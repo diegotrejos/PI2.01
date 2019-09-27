@@ -1,0 +1,80 @@
+﻿@model Proyecto.Models.Proyecto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Proyecto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracionEstimada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costoTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costoEstimado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoEstimado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.objetivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objetivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFinalizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFinalizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

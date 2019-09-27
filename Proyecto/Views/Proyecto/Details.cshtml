@@ -1,0 +1,74 @@
+﻿@model Proyecto.Models.Proyecto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Proyecto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracionEstimada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costoTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costoEstimado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoEstimado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.objetivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objetivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFinalizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFinalizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.nombre }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

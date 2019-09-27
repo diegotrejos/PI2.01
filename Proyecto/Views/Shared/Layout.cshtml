@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camaik</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <h1 class=" titulo text-center ">Software Expert S.A </h1>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="#">Camaik</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="Proyecto">Proyectos <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Equipo</a>
+                <a class="nav-item nav-link" href="Moduloe">Modulo</a>
+                <a class="nav-item nav-link" href="#">Requerimientos</a>
+                <a class="nav-item nav-link" href="EmpleadoDesarrollador">Empleados</a>
+                <a class="nav-item nav-link" href="Cliente">Cliente</a>
+                <a class="nav-item nav-link" href="#">Salir</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <footer class="fixed-bottom bg-success pt-4 pb-4">
+        <div class="copyright text-sm-center text-white small">
+            Copyright &copy; 2019 <span>Camaik</span>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

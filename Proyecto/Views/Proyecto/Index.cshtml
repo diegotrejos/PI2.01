@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Proyecto.Models.Proyecto>
+
+@{
+    ViewBag.Title = "Proyectos";
+}
+
+<h2>Lista de Proyectos</h2>
+<p class=" boton">
+    <a href="Create" class="btn btn-success btn-lg float-right ">
+        <span class="glyphicon glyphicon-plus"></span> +
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costoTrabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.costoEstimado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.objetivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaFinalizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.duracionEstimada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costoTrabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.costoEstimado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.objetivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaFinalizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.nombre , @class = "glyphicon-trash  btn-danger" }) |
+            @Html.ActionLink("Consultar", "Details", new { id=item.nombre }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.nombre })
+        </td>
+    </tr>
+}
+
+</table>

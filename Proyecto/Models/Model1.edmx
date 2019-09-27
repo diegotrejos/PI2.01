@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Gr02Proy3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="apellido1" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="apellido2" Type="varchar" MaxLength="15" />
+          <Property Name="telefono" Type="varchar" MaxLength="8" />
+          <Property Name="direccionExacta" Type="varchar" MaxLength="15" />
+          <Property Name="distrito" Type="varchar" MaxLength="25" />
+          <Property Name="canton" Type="varchar" MaxLength="25" />
+          <Property Name="provincia" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="EmpleadoDesarrollador">
+          <Key>
+            <PropertyRef Name="cedulaED" />
+          </Key>
+          <Property Name="cedulaED" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombreED" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="apellido1ED" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="apellido2ED" Type="varchar" MaxLength="15" />
+          <Property Name="fechaInicio" Type="date" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="edad" Type="tinyint" />
+          <Property Name="telefono" Type="varchar" MaxLength="8" />
+          <Property Name="correo" Type="varchar" MaxLength="15" />
+          <Property Name="disponibilidad" Type="bit" />
+          <Property Name="direccionExacta" Type="varchar" MaxLength="15" />
+          <Property Name="distrito" Type="varchar" MaxLength="25" />
+          <Property Name="canton" Type="varchar" MaxLength="25" />
+          <Property Name="provincia" Type="varchar" MaxLength="25" />
+          <Property Name="flg" Type="bit" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="NombreProy" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="NombreProy" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Proyecto">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="duracionEstimada" Type="int" />
+          <Property Name="costoTrabajo" Type="int" />
+          <Property Name="costoEstimado" Type="int" />
+          <Property Name="objetivo" Type="varchar" MaxLength="45" />
+          <Property Name="fechaFinalizacion" Type="date" />
+          <Property Name="fechaInicio" Type="date" />
+          <Property Name="cedulaCliente" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Modulo__NombrePr__03F0984C">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1" />
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="nombre" />
+            </Principal>
+            <Dependent Role="Modulo">
+              <PropertyRef Name="NombreProy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proyecto__cedula__01142BA1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="Proyecto">
+              <PropertyRef Name="cedulaCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gr02Proy3ModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Modulo__NombrePr__03F0984C" Association="Self.FK__Modulo__NombrePr__03F0984C">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="Modulo" EntitySet="Modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proyecto__cedula__01142BA1" Association="Self.FK__Proyecto__cedula__01142BA1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Proyecto" EntitySet="Proyecto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gr02Proy3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="cedula" />
+          </Key>
+          <Property Name="cedula" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="direccionExacta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="distrito" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="canton" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Proyecto" Relationship="Self.FK__Proyecto__cedula__01142BA1" FromRole="Cliente" ToRole="Proyecto" />
+        </EntityType>
+        <EntityType Name="EmpleadoDesarrollador">
+          <Key>
+            <PropertyRef Name="cedulaED" />
+          </Key>
+          <Property Name="cedulaED" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombreED" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido1ED" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido2ED" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="edad" Type="Byte" />
+          <Property Name="telefono" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="disponibilidad" Type="Boolean" />
+          <Property Name="direccionExacta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="distrito" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="canton" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="flg" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Modulo">
+          <Key>
+            <PropertyRef Name="NombreProy" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="NombreProy" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Proyecto" Relationship="Self.FK__Modulo__NombrePr__03F0984C" FromRole="Modulo" ToRole="Proyecto" />
+        </EntityType>
+        <EntityType Name="Proyecto">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="duracionEstimada" Type="Int32" />
+          <Property Name="costoTrabajo" Type="Int32" />
+          <Property Name="costoEstimado" Type="Int32" />
+          <Property Name="objetivo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="fechaFinalizacion" Type="DateTime" Precision="0" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="cedulaCliente" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Proyecto__cedula__01142BA1" FromRole="Proyecto" ToRole="Cliente" />
+          <NavigationProperty Name="Modulo" Relationship="Self.FK__Modulo__NombrePr__03F0984C" FromRole="Proyecto" ToRole="Modulo" />
+        </EntityType>
+        <Association Name="FK__Proyecto__cedula__01142BA1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="Proyecto">
+              <PropertyRef Name="cedulaCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Modulo__NombrePr__03F0984C">
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1" />
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyecto">
+              <PropertyRef Name="nombre" />
+            </Principal>
+            <Dependent Role="Modulo">
+              <PropertyRef Name="NombreProy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gr02Proy3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" />
+          <EntitySet Name="Modulo" EntityType="Self.Modulo" />
+          <EntitySet Name="Proyecto" EntityType="Self.Proyecto" />
+          <AssociationSet Name="FK__Proyecto__cedula__01142BA1" Association="Self.FK__Proyecto__cedula__01142BA1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Proyecto" EntitySet="Proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Modulo__NombrePr__03F0984C" Association="Self.FK__Modulo__NombrePr__03F0984C">
+            <End Role="Proyecto" EntitySet="Proyecto" />
+            <End Role="Modulo" EntitySet="Modulo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Gr02Proy3ModelStoreContainer" CdmEntityContainer="Gr02Proy3Entities">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccionExacta" ColumnName="direccionExacta" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpleadoDesarrollador">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.EmpleadoDesarrollador">
+              <MappingFragment StoreEntitySet="EmpleadoDesarrollador">
+                <ScalarProperty Name="cedulaED" ColumnName="cedulaED" />
+                <ScalarProperty Name="nombreED" ColumnName="nombreED" />
+                <ScalarProperty Name="apellido1ED" ColumnName="apellido1ED" />
+                <ScalarProperty Name="apellido2ED" ColumnName="apellido2ED" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="disponibilidad" ColumnName="disponibilidad" />
+                <ScalarProperty Name="direccionExacta" ColumnName="direccionExacta" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="flg" ColumnName="flg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modulo">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Modulo">
+              <MappingFragment StoreEntitySet="Modulo">
+                <ScalarProperty Name="NombreProy" ColumnName="NombreProy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proyecto">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Proyecto">
+              <MappingFragment StoreEntitySet="Proyecto">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
+                <ScalarProperty Name="costoTrabajo" ColumnName="costoTrabajo" />
+                <ScalarProperty Name="costoEstimado" ColumnName="costoEstimado" />
+                <ScalarProperty Name="objetivo" ColumnName="objetivo" />
+                <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="cedulaCliente" ColumnName="cedulaCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
