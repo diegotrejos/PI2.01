@@ -5,10 +5,11 @@
 }
 
 <h2>Lista de Proyectos</h2>
-<p class=" boton">
-    <a href="Create" class="btn btn-success btn-lg float-right ">
+<p class=" boton btn btn-success btn-lg float-right" href="Create">
+    <!--<a href="Create" class="btn btn-success btn-lg float-right ">
         <span class="glyphicon glyphicon-plus"></span> +
-    </a>
+    </a>-->
+    @Html.ActionLink("+", "Create")
 </p>
 <table class="table">
     <tr>
