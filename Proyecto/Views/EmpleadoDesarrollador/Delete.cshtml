@@ -1,18 +1,23 @@
 ﻿@model Proyecto.Models.EmpleadoDesarrollador
 
-@{
-    ViewBag.Title = "Delete";
-}
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h2>Eliminar</h2>
+
+<h3>¿Seguro que desea eliminar este empleado?</h3>
 <div>
-    <h4>EmpleadoDesarrollador</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.nombreED)
+            Cédula
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cedulaED)
+        </dd>
+
+        <dt>
+            Nombre
         </dt>
 
         <dd>
@@ -20,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.apellido1ED)
+            Primer Apellido
         </dt>
 
         <dd>
@@ -28,31 +33,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.apellido2ED)
+            Segundo Apellido
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.apellido2ED)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaNacimiento)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaNacimiento)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.edad)
+            Edad
         </dt>
 
         <dd>
@@ -60,7 +53,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.telefono)
+            Teléfono
         </dt>
 
         <dd>
@@ -68,7 +61,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.correo)
+            Correo
         </dt>
 
         <dd>
@@ -76,31 +69,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.disponibilidad)
+            Fecha de Nacimiento
+        </dt>
+
+        <dt>
+            Provincia
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
+            @Html.DisplayFor(model => model.provincia)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.direccionExacta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.distrito)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.canton)
+            Cantón
         </dt>
 
         <dd>
@@ -108,15 +90,41 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.provincia)
+            Distrito
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.provincia)
+            @Html.DisplayFor(model => model.distrito)
+        </dd>
+
+
+        <dt>
+            Dirección Exacta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccionExacta)
+        </dd>
+
+
+        <dt>
+            Fecha de Inicio
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.flg)
+            Disponibilidad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disponibilidad)
+        </dd>
+
+        <dt>
+           Rol
         </dt>
 
         <dd>
@@ -125,12 +133,16 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger form-group" />
+        <p class="btn btn-success form-group">
+            @Html.ActionLink("Cancelar", "Index")
+        </p>
+    </div>
+    
+    
 </div>
+
+
+
+
