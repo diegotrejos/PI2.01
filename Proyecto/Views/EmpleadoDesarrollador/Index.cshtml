@@ -4,13 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
+<h2>Lista de Empleados</h2>
+<p class=" boton">
+    <a href="Create" class="btn btn-success btn-lg float-right ">
+        <span class="glyphicon glyphicon-plus"></span> +
+    </a>
 </p>
 <table class="table">
     <tr>
+
         <th>
             @Html.DisplayNameFor(model => model.nombreED)
         </th>
@@ -24,39 +26,12 @@
             @Html.DisplayNameFor(model => model.fechaInicio)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fechaNacimiento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.edad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.disponibilidad)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.direccionExacta)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.distrito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.canton)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.provincia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.flg)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.nombreED)
@@ -71,42 +46,15 @@
             @Html.DisplayFor(modelItem => item.fechaInicio)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.fechaNacimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.edad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.disponibilidad)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.direccionExacta)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.distrito)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.canton)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.provincia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.flg)
-        </td>
-        <td>
-   
-            @Html.ActionLink("Edit", "Edit", new { id = item.cedulaED, @class = "glyphicon-trash" }) |
-            @Html.ActionLink("Details", "Details", new { id = item.cedulaED }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.cedulaED })
+
+            @Html.ActionLink("Editar", "Edit", new { id = item.cedulaED, @class = "glyphicon-trash" }) |
+            @Html.ActionLink("Consultar", "Details", new { id = item.cedulaED }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.cedulaED })
         </td>
     </tr>
-}
+    }
 
 </table>
