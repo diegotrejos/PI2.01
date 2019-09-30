@@ -4,14 +4,22 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Consultar</h2>
 
 <div>
-    <h4>Cliente</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.nombre)
+            Cédula
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cedula)
+        </dd>
+
+        <dt>
+            Nombre
         </dt>
 
         <dd>
@@ -19,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.apellido1)
+            Primer apellido
         </dt>
 
         <dd>
@@ -27,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.apellido2)
+            Segundo apellido
         </dt>
 
         <dd>
@@ -35,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.telefono)
+            Teléfono
         </dt>
 
         <dd>
@@ -43,23 +51,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.direccionExacta)
+            Provincia
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
+            @Html.DisplayFor(model => model.provincia)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.distrito)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.canton)
+            Cantón
         </dt>
 
         <dd>
@@ -67,16 +68,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.provincia)
+            Distrito
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.provincia)
+            @Html.DisplayFor(model => model.distrito)
         </dd>
+
+        <dt>
+            Dirección Exacta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccionExacta)
+        </dd>
+
+
+
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.cedula }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Aceptar", "Index")
 </p>

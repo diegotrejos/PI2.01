@@ -4,36 +4,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista de clientes</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class=" boton btn btn-success btn-lg float-right" href="Create">
+    @Html.ActionLink("+", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.apellido1)
+            Primer Apellido
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.apellido2)
+            Segundo apellido
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direccionExacta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.distrito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.canton)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.provincia)
+           Teléfono
         </th>
         <th></th>
     </tr>
@@ -65,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.provincia)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.cedula }) |
-            @Html.ActionLink("Details", "Details", new { id=item.cedula }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.cedula })
+            @Html.ActionLink("Editar", "Edit", new { id=item.cedula }) |
+            @Html.ActionLink("Consultar", "Details", new { id=item.cedula }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.cedula })
         </td>
     </tr>
 }
