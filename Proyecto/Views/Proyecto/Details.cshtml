@@ -4,38 +4,21 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles de Proyecto</h2>
 
 <div>
-    <h4>Proyecto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
+            Nombre
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
+            @Html.DisplayFor(model => model.nombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.costoTrabajo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costoTrabajo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.costoEstimado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costoEstimado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.objetivo)
+            Objetivo
         </dt>
 
         <dd>
@@ -43,15 +26,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fechaFinalizacion)
+            Nombre de Cliente
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fechaFinalizacion)
+            @Html.DisplayFor(model => model.Cliente.nombre)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
+            Fecha de Inicio
         </dt>
 
         <dd>
@@ -59,16 +42,40 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Cliente.nombre)
+            Duración Estimada
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Cliente.nombre)
+            @Html.DisplayFor(model => model.duracionEstimada)
         </dd>
+
+        <dt>
+            Costo de Trabajo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoTrabajo)
+        </dd>
+
+        <dt>
+            Costo Estimado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoEstimado)
+        </dd>
+
+        <dt>
+            Fecha de Finalización
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFinalizacion)
+        </dd>
+
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.nombre }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="btn btn-success">
+    @Html.ActionLink("Aceptar", "Index")
 </p>
