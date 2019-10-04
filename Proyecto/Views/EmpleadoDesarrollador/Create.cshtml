@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.apellido1ED, "Primer Apellido", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.apellido1ED, "Primer Apellido *", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10" required>
             @Html.EditorFor(model => model.apellido1ED, new { htmlAttributes = new { @class = "form-control", required = "required" } })
             @Html.ValidationMessageFor(model => model.apellido1ED, "", new { @class = "text-danger" })
@@ -47,7 +47,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.fechaNacimiento, "Fecha Nacimiento", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.fechaNacimiento, "Fecha Nacimiento (YYYY-MM-DD)", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
@@ -117,7 +117,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio (YYYY-MM-DD)", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
@@ -137,7 +137,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.flg,"Rol",htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.flg,"Lider?",htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
                 @Html.EditorFor(model => model.flg)
