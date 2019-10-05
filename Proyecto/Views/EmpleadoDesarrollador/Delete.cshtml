@@ -40,10 +40,6 @@
             @Html.DisplayFor(model => model.apellido2ED)
         </dd>
 
-        <dt>
-            Fecha de Nacimiento
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaNacimiento)
         </dd>
@@ -71,6 +67,10 @@
         <dd>
             @Html.DisplayFor(model => model.correo)
         </dd>
+
+        <dt>
+            Fecha de Nacimiento
+        </dt>
 
         <dt>
             Provincia
@@ -124,7 +124,7 @@
         </dd>
 
         <dt>
-            Lider?
+           Rol
         </dt>
 
         <dd>
@@ -133,21 +133,15 @@
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
     <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            <a href="../Index" class="btn btn-success ">
-                <span></span> Cancelar
-            </a>
+        <input type="submit" value="Eliminar" class="btn btn-danger form-group" />
+        <p class="btn btn-success form-group">
+            @Html.ActionLink("Cancelar", "Index")
+        </p>
     </div>
-    }
+    
+    
 </div>
-    
-    
-
 
 
 

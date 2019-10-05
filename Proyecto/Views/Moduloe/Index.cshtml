@@ -1,39 +1,77 @@
 ﻿@model IEnumerable<Proyecto.Models.Modulo>
-
+@*@{Html.RenderPartial("Proyecto", Model);} *@
 @{
-    ViewBag.Title = "Index";
+    /**/
+
+    ViewBag.Title = "Modulos";
 }
+<h2> Modulos </h2>
 
-<h2>Index</h2>
+<h6>Seleccione Proyecto</h6>
+@*
+@Html.DropDownList("Seleccione Proyecto",
+                    new SelectList(Proyecto.Models.Proyecto p),
+                    "Proyectos",
+                    new { @class = "form-control" })
+*@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+
+            <td>
+                <!--ActionLink(como quiero que se llame, A donde va el link, id del respectivo objeto) -->
+                @Html.ActionLink("Consultar", "Details", new { id = item.Nombre }) |
+
+                @Html.ActionLink("Editar", "Edit", new { id = item.Nombre }) |
+
+                @Html.ActionLink("Crear", "Create", new { id = item.Nombre }) |
+            </td>
+        </tr>
+    }
+</table>
+
+
+<!--Esta es la segunda tabla  -->
+
+<h6>Modulos dentro de este:</h6>
+
+<table class="table">
+    <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Proyecto.objetivo)
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proyecto.objetivo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+        </tr>
+
+    }
 </table>

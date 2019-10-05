@@ -38,6 +38,10 @@
             @Html.DisplayFor(model => model.apellido2ED)
         </dd>
 
+        <dd>
+            @Html.DisplayFor(model => model.fechaNacimiento)
+        </dd>
+
         <dt>
             Edad
         </dt>
@@ -65,10 +69,6 @@
         <dt>
             Fecha de Nacimiento
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaNacimiento)
-        </dd>
 
         <dt>
             Provincia
@@ -122,7 +122,7 @@
         </dd>
 
         <dt>
-            Lider?
+            Rol
         </dt>
 
         <dd>
@@ -131,8 +131,7 @@
 
     </dl>
 </div>
-<p class=" boton">
-    <a href="../Index" class="btn btn-success btn-lg ">
-        <span></span> Aceptar
-    </a>
+<p
+    class = "btn btn-success form-group">
+    @Html.ActionLink("Aceptar", "Index")
 </p>

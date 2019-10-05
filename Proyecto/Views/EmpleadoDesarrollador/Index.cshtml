@@ -5,16 +5,14 @@
 }
 
 <h2>Lista de Empleados</h2>
-<p class=" boton float-right">
-    <a href="~/EmpleadoDesarrollador/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
+<p class=" boton">
+    <a href="Create" class="btn btn-success btn-lg float-right ">
+        <span class="glyphicon glyphicon-plus"></span> +
     </a>
 </p>
 <table class="table">
     <tr>
 
-        <th>
-            Cédula
-        </th>
         <th>
             Nombre
         </th>
@@ -33,9 +31,6 @@
     {
     <tr>
         <td>
-            @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.nombreED)
         </td>
         <td>
@@ -48,18 +43,12 @@
             @Html.DisplayFor(modelItem => item.fechaInicio)
         </td>
         <td>
-            <p class="botones">
-                <a href=@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Edit") class="btn  btn-info glyphicon glyphicon-wrench float-right ">
-                </a>
-                <a href=@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
-                </a>
-            </p>
 
+            @Html.ActionLink("Editar", "Edit", new { id = item.cedulaED, @class = "glyphicon-trash" }) |
+            @Html.ActionLink("Consultar", "Details", new { id = item.cedulaED }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.cedulaED })
         </td>
-
-
     </tr>
     }
 
 </table>
-

@@ -16,7 +16,7 @@ namespace Proyecto.Models
 
     public partial class Proyecto
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")] //Lo hace automatico, no se pra que sirve
         public Proyecto()
         {
             this.Modulo = new HashSet<Modulo>();

@@ -13,13 +13,22 @@ namespace Proyecto.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Modulo
+    public partial class Modulo // porque partial? es por la relacion???
     {
-        [Key]
+        //Data notation 
+        //Sirven para hacer validaciones o dar formato a las variables
+
+        [Key] // Creo que se refiere a PK o FK
+        [StringLength(15)] //Constraint que limita los strings 
+        [Display(Name = "Nombre")]
         public string NombreProy { get; set; }
+
+        [Display(Name = "Nombre")]
         public int Id { get; set; }
+        [Required] //Constraint es necesario
         public string Nombre { get; set; }
     
-        public virtual Proyecto Proyecto { get; set; }
+         public virtual Proyecto Proyecto { get; set; } //FK?
+
     }
 }

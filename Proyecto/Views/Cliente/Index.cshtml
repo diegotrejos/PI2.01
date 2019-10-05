@@ -1,20 +1,16 @@
 ﻿@model IEnumerable<Proyecto.Models.Cliente>
 
 @{
-    ViewBag.Title = "Clientes";
+    ViewBag.Title = "Index";
 }
 
 <h2>Lista de clientes</h2>
 
-<p class=" boton float-right">
-    <a href="~/Cliente/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
+<p class=" boton btn btn-success btn-lg float-right" href="Create">
+    @Html.ActionLink("+", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            Cédula
-        </th>
         <th>
             Nombre
         </th>
@@ -32,9 +28,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.ActionLink(item.cedula, "Details", new { id = item.cedula })
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
@@ -60,12 +53,9 @@
             @Html.DisplayFor(modelItem => item.provincia)
         </td>
         <td>
-            <p class="botones">
-                <a href=@Url.Action(item.cedula, "Cliente/Edit") class="btn  btn-info glyphicon glyphicon-wrench float-right ">
-                </a>
-                <a href=@Url.Action(item.cedula, "Cliente/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
-                </a>
-            </p>
+            @Html.ActionLink("Editar", "Edit", new { id=item.cedula }) |
+            @Html.ActionLink("Consultar", "Details", new { id=item.cedula }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.cedula })
         </td>
     </tr>
 }

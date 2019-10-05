@@ -77,7 +77,9 @@
         @Html.AntiForgeryToken()
 
     <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <input type="button" value="Eliminar" class="btn btn-success" />
+        @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-success" })
     </div>
     }
 </div>
