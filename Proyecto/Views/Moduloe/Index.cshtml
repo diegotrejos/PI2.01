@@ -24,7 +24,7 @@
 
 
 
-@Html.ActionLink("Crear modulo Nuevo", "Create", "Moduloe")
+@Html.ActionLink("Crear modulo Nuevo", "Create", "Moduloe",null)
 <br />
 <br />
 
@@ -51,10 +51,10 @@
                 @Html.DisplayFor(modelItem => item.NombreProy)
             </td>
             <td>
-                <!--ActionLink(como quiero que se llame, A donde va el link, id del respectivo objeto) -->
-                @Html.ActionLink("Consultar", "Details", "Moduloe", new { id = item.Id, nombre = item.NombreProy }) |
+                <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
+                @Html.ActionLink("Consultar", "Details", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy },null)|
 
-                @Html.ActionLink("Editar", "Edit", "Moduloe", new { id = item.Id, nombre = item.NombreProy })
+                @Html.ActionLink("Editar", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy },null)
 
             </td>
         </tr>
