@@ -22,9 +22,14 @@
 
 @*Falta agregar un filtro por proyecto*@
 
+<p class=" boton float-right">
+    <a href="Create" class="btn btn-success btn-lg float-right ">
+        <span class="glyphicon glyphicon-plus"></span> +
+    </a>
+</p>
 
 
-@Html.ActionLink("Crear modulo Nuevo", "Create", "Moduloe",null)
+@Html.ActionLink("Crear modulo Nuevo", "Create", "Moduloe")
 <br />
 <br />
 
@@ -52,10 +57,11 @@
             </td>
             <td>
                 <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
-                @Html.ActionLink("Consultar", "Details", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy },null)|
+                @Html.ActionLink("Consultar", "Details", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)|
 
-                @Html.ActionLink("Editar", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy },null)
+                @Html.ActionLink("Editar", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)
 
+                @Html.ActionLink("Borrar", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)
             </td>
         </tr>
     }
