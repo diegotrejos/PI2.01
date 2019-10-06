@@ -32,7 +32,7 @@ namespace Proyecto.Controllers
                 {
                 /*Aqui podria poner un filtro*/
                 var query = from a in db.Modulo
-                             where a.Id.Equals(id)
+                             where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))             
                              select a;
 
                 var item = query.FirstOrDefault();
@@ -45,7 +45,7 @@ namespace Proyecto.Controllers
                 }
            
          } 
-
+        /*
         // GET: Moduloe/Create
         public ActionResult Create()
         {
@@ -56,10 +56,11 @@ namespace Proyecto.Controllers
             }
            
         }
-
+        */
         // POST: Moduloe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken] //Buscar para que sirve 
         public ActionResult Create([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
@@ -78,22 +79,29 @@ namespace Proyecto.Controllers
         }
 
         // GET: Moduloe/Edit/5
-        public ActionResult Edit(int Id) // comunica con el modelo
+        public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
         {
-            Modulo model = new Modulo();
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                var mTabla = db.Modulo.Find(Id);
-                model.NombreProy = mTabla.NombreProy;
-                model.Id = mTabla.Id;
-                model.Nombre = mTabla.Nombre;
+                /*Aqui podria poner un filtro*/
+                var query = from a in db.Modulo
+                            where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
+                            select a;
+
+                var item = query.FirstOrDefault();
+
+                if (item != null)
+                    return View(item);
+                else
+                    return View("NotFound");
+
             }
-            return View(model);
+
         }
 
 
         //Creo que este metodo es necesario para que sirva el edit
-
+        /*
         [HttpPost]
         public ActionResult Edit(Modulo model)
         {
@@ -119,7 +127,7 @@ namespace Proyecto.Controllers
                {
                 throw new Exception(ex.Message); //Para notificar la exception
                }
-           } 
+           } */
 
         // POST: Moduloe/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -182,3 +190,4 @@ namespace Proyecto.Controllers
         //}
     }
 }
+
