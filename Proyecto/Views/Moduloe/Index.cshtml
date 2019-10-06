@@ -1,26 +1,42 @@
-﻿@model IEnumerable<Proyecto.Models.Modulo>
+@model IEnumerable<Proyecto.Models.Modulo>
 @*@{Html.RenderPartial("Proyecto", Model);} *@
 @{
-    /**/
+
 
     ViewBag.Title = "Modulos";
 }
 <h2> Modulos </h2>
-
-<h6>Seleccione Proyecto</h6>
 @*
+<h6>Seleccione Proyecto</h6>
+
 @Html.DropDownList("Seleccione Proyecto",
-                    new SelectList(Proyecto.Models.Proyecto p),
+                    new SelectList(Model),
                     "Proyectos",
                     new { @class = "form-control" })
 *@
 
 
 
+<br />
+<br />
+
+@*Falta agregar un filtro por proyecto*@
+
+
+
+@Html.ActionLink("Crear modulo Nuevo", "Create", "Moduloe")
+<br />
+<br />
+
+@*Tabla de Modulos*@
+<h6>Seleccione un Modulo</h6>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProy)
         </th>
     </tr>
 
@@ -31,14 +47,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProy)
+            </td>
             <td>
                 <!--ActionLink(como quiero que se llame, A donde va el link, id del respectivo objeto) -->
-                @Html.ActionLink("Consultar", "Details", new { id = item.Nombre }) |
+                @Html.ActionLink("Consultar", "Details", "Moduloe", new { id = item.Id, nombre = item.NombreProy }) |
 
-                @Html.ActionLink("Editar", "Edit", new { id = item.Nombre }) |
+                @Html.ActionLink("Editar", "Edit", "Moduloe", new { id = item.Id, nombre = item.NombreProy })
 
-                @Html.ActionLink("Crear", "Create", new { id = item.Nombre }) |
             </td>
         </tr>
     }
@@ -46,32 +63,33 @@
 
 
 <!--Esta es la segunda tabla  -->
+@*
+    <h6>Modulos dentro de este:</h6>
 
-<h6>Modulos dentro de este:</h6>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th></th>
-    </tr>
-
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
         </tr>
 
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+            </tr>
+
+        }
+    </table>
+*@
