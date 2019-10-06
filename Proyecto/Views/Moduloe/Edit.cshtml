@@ -1,25 +1,18 @@
-﻿@model Proyecto.Models.Modulo
-
+@model Proyecto.Models.Modulo
 @{
     ViewBag.Title = "Edit";
 }
-
 <h2>  Editar </h2>
-
-
-@using (Html.BeginForm("Edit", "Moduloe", FormMethod.Post)) @*No se si sera Moduloe o Modulo*@
+@*No se si sera Moduloe o Modulo*@
+@using (Html.BeginForm("Edit", "Moduloe", FormMethod.Post))
 {
-    <div class="row">
-        <div class="col-12">
-           @Html.HiddenFor(ModuloeController->ModuloeController.Id)  @*Si arreglo esto creo que funciona*@
-        </div>
-    </div>
+    <p>Title: @Html.TextBox("cosa1")<br/>@*Cajita de texto*@
+    <input type="submit" value="botonmieo"/></p>@*boton q no hace nada*@
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
