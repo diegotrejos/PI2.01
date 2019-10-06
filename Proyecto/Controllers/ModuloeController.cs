@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -25,19 +25,26 @@ namespace Proyecto.Controllers
         }
 
         // GET: Moduloe/Details/5
-        /* public ActionResult Details(string id)
+        public ActionResult Details(int id,string nombreProy)
          {
-             if (id == null)
-             {
-                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-             }
-             Modulo modulo = db.Modulo.Find(id);
-             if (modulo == null)
-             {
-                 return HttpNotFound();
-             }
-             return View(modulo);
-         } */
+         
+                using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+                {
+                /*Aqui podria poner un filtro*/
+                var query = from a in db.Modulo
+                             where a.Id.Equals(id)
+                             select a;
+
+                var item = query.FirstOrDefault();
+  
+                if (item != null)
+                    return View(item);
+                else
+                    return View("NotFound"); 
+
+                }
+           
+         } 
 
         // GET: Moduloe/Create
         public ActionResult Create()
@@ -45,8 +52,9 @@ namespace Proyecto.Controllers
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo");
+                return View();
             }
-            return View();
+           
         }
 
         // POST: Moduloe/Create
