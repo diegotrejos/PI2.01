@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -45,7 +45,7 @@ namespace Proyecto.Controllers
                 }
            
          } 
-        /*
+        
         // GET: Moduloe/Create
         public ActionResult Create()
         {
@@ -56,7 +56,7 @@ namespace Proyecto.Controllers
             }
            
         }
-        */
+        
         // POST: Moduloe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -77,7 +77,7 @@ namespace Proyecto.Controllers
             }
             return View(modulo);
         }
-
+        
         // GET: Moduloe/Edit/5
         public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
         {
@@ -101,8 +101,8 @@ namespace Proyecto.Controllers
 
 
         //Creo que este metodo es necesario para que sirva el edit
-        
-        /*[HttpPost]
+        /*
+        [HttpPost]
         public ActionResult Edit(Modulo model)
         {
                try
@@ -134,77 +134,59 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
 
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
         {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(modulo).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-               // ViewBag.NombreProy = new SelectList(db.modulo, "nombre", "objetivo", modulo.NombreProy);
-                return View(modulo);
+                db.Entry(modulo).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-        }
+            ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
+            return View(modulo);
+        }*/
 
         // GET: Moduloe/Delete/5
-        public ActionResult Delete(int id, string nombreProy) // comunica con el modelo
-        {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-                /*Aqui podria poner un filtro*/
-                var query = from a in db.Modulo
-                            where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
-                            select a;
-
-                var item = query.FirstOrDefault();
-
-                if (item != null)
-                    return View(item);
-                else
-                    return View("NotFound");
-
-            }
-
-        }
-
-       
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
-        {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-                if (ModelState.IsValid)
+        [HttpGet]
+         public ActionResult Delete(int Id)
+         {
+                Modulo model = new Modulo();
+                using (Gr02Proy3Entities db = new Gr02Proy3Entities())
                 {
+                    var mTabla = db.Modulo.Find(Id);
+                    db.Modulo.Remove(mTabla);
+                    db.SaveChanges();
+                }
+                return Redirect("~/Moduloe/");
+        }
+         
+
+
+
+        /*        // POST: Moduloe/Delete/5
+                [HttpPost, ActionName("Delete")]
+                [ValidateAntiForgeryToken]
+                public ActionResult DeleteConfirmed(string id)
+                {
+                    Modulo modulo = db.Modulo.Find(id);
                     db.Modulo.Remove(modulo);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-               
-                return View(modulo);
-            }
-        }
+        */
 
-        
+        /*
     protected override void Dispose(bool disposing)
     {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-                if (disposing)
-                {
-                    db.Dispose();
-                }
-                base.Dispose(disposing);
-            }
+        if (disposing)
+        {
+            db.Dispose();
+        }
+        base.Dispose(disposing);
     }
-    
-       
+    */
+        //}
     }
 }
-
