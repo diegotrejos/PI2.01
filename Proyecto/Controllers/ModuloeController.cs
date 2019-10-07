@@ -12,75 +12,129 @@ namespace Proyecto.Controllers
 {
     public class ModuloeController : Controller
     {
-        private Gr02Proy3Entities db = new Gr02Proy3Entities();
+        //private Gr02Proy3Entities db = new Gr02Proy3Entities(); 
 
         // GET: Moduloe
         public ActionResult Index()
         {
-            var modulo = db.Modulo.Include(m => m.Proyecto);
-            return View(modulo.ToList());
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+                var modulo = db.Modulo.Include(m => m.Proyecto);
+                return View(modulo.ToList());
+            }
         }
 
         // GET: Moduloe/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Modulo modulo = db.Modulo.Find(id);
-            if (modulo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(modulo);
-        }
+        public ActionResult Details(int id,string nombreProy)
+         {
+         
+                using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+                {
+                /*Aqui podria poner un filtro*/
+                var query = from a in db.Modulo
+                             where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))             
+                             select a;
 
+                var item = query.FirstOrDefault();
+  
+                if (item != null)
+                    return View(item);
+                else
+                    return View("NotFound"); 
+
+                }
+           
+         } 
+        
         // GET: Moduloe/Create
         public ActionResult Create()
         {
-            ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo");
-            return View();
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+                ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo");
+                return View();
+            }
+           
         }
-
+        
         // POST: Moduloe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //Buscar para que sirve 
         public ActionResult Create([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
         {
-            if (ModelState.IsValid)
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                db.Modulo.Add(modulo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Modulo.Add(modulo);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
             }
-
-            ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
             return View(modulo);
         }
-
+        
         // GET: Moduloe/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
         {
-            if (id == null)
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                /*Aqui podria poner un filtro*/
+                var query = from a in db.Modulo
+                            where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
+                            select a;
+
+                var item = query.FirstOrDefault();
+
+                if (item != null)
+                    return View(item);
+                else
+                    return View("NotFound");
+
             }
-            Modulo modulo = db.Modulo.Find(id);
-            if (modulo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
-            return View(modulo);
+
         }
+
+
+        //Creo que este metodo es necesario para que sirva el edit
+        /*
+        [HttpPost]
+        public ActionResult Edit(Modulo model)
+        {
+               try
+               {
+                   if (ModelState.IsValid)
+                   {
+                       using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+                       {
+                           var mTabla = db.Modulo.Find(model.Id); //relaciona con la BD
+                           model.NombreProy = mTabla.NombreProy;
+                           model.Id = mTabla.Id;
+                           model.Nombre = mTabla.Nombre;
+
+                           db.Entry(mTabla).State = System.Data.Entity.EntityState.Modified;
+                           db.SaveChanges();
+                       }
+                       return Redirect("/"); //Path al que se direcciona
+                   }
+                   return View(model);
+               }
+               catch (Exception ex)
+               {
+                throw new Exception(ex.Message); //Para notificar la exception
+               }
+           } */
 
         // POST: Moduloe/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+
+
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
         {
@@ -92,41 +146,47 @@ namespace Proyecto.Controllers
             }
             ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
             return View(modulo);
-        }
+        }*/
 
         // GET: Moduloe/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Modulo modulo = db.Modulo.Find(id);
-            if (modulo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(modulo);
+        [HttpGet]
+         public ActionResult Delete(int Id)
+         {
+                Modulo model = new Modulo();
+                using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+                {
+                    var mTabla = db.Modulo.Find(Id);
+                    db.Modulo.Remove(mTabla);
+                    db.SaveChanges();
+                }
+                return Redirect("~/Moduloe/");
         }
+         
 
-        // POST: Moduloe/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Modulo modulo = db.Modulo.Find(id);
-            db.Modulo.Remove(modulo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
-        protected override void Dispose(bool disposing)
+
+        /*        // POST: Moduloe/Delete/5
+                [HttpPost, ActionName("Delete")]
+                [ValidateAntiForgeryToken]
+                public ActionResult DeleteConfirmed(string id)
+                {
+                    Modulo modulo = db.Modulo.Find(id);
+                    db.Modulo.Remove(modulo);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+        */
+
+        /*
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            db.Dispose();
         }
+        base.Dispose(disposing);
+    }
+    */
+        //}
     }
 }
