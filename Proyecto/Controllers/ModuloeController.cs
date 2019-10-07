@@ -45,7 +45,7 @@ namespace Proyecto.Controllers
                 }
            
          } 
-        /*
+        
         // GET: Moduloe/Create
         public ActionResult Create()
         {
@@ -56,7 +56,7 @@ namespace Proyecto.Controllers
             }
            
         }
-        */
+        
         // POST: Moduloe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -77,7 +77,7 @@ namespace Proyecto.Controllers
             }
             return View(modulo);
         }
-
+        
         // GET: Moduloe/Edit/5
         public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
         {
@@ -190,4 +190,5 @@ namespace Proyecto.Controllers
         //}
     }
 }
+
 
