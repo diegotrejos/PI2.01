@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -101,33 +101,6 @@ namespace Proyecto.Controllers
         }
 
 
-        //Creo que este metodo es necesario para que sirva el edit
-
-        /*[HttpPost]
-        public ActionResult Edit(Modulo model)
-        {
-               try
-               {
-                   if (ModelState.IsValid)
-                   {
-                       using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-                       {
-                           var mTabla = db.Modulo.Find(model.Id); //relaciona con la BD
-                           model.NombreProy = mTabla.NombreProy;
-                           model.Id = mTabla.Id;
-                           model.Nombre = mTabla.Nombre;
-                           db.Entry(mTabla).State = System.Data.Entity.EntityState.Modified;
-                           db.SaveChanges();
-                       }
-                       return Redirect("/"); //Path al que se direcciona
-                   }
-                   return View(model);
-               }
-               catch (Exception ex)
-               {
-                throw new Exception(ex.Message); //Para notificar la exception
-               }
-           } */
 
         // POST: Moduloe/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -146,12 +119,12 @@ namespace Proyecto.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                // ViewBag.NombreProy = new SelectList(db.modulo, "nombre", "objetivo", modulo.NombreProy);
+               
                 return View(modulo);
             }
         }
 
-        // GET: Moduloe/Delete/5
+
         public ActionResult Delete(int id, string nombreProy) // comunica con el modelo
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
@@ -172,22 +145,16 @@ namespace Proyecto.Controllers
 
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
+        public ActionResult Delete([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                if (ModelState.IsValid)
-                {
-                    db.Modulo.Remove(modulo);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-
-                return View(modulo);
+                db.Entry(modulo).State = EntityState.Deleted;
+                db.Modulo.Remove(modulo);
+                db.SaveChanges();
+                return RedirectToAction("Index");  
             }
         }
 
