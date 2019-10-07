@@ -1,4 +1,4 @@
-﻿@model Proyecto.Models.Modulo
+@model Proyecto.Models.Modulo
 
 @{
     ViewBag.Title = "Eliminar Proyecto";
@@ -49,9 +49,9 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-            @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-success" })
-        </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-large" })
+    </div>
     }
 </div>
