@@ -1,57 +1,40 @@
 ﻿@model Proyecto.Models.Modulo
 
 @{
-    ViewBag.Title = "Eliminar Proyecto";
+    ViewBag.Title = "Delete";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Delete</h2>
 
-<h3>¿Está seguro que desea borrar este proyecto?</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
+    <h4>Modulo</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Nombre
+            @Html.DisplayNameFor(model => model.Nombre)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Nombre)
         </dd>
+
         <dt>
-            Id
+            @Html.DisplayNameFor(model => model.Proyecto.objetivo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.Proyecto.objetivo)
         </dd>
-        <dt>
-            Nombre Proyecto
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombreProy)
-        </dd>
-        <dt>
-            Requerimientos:
-        </dt>
-        <table>
-            <tr>
-                <td> Requerimiento 1:</td>
-            </tr>
-            <tr>
-                <td> Requerimiento 2:</td>
-            </tr>
-        </table>
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-            @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-success" })
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

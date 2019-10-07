@@ -1,4 +1,4 @@
-@model IEnumerable<Proyecto.Models.Modulo>
+﻿@model IEnumerable<Proyecto.Models.Modulo>
 @*@{Html.RenderPartial("Proyecto", Model);} *@
 @{
 
@@ -28,8 +28,10 @@
     </a>
 </p>
 
+<p>
+    @Html.ActionLink("Crear modulo Nuevo", "Create")
+</p>
 
-@Html.ActionLink("Crear modulo Nuevo", "Create", "Moduloe")
 <br />
 <br />
 
