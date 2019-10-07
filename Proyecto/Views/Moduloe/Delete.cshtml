@@ -1,7 +1,7 @@
-@model Proyecto.Models.Modulo
+﻿@model Proyecto.Models.Modulo
 
 @{
-    ViewBag.Title = "Eliminar Proyecto";
+    ViewBag.Title = "Eliminar Modulo";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -50,7 +50,7 @@
         @Html.AntiForgeryToken()
 
     <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <input type="submit" value="Aceptar" class="btn btn-success" />
         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-large" })
     </div>
     }
