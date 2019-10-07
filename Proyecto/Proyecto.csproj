@@ -241,6 +241,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
