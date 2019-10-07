@@ -7,12 +7,12 @@
 }
 <h2> Modulos </h2>
 @*
-<h6>Seleccione Proyecto</h6>
+    <h6>Seleccione Proyecto</h6>
 
-@Html.DropDownList("Seleccione Proyecto",
-                    new SelectList(Model),
-                    "Proyectos",
-                    new { @class = "form-control" })
+    @Html.DropDownList("Seleccione Proyecto",
+                        new SelectList(Model),
+                        "Proyectos",
+                        new { @class = "form-control" })
 *@
 
 
@@ -22,12 +22,11 @@
 
 @*Falta agregar un filtro por proyecto*@
 
+
 <p class=" boton float-right">
-    <a href="Create" class="btn btn-success btn-lg float-right ">
-        <span class="glyphicon glyphicon-plus"></span> +
+    <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
     </a>
 </p>
-
 <p>
     @Html.ActionLink("Crear modulo Nuevo", "Create")
 </p>
