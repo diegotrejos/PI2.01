@@ -4,9 +4,9 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar</h2>
+<h2>Eliminar Cliente</h2>
 
-<h3>¿Esta seguro que desea eliminar este cliente?</h3>
+<h3 style="color:#FF0000" ;> ¿Esta seguro que desea eliminar este cliente?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -85,12 +85,15 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        @Html.ActionLink("Cancelar", "Index")
-    </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            <a href="../Index" class="btn btn-success ">
+                <span></span> Cancelar
+            </a>
+        </div>
     }
 </div>
