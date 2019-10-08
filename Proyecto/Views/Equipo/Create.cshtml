@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Proyecto.Models.Equipo>
+
+@{
+    ViewBag.Title = "Asignar Equipo"; @*Titulo que este en el estandar *@
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<fieldset id="left">
+    <legend><b>Empleados Disponibles</b></legend>
+    <ol id="Empleados Disponibles">
+        <li id="Trejos">TREJOS</li>
+    </ol>
+</fieldset>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

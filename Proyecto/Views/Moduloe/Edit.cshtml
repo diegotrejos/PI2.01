@@ -3,20 +3,7 @@
     ViewBag.Title = "Editar";
 }
 <h2>  @ViewBag.Title </h2>
-@*No se si sera Moduloe o Modulo*@
-@*
-    @using (Html.BeginForm("Edit", "Moduloe", FormMethod.Post))
-    {
-        <p>Title: @Html.TextBox("cosa1")<br/>@*Cajita de texto
-        <input type="submit" value="botonmieo"/></p>@*boton q no hace nada
-    }
-        <div>
-            @Html.ActionLink("Aceptar", "Index", null, new { @class = "btn btn-success btn-large" })
-        </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-*@
+
 
 @using (Html.BeginForm())
 {

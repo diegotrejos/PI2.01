@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Proyecto.Models.Equipo>
+
+@{
+    ViewBag.Title = "Index"; @*Titulo que este en el estandar *@
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<style>
+    ol 
+    {
+        list-style-type:none;
+        width:170px;
+        height:480px;
+    }
+    li 
+    {
+        height:30px;
+        width:150px;
+        border:1px solid black;
+        margin:2px;
+        font-size:20px;
+        text-align: center;
+    }
+    #Empleados_Disponibles li 
+    {
+        background-color:pink;
+    }
+    #Empleados_Agregados li 
+    {
+        background-color:silver;
+    }
+    filedset 
+    {
+        float:left;
+        margin:30px;
+        width:200px;
+        height:500px;
+        border:5px solid black;
+    }
+</style>
+<link rel="stylesheet " href="jquary-ui.css" >
+<script src="jquary.js"></script>
+<script> src = "jquary-ui.js" ></script>
+<script>
+        $(document).ready(function () {
+            $("#Empleados_Disponibles").sortable({ connectWith: "#Empleados_Agregados" });
+            $("#Empleados_Agregados").sortable();
+        });
+</script>
+
+<fieldset id="left">
+    <legend><b>Empleados Disponibles</b></legend>
+    <ol id="Empleados_Disponibles">
+        <li id="Trejos">TREJOS</li>
+    </ol>
+</fieldset>
+
+<fieldset id="right">
+    <legend><b>Empleados Agregados</b></legend>
+    <ol id="Empleados_Agregados">
+        <li id="Urena">Urena</li>
+    </ol>
+</fieldset>
+
+
+
+@*
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreEquipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proyecto.objetivo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+    *@
+
+

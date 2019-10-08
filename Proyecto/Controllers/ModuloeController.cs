@@ -14,7 +14,7 @@ namespace Proyecto.Controllers
     public class ModuloeController : Controller
     {
         //private Gr02Proy3Entities db = new Gr02Proy3Entities(); 
-
+        Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         // GET: Moduloe
         public ActionResult Index()
         {
@@ -123,27 +123,9 @@ namespace Proyecto.Controllers
                 return View(modulo);
             }
         }
+        
 
 
-        public ActionResult Delete(int id, string nombreProy) // comunica con el modelo
-        {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-                /*Aqui podria poner un filtro*/
-                var query = from a in db.Modulo
-                            where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
-                            select a;
-
-                var item = query.FirstOrDefault();
-
-                if (item != null)
-                    return View(item);
-                else
-                    return View("NotFound");
-
-            }
-
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -168,6 +150,26 @@ namespace Proyecto.Controllers
                     db.Dispose();
                 }
                 base.Dispose(disposing);
+            }
+        }
+
+        public SelectList getProyectos()
+        {
+
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+                /*posible metodo de inclusion de proyecto
+                @{
+                    ((ProyectoController)this.ViewContext.Controller).getProyectos();
+                }
+                */
+
+
+
+
+                return this.proyController.getProyectos();
+
+                //return (IEnumerable<Proyecto.Models.Proyecto>(RedirectToAction("getProyectos", "Proyecto")));
             }
         }
 

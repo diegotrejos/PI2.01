@@ -12,12 +12,14 @@ namespace Proyecto.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Modulo
+    public partial class Equipo
     {
-        public string NombreProy { get; set; }
-        public int Id { get; set; }
-        public string Nombre { get; set; }
+        public string cedulaEM_FK { get; set; }
+        public string nombreProy_FK { get; set; }
+        public string nombreEquipo { get; set; }
+        public bool rol { get; set; }
     
+        public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
         public virtual Proyecto Proyecto { get; set; }
     }
 }

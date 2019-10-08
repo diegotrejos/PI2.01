@@ -6,93 +6,106 @@
     ViewBag.Title = "Modulos";
 }
 <h2> Modulos </h2>
-@*
+@**@
     <h6>Seleccione Proyecto</h6>
 
-    @Html.DropDownList("Seleccione Proyecto",
-                        new SelectList(Model),
+    @Html.DropDownList( "Seleccione Proyecto",
+                        //new SelectList(Model),
+                        ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
                         "Proyectos",
                         new { @class = "form-control" })
-*@
 
-
-
-<br />
-<br />
-
-@*Falta agregar un filtro por proyecto*@
-
-
-<p class=" boton float-right">
-    <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
-</p>
-
-
-<br />
-<br />
-
-@*Tabla de Modulos*@
-<h6>Seleccione un Modulo</h6>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreProy)
-        </th>
-    </tr>
-
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Nombre, "Details", new { id = item.Id, nombreProy = item.NombreProy },null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreProy)
-            </td>
-            <td>
-                <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
-                @Html.ActionLink(" ", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-info glyphicon glyphicon-wrench float-right " })
-
-                @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
-            </td>
-        </tr>
-    }
-</table>
-
-
-<!--Esta es la segunda tabla  -->
 @*
-    <h6>Modulos dentro de este:</h6>
+                       
+                        para enviarle algo a un controlador con metodo q se llame report
+                            @using (Html.BeginForm("Report", "ProyectoController"))
+                            {
+                                <input type="text" name="reportName" />
+                                <input type="submit" />
+                            }
+                        
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th></th>
-        </tr>
-
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-            </tr>
-
-        }
-    </table>
+                        @{
+                            ProyectoController.
+                        }
 *@
+
+                        <br />
+                        <br />
+
+                        @*Falta agregar un filtro por proyecto*@
+
+
+                        <p class=" boton float-right">
+                            <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
+                            </a>
+                        </p>
+
+
+                        <br />
+                        <br />
+
+                        @*Tabla de Modulos*@
+                        <h6>Seleccione un Modulo</h6>
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NombreProy)
+                                </th>
+                            </tr>
+
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink(item.Nombre, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreProy)
+                                    </td>
+                                    <td>
+                                        <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
+                                        @Html.ActionLink(" ", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-info glyphicon glyphicon-wrench float-right " })
+
+                                        @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+
+
+                        <!--Esta es la segunda tabla  -->
+                        @*
+                            <h6>Modulos dentro de este:</h6>
+
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Id)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                    </tr>
+
+                                }
+                            </table>
+                        *@

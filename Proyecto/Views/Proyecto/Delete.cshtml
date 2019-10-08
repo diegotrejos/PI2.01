@@ -6,12 +6,12 @@
 
 <h2>Eliminar Proyecto</h2>
 
-<h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
+<h3>¿Está seguro que desea borrar este proyecto?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            nombre
+           nombre
         </dt>
 
         <dd>
@@ -32,14 +32,14 @@
             @Html.DisplayFor(model => model.fechaInicio)
         </dd>
         <dt>
-            Nombre de Cliente
+           Nombre de Cliente
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Cliente.nombre)
         </dd>
         <dt>
-            Duración Estimada
+           Duración Estimada
         </dt>
 
         <dd>
@@ -73,18 +73,11 @@
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-    <div class="botones">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            <a href="~/Proyecto/Index" class="btn btn-success">
-                Cancelar
-            </a>
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
     </div>
-
-
-
     }
 </div>

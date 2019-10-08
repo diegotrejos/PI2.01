@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camaik</title>
     <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
-
     @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/jquery-ui.css")
+    @Scripts.Render("~/bundles/modernizr")
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,7 +20,7 @@
         function estilo(numero) {
             listaElementos = document.getElementsByClassName('navbar-nav');
             for (var elemento in listaElementos) {
-                elemento.style.font = "italics";
+                elemento.style.font= "italics";
             }
             listaElementos[numero].style.font = "bold";
             document.write('Termineee');
@@ -29,7 +28,7 @@
 
     </script>
     <h1 class=" titulo text-center ">Software Expert S.A </h1>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <a class="navbar-brand" href="#">Camaik</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" onclick="estilo(0)" href="~/Proyecto">Proyectos</a>
-                <a class="nav-item nav-link" href="#">Equipo</a>
+                <a class="nav-item nav-link" href="~/Equipo">Equipo</a>
                 <a class="nav-item nav-link" href="~/Moduloe">Modulo</a>
                 <a class="nav-item nav-link" href="#">Requerimientos</a>
                 <a class="nav-item nav-link" href="~/EmpleadoDesarrollador">Empleados</a>
@@ -46,21 +45,19 @@
             </div>
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
     </div>
-    <footer class="fixed-bottom bg-dark pt-4 pb-4">
+    <footer class="fixed-bottom bg-success pt-4 pb-4">
         <div class="copyright text-sm-center text-white small">
             Copyright &copy; 2019 <span>Camaik</span>
         </div>
     </footer>
 
 
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/DatePickerReady.js")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
