@@ -1,12 +1,19 @@
-﻿@model IEnumerable<Proyecto.Models.Modulo>
+@model IEnumerable<Proyecto.Models.Modulo>
 @*@{Html.RenderPartial("Proyecto", Model);} *@
 @{
 
 
     ViewBag.Title = "Modulos";
 }
+
+
+
+
+
+
+
 <h2> Modulos </h2>
-@*
+@**
     <h6>Seleccione Proyecto</h6>
 
     @Html.DropDownList("Seleccione Proyecto",
@@ -14,8 +21,17 @@
                         "Proyectos",
                         new { @class = "form-control" })
 *@
+@*para enviarle algo a un controlador con metodo q se llame report
+@using (Html.BeginForm("Report", "ProyectoController"))
+{
+    <input type="text" name="reportName" />
+    <input type="submit" />
+}
+*@
 
-
+@{ 
+    ProyectoController.
+}
 
 <br />
 <br />
@@ -27,9 +43,7 @@
     <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
     </a>
 </p>
-<p>
-    @Html.ActionLink("Crear modulo Nuevo", "Create")
-</p>
+
 
 <br />
 <br />
@@ -51,18 +65,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                @Html.ActionLink(item.Nombre, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NombreProy)
             </td>
             <td>
                 <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
-                @Html.ActionLink("Consultar", "Details", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)|
+                @Html.ActionLink(" ", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-info glyphicon glyphicon-wrench float-right " })
 
-                @Html.ActionLink("Editar", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)
-
-                @Html.ActionLink("Borrar", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)
+                @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
             </td>
         </tr>
     }
