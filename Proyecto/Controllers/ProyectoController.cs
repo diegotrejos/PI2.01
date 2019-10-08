@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using System.Data.SqlClient;
+using System.Windows;
 
 namespace Proyecto.Controllers
 {
@@ -50,16 +52,25 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
         {
-            if (ModelState.IsValid)
-            {
-                db.Proyecto.Add(proyecto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre", proyecto.cedulaCliente);
-            return View(proyecto);
+
+                if (ModelState.IsValid)
+                {
+                    db.Proyecto.Add(proyecto);
+
+                if (db.SaveChanges() == 0) {
+                    Response.Write("<script>alert('El nombre del proyecto ya existe. Intente con uno nuevo');</script>");
+                    return View(proyecto);
+                }
+                    
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre", proyecto.cedulaCliente);
+                return View(proyecto);
+                //registro no existe
         }
+
 
         // GET: Proyecto/Edit/5
         public ActionResult Edit(string id)
@@ -108,6 +119,34 @@ namespace Proyecto.Controllers
             }
             return View(proyecto);
         }
+
+        static private string GetConnectionString()
+        {
+            // To avoid storing the connection string in your code, 
+            // you can retrieve it from a configuration file.
+            return "Data Source=MSSQL1;Initial Catalog=Gr02Proy3;"
+                + "Integrated Security=true;";
+        }
+
+
+        public bool Existe(string Codigo_ruc)
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                string query = "select count(*)from Proyecto where Codigo_ruc=@Codigo_ruc";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Codigo_ruc", Codigo_ruc);
+                conn.Open();
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 0)
+                    return false;
+                else
+                    return true;
+            }
+        }
+
+
 
         // POST: Proyecto/Delete/5
         [HttpPost, ActionName("Delete")]

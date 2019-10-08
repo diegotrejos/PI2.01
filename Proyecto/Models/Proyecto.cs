@@ -23,17 +23,40 @@ namespace Proyecto.Models
         }
 
         [Key]
+        [Required]
+        [StringLength(15, MinimumLength = 2)]
         public string nombre { get; set; }
+
+
         public Nullable<int> duracionEstimada { get; set; }
+
+
         public Nullable<int> costoTrabajo { get; set; }
+
+
         public Nullable<int> costoEstimado { get; set; }
+
+        [Required]
+        [StringLength(256, MinimumLength = 5)]
         public string objetivo { get; set; }
+
+
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }
+        
+        
+        
+        [Required]
         public Nullable<System.DateTime> fechaInicio { get; set; }
+        
+        
+        [Required]
+        [StringLength(9, MinimumLength = 9)]
         public string cedulaCliente { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+       
+        
         public virtual ICollection<Modulo> Modulo { get; set; }
     }
 }
