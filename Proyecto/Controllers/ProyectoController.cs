@@ -36,8 +36,23 @@ namespace Proyecto.Controllers
             return View(proyecto);
         }
 
-        // GET: Proyecto/Create
-        public ActionResult Create()
+
+        public IEnumerable<Proyecto.Models.Proyecto> getProyectos()
+        {
+            var proyecto = db.Proyecto;
+            return(proyecto.ToList());
+
+        }
+
+
+
+
+
+
+
+
+    // GET: Proyecto/Create
+    public ActionResult Create()
         {
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre");
             return View();
@@ -128,5 +143,10 @@ namespace Proyecto.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
+
+
+
+    
 }
