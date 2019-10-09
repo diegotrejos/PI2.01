@@ -16,7 +16,7 @@ namespace Proyecto.Models
     public partial class Gr02Proy3Entities : DbContext
     {
         public Gr02Proy3Entities()
-            : base("name=Gr02Proy3Entities1")
+            : base("name=Gr02Proy3Entities")
         {
         }
     
