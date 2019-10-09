@@ -22,14 +22,28 @@ namespace Proyecto.Models
         }
         
         [Key]
+        [Required(ErrorMessage = "El campo es requerido")]
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]
         public string cedula { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
+        [StringLength(15, MinimumLength = 2, ErrorMessage = "El nombre del cliente debe estar entre un rango de 2 a 15 caracteres")]
         public string nombre { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
         public string apellido1 { get; set; }
+
         public string apellido2 { get; set; }
+
+        [StringLength(11, MinimumLength = 8, ErrorMessage = "El número de digitos debe ser de 8")]
         public string telefono { get; set; }
+
         public string direccionExacta { get; set; }
+
         public string distrito { get; set; }
+
         public string canton { get; set; }
+
         public string provincia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

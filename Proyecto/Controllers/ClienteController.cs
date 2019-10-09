@@ -50,9 +50,14 @@ namespace Proyecto.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Cliente.Add(cliente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.Cliente.Any(model => model.cedula == cliente.cedula))
+                {
+                    db.Cliente.Add(cliente);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                    Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");
             }
 
             return View(cliente);
