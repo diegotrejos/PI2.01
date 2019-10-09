@@ -4,96 +4,115 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar Cliente</h2>
+<div class="container-fluid text-center">
+    <h2>Eliminar Cliente</h2>
+    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este cliente?</h3>
 
-<h3 style="color:#FF0000" ;> ¿Esta seguro que desea eliminar este cliente?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Cédula
-        </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Cédula
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.cedula)
+                </td>
+            </tr>
 
-        <dt>
-            Nombre
-        </dt>
+            <tr>
+                <th>
+                    Nombre
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.nombre)
+                </td>
+            </tr>
 
-        <dt>
-            Primer apellido
-        </dt>
+            <tr>
+                <th>
+                    Primer apellido
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1)
+                </td>
+            </tr>
 
-        <dt>
-            Segundo apellido
-        </dt>
+            <tr>
+                <th>
+                    Segundo apellido
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2)
+                </td>
+            </tr>
 
-        <dt>
-            Teléfono
-        </dt>
+            <tr>
+                <th>
+                    Teléfono
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            </tr>
 
-        <dt>
-            Provincia
-        </dt>
+            <tr>
+                <th>
+                    Provincia
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.provincia)
+                </td>
+            </tr>
 
+            <tr>
+                <th>
+                    Cantón
+                </th>
 
-        <dt>
-            Cantón
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.canton)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
+            <tr>
+                <th>
+                    Distrito
+                </th>
 
-        <dt>
-            Distrito
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.distrito)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
+            <tr>
+                <th>
+                    Dirección Exacta
+                </th>
 
-        <dt>
-            Dirección Exacta
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    </dl>
+    <div class="botones text-center">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a href="~/Cliente/Index" class="btn btn-default">
+            Regresar
+        </a>
+    </div>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-            <a href="../Index" class="btn btn-success ">
-                <span></span> Cancelar
-            </a>
-        </div>
-    }
+}
 </div>

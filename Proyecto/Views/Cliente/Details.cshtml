@@ -4,92 +4,109 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Consultar Cliente</h2>
+<div class="container-fluid text-center">
+    <h2>Detalles del Cliente</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Cédula
+                </th>
 
-        <dt>
-            Cédula
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.cedula)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
+            <tr>
+                <th>
+                    Nombre
+                </th>
 
-        <dt>
-            Nombre
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.nombre)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+            <tr>
+                <th>
+                    Primer apellido
+                </th>
 
-        <dt>
-            Primer apellido
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1)
-        </dd>
+            <tr>
+                <th>
+                    Segundo apellido
+                </th>
 
-        <dt>
-            Segundo apellido
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2)
-        </dd>
+            <tr>
+                <th>
+                    Teléfono
+                </th>
 
-        <dt>
-            Teléfono
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+            <tr>
+                <th>
+                    Provincia
+                </th>
 
-        <dt>
-            Provincia
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.provincia)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
+            <tr>
+                <th>
+                    Cantón
+                </th>
 
+                <td>
+                    @Html.DisplayFor(model => model.canton)
+                </td>
+            </tr>
 
-        <dt>
-            Cantón
-        </dt>
+            <tr>
+                <th>
+                    Distrito
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.distrito)
+                </td>
+            </tr>
 
-        <dt>
-            Distrito
-        </dt>
+            <tr>
+                <th>
+                    Dirección Exacta
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-        <dt>
-            Dirección Exacta
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
-
-
-
-
-    </dl>
+    <p class=" boton">
+        <a href="~/Cliente/Index" class="btn btn-default ">
+            <span></span> Regresar
+        </a>
+    </p>
 </div>
-<p class=" boton">
-    <a href="../Index" class="btn btn-success btn-lg ">
-        <span></span> Regresar
-    </a>
-</p>
+
+
+
