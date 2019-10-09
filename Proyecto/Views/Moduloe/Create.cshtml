@@ -18,8 +18,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.NombreProy, "NombreProy", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @** @Html.DropDownList("NombreProy", null, htmlAttributes: new { @class = "form-control" })*@
-            @Html.EditorFor(model => model.NombreProy, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownList(((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(), htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.NombreProy, "", new { @class = "text-danger" })
         </div>
     </div>
