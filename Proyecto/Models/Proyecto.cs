@@ -23,7 +23,7 @@ namespace Proyecto.Models
         }
 
         [Key]
-        [Required]
+        [Required(ErrorMessage = "El campo es requerido")]
         [StringLength(15, MinimumLength = 2, ErrorMessage="El nombre del proyecto debe estar entre un rango de 2 a 15 caracteres")]
         public string nombre { get; set; }
 
@@ -36,8 +36,8 @@ namespace Proyecto.Models
 
         public Nullable<int> costoEstimado { get; set; }
 
-        [Required]
-        [StringLength(256, MinimumLength = 5)]
+        [Required(ErrorMessage ="El campo es requerido")]
+        [StringLength(256, MinimumLength = 5, ErrorMessage = "El Objetivo debe estar entre un rango de 5 a 256 caracteres")]
         public string objetivo { get; set; }
 
 
@@ -45,12 +45,12 @@ namespace Proyecto.Models
         
         
         
-        [Required]
+        [Required(ErrorMessage ="El campo es requerido")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
         
         
-        [Required]
-        [StringLength(12, MinimumLength = 9)]
+        [Required(ErrorMessage ="El campo es requerido")]
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula del cliente debe estar entre un rango de 5 a 256 caracteres")]
         public string cedulaCliente { get; set; }
 
         //public bool existe(string llave) {

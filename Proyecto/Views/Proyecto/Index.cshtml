@@ -4,53 +4,50 @@
     ViewBag.Title = "Proyectos";
 }
 
-<h2>Lista de Proyectos</h2>
-<p class=" boton float-right">
-    <a href="~/Proyecto/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-           Nombre
-        </th>
-        <th>
-            Objetivo
-        </th>
-        <th>
-            Nombre de Cliente
-        </th>
-        <th>
-            Fecha de inicio
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class=" Container" align-items-center>
+    <h2>Lista de Proyectos</h2>
+    <p class=" boton float-right">
+        <a href="~/Proyecto/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
+        </a>
+    </p>
+    <table class="table">
         <tr>
-            <td>
-                @Html.ActionLink(item.nombre, "Details", new { id = item.nombre })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.objetivo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaInicio)
-            </td>
-            <td>
-                <p class="botones">
-                    <a href= @Url.Action(item.nombre, "Proyecto/Edit") class="btn  btn-info glyphicon glyphicon-wrench float-right ">
-                    </a>
-                    <a  href= @Url.Action(item.nombre, "Proyecto/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
-                    </a>
-                </p>
-            </td>
-        </tr>
-    }
+            <th>
+               Nombre
+            </th>
+            <th>
+                Nombre de Cliente
+            </th>
+            <th>
+                Fecha de inicio
+            </th>
 
-</table>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.nombre, "Details", new { id = item.nombre })
+                </td>
+                <td>
+                    @Html.ActionLink(item.Cliente.nombre, "Details", new { id = item.nombre })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaInicio)
+                </td>
+                <td>
+                    <p class="botones">
+                        <a href= @Url.Action(item.nombre, "Proyecto/Edit") class="btn  btn-info glyphicon glyphicon-wrench float-right ">
+                        </a>
+                        <a  href= @Url.Action(item.nombre, "Proyecto/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
+                        </a>
+                    </p>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>
