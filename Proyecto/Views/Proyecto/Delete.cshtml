@@ -4,87 +4,108 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar Proyecto</h2>
 
-<h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            nombre
-        </dt>
+<div class="container-fluid text-center">
+    <h2>Eliminar Proyecto</h2>
+    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt>
-            Objetivo
-        </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Nombre
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.objetivo)
-        </dd>
-        <dt>
-            Fecha de Inicio
-        </dt>
+                <th>
+                    @Html.DisplayFor(model => model.nombre)
+                </th>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-        <dt>
-            Nombre de Cliente
-        </dt>
+            <tr>
+                <th>
+                    Objetivo
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cliente.nombre)
-        </dd>
-        <dt>
-            Duración Estimada
-        </dt>
+                <th>
+                    @Html.DisplayFor(model => model.objetivo)
+                </th>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
+            <tr>
+                <th>
+                    Fecha de Inicio
+                </th>
 
-        <dt>
-            Costo de Trabajo
-        </dt>
+                <th>
+                    @Html.DisplayFor(model => model.fechaInicio)
+                </th>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.costoTrabajo)
-        </dd>
+            <tr>
+                <th>
+                    Nombre de Cliente
+                </th>
 
-        <dt>
-            Costo Estimado
-        </dt>
+                <th>
+                    @Html.DisplayFor(model => model.Cliente.nombre)
+                </th>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.costoEstimado)
-        </dd>
+            <tr>
+                <th>
+                    Duración Estimada
+                </th>
 
+                <th>
+                    @Html.DisplayFor(model => model.duracionEstimada)
+                </th>
+            </tr>
 
-        <dt>
-            Fecha de Finalización
-        </dt>
+            <tr>
+                <th>
+                    Costo de Trabajo
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaFinalizacion)
-        </dd>
+                <th>
+                    @Html.DisplayFor(model => model.costoTrabajo)
+                </th>
+            </tr>
 
-    </dl>
+            <tr>
+                <th>
+                    Costo Estimado
+                </th>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+                <th>
+                    @Html.DisplayFor(model => model.costoEstimado)
+                </th>
+            </tr>
 
-    <div class="botones">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            <a href="~/Proyecto/Index" class="btn btn-success">
-                Cancelar
-            </a>
+            <tr>
+                <th>
+                    Fecha de Finalización
+                </th>
+
+                <th>
+                    @Html.DisplayFor(model => model.fechaFinalizacion)
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="botones text-center">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a href="~/Proyecto/Index" class="btn btn-success">
+            Cancelar
+        </a>
     </div>
 
 
 
-    }
+}
 </div>

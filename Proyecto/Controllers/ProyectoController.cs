@@ -56,15 +56,16 @@ namespace Proyecto.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    db.Proyecto.Add(proyecto);
+                    if (!db.Proyecto.Any(model => model.nombre == proyecto.nombre))
+                    {
+                        db.Proyecto.Add(proyecto);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                        Response.Write("<script>alert('El nombre del proyecto ya existe. Intente con uno nuevo');</script>");
+                }
 
-                if (db.SaveChanges() == 0) {
-                    Response.Write("<script>alert('El nombre del proyecto ya existe. Intente con uno nuevo');</script>");
-                    return View(proyecto);
-                }
-                    
-                    return RedirectToAction("Index");
-                }
 
                 ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre", proyecto.cedulaCliente);
                 return View(proyecto);
@@ -129,9 +130,9 @@ namespace Proyecto.Controllers
         }
 
 
-        public bool Existe(string Codigo_ruc)
-        {
-            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+        //public bool Existe(string Codigo_ruc)
+        //{
+            /*using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
                 string query = "select count(*)from Proyecto where Codigo_ruc=@Codigo_ruc";
                 SqlCommand cmd = new SqlCommand(query, conn);
@@ -143,8 +144,9 @@ namespace Proyecto.Controllers
                     return false;
                 else
                     return true;
-            }
-        }
+            }*/
+
+        //}
 
 
 

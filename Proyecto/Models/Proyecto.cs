@@ -24,7 +24,7 @@ namespace Proyecto.Models
 
         [Key]
         [Required]
-        [StringLength(15, MinimumLength = 2)]
+        [StringLength(15, MinimumLength = 2, ErrorMessage="El nombre del proyecto debe estar entre un rango de 2 a 15 caracteres")]
         public string nombre { get; set; }
 
 
@@ -50,8 +50,13 @@ namespace Proyecto.Models
         
         
         [Required]
-        [StringLength(9, MinimumLength = 9)]
+        [StringLength(12, MinimumLength = 9)]
         public string cedulaCliente { get; set; }
+
+        //public bool existe(string llave) {
+
+
+        //}
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
