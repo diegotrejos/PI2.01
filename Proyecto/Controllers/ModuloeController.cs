@@ -123,13 +123,35 @@ namespace Proyecto.Controllers
                 return View(modulo);
             }
         }
-        
+
+
+        // GET: Moduloe/Delete/5
+        public ActionResult Delete(int id, string nombreProy) // comunica con el modelo
+        {
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+                /*Aqui podria poner un filtro*/
+                var query = from a in db.Modulo
+                            where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
+                            select a;
+
+                var item = query.FirstOrDefault();
+
+                if (item != null)
+                    return View(item);
+                else
+                    return View("NotFound");
+
+            }
+
+        }
+
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
+        public ActionResult Delete([Bind(Include = "NombreProy,Id")] Modulo modulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
@@ -158,18 +180,10 @@ namespace Proyecto.Controllers
 
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                /*posible metodo de inclusion de proyecto
-                @{
-                    ((ProyectoController)this.ViewContext.Controller).getProyectos();
-                }
-                */
-
-
-
 
                 return this.proyController.getProyectos();
 
-                //return (IEnumerable<Proyecto.Models.Proyecto>(RedirectToAction("getProyectos", "Proyecto")));
+              
             }
         }
 
