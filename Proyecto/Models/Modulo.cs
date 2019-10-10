@@ -1,11 +1,10 @@
-
 namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Modulo // porque partial? es por la relacion???
+    public partial class Modulo 
     {
         //Data notation 
         //Sirven para hacer validaciones o dar formato a las variables
@@ -15,9 +14,8 @@ namespace Proyecto.Models
         [Display(Name = "Nombre de Proyecto")]
         public string NombreProy { get; set; }
 
-        [Display(Name = "Identificador")]
-        [Required(ErrorMessage = "Debe tener identificador")]
-        public int Id { get; set; }
+        [Display(Name = "No debe salir Identificador")]
+        public int Id { get; set; }//es autogenerado en la base
 
 
         [Required(ErrorMessage = "Debe tener Nombre")] //Constraint es necesario
