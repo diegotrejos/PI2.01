@@ -57,9 +57,9 @@ namespace Proyecto.Controllers
             {
                if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
                 {
-                    if (Regex.IsMatch("model => model.correo", expresion))
+                    if (Regex.IsMatch("cristy@gmail.com", expresion))
                     {
-                        if (Regex.Replace("model => model.correo", expresion, String.Empty).Length == 0)
+                        if (Regex.Replace("cristy@gmail.com", expresion, String.Empty).Length == 0)
                         {
                             db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
                             db.SaveChanges();
