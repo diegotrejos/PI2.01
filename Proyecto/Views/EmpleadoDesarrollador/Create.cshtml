@@ -47,7 +47,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.fechaNacimiento, "Fecha Nacimiento (YYYY-MM-DD)", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.fechaNacimiento, "Fecha Nacimiento ", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
@@ -117,7 +117,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio (YYYY-MM-DD)", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.fechaInicio, "Fecha Inicio ", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
@@ -150,8 +150,7 @@
                 @Html.DropDownListFor(model => model.flg, new SelectList(
                     new[] {
                         new { Value = "true", Text = "Desarrollador" },
-                        new { Value = "false", Text = "Jefe de Desarrollo" },
-                        new { Value = "false", Text = "Soporte Técnico" },
+                        new { Value = "false", Text = "Otro" }
                     },
                     "Value",
                     "Text"
@@ -161,10 +160,10 @@
         </div>
     </div>
 
-    <div class="form-actions no-color">
+    <div class="botones text-center">
         <input type="submit" value="Aceptar" class="btn btn-success" />
-        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-success ">
-            <span></span> Cancelar
+        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default">
+            Cancelar
         </a>
     </div>
 

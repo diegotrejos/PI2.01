@@ -3,136 +3,134 @@
 <h2>Consultar</h2>
 
 <div>
-    <h4>EmpleadoDesarrollador</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
             Cédula
         </dt>
+            <dd>
+                @Html.DisplayFor(model => model.cedulaED)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.cedulaED)
-        </dd>
+            <dt>
+                Nombre
+            </dt>
 
-        <dt>
-            Nombre
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nombreED)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombreED)
-        </dd>
+            <dt>
+                Primer Apellido
+            </dt>
 
-        <dt>
-            Primer Apellido
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.apellido1ED)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1ED)
-        </dd>
+            <dt>
+                Segundo Apellido
+            </dt>
 
-        <dt>
-            Segundo Apellido
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.apellido2ED)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2ED)
-        </dd>
+            <dt>
+                Edad
+            </dt>
 
-        <dt>
-            Edad
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.edad)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.edad)
-        </dd>
+            <dt>
+                Teléfono
+            </dt>
 
-        <dt>
-            Teléfono
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+            <dt>
+                Correo
+            </dt>
 
-        <dt>
-            Correo
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.correo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+            <dt>
+                Fecha de Nacimiento
+            </dt>
 
-        <dt>
-            Fecha de Nacimiento
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.fechaNacimiento)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaNacimiento)
-        </dd>
+            <dt>
+                Provincia
+            </dt>
 
-        <dt>
-            Provincia
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
-
-
-        <dt>
-            Cantón
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
-
-        <dt>
-            Distrito
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.provincia)
+            </dd>
 
 
-        <dt>
-            Dirección Exacta
-        </dt>
+            <dt>
+                Cantón
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.canton)
+            </dd>
+
+            <dt>
+                Distrito
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.distrito)
+            </dd>
 
 
-        <dt>
-            Fecha de Inicio
-        </dt>
+            <dt>
+                Dirección Exacta
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.direccionExacta)
+            </dd>
 
-        <dt>
-            Disponibilidad
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
-        </dd>
+            <dt>
+                Fecha de Inicio
+            </dt>
 
-		<dt>
-			Desarrollador?
-		</dt>
+            <dd>
+                @Html.DisplayFor(model => model.fechaInicio)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.flg)
-        </dd>
+            <dt>
+                Disponibilidad
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.disponibilidad)
+            </dd>
+
+            <dt>
+                Desarrollador?
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.flg)
+            </dd>
+
+        </dl>
 </div>
 <p class=" boton">
-    <a href="../Index" class="btn btn-success btn-lg ">
+    <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
         <span></span> Regresar
     </a>
 </p>

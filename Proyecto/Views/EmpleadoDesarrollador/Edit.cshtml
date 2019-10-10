@@ -9,7 +9,6 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>EmpleadoDesarrollador</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.cedulaED)
@@ -145,8 +144,7 @@
                 @Html.DropDownListFor(model => model.flg, new SelectList(
                     new[] {
                         new { Value = "true", Text = "Desarrollador" },
-                        new { Value = "false", Text = "Jefe de Desarrollo" },
-                        new { Value = "false", Text = "Soporte Técnico" },
+                        new { Value = "false", Text = "Otro" }
                     },
                     "Value",
                     "Text"
@@ -156,10 +154,11 @@
         </div>
     </div>
 
-    <div class="btn btn-success form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Aceptar" class="btn btn-default" />
-        </div>
+    <div class="botones text-center">
+        <input type="submit" value="Aceptar" class="btn btn-success" />
+        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default">
+            Cancelar
+        </a>
     </div>
 
 </div>

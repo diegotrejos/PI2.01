@@ -11,7 +11,8 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
+
     public partial class EmpleadoDesarrollador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +20,12 @@ namespace Proyecto.Models
         {
             this.Habilidades = new HashSet<Habilidades>();
         }
-    
+        
+        [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
         public string cedulaED { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
         public string nombreED { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
         public string apellido1ED { get; set; }
         public string apellido2ED { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }

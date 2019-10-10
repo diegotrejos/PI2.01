@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using System.Text.RegularExpressions;
+
 
 namespace Proyecto.Controllers
 {
@@ -48,12 +50,37 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
+
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
             if (ModelState.IsValid)
             {
-                db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+               if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
+                {
+                    if (Regex.IsMatch("model => model.correo", expresion))
+                    {
+                        if (Regex.Replace("model => model.correo", expresion, String.Empty).Length == 0)
+                        {
+                            db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('Correro incorrecto.');</script>");
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("<script>alert('Correo incorrecto.');</script>");
+                    }
+
+                }
+                    else
+                        Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");
+
             }
+           
 
             return View(empleadoDesarrollador);
         }
