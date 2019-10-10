@@ -11,11 +11,15 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class EmpleadoDesarrollador
     {
-        [Key]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EmpleadoDesarrollador()
+        {
+            this.Habilidades = new HashSet<Habilidades>();
+        }
+    
         public string cedulaED { get; set; }
         public string nombreED { get; set; }
         public string apellido1ED { get; set; }
@@ -31,5 +35,8 @@ namespace Proyecto.Models
         public string canton { get; set; }
         public string provincia { get; set; }
         public Nullable<bool> flg { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Habilidades> Habilidades { get; set; }
     }
 }

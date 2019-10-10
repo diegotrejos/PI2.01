@@ -4,12 +4,12 @@
     <Key>
       <PropertyRef Name="cedula" />
     </Key>
-    <Property Name="cedula" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="cedula" Type="varchar" MaxLength="12" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="apellido1" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="apellido2" Type="varchar" MaxLength="15" />
     <Property Name="telefono" Type="varchar" MaxLength="8" />
-    <Property Name="direccionExacta" Type="varchar" MaxLength="15" />
+    <Property Name="direccionExacta" Type="varchar" MaxLength="256" />
     <Property Name="distrito" Type="varchar" MaxLength="25" />
     <Property Name="canton" Type="varchar" MaxLength="25" />
     <Property Name="provincia" Type="varchar" MaxLength="25" />
@@ -18,7 +18,7 @@
     <Key>
       <PropertyRef Name="cedulaED" />
     </Key>
-    <Property Name="cedulaED" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="cedulaED" Type="varchar" MaxLength="12" Nullable="false" />
     <Property Name="nombreED" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="apellido1ED" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="apellido2ED" Type="varchar" MaxLength="15" />
@@ -28,11 +28,19 @@
     <Property Name="telefono" Type="varchar" MaxLength="8" />
     <Property Name="correo" Type="varchar" MaxLength="15" />
     <Property Name="disponibilidad" Type="bit" />
-    <Property Name="direccionExacta" Type="varchar" MaxLength="15" />
+    <Property Name="direccionExacta" Type="varchar" MaxLength="256" />
     <Property Name="distrito" Type="varchar" MaxLength="25" />
     <Property Name="canton" Type="varchar" MaxLength="25" />
     <Property Name="provincia" Type="varchar" MaxLength="25" />
     <Property Name="flg" Type="bit" />
+  </EntityType>
+  <EntityType Name="Habilidades">
+    <Key>
+      <PropertyRef Name="cedulaEmpleadoPK_FK" />
+      <PropertyRef Name="conocimientos" />
+    </Key>
+    <Property Name="cedulaEmpleadoPK_FK" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="conocimientos" Type="varchar" MaxLength="64" Nullable="false" />
   </EntityType>
   <EntityType Name="Modulo">
     <Key>
@@ -51,13 +59,29 @@
     <Property Name="duracionEstimada" Type="int" />
     <Property Name="costoTrabajo" Type="int" />
     <Property Name="costoEstimado" Type="int" />
-    <Property Name="objetivo" Type="varchar" MaxLength="45" />
+    <Property Name="objetivo" Type="varchar" MaxLength="256" />
     <Property Name="fechaFinalizacion" Type="date" />
     <Property Name="fechaInicio" Type="date" />
-    <Property Name="cedulaCliente" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="cedulaCliente" Type="varchar" MaxLength="12" />
   </EntityType>
-  <Association Name="FK__Modulo__NombrePr__03F0984C">
-    <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1" />
+  <Association Name="FK_EmpleadoHabilidades">
+    <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Habilidades" Type="Self.Habilidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoDesarrollador">
+        <PropertyRef Name="cedulaED" />
+      </Principal>
+      <Dependent Role="Habilidades">
+        <PropertyRef Name="cedulaEmpleadoPK_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModuloProyecto">
+    <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Modulo" Type="Self.Modulo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Proyecto">
@@ -68,8 +92,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Proyecto__cedula__01142BA1">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+  <Association Name="FK_ProyectoCliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
     <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cliente">
@@ -83,13 +107,18 @@
   <EntityContainer Name="Gr02Proy3ModelStoreContainer">
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Habilidades" EntityType="Self.Habilidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Modulo__NombrePr__03F0984C" Association="Self.FK__Modulo__NombrePr__03F0984C">
+    <AssociationSet Name="FK_EmpleadoHabilidades" Association="Self.FK_EmpleadoHabilidades">
+      <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
+      <End Role="Habilidades" EntitySet="Habilidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModuloProyecto" Association="Self.FK_ModuloProyecto">
       <End Role="Proyecto" EntitySet="Proyecto" />
       <End Role="Modulo" EntitySet="Modulo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Proyecto__cedula__01142BA1" Association="Self.FK__Proyecto__cedula__01142BA1">
+    <AssociationSet Name="FK_ProyectoCliente" Association="Self.FK_ProyectoCliente">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Proyecto" EntitySet="Proyecto" />
     </AssociationSet>

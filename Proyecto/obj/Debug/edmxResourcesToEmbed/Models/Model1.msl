@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Gr02Proy3ModelStoreContainer" CdmEntityContainer="Gr02Proy3Entities">
+  <EntityContainerMapping StorageEntityContainer="Gr02Proy3ModelStoreContainer" CdmEntityContainer="Gr02Proy3Entities1">
     <EntitySetMapping Name="Cliente">
       <EntityTypeMapping TypeName="Gr02Proy3Model.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
@@ -34,6 +34,14 @@
           <ScalarProperty Name="canton" ColumnName="canton" />
           <ScalarProperty Name="provincia" ColumnName="provincia" />
           <ScalarProperty Name="flg" ColumnName="flg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Habilidades">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Habilidades">
+        <MappingFragment StoreEntitySet="Habilidades">
+          <ScalarProperty Name="cedulaEmpleadoPK_FK" ColumnName="cedulaEmpleadoPK_FK" />
+          <ScalarProperty Name="conocimientos" ColumnName="conocimientos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

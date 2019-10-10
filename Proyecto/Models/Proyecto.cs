@@ -11,9 +11,7 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-
+    
     public partial class Proyecto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,47 +19,18 @@ namespace Proyecto.Models
         {
             this.Modulo = new HashSet<Modulo>();
         }
-
-        [Key]
-        [Required(ErrorMessage = "El campo es requerido")]
-        [StringLength(15, MinimumLength = 2, ErrorMessage="El nombre del proyecto debe estar entre un rango de 2 a 15 caracteres")]
+    
         public string nombre { get; set; }
-
-
         public Nullable<int> duracionEstimada { get; set; }
-
-
         public Nullable<int> costoTrabajo { get; set; }
-
-
         public Nullable<int> costoEstimado { get; set; }
-
-        [Required(ErrorMessage ="El campo es requerido")]
-        [StringLength(256, MinimumLength = 5, ErrorMessage = "El Objetivo debe estar entre un rango de 5 a 256 caracteres")]
         public string objetivo { get; set; }
-
-
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }
-        
-        
-        
-        [Required(ErrorMessage ="El campo es requerido")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
-        
-        
-        [Required(ErrorMessage ="El campo es requerido")]
-        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula del cliente debe estar entre un rango de 5 a 256 caracteres")]
         public string cedulaCliente { get; set; }
-
-        //public bool existe(string llave) {
-
-
-        //}
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-       
-        
         public virtual ICollection<Modulo> Modulo { get; set; }
     }
 }
