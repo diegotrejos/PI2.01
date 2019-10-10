@@ -1,44 +1,43 @@
 @model Proyecto.Models.Modulo
-
 @{
-    ViewBag.Title = "Eliminar Proyecto";
+    /**/
+
+    ViewBag.Title = "Consulta";
 }
-
 <h2>@ViewBag.Title</h2>
-
-<h3>¿Está seguro que desea borrar este proyecto?</h3>
 <div>
+    <h4>Modulo</h4>
+    <hr />
     <hr />
     <dl class="dl-horizontal">
         <dt>
             Nombre
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        
         <dt>
-            Nombre Proyecto
+            Identificador
         </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            Nombre de Proyecto
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.NombreProy)
         </dd>
         <dt>
-            Requerimientos:
-        </dt>
-     
 
     </dl>
+    @*Primera idea con un for each desplegando cada requerimiento*@
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-    <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" />
-        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-default" })
-    </div>
-    }
 </div>
+<div>
+
+</div>
+<p>
+
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
+</p>
