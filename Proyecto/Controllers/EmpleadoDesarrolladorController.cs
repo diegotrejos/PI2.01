@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
-using System.Text.RegularExpressions;
+
 
 
 namespace Proyecto.Controllers
@@ -51,29 +51,15 @@ namespace Proyecto.Controllers
         public ActionResult Create([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
 
-            String expresion;
-            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+           
             if (ModelState.IsValid)
             {
                if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
                 {
-                    if (Regex.IsMatch("cristy@gmail.com", expresion))
-                    {
-                        if (Regex.Replace("cristy@gmail.com", expresion, String.Empty).Length == 0)
-                        {
+                    
                             db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
                             db.SaveChanges();
                             return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            Response.Write("<script>alert('Correro incorrecto.');</script>");
-                        }
-                    }
-                    else
-                    {
-                        Response.Write("<script>alert('Correo incorrecto.');</script>");
-                    }
 
                 }
                     else

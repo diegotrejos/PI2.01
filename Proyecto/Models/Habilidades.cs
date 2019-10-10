@@ -11,12 +11,17 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Habilidades
     {
         public string cedulaEmpleadoPK_FK { get; set; }
+        [Display(Name = "Habilidades")]
         public string conocimientos { get; set; }
     
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
+        public List<Habilidades> listaHabilidades { get; set; }
+
+        public Habilidades modeloHabilidades { get; set; }
     }
 }

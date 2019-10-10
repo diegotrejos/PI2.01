@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\EmpleadoDesarrolladorController.cs" />
+    <Compile Include="Controllers\HabilidadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuloeController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
@@ -256,6 +257,11 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Habilidades\Create.cshtml" />
+    <Content Include="Views\Habilidades\Delete.cshtml" />
+    <Content Include="Views\Habilidades\Details.cshtml" />
+    <Content Include="Views\Habilidades\Edit.cshtml" />
+    <Content Include="Views\Habilidades\Index.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

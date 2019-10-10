@@ -12,6 +12,7 @@ namespace Proyecto.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
+    using System.Text.RegularExpressions;
 
     public partial class EmpleadoDesarrollador
     {
@@ -32,6 +33,7 @@ namespace Proyecto.Models
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
         public Nullable<byte> edad { get; set; }
         public string telefono { get; set; }
+        [DataType(DataType.EmailAddress, ErrorMessage = "Ingresar correo válido")]
         public string correo { get; set; }
         public Nullable<bool> disponibilidad { get; set; }
         public string direccionExacta { get; set; }

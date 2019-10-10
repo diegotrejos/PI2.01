@@ -53,6 +53,9 @@
                 </a>
                 <a href=@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
                 </a>
+                <div class="col text-center">
+                    @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+                </div>
             </p>
 
         </td>
