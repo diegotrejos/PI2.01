@@ -125,17 +125,32 @@
         @Html.LabelFor(model => model.disponibilidad, "Disponibilidad", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.disponibilidad)
+                @Html.DropDownListFor(model => model.disponibilidad, new SelectList(
+                    new[] {
+                        new { Value = "true", Text = "SI" },
+                        new { Value = "false", Text = "NO" },
+                    },
+                    "Value",
+                    "Text"
+                ))
                 @Html.ValidationMessageFor(model => model.disponibilidad, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.flg, "Desarrollador? ", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.flg, "Rol ", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.flg)
+                @Html.DropDownListFor(model => model.flg, new SelectList(
+                    new[] {
+                        new { Value = "true", Text = "Desarrollador" },
+                        new { Value = "false", Text = "Jefe de Desarrollo" },
+                        new { Value = "false", Text = "Soporte Técnico" },
+                    },
+                    "Value",
+                    "Text"
+                ))
                 @Html.ValidationMessageFor(model => model.flg, "", new { @class = "text-danger" })
             </div>
         </div>
