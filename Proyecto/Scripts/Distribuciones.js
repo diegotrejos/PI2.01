@@ -6,7 +6,7 @@ function getProvincia(){
         success: function (data) {
             var html = "";
             for (key in data) {
-                html += "<option value='" + data[key] + "'>" + data[key] + "</option>";
+                html += "<option value='" + key + "'>" + data[key] + "</option>";
             }
             console.log(data);
             $("#provincia").append(html);
@@ -25,7 +25,7 @@ function getCanton() {
         success: function (data) {
             var html = "";
             for (key in data) {
-                html += "<option value='" + data[key] + "'>" + data[key] + "</option>";
+                html += "<option value='" + key + "'>" + data[key] + "</option>";
             }
             console.log(data);
             $("#canton").empty();
@@ -46,7 +46,7 @@ function getDistrict() {
         success: function (data) {
             var html = "";
             for (key in data) {
-                html += "<option value='" + data[key] + "'>" + data[key] + "</option>";
+                html += "<option value='" + key + "'>" + data[key] + "</option>";
             }
             console.log(data);
             $("#distrito").empty();
