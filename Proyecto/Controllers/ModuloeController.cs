@@ -64,20 +64,35 @@ namespace Proyecto.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] //Buscar para que sirve 
-        public ActionResult Create([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
+        public ActionResult Create([Bind(Include = "NombreProy,Id,Nombre")] Proyecto.Models.Modulo modulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (ModelState.IsValid)
                 {
-                    db.Modulo.Add(modulo);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (!db.Modulo.Any(model => model.Nombre == modulo.Nombre))
+                    {
+                        db.Modulo.Add(modulo);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                        Response.Write("<script>alert('El nombre del Modulo ya existe. Intente con uno nuevo');</script>");
                 }
                 ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
             }
             return View(modulo);
         }
+
+
+
+     
+
+
+
+
+
+
 
         // GET: Moduloe/Edit/5
         public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
