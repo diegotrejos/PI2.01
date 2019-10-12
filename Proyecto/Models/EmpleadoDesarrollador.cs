@@ -22,9 +22,9 @@ namespace Proyecto.Models
             this.Habilidades = new HashSet<Habilidades>();
         }
         [Key]
-        [Required(ErrorMessage = "Este campo es requerido")]//Error si dejan este campo vacío
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]//Para validar que cédula sean solo números
-        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida si el tamaño de cédula es correcto
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean números
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaño
         public string cedulaED { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
@@ -45,6 +45,7 @@ namespace Proyecto.Models
         public Nullable<byte> edad { get; set; }
 
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean números
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "Número mayor a 8 dígitos")]//Valida tamaño
         public string telefono { get; set; }
 
         [DataType(DataType.EmailAddress, ErrorMessage = "Ingresar correo válido")]//Para validar correo y si es incorrecto despliega este mensaje

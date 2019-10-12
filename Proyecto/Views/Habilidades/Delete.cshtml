@@ -4,29 +4,44 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar Habilidad</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Habilidades</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
-        </dt>
+<h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar esta habilidad?</h3>
+<table class="d-flex justify-content-center">
+    <tbody>
+        <tr style="line-height:40px">
+            <th>
+                Nombre:
+            </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
-        </dd>
+            <td>
+                @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
+            </td>
+        </tr>
 
-    </dl>
+        <tr style="line-height:40px">
+            <th>
+                Habilidad: 
+            </th>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            <td>
+                @Html.DisplayFor(model => model.conocimientos)
+            </td>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+
+   
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
+
+
+<div class="botones text-center">
+    <input type="submit" value="Eliminar" class="btn btn-danger" style="margin: 20px" />
+    @Html.ActionLink("Cancelar ", "Index", new {id = Model.cedulaEmpleadoPK_FK }, new { @class = "btn btn-success" })
+    
 </div>
+}
+

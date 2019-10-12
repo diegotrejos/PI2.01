@@ -36,7 +36,7 @@
             @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.nombreED)
+            @Html.ActionLink(item.nombreED, "Details", new { id = item.cedulaED })
         </td>
         <td>
             @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
@@ -53,8 +53,8 @@
                 </a>
                 <a href=@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
                 </a>
-                <div class="col text-center">
-                    @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+                <div class="form-group">
+                    @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-success float - right" })
                 </div>
             </p>
 
@@ -65,4 +65,7 @@
     }
 
 </table>
+
+
+
 

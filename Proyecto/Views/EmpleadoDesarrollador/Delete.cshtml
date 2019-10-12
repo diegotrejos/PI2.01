@@ -9,6 +9,7 @@
 
 <div class="container-fluid text-center">
     <h2>Detalles de Empleado</h2>
+    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
 
     <table class="d-flex justify-content-center">
         <tbody>
@@ -151,12 +152,12 @@
     {
         @Html.AntiForgeryToken()
 
-       <div class="botones text-center">
-        <input type="submit" value="Eliminar" class="btn btn-danger" style="margin: 20px" />
-        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-success ">
-            <span></span> Cancelar
-        </a>
-       </div>
+        <div class="botones text-center">
+            <input type="submit" value="Eliminar" class="btn btn-danger" style="margin: 20px" />
+            <a href="~/EmpleadoDesarrollador/Index" class="btn btn-success ">
+                <span></span> Cancelar
+            </a>
+        </div>
     }
 </div>
 
