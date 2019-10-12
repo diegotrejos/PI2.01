@@ -43,7 +43,7 @@ namespace Proyecto.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]
         public string telefono { get; set; }
 
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]
+        
         public string direccionExacta { get; set; }
         public string distrito { get; set; }
         public string canton { get; set; }
