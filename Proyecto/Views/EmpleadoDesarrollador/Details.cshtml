@@ -1,136 +1,151 @@
 ﻿@model Proyecto.Models.EmpleadoDesarrollador
 
-<h2>Consultar</h2>
+@{
+ ViewBag.Title = "Details";
+}
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Cédula
-        </dt>
-            <dd>
-                @Html.DisplayFor(model => model.cedulaED)
-            </dd>
+<div class="container-fluid text-center">
+    <h2>Detalles de Empleado</h2>
 
-            <dt>
-                Nombre
-            </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr style="line-height:40px">
+                <th>
+                    Cédula
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.nombreED)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.cedulaED)
+                </td>
+            </tr>
 
-            <dt>
-                Primer Apellido
-            </dt>
+            <tr style="line-height:40px">
+                <th>
+                    Nombre
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.apellido1ED)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.nombreED)
+                </td>
+            </tr>
 
-            <dt>
-                Segundo Apellido
-            </dt>
+            <tr style="line-height:40px">
+                <th>
+                    Primer apellido
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.apellido2ED)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1ED)
+                </td>
+            </tr>
 
-            <dt>
-                Edad
-            </dt>
+            <tr style="line-height:40px">
+                <th>
+                    Segundo apellido
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.edad)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2ED)
+                </td>
+            <tr style="line-height:40px">
+                <th>
+                    Fecha de Nacimiento
+                <th>
 
-            <dt>
-                Teléfono
-            </dt>
+                <td>
+                    @Html.DisplayFor(model => model.fechaNacimiento)
+                <td>
+            <tr style="line-height:40px">
+                <th>
+                    Edad
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.telefono)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.edad)
+                <td>
+            <tr style="line-height:40px">
+                <th>
+                    Teléfono
+                </th>
 
-            <dt>
-                Correo
-            </dt>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            <tr style="line-height:40px">
+                <th>
+                    Correo
+                <th>
+                <td>
+                    @Html.DisplayFor(model => model.correo)
+                <td>
+            <tr style="line-height:40px">
+                <th>
+                    Provincia
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.correo)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.provincia)
+                </td>
+            </tr>
 
-            <dt>
-                Fecha de Nacimiento
-            </dt>
+            <tr style="line-height:40px">
+                <th>
+                    Cantón
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.fechaNacimiento)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.canton)
+                </td>
+            </tr>
 
-            <dt>
-                Provincia
-            </dt>
+            <tr style="line-height:40px">
+                <th>
+                    Distrito
+                </th>
 
-            <dd>
-                @Html.DisplayFor(model => model.provincia)
-            </dd>
+                <td>
+                    @Html.DisplayFor(model => model.distrito)
+                </td>
+            </tr>
 
+            <tr style="line-height:40px">
+                <th>
+                    Dirección Exacta
+                </th>
 
-            <dt>
-                Cantón
-            </dt>
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
 
-            <dd>
-                @Html.DisplayFor(model => model.canton)
-            </dd>
+            <tr style="line-height:40px">
+                <th>
+                    Disponibilidad
+                <th>
 
-            <dt>
-                Distrito
-            </dt>
+                <td>
+                    @Html.DisplayFor(model => model.disponibilidad)
+                <td>
+            </tr>
+            <tr style="line-height:40px">
+                <th>
+                    Rol
+                <th>
+                    @* @if(model => model.flg == true){
 
-            <dd>
-                @Html.DisplayFor(model => model.distrito)
-            </dd>
+                        }else{
 
+                        }*@
+                <td>
+                    @Html.DisplayFor(model => model.flg)
+                <td>
+            </tr>
+        </tbody>
+    </table>
 
-            <dt>
-                Dirección Exacta
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.direccionExacta)
-            </dd>
-
-
-            <dt>
-                Fecha de Inicio
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.fechaInicio)
-            </dd>
-
-            <dt>
-                Disponibilidad
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.disponibilidad)
-            </dd>
-
-            <dt>
-                Desarrollador?
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.flg)
-            </dd>
-
-        </dl>
+    <p class=" boton">
+        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
+            <span></span> Regresar
+        </a>
+    </p>
 </div>
-<p class=" boton">
-    <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
-        <span></span> Regresar
-    </a>
-</p>

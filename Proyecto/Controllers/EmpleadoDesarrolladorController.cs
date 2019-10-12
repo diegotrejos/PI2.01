@@ -23,7 +23,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
             {
@@ -51,9 +51,9 @@ namespace Proyecto.Controllers
         public ActionResult Create([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
 
-           
+           //Para válidar 
             if (ModelState.IsValid)
-            {
+            {   //Valida si la cédula es nueva
                if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
                 {
                     
@@ -62,7 +62,7 @@ namespace Proyecto.Controllers
                             return RedirectToAction("Index");
 
                 }
-                    else
+                    else//Si la cédula ya existe, muestra mensaje de error
                         Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");
 
             }
@@ -72,7 +72,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
             {
@@ -103,7 +103,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
             {

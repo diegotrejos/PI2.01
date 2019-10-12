@@ -36,7 +36,7 @@
             @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
         </td>
         <td>
-            @Html.ActionLink(item.nombreED, "Details", new { id = item.cedulaED })
+            @Html.DisplayFor(modelItem => item.nombreED)
         </td>
         <td>
             @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
