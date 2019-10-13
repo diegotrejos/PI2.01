@@ -4,77 +4,92 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles de Proyecto</h2>
+<div class="container-fluid text-center">
+    <h2>Detalles de Proyecto</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre
-        </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Nombre
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.nombre)
+                </td>
+            </tr>
 
-        <dt>
-            Objetivo
-        </dt>
+            <tr>
+                <th>
+                    Objetivo
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.objetivo)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.objetivo)
+                </td>
+            </tr>
 
-        <dt>
-            Nombre de Cliente
-        </dt>
+            <tr>
+                <th>
+                    Fecha de Inicio
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cliente.nombre)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.fechaInicio)
+                </td>
+            </tr>
 
-        <dt>
-            Fecha de Inicio
-        </dt>
+            <tr>
+                <th>
+                    Nombre de Cliente
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.Cliente.nombre)
+                </td>
+            </tr>
 
-        <dt>
-            Duración Estimada
-        </dt>
+            <tr>
+                <th>
+                    Duración Estimada
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.duracionEstimada)
+                </td>
+            </tr>
 
-        <dt>
-            Costo de Trabajo
-        </dt>
+            <tr>
+                <th>
+                    Costo de Trabajo
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.costoTrabajo)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.costoTrabajo)
+                </td>
+            </tr>
 
-        <dt>
-            Costo Estimado
-        </dt>
+            <tr>
+                <th>
+                    Costo Estimado
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.costoEstimado)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.costoEstimado)
+                </td>
+            </tr>
 
-        <dt>
-            Fecha de Finalización
-        </dt>
+            <tr>
+                <th>
+                    Fecha de Finalización
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaFinalizacion)
-        </dd>
-
-
-    </dl>
+                <td>
+                    @Html.DisplayFor(model => model.fechaFinalizacion)
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <p class=" boton">
