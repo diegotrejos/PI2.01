@@ -15,10 +15,10 @@ namespace Proyecto.Controllers
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
         // GET: Habilidades
-        public ActionResult Index(string id)
+        public ActionResult Index(string id)//id para conectar habilidad con empleado
         {
             Habilidades modelo = new Habilidades();
-            List<Habilidades> aList;
+            List<Habilidades> aList;//lista de habilidades
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,7 +36,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id)//id para conectar habilidad con empleado
         {
             if (id == null)
             {
@@ -66,10 +66,17 @@ namespace Proyecto.Controllers
         public ActionResult Create([Bind(Include = "cedulaEmpleadoPK_FK,conocimientos")] Habilidades habilidades)
         {
             if (ModelState.IsValid)
-            {
-                db.Habilidades.Add(habilidades);
+            {   //Valida que no tenga dos conocimientos iguales para un mismo empleado
+                if (!db.Habilidades.Any(model => model.conocimientos == habilidades.conocimientos))
+                {
+                    db.Habilidades.Add(habilidades);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = habilidades.cedulaEmpleadoPK_FK });
+                }
+                else
+                {//Si ya esatab esta habilidad, muestra mensaje de error
+                    Response.Write("<script>alert('Esta habilidada ya fue agregada.');</script>");//Si la cédula ya existe, muestra mensaje de error)
+                }
             }
 
             ViewBag.cedulaEmpleadoPK_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", habilidades.cedulaEmpleadoPK_FK);
@@ -77,7 +84,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Edit/5
-        public ActionResult Edit(string id, string habilidad)
+        public ActionResult Edit(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
             if (id == null || habilidad == null)
             {
@@ -110,7 +117,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Delete/5
-        public ActionResult Delete(string id, string habilidad)
+        public ActionResult Delete(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
             if (id == null || habilidad == null)
             {
@@ -127,7 +134,7 @@ namespace Proyecto.Controllers
         // POST: Habilidades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id, string habilidad)
+        public ActionResult DeleteConfirmed(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
             Habilidades habilidades = db.Habilidades.Find(id, habilidad);
             db.Habilidades.Remove(habilidades);

@@ -172,11 +172,17 @@
                 <th>
                     Rol
                 <th>
-                    @* @if(model => model.flg == true){
+                    @if (model => model.flg.value != null)
+                    {
+                     @if (model => model.flg.value == true)
+                     {
 
-                        }else{
+                     }
+                     else
+                     {
 
-                        }*@
+                     }
+                    }
                 <td>
                     @Html.DisplayFor(model => model.flg)
                 <td>
@@ -185,7 +191,7 @@
     </table>
 </div>
 
-    <p class=" boton">
+    <p class="botones text-center">
         <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
             <span></span> Regresar
         </a>

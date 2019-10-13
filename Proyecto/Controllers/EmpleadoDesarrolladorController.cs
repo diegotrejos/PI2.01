@@ -65,7 +65,7 @@ namespace Proyecto.Controllers
                         return RedirectToAction("Index");
                     }
                     else {//Si la cédula ya existe, muestra mensaje de error
-                        Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");//Si la cédula ya existe, muestra mensaje de error)
+                        Response.Write("<script>alert('La cédula de este empleado ya existe. Intente con una nueva');</script>");//Si la cédula ya existe, muestra mensaje de error)
                 }
                 }
             return View(empleadoDesarrollador);
