@@ -21,6 +21,7 @@ namespace Proyecto.Models
         {
             this.Habilidades = new HashSet<Habilidades>();
         }
+
         [Key]
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean números

@@ -51,25 +51,25 @@ namespace Proyecto.Controllers
         public ActionResult Create([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
 
-           //Para válidar 
-            if (ModelState.IsValid)
-            {   //Valida si la cédula es nueva
-               if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
+                //Para válidar 
+                if (ModelState.IsValid)
                 {
-                    
-                            db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-
+                    //Valida si la cédula es nueva
+                    if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
+                    {
+                    DateTime fecha = empleadoDesarrollador.fechaNacimiento.Value;
+                    int edad = System.DateTime.Now.Year - fecha.Year; 
+                    empleadoDesarrollador.edad = (byte)edad;
+                    db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else {//Si la cédula ya existe, muestra mensaje de error
+                        Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");//Si la cédula ya existe, muestra mensaje de error)
                 }
-                    else//Si la cédula ya existe, muestra mensaje de error
-                        Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");
-
-            }
-           
-
+                }
             return View(empleadoDesarrollador);
-        }
+          }
 
         // GET: EmpleadoDesarrollador/Edit/5
         public ActionResult Edit(string id)//String id para conectar empleado con la tabla habilidades
