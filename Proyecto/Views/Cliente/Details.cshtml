@@ -4,6 +4,47 @@
     ViewBag.Title = "Details";
 }
 
+<script>
+
+        $(document).ready(function () {
+            //@Html.DisplayFor(model => model.provincia)
+            if (@Html.DisplayFor(model => model.provincia) == 1) {
+                $("#provincia").html("San José");
+            } else if(@Html.DisplayFor(model => model.provincia) == 2){
+                $("#provincia").html("Alajuela");
+            } else if(@Html.DisplayFor(model => model.provincia) == 3){
+                $("#provincia").html("Cartago");
+            } else if(@Html.DisplayFor(model => model.provincia) == 4){
+                $("#provincia").html("Heredia");
+            } else if(@Html.DisplayFor(model => model.provincia) == 5){
+                $("#provincia").html("Guanacaste");
+            } else if(@Html.DisplayFor(model => model.provincia) == 6){
+                $("#provincia").html("Puntarenas");
+            } else if(@Html.DisplayFor(model => model.provincia) == 7){
+                $("#provincia").html("Limón");
+            }
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#distrito").html(data[@Html.DisplayFor(model => model.distrito)]);
+                }
+            });
+        });
+
+</script>
+
 <div class="container-fluid text-center">
     <h2>Detalles del Cliente</h2>
 
@@ -65,7 +106,7 @@
                 </th>
 
                 <td>
-                    @Html.DisplayFor(model => model.provincia)
+                    <span id="provincia"></span>
                 </td>
             </tr>
 
@@ -75,7 +116,7 @@
                 </th>
 
                 <td>
-                    @Html.DisplayFor(model => model.canton)
+                    <span id="canton"></span>
                 </td>
             </tr>
 
@@ -85,7 +126,7 @@
                 </th>
 
                 <td>
-                    @Html.DisplayFor(model => model.distrito)
+                    <span id="distrito"></span>
                 </td>
             </tr>
 
