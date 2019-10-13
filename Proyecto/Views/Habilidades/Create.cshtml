@@ -15,24 +15,19 @@
         <h2>Agregar Habilidad</h2>
         <hr />
 
-        <table class="d-flex justify-content-center">
-            <tbody>
-                <tr style="line-height:40px">
-                    <th>
-                        Nombre:
-                    </th>
-
-                    <td>
-                        @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <div class="container-fluid text-center">
             <br>
 
             <div class="d-flex justify-content-center">
-                @Html.LabelFor(model => model.conocimientos, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.cedulaEmpleadoPK_FK, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="d-flex justify-content-center" required>
+                    @Html.DropDownList("cedulaEmpleadoPK_FK", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.cedulaEmpleadoPK_FK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                @Html.LabelFor(model => model.conocimientos, "Habilidad", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="d-flex justify-content-center" required>
                     @Html.EditorFor(model => model.conocimientos, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.conocimientos, "", new { @class = "text-danger" })
@@ -47,7 +42,7 @@
             </div>
 
             <div>
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Regresar", "Index/")
             </div>
 
         </div>

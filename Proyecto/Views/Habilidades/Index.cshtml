@@ -12,7 +12,6 @@
     <a href="~/Habilidades/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
     </a>
 </p>
-
 <table class="table">
     <tr>
         <th>
@@ -26,23 +25,31 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.conocimientos)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.conocimientos)
+            </td>
 
 
-    <td>
-        <p class="botones">
+            <td>
+                <p class="botones">
 
-            @Html.ActionLink(" ", "Delete", new { id = item.EmpleadoDesarrollador.cedulaED, habilidad = item.conocimientos }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
+                    @Html.ActionLink(" ", "Delete", new { id = item.EmpleadoDesarrollador.cedulaED, habilidad = item.conocimientos }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
 
-        </p>
-    </td>
-</tr>
-}
+                </p>
+            </td>
+        </tr>
+    }
+
+    
 
 </table>
+
+<div class="botones text-center">
+    <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
+        <span></span> Regresar
+    </a>
+</div>
