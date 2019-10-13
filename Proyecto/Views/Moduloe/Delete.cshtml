@@ -1,7 +1,7 @@
 ﻿@model Proyecto.Models.Modulo
 
 @{
-    ViewBag.Title = "Eliminar Modulo";
+    ViewBag.Title = "Eliminar Proyecto";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,13 +17,7 @@
         <dd>
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt>
-            Id
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt>
             Nombre Proyecto
         </dt>
@@ -34,14 +28,7 @@
         <dt>
             Requerimientos:
         </dt>
-        <table>
-            <tr>
-                <td> Requerimiento 1:</td>
-            </tr>
-            <tr>
-                <td> Requerimiento 2:</td>
-            </tr>
-        </table>
+
 
     </dl>
 
@@ -49,9 +36,9 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Aceptar" class="btn btn-success" />
-        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-large" })
-    </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-default" })
+        </div>
     }
 </div>

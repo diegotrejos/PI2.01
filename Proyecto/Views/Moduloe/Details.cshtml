@@ -11,16 +11,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Nombre
+            Nombre de Modulo
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt>
-            Id
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
             Nombre de Proyecto
@@ -29,16 +23,7 @@
             @Html.DisplayFor(model => model.NombreProy)
         </dd>
         <dt>
-            Requerimientos:
-        </dt>
-        <table>
-            <tr>
-                <td> Requerimiento 1:</td>
-            </tr>
-            <tr>
-                <td> Requerimiento 2:</td>
-            </tr>
-        </table>
+
     </dl>
     @*Primera idea con un for each desplegando cada requerimiento*@
 
@@ -47,6 +32,6 @@
 
 </div>
 <p>
-    @* @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
-    @Html.ActionLink("Aceptar", "Index", null, new { @class = "btn btn-success btn-large" })
+
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
 </p>
