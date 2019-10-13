@@ -4,12 +4,53 @@
  ViewBag.Title = "Details";
 }
 
+<script>
+
+        $(document).ready(function () {
+            //@Html.DisplayFor(model => model.provincia)
+            if (@Html.DisplayFor(model => model.provincia) == 1) {
+                $("#provincia").html("San José");
+            } else if(@Html.DisplayFor(model => model.provincia) == 2){
+                $("#provincia").html("Alajuela");
+            } else if(@Html.DisplayFor(model => model.provincia) == 3){
+                $("#provincia").html("Cartago");
+            } else if(@Html.DisplayFor(model => model.provincia) == 4){
+                $("#provincia").html("Heredia");
+            } else if(@Html.DisplayFor(model => model.provincia) == 5){
+                $("#provincia").html("Guanacaste");
+            } else if(@Html.DisplayFor(model => model.provincia) == 6){
+                $("#provincia").html("Puntarenas");
+            } else if(@Html.DisplayFor(model => model.provincia) == 7){
+                $("#provincia").html("Limón");
+            }
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#distrito").html(data[@Html.DisplayFor(model => model.distrito)]);
+                }
+            });
+        });
+
+</script>
+
 <div class="container-fluid text-center">
     <h2>Detalles de Empleado</h2>
 
     <table class="d-flex justify-content-center">
         <tbody>
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Cédula
                 </th>
@@ -19,7 +60,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Nombre
                 </th>
@@ -29,7 +70,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Primer apellido
                 </th>
@@ -39,7 +80,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Segundo apellido
                 </th>
@@ -47,7 +88,7 @@
                 <td>
                     @Html.DisplayFor(model => model.apellido2ED)
                 </td>
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Fecha de Nacimiento
                 <th>
@@ -55,7 +96,7 @@
                 <td>
                     @Html.DisplayFor(model => model.fechaNacimiento)
                 <td>
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Edad
                 </th>
@@ -63,7 +104,7 @@
                 <td>
                     @Html.DisplayFor(model => model.edad)
                 <td>
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Teléfono
                 </th>
@@ -78,7 +119,7 @@
                 <td>
                     @Html.DisplayFor(model => model.correo)
                 <td>
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Provincia
                 </th>
@@ -88,7 +129,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Cantón
                 </th>
@@ -98,7 +139,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Distrito
                 </th>
@@ -108,7 +149,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Dirección Exacta
                 </th>
@@ -118,7 +159,7 @@
                 </td>
             </tr>
 
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Disponibilidad
                 <th>
@@ -127,7 +168,7 @@
                     @Html.DisplayFor(model => model.disponibilidad)
                 <td>
             </tr>
-            <tr style="line-height:40px">
+            <tr>
                 <th>
                     Rol
                 <th>
@@ -142,10 +183,11 @@
             </tr>
         </tbody>
     </table>
+</div>
 
     <p class=" boton">
         <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
             <span></span> Regresar
         </a>
     </p>
-</div>
+
