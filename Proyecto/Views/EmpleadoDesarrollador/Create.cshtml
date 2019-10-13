@@ -16,6 +16,7 @@
 {
     @Html.AntiForgeryToken()
 
+<<<<<<< HEAD
 <div class="container-fluid text-center">
     <h2>Agregar Empleado</h2>
     <hr />
@@ -25,6 +26,20 @@
         <div class="d-flex justify-content-center" required>
             @Html.EditorFor(model => model.cedulaED, new { htmlAttributes = new { @class = "form-control", required = "required" } })
             @Html.ValidationMessageFor(model => model.cedulaED, "", new { @class = "text-danger" })
+=======
+    <div class="container-fluid text-center">
+        <h2>Agregar Empleado</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.cedulaED)
+
+        <div class="d-flex justify-content-center">
+            @Html.LabelFor(model => model.cedulaED, "Cédula *", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="d-flex justify-content-center" required>
+                @Html.EditorFor(model => model.cedulaED, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.cedulaED, "", new { @class = "text-danger" })
+            </div>
+>>>>>>> 2298a269c827ab449ec149982e64e4537806d7a0
         </div>
     </div>
 
