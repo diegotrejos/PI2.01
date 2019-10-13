@@ -147,5 +147,13 @@ namespace Proyecto.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public SelectList getProyectos()
+        {
+            var query = from proy in db.Proyecto
+                        select proy.nombre;
+            return new SelectList(query);
+
+        }
     }
 }

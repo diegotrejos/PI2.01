@@ -16,7 +16,7 @@ namespace Proyecto.Models
     public partial class Gr02Proy3Entities : DbContext
     {
         public Gr02Proy3Entities()
-            : base("name=Gr02Proy3Entities1")
+            : base("name=Gr02Proy3Entities")
         {
         }
     
@@ -27,6 +27,7 @@ namespace Proyecto.Models
     
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<EmpleadoDesarrollador> EmpleadoDesarrollador { get; set; }
+        public virtual DbSet<Equipo> Equipo { get; set; }
         public virtual DbSet<Habilidades> Habilidades { get; set; }
         public virtual DbSet<Modulo> Modulo { get; set; }
         public virtual DbSet<Proyecto> Proyecto { get; set; }

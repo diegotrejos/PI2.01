@@ -42,7 +42,6 @@ namespace Proyecto.Controllers
         {
             return View();
         }
-
         // POST: EmpleadoDesarrollador/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -135,6 +134,12 @@ namespace Proyecto.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public List<EmpleadoDesarrollador> getEmpleados()
+        {
+            var query = from EmpleadoDesarrollador in db.EmpleadoDesarrollador
+                        select EmpleadoDesarrollador;
+            return new List<EmpleadoDesarrollador>(query);
         }
     }
 }

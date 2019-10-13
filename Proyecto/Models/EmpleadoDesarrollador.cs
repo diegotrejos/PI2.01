@@ -14,12 +14,14 @@ namespace Proyecto.Models
     using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
     using System.Text.RegularExpressions;//Para validaciones con expresiones regulares
 
+
     public partial class EmpleadoDesarrollador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EmpleadoDesarrollador()
         {
             this.Habilidades = new HashSet<Habilidades>();
+            this.Equipo = new HashSet<Equipo>();
         }
 
         [Key]
@@ -63,8 +65,11 @@ namespace Proyecto.Models
         public string provincia { get; set; }
 
         public Nullable<bool> flg { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Habilidades> Habilidades { get; set; }//Para mostrar habilidades de empleado
+        public virtual ICollection<Habilidades> Habilidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipo> Equipo { get; set; }
     }
 }

@@ -136,10 +136,10 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
-            Habilidades habilidades = db.Habilidades.Find(id, habilidad);
-            db.Habilidades.Remove(habilidades);
+            Habilidades habilidade = db.Habilidades.Find(id, habilidad);
+            db.Habilidades.Remove(habilidade);
             db.SaveChanges();
-            return RedirectToAction("Index", new { id = habilidades.cedulaEmpleadoPK_FK });
+            return RedirectToAction("Index", new { id = habilidade.cedulaEmpleadoPK_FK });
         }
 
         protected override void Dispose(bool disposing)
