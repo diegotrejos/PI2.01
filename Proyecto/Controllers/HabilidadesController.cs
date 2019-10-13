@@ -67,16 +67,20 @@ namespace Proyecto.Controllers
         {
             if (ModelState.IsValid)
             {   //Valida que no tenga dos conocimientos iguales para un mismo empleado
-                if (!db.Habilidades.Any(model => model.conocimientos == habilidades.conocimientos))
-                {
-                    db.Habilidades.Add(habilidades);
-                db.SaveChanges();
-                return RedirectToAction("Index", new { id = habilidades.cedulaEmpleadoPK_FK });
-                }
-                else
-                {//Si ya esatab esta habilidad, muestra mensaje de error
-                    Response.Write("<script>alert('Esta habilidada ya fue agregada.');</script>");//Si la cédula ya existe, muestra mensaje de error)
-                }
+                //if (!db.Habilidades.Any(model => model.conocimientos == habilidades.conocimientos))
+               // {
+                   // if (!db.Habilidades.Any(model => model.cedulaEmpleadoPK_FK == habilidades.cedulaEmpleadoPK_FK)) {
+                        db.Habilidades.Add(habilidades);
+                        db.SaveChanges();
+                        return RedirectToAction("Index", new { id = habilidades.cedulaEmpleadoPK_FK });
+                    //}
+                    
+                //}
+              //  else
+              //  {//Si ya esatab esta habilidad, muestra mensaje de error
+                //    Response.Write("<script>alert('Esta habilidada ya fue agregada.');</script>");//Si la habilidad ya existe, muestra mensaje de error)
+               // }
+
             }
 
             ViewBag.cedulaEmpleadoPK_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", habilidades.cedulaEmpleadoPK_FK);
