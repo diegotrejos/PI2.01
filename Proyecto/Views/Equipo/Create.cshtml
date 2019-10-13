@@ -1,0 +1,270 @@
+﻿@model Proyecto.Models.Equipo
+
+@{
+
+    ViewBag.Title = "Asignar Equipo"; @*Titulo que este en el estandar *@
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombreEquipo, "Nombre de Equipo *", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" required>
+                @Html.EditorFor(model => model.nombreEquipo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.nombreEquipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $("#sortable2").sortable({
+            connectWith: "#sortable",
+            update: function (event, ui) {
+                var itemIds = "";
+                $("sortable").find(".taskSingleInline").each(function () {
+                    var itemId = $(this).attr("data-taskid");
+                    itemIds = itemIds + itemId + ",";
+                });
+                $.ajax({
+                    url: '@Url.Action("UpdateItem", "equipo")',
+                    data: { itemIds: itemIds },
+                    type: 'POST',
+                    success: function (data) {
+                    },
+                    error: function (xhr, status, error) {
+                    }
+                });
+            }
+        });
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#sortable").sortable({
+            connectWith: "#sortable2",
+            update: function (event, ui) {
+                var itemIds = "";
+                $("sortable").find(".taskSingleInline").each(function () {
+                    var itemId = $(this).attr("data-taskid");
+                    itemIds = itemIds + itemId + ",";
+                });
+                $.ajax({
+                    url: '@Url.Action("UpdateItem", "equipo")',
+                    data: { itemIds: itemIds },
+                    type: 'POST',
+                    success: function (data) {
+                    },
+                    error: function (xhr, status, error) {
+                    }
+                });
+            }
+        });
+    })
+</script>
+
+<!-- Adición de libirería de íconos -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+
+
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+<style>
+    #sortable tr:hover {
+        background-color: #0094ff;
+        color: #fff;
+    }
+</style>
+
+<style>
+    #sortable2 tr:hover {
+        background-color: #0094ff;
+        color: #fff;
+    }
+</style>
+
+
+<div class="modal-body row">
+    <div class=".col-6 .col-sm-4">
+        <!-- codigo de primer columna-->
+        <p> Desarrolladores disponibles</p>
+
+        <!-- lista desplegable para filtrar por conocimientos-->
+        @*<td> Seleccionar filtro </td>
+            <td>
+                @if (TempData["conocimientos"] != null)
+                {
+                    @Html.DropDownList("conocimientoPK", new SelectList(TempData["conocimientos"] as List<Proyecto_Integrador.Models.conocimientos>, "conocimientoPK", "conocimientoPK"), "----------")
+                }
+            </td>
+        *@
+        <p></p>
+
+
+        <table class="table table-responsive-md">
+
+
+
+
+            <thead class="thead-light">
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+
+            <tbody id="sortable" style="cursor:pointer;">
+                @*Id es lo que reconoce el script de mas arriba*@
+                <!-- listar los desarrolladores disponibles-->
+                @if (TempData["empleados"] != null)
+                {
+                    foreach (var item in TempData["empleados"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+                    {
+                        if (item.disponibilidad == true)
+                        {
+                        <tr>
+                            <td>
+                                @item.cedulaED
+
+                            </td>
+                            <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                @item.nombreED
+                                <a href="@Url.Action("Details", new { cedula = item.cedulaED })"><i class="fas fa-info-circle" style="color:cornflowerblue"></i></a>
+                                <a href="@Url.Action("Details", new { cedula = item.cedulaED })"><i class="fas btn-success glyphicon glyphicon-plus"></i></a>
+                            </td>
+
+                        </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col">
+
+    </div>
+
+    <div class=".col-6 .col-sm-4">
+        <!-- codigo de segunda colunma-->
+        <p> Empleados Asignados</p>
+        <!-- lista desplegable para seleccionar proyecto--
+
+        <!-- muestra el nombre del equipo (id)-->
+
+        <table class="table table-responsive-md">
+
+            <thead class="thead-light">
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <!-- listar los miembros del equipo para el proyecto seleccinado-->
+
+
+
+            <tbody id="sortable2" style="cursor:pointer;">
+                <!-- para visualizar un ejemplo-->
+                @if (TempData["empleados"] != null)
+                {
+                    foreach (var item in TempData["empleados"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+                    {
+                        if (item.disponibilidad == false)
+                        {
+                        <tr>
+                            <td>
+                                @item.cedulaED
+                            </td>
+                            <td class="taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                @item.nombreED
+                                <a href="@Url.Action("Details", new { cedula = item.cedulaED })"><i class="fas fa-info-circle" style="color:cornflowerblue"></i></a>
+
+                            </td>
+
+                        </tr>
+                        }
+                    }
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+</div>
+
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-large" })
+    </div>
+
+
+
+
+
+
+
+
+@*script para filtrar empleados por conociminento*@
+@*
+    <script>
+            $(document).ready(function () {
+
+                $("#conocimientoPK").change(function () {
+
+
+                    $.get("/equipos/GetEmployees", { codigoPK: $("#conocimientoPK").val() }, function (data) {
+                        $TempData["empleados"].empty;
+                        $.each(data, function (index, row) {
+                            $TempData["empleados"].append("<option value = '" + row.cedulaPK + "'>" + row.nombre + "</option>")
+                        });
+
+                    });
+
+
+                })
+            });
+
+    </script>
+*@
+
+
+@*script para filtrar empleados por proyecto*@
+@*
+    <script>
+        $(document).ready(function () {
+
+            $("#codigoPK").change(function () {
+
+
+                $.get("/equipos/GetEmployees2", { conocimientoPK: $("#codigoPK").val() }, function (data) {
+                    $TempData["empleados2"].empty;
+                    $.each(data, function (index, row) {
+                        $TempData["empleados"].append("<option value = '" + row.cedulaPK + "'>" + row.nombre + "</option>")
+                    });
+
+                });
+
+
+            })
+        });
+
+    </script>
+*@

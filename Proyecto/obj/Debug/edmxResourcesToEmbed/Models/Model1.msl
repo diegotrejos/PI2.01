@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Gr02Proy3ModelStoreContainer" CdmEntityContainer="Gr02Proy3Entities1">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Gr02Proy3Entities3">
     <EntitySetMapping Name="Cliente">
-      <EntityTypeMapping TypeName="Gr02Proy3Model.Cliente">
+      <EntityTypeMapping TypeName="Models.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
           <ScalarProperty Name="cedula" ColumnName="cedula" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -17,7 +17,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EmpleadoDesarrollador">
-      <EntityTypeMapping TypeName="Gr02Proy3Model.EmpleadoDesarrollador">
+      <EntityTypeMapping TypeName="Models.EmpleadoDesarrollador">
         <MappingFragment StoreEntitySet="EmpleadoDesarrollador">
           <ScalarProperty Name="cedulaED" ColumnName="cedulaED" />
           <ScalarProperty Name="nombreED" ColumnName="nombreED" />
@@ -37,8 +37,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Equipo">
+      <EntityTypeMapping TypeName="Models.Equipo">
+        <MappingFragment StoreEntitySet="Equipo">
+          <ScalarProperty Name="cedulaEM_FK" ColumnName="cedulaEM_FK" />
+          <ScalarProperty Name="nombreProy_FK" ColumnName="nombreProy_FK" />
+          <ScalarProperty Name="nombreEquipo" ColumnName="nombreEquipo" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Habilidades">
-      <EntityTypeMapping TypeName="Gr02Proy3Model.Habilidades">
+      <EntityTypeMapping TypeName="Models.Habilidades">
         <MappingFragment StoreEntitySet="Habilidades">
           <ScalarProperty Name="cedulaEmpleadoPK_FK" ColumnName="cedulaEmpleadoPK_FK" />
           <ScalarProperty Name="conocimientos" ColumnName="conocimientos" />
@@ -46,7 +56,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Modulo">
-      <EntityTypeMapping TypeName="Gr02Proy3Model.Modulo">
+      <EntityTypeMapping TypeName="Models.Modulo">
         <MappingFragment StoreEntitySet="Modulo">
           <ScalarProperty Name="NombreProy" ColumnName="NombreProy" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -55,7 +65,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Proyecto">
-      <EntityTypeMapping TypeName="Gr02Proy3Model.Proyecto">
+      <EntityTypeMapping TypeName="Models.Proyecto">
         <MappingFragment StoreEntitySet="Proyecto">
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />

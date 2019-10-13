@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Gr02Proy3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="cedula" />
@@ -34,6 +34,16 @@
     <Property Name="provincia" Type="varchar" MaxLength="25" />
     <Property Name="flg" Type="bit" />
   </EntityType>
+  <EntityType Name="Equipo">
+    <Key>
+      <PropertyRef Name="cedulaEM_FK" />
+      <PropertyRef Name="nombreProy_FK" />
+    </Key>
+    <Property Name="cedulaEM_FK" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="nombreProy_FK" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="nombreEquipo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="rol" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Habilidades">
     <Key>
       <PropertyRef Name="cedulaEmpleadoPK_FK" />
@@ -48,7 +58,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="NombreProy" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="Proyecto">
@@ -78,6 +88,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EquipoEmpleado">
+    <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoDesarrollador">
+        <PropertyRef Name="cedulaED" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="cedulaEM_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquipoProyecto">
+    <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="nombre" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="nombreProy_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ModuloProyecto">
     <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -104,15 +138,24 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Gr02Proy3ModelStoreContainer">
+  <EntityContainer Name="ModelsStoreContainer">
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Habilidades" EntityType="Self.Habilidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_EmpleadoHabilidades" Association="Self.FK_EmpleadoHabilidades">
       <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
       <End Role="Habilidades" EntitySet="Habilidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipoEmpleado" Association="Self.FK_EquipoEmpleado">
+      <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquipoProyecto" Association="Self.FK_EquipoProyecto">
+      <End Role="Proyecto" EntitySet="Proyecto" />
+      <End Role="Equipo" EntitySet="Equipo" />
     </AssociationSet>
     <AssociationSet Name="FK_ModuloProyecto" Association="Self.FK_ModuloProyecto">
       <End Role="Proyecto" EntitySet="Proyecto" />

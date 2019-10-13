@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Proyecto.Models.Equipo>
+
+@{           
+    ViewBag.Title = "Equipo por Proyecto";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h6>Seleccione Proyecto</h6>
+
+@Html.DropDownList( "Seleccione Proyecto",
+                    ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos(),
+                    "Proyectos",
+                    new { @class = "form-control" })
+
+<p class=" boton float-right">
+    <a href="~/Equipo/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
+    </a>
+</p>
+
+<br>
+    <!-- codigo de segunda colunma-->
+    <p> Empleados Asignados</p>
+    <!-- lista desplegable para seleccionar proyecto--
+
+    <!-- muestra el nombre del equipo (id)-->
+
+    <table class="table">
+
+
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+        </tr>
+        <!-- listar los miembros del equipo para el proyecto seleccinado-->
+        <!-- para visualizar un ejemplo-->
+        @if (TempData["empleados"] != null)
+        {
+            foreach (var item in TempData["empleados"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+            {
+                <tr>
+                     <td>
+                          @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
+                     </td>
+                     <td>
+                         @Html.ActionLink(item.nombreED, "Details", new { id = item.nombreED })
+                     </td>
+                </tr>
+            }
+        }
+
+
+
+    </table>
+
+
+
+
+
+
+
+
