@@ -1,7 +1,9 @@
 ﻿@model Proyecto.Models.EmpleadoDesarrollador
 
 @{
-    ViewBag.Title = "Edit";
+                /**/
+
+                ViewBag.Title = "Edit";
 }
 
 <script>
@@ -16,12 +18,9 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div class="container-fluid text-center">
         <h2>Editar Empleado</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
         <table class="d-flex justify-content-center">
             <tbody>
                 <tr>
@@ -140,13 +139,13 @@
                     <td>
                         <div class="checkbox">
                             @Html.DropDownListFor(model => model.disponibilidad, new SelectList(
-                                new[] {
+             new[] {
                                     new { Value = "true", Text = "SI" },
                                     new { Value = "false", Text = "NO" },
-                                },
-                                "Value",
-                                "Text"
-                            ))
+             },
+             "Value",
+             "Text"
+         ))
                             @Html.ValidationMessageFor(model => model.disponibilidad, "", new { @class = "text-danger" })
                         </div>
                     </td>
@@ -158,13 +157,13 @@
                     <td>
                         <div class="checkbox">
                             @Html.DropDownListFor(model => model.flg, new SelectList(
-                                new[] {
+             new[] {
                                     new { Value = "true", Text = "Desarrollador" },
                                     new { Value = "false", Text = "Otro" }
-                                },
-                                "Value",
-                                "Text"
-                            ))
+             },
+             "Value",
+             "Text"
+         ))
                             @Html.ValidationMessageFor(model => model.flg, "", new { @class = "text-danger" })
                         </div>
                     </td>
@@ -180,7 +179,7 @@
             Cancelar
         </a>
     </div>
-
+}
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
