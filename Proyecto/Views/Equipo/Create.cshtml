@@ -10,17 +10,22 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.nombreEquipo, "Nombre de Equipo *", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" required>
-                @Html.EditorFor(model => model.nombreEquipo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                @Html.ValidationMessageFor(model => model.nombreEquipo, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombreEquipo, "Nombre de Equipo *", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10" required>
+            @Html.EditorFor(model => model.nombreEquipo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.nombreEquipo, "", new { @class = "text-danger" })
         </div>
     </div>
+    <p class="botones text-center ">
+        <input type="submit" value="Crear" class="btn btn-success" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-large" })
+    </p>
+    <p align="center">Para asignar empleados a un proyecto por favor arrastrar de empleados disponibles a empleados asignados</p>
+</div>
 }
 <script>
     $(document).ready(function () {
@@ -33,7 +38,7 @@
                     itemIds = itemIds + itemId + ",";
                 });
                 $.ajax({
-                    url: '@Url.Action("UpdateItem", "equipo")',
+                    url: '@Url.Action("UpdateItem", "Equipo")',
                     data: { itemIds: itemIds },
                     type: 'POST',
                     success: function (data) {
@@ -57,7 +62,7 @@
                     itemIds = itemIds + itemId + ",";
                 });
                 $.ajax({
-                    url: '@Url.Action("UpdateItem", "equipo")',
+                    url: '@Url.Action("UpdateItem", "Equipo")',
                     data: { itemIds: itemIds },
                     type: 'POST',
                     success: function (data) {
@@ -88,6 +93,7 @@
     #sortable tr:hover {
         background-color: #0094ff;
         color: #fff;
+        margin: 20px;
     }
 </style>
 
@@ -95,6 +101,15 @@
     #sortable2 tr:hover {
         background-color: #0094ff;
         color: #fff;
+        margin: 20px;
+    }
+</style>
+
+<style>
+    tbody {
+        float: left;
+        width: 50px;
+        height: 250px;
     }
 </style>
 
@@ -136,16 +151,14 @@
                     foreach (var item in TempData["empleados"] as List<Proyecto.Models.EmpleadoDesarrollador>)
                     {
                         if (item.disponibilidad == true)
-                        {
+                        { 
                         <tr>
                             <td>
-                                @item.cedulaED
+                                <a href="@Url.Action("Details","EmpleadoDesarrollador", new {id = item.cedulaED})"><i>@item.cedulaED</i></a>
 
                             </td>
                             <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
-                                @item.nombreED
-                                <a href="@Url.Action("Details", new { cedula = item.cedulaED })"><i class="fas fa-info-circle" style="color:cornflowerblue"></i></a>
-                                <a href="@Url.Action("Details", new { cedula = item.cedulaED })"><i class="fas btn-success glyphicon glyphicon-plus"></i></a>
+                                <a href="@Url.Action("Details","EmpleadoDesarrollador", new {id = item.cedulaED})"><i>@item.nombreED</i></a>
                             </td>
 
                         </tr>
@@ -210,12 +223,9 @@
 </div>
 
 
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Crear" class="btn btn-success" />
-        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger btn-large" })
-    </div>
+   
 
-
+    
 
 
 
