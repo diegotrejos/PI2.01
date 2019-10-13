@@ -67,7 +67,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: Equipo/Edit/5
-        public ActionResult Edit(string id)
+        /*public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -81,12 +81,12 @@ namespace Proyecto.Controllers
             ViewBag.cedulaEM_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", equipo.cedulaEM_FK);
             ViewBag.nombreProy_FK = new SelectList(db.Proyecto, "nombre", "objetivo", equipo.nombreProy_FK);
             return View(equipo);
-        }
+        }*/
 
         // POST: Equipo/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cedulaEM_FK,nombreProy_FK,nombreEquipo,rol")] Equipo equipo)
         {
@@ -99,7 +99,7 @@ namespace Proyecto.Controllers
             ViewBag.cedulaEM_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", equipo.cedulaEM_FK);
             ViewBag.nombreProy_FK = new SelectList(db.Proyecto, "nombre", "objetivo", equipo.nombreProy_FK);
             return View(equipo);
-        }
+        }*/
 
         // GET: Equipo/Delete/5
         public ActionResult Delete(string id)
@@ -145,7 +145,7 @@ namespace Proyecto.Controllers
         public ActionResult UpdateItem(string itemIds)
         {
             Gr02Proy3Entities db = new Gr02Proy3Entities();
-            int count = 1;
+            int count = 0;
             List<int> itemIdList = new List<int>();
             itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
             foreach (var itemId in itemIds)
@@ -153,6 +153,7 @@ namespace Proyecto.Controllers
                 try
                 {
                     EmpleadoDesarrollador item = db.EmpleadoDesarrollador.Where(x => x.cedulaED == itemId.ToString()).FirstOrDefault();
+                    item.disponibilidad = false;  //intento de que se pase a la otra columna 
                     db.SaveChanges();
                 }
                 catch (Exception)
@@ -162,13 +163,6 @@ namespace Proyecto.Controllers
                 count++;
             }
             return Json(true, JsonRequestBehavior.AllowGet);
-
-
-            /*
-             List<roles> rol =  new rolesController().UddeRol();
-            List<roles> rol =  new rolesController().EraseeRol();
-             
-             */
         }
     }
 }
