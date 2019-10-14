@@ -42,7 +42,7 @@
                         Fecha de inicio *
                     </th>
                     <td required="true">
-                        @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control", required = "required", type="date" } })
                         @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
                     </td>
                 </tr>
@@ -96,7 +96,7 @@
                     </th>
 
                     <td>
-                        @Html.EditorFor(model => model.fechaFinalizacion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.fechaFinalizacion, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                         @Html.ValidationMessageFor(model => model.fechaFinalizacion, "", new { @class = "text-danger" })
                     </td>
                 </tr>

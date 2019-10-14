@@ -38,9 +38,13 @@ namespace Proyecto.Models
 
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         public string objetivo { get; set; } //metodo que registra y devuelve objetivo
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaFinalizacion { get; set; }  //metodo que registra y devuelve fecha de finalización
 
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaInicio { get; set; } //metodo que registra y devuelve la fecha de inicio
 
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
