@@ -41,8 +41,14 @@ namespace Proyecto.Models
         [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         public string apellido2ED { get; set; }
 
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaInicio { get; set; }
 
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
 
         public Nullable<byte> edad { get; set; }
