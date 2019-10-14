@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,7 +66,7 @@ public ActionResult Details(int id, string nombreProy)
 
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                /*Aqui podria poner un filtro*/
+                //Busca modulo con sus dos llaves
                 var query = from a in db.Modulo
                             where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
                             select a;
@@ -99,7 +98,7 @@ public ActionResult Details(int id, string nombreProy)
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken] //no me valida si existen en el mismo proyecto de ves en cuando
         public ActionResult Create([Bind(Include = "NombreProy,Nombre")] Modulo modulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
@@ -262,7 +261,7 @@ public ActionResult Details(int id, string nombreProy)
                 base.Dispose(disposing);
             }
         }
-
+        //METODO Q OBTIENE LISTA DE CONTROLLADOR DE PROYECTO
         public SelectList getProyectos()
         {
 
