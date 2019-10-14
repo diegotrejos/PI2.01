@@ -1,57 +1,71 @@
 ﻿@model IEnumerable<Proyecto.Models.Equipo>
 
-@{           
+@{ #line 2 "C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\Views\Equipo\Index.cshtml"
+    /**/
+
     ViewBag.Title = "Equipo por Proyecto";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<h6>Seleccione Proyecto</h6>
+@*Codigo que realiza un dropdown con los nombres de los proyectos creados(desde el controlador de equipo se llama un metodo del controlador Proyecto para recibir estos datos) *@
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="display-label">
+            Filtrar por Proyecto
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("filtro",
+      /*Lista de donde extraigo*/  ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos()
+                       )
 
-@Html.DropDownList( "Seleccione Proyecto",
-                    ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos(),
-                    "Proyectos",
-                    new { @class = "form-control" })
+        </div>
+        <p>
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </p>
+    </fieldset>
+}
 
+
+
+@*Codigo al costado derecho de la vista que permite ir a create*@
 <p class=" boton float-right">
     <a href="~/Equipo/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
     </a>
 </p>
+@*  Intento de hacer que se llegue al create con el nombre del proyecto escogido
+    <script>
+        var e = document.getElementById("Proyectoo");
+    </script>
+          <td> @Html.ActionLink("", "Create", new { id = e, new { @class = "btn btn-success btn-lg glyphicon glyphicon-plus float-right" })
+        </td>
+    @*</p>*@
 
+@*Codigo de la tabla que muestra los empleados segun el proyecto escogido*@
 <br>
-    <!-- codigo de segunda colunma-->
-    <p> Empleados Asignados</p>
-    <!-- lista desplegable para seleccionar proyecto--
-
-    <!-- muestra el nombre del equipo (id)-->
-
-    <table class="table">
-
-
-        <tr>
-            <th>Cédula</th>
-            <th>Nombre</th>
-        </tr>
-        <!-- listar los miembros del equipo para el proyecto seleccinado-->
-        <!-- para visualizar un ejemplo-->
-        @if (TempData["empleados"] != null)
+<p style="font-size:24px; font-weight:bold;"> Empleados Asignados</p>
+<table class="table">
+    <tr>
+        <th>Cédula</th>
+        <th>Nombre</th>
+    </tr>
+    @if (TempData["empleadosDisponibles"] != null)
+    {
+        foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
         {
-            foreach (var item in TempData["empleados"] as List<Proyecto.Models.EmpleadoDesarrollador>)
-            {
-                <tr>
-                     <td>
-                          @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
-                     </td>
-                     <td>
-                         @Html.ActionLink(item.nombreED, "Details", new { id = item.nombreED })
-                     </td>
-                </tr>
-            }
+            <tr>
+                @*Codigo que permite ir al details de empleado ya sea pulsando su cedula o nombre*@
+                <td>
+                    @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
+                </td>
+                <td>
+                    @Html.ActionLink(item.nombreED, "Details", new { id = item.nombreED })
+                </td>
+            </tr>
         }
-
-
-
-    </table>
+    }
+</table>
 
 
 
