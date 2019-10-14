@@ -7,20 +7,27 @@
 }
 <h2> Modulos </h2>
 @**@
-<h6>Seleccione Proyecto</h6>
+
 @*Genera una dropdown list con todos los proyectos*@
-@Html.DropDownList( "Seleccione Proyecto",
-                    //new SelectList(Model),
-                    ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
-                    "Proyectos",
-                    new { @class = "form-control", onchange = "" })
 
-
-<br />
-<br />
-
-@*Falta agregar un filtro por proyecto luego de seleccionar alguno*@
-
+@*DROPDOWN LIST QUE LLAMA A METODO POST INDEX EN CONTROLLER*@
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="display-label">
+            Filtrar por Proyecto
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("filtro",
+      /*Lista de donde extraigo*/  ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos()
+                       )
+            
+        </div>
+        <p>
+            <input type="submit" value="Buscar"  class="btn btn-default" />
+        </p>
+    </fieldset>
+}
 
 <p class=" boton float-right">
     <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
@@ -32,6 +39,8 @@
 <br />
 
 @*Tabla de Modulos*@
+
+
 
 <table class="table">
     <tr>
