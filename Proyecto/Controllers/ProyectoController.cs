@@ -17,6 +17,10 @@ namespace Proyecto.Controllers
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
         // GET: Proyecto
+
+        /* Metodo que devuelve la lista de proyectos para la vista index
+         * @return lista de proyectos
+         */
         public ActionResult Index()
         {
             var proyecto = db.Proyecto.Include(p => p.Cliente);
@@ -24,6 +28,10 @@ namespace Proyecto.Controllers
         }
 
         // GET: Proyecto/Details/5
+        /*Metodo que devuelve los detalles de un proyecto en específico
+         * @param id : la llave del proyecto específico
+         * @return proyecto
+         */
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -39,6 +47,9 @@ namespace Proyecto.Controllers
         }
 
         // GET: Proyecto/Create
+        /*Metodo para la vista de la cedula de cliente
+         * @return vista de cliente
+         */
         public ActionResult Create()
         {
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre");
@@ -48,6 +59,10 @@ namespace Proyecto.Controllers
         // POST: Proyecto/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /*Método para crear un proyecto
+  * @param datos necesarios para la creacion de un proyecto
+  * @return vista del nuevo proyecto
+  */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
@@ -73,6 +88,10 @@ namespace Proyecto.Controllers
         }
 
 
+        /*Método para la vista  editar un proyecto
+         * @param id:llave del proyecto
+         * @return vista del proyecto específico
+         */
         // GET: Proyecto/Edit/5C:\Users\Katherine\Desktop\Proyecto\Proyecto\Controllers\ProyectoController.cs
         public ActionResult Edit(string id)
         {
@@ -89,6 +108,11 @@ namespace Proyecto.Controllers
             return View(proyecto);
         }
 
+
+        /*Metodo para editar un proyecto
+         * @param datos necesarios para editar un proyecto
+         * @return vista al inicio con los cambios del proyecto
+         */
         // POST: Proyecto/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -98,20 +122,23 @@ namespace Proyecto.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!db.Proyecto.Any(model => model.nombre == proyecto.nombre))
-                {
+               
+                
                     db.Entry(proyecto).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
-                }
-                else
-                    Response.Write("<script>alert('El nombre del proyecto ya existe. Intente con uno nuevo');</script>"); 
+              
+                   
             }
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre", proyecto.cedulaCliente);
             return View(proyecto);
         }
 
         // GET: Proyecto/Delete/5
+        /*Vista para eliminar un proyecto
+         * @param id: llave del proyecto específico
+         * @return vista del proyecto específico
+         */
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -129,6 +156,10 @@ namespace Proyecto.Controllers
 
 
         // POST: Proyecto/Delete/5
+        /*Método para borrar un proyecto
+         *@param id: llave específica del proyecto
+         * @return vista al inicio de proyecto borrado
+         */
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
@@ -148,6 +179,9 @@ namespace Proyecto.Controllers
             base.Dispose(disposing);
         }
 
+        /*Método para obtener una lista de proyectos
+         * @return lista de proyectos
+         */
         public SelectList getProyectos()
         {
             var query = from proy in db.Proyecto

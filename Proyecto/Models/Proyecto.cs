@@ -11,7 +11,8 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
+
     public partial class Proyecto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +21,32 @@ namespace Proyecto.Models
             this.Equipo = new HashSet<Equipo>();
             this.Modulo = new HashSet<Modulo>();
         }
-    
-        public string nombre { get; set; }
-        public Nullable<int> duracionEstimada { get; set; }
-        public Nullable<int> costoTrabajo { get; set; }
-        public Nullable<int> costoEstimado { get; set; }
-        public string objetivo { get; set; }
-        public Nullable<System.DateTime> fechaFinalizacion { get; set; }
-        public Nullable<System.DateTime> fechaInicio { get; set; }
-        public string cedulaCliente { get; set; }
+        
+        [Key]
+        [Required (ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        public string nombre { get; set; } //metodo que regista y devuelve el ingreso del nombre
+
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]               //Valida que solo se ingresen números
+        public Nullable<int> duracionEstimada { get; set; } //metodo que registra y devuelve la duración estimada
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]               //Valida que solo se ingresen números
+        public Nullable<int> costoTrabajo { get; set; }// metodo que registra y devuelve el costo de trabajo
+
+
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]               //Valida que solo se ingresen números
+        public Nullable<int> costoEstimado { get; set; }//metodo que registra y devuelve costo estimado
+
+
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        public string objetivo { get; set; } //metodo que registra y devuelve objetivo
+        public Nullable<System.DateTime> fechaFinalizacion { get; set; }  //metodo que registra y devuelve fecha de finalización
+
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        public Nullable<System.DateTime> fechaInicio { get; set; } //metodo que registra y devuelve la fecha de inicio
+
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean números
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaño
+        public string cedulaCliente { get; set; } //metodo que registra y devuelve la cedula cliente
     
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -20,8 +20,8 @@
                         Nombre Proyecto *
                     </th>
 
-                    <td required="true">
-                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    <td required="true" readonly>
+                        @Html.TextBoxFor(model => model.nombre, new { @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
                     </td>
                 </tr>
