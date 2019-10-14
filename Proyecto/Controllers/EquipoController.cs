@@ -17,33 +17,45 @@ namespace Proyecto.Controllers
         // GET: Equipo
         public ActionResult Index()
         {
-            var equipo = db.Equipo.Include(e => e.EmpleadoDesarrollador).Include(e => e.Proyecto);
+            //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
-            TempData["empleados"] = empleados;
+            List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
+            //Guardan temporalmente los datos
+            TempData["empleadosDisponibles"] = empleados;
+            TempData["empleadosAsignados"] = empleadosA;
             TempData.Keep();
-            return View(equipo.ToList());
+            return View(db.Equipo.ToList());
         }
 
-        // GET: Equipo/Details/5
-        public ActionResult Details(string id)
+        //Metodo Post que esta conectado al boton tipo submit de index que actualiza la lista segun el filtro del proyecto
+        // Intento fallido de tratar de filtrar por proyecto
+       /* [HttpPost]
+        public ActionResult Index([Bind(Include = "NombreProy,Nombre")]string filtro)
         {
-            if (id == null)
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (filtro != null)
+                {
+                    var equipo1 = from a in db.EmpleadoDesarrollador
+                                  where a.cedulaED is (from b in db.Equipo
+                                                       where b.nombreProy_FK == filtro)
+                                                       select b.cedulaEM_FK)
+                                  select a;
+                    return View(query.ToList());
+                }
+               else
+                    return View();
             }
-            Equipo equipo = db.Equipo.Find(id);
-            if (equipo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(equipo);
+        }*/
+            // GET: Equipo/Details/5
+        public ActionResult Details(string nombreEquipo)
+        {
+                return View();
         }
 
         // GET: Equipo/Create
-        public ActionResult Create()
+        public ActionResult Create(string nombreProy)
         {
-            ViewBag.cedulaEM_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED");
-            ViewBag.nombreProy_FK = new SelectList(db.Proyecto, "nombre", "objetivo");
             return View();
         }
 
@@ -52,54 +64,10 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaEM_FK,nombreProy_FK,nombreEquipo,rol")] Equipo equipo)
+        public ActionResult Create(string nombreEquipo,List<EmpleadoDesarrollador> empleadosAgregados,string nombreProy)
         {
-            if (ModelState.IsValid)
-            {
-                db.Equipo.Add(equipo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.cedulaEM_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", equipo.cedulaEM_FK);
-            ViewBag.nombreProy_FK = new SelectList(db.Proyecto, "nombre", "objetivo", equipo.nombreProy_FK);
-            return View(equipo);
+            return RedirectToAction("Index", "Equipo");
         }
-
-        // GET: Equipo/Edit/5
-        /*public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Equipo equipo = db.Equipo.Find(id);
-            if (equipo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.cedulaEM_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", equipo.cedulaEM_FK);
-            ViewBag.nombreProy_FK = new SelectList(db.Proyecto, "nombre", "objetivo", equipo.nombreProy_FK);
-            return View(equipo);
-        }*/
-
-        // POST: Equipo/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaEM_FK,nombreProy_FK,nombreEquipo,rol")] Equipo equipo)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(equipo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.cedulaEM_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", equipo.cedulaEM_FK);
-            ViewBag.nombreProy_FK = new SelectList(db.Proyecto, "nombre", "objetivo", equipo.nombreProy_FK);
-            return View(equipo);
-        }*/
 
         // GET: Equipo/Delete/5
         public ActionResult Delete(string id)
@@ -127,6 +95,7 @@ namespace Proyecto.Controllers
             return RedirectToAction("Index");
         }
 
+        //Codigo que traia por default visual y como se referencia 5 veces mejor no lo borro xD
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -136,17 +105,19 @@ namespace Proyecto.Controllers
             base.Dispose(disposing);
         }
 
+        //Codigo que se comunica con la controladora de proyectos para recibir los proyectos actuales creados
         public SelectList getProyectos()
         {
             return new Proyecto.Controllers.ProyectoController().getProyectos();
         }
 
-        //Codigo igual a grupo 1, hay que cambiarlo
+        //Codigo que se llama en el script de create que permiete realizar el evento de arrastre 
+        //Aporte del grupo #1
         public ActionResult UpdateItem(string itemIds)
         {
             Gr02Proy3Entities db = new Gr02Proy3Entities();
-            int count = 0;
-            List<int> itemIdList = new List<int>();
+            int count = 1;
+            List<int> itemIdList = new List<int>(); 
             itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
             foreach (var itemId in itemIds)
             {
