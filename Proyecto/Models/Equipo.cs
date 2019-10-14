@@ -11,12 +11,24 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
+
     public partial class Equipo
     {
+        [Key]
+        [Display(Name = "Cedula de empleado")]
         public string cedulaEM_FK { get; set; }
+
+        [Key]
+        [Display(Name = "Nombre de proyecto")]
         public string nombreProy_FK { get; set; }
+        
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [Display(Name = "Nombre de Equipo")]
+        [StringLength(20)]
         public string nombreEquipo { get; set; }
+
+        [Display(Name = "Rol")]
         public bool rol { get; set; }
     
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
