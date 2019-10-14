@@ -1,4 +1,4 @@
-﻿@model Proyecto.Models.Modulo
+@model Proyecto.Models.Modulo
 @{
     ViewBag.Title = "Editar";
 }
@@ -14,16 +14,9 @@
         <hr />
         @Html.ValidationSummary(true)
         <div class="form-group">
-            @*
-        @Html.LabelFor(model => model.Id, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-        </div>
-            *@
-        
+
             @Html.LabelFor(model => model.NombreProy, "Nombre de Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div>
 
                 @*Dropdown list con datos de modulo que si intenta cambiar la tabla
                 @Html.DropDownListFor(model => Model.NombreProy,
@@ -32,20 +25,18 @@
                 new { @class = "form-control"})
                         *@
 
-                @Html.DropDownList( "Seleccione Proyecto",
+                @Html.DropDownList( "Seleccione",
                     //new SelectList(Model),
                     ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
-                    "Proyectos",
+                    null,
                     new { @class = "form-control", onchange = "" })
 
-
-
-                @*  @Html.EditorFor(model => model.NombreProy, new { htmlAttributes = new { @class = "form-control" } })*@
+            
                 @Html.ValidationMessageFor(model => model.NombreProy, "", new { @class = "text-danger" })
             </div>
 
             @Html.LabelFor(model => model.Nombre,"Nombre del Modulo*", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div>
                 @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
             </div>
