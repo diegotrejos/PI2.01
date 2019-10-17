@@ -501,3 +501,759 @@ C:\Users\B55049\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileI
 C:\Users\B55049\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
 C:\Users\B55049\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.dll
 C:\Users\B55049\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Proyecto.dll.config
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Proyecto.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Proyecto.pdb
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\csc.exe
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\csc.rsp
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\csi.exe
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\csi.rsp
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\vbc.exe
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\EntityFramework.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Razor.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\WebGrease.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\EntityFramework.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.Razor.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Carolina\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\Carolina\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\Carolina\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\Carolina\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\Carolina\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\b55049\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\b55049\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\b55049\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Proyecto.dll.config
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Proyecto.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Proyecto.pdb
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\csc.exe
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\csc.rsp
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\csi.exe
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\csi.rsp
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\vbc.exe
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\EntityFramework.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Razor.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\WebGrease.dll
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\EntityFramework.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.Razor.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\b55049\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Proyecto.dll.config
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Proyecto.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Proyecto.pdb
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\csc.exe
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\csc.rsp
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\csi.exe
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\csi.rsp
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\vbc.exe
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\EntityFramework.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Razor.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\WebGrease.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\EntityFramework.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.Razor.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\admin\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\admin\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\admin\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\admin\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Proyecto.dll.config
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Proyecto.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Proyecto.pdb
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\csc.exe
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\csc.rsp
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\csi.exe
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\csi.rsp
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\vbc.exe
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\EntityFramework.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Razor.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\WebGrease.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\EntityFramework.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.Razor.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\admin\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\admin\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Proyecto.dll.config
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Proyecto.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Proyecto.pdb
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\csc.exe
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\csc.rsp
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\csi.exe
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\csi.rsp
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\vbc.exe
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\EntityFramework.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Razor.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\WebGrease.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\EntityFramework.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.Razor.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\admin\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\admin\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\admin\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\admin\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+E:\Proyecto\Proyecto\bin\Proyecto.dll.config
+E:\Proyecto\Proyecto\bin\Proyecto.dll
+E:\Proyecto\Proyecto\bin\Proyecto.pdb
+E:\Proyecto\Proyecto\bin\roslyn\csc.exe
+E:\Proyecto\Proyecto\bin\roslyn\csc.exe.config
+E:\Proyecto\Proyecto\bin\roslyn\csc.rsp
+E:\Proyecto\Proyecto\bin\roslyn\csi.exe
+E:\Proyecto\Proyecto\bin\roslyn\csi.exe.config
+E:\Proyecto\Proyecto\bin\roslyn\csi.rsp
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+E:\Proyecto\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Proyecto\Proyecto\bin\roslyn\System.AppContext.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Console.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.IO.Compression.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.IO.Pipes.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.Claims.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.ValueTuple.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.dll
+E:\Proyecto\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\Proyecto\Proyecto\bin\roslyn\vbc.exe
+E:\Proyecto\Proyecto\bin\roslyn\vbc.exe.config
+E:\Proyecto\Proyecto\bin\roslyn\vbc.rsp
+E:\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe
+E:\Proyecto\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+E:\Proyecto\Proyecto\bin\Antlr3.Runtime.dll
+E:\Proyecto\Proyecto\bin\EntityFramework.dll
+E:\Proyecto\Proyecto\bin\EntityFramework.SqlServer.dll
+E:\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+E:\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Proyecto\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+E:\Proyecto\Proyecto\bin\Newtonsoft.Json.dll
+E:\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+E:\Proyecto\Proyecto\bin\System.Web.Helpers.dll
+E:\Proyecto\Proyecto\bin\System.Web.Mvc.dll
+E:\Proyecto\Proyecto\bin\System.Web.Optimization.dll
+E:\Proyecto\Proyecto\bin\System.Web.Razor.dll
+E:\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.dll
+E:\Proyecto\Proyecto\bin\System.Web.WebPages.dll
+E:\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.dll
+E:\Proyecto\Proyecto\bin\WebGrease.dll
+E:\Proyecto\Proyecto\bin\EntityFramework.xml
+E:\Proyecto\Proyecto\bin\EntityFramework.SqlServer.xml
+E:\Proyecto\Proyecto\bin\System.Web.Helpers.xml
+E:\Proyecto\Proyecto\bin\System.Web.Mvc.xml
+E:\Proyecto\Proyecto\bin\System.Web.Optimization.xml
+E:\Proyecto\Proyecto\bin\System.Web.Razor.xml
+E:\Proyecto\Proyecto\bin\System.Web.WebPages.xml
+E:\Proyecto\Proyecto\bin\System.Web.WebPages.Deployment.xml
+E:\Proyecto\Proyecto\bin\System.Web.WebPages.Razor.xml
+E:\Proyecto\Proyecto\bin\Newtonsoft.Json.xml
+E:\Proyecto\Proyecto\bin\Antlr3.Runtime.pdb
+E:\Proyecto\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+E:\Proyecto\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+E:\Proyecto\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Proyecto\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+E:\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+E:\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+E:\Proyecto\Proyecto\obj\Debug\Proyecto.dll
+E:\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Proyecto.dll.config
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Proyecto.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Proyecto.pdb
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\csc.exe
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\csc.rsp
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\csi.exe
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\csi.rsp
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\vbc.exe
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\EntityFramework.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Razor.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\WebGrease.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\EntityFramework.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.Razor.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\admin\Downloads\Proyecto-master\Proyecto-master\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\obj\Debug\Proyecto.pdb
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Proyecto.dll.config
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Proyecto.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Proyecto.pdb
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\csc.exe
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\csc.rsp
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\csi.exe
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\csi.rsp
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\vbc.exe
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\EntityFramework.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Razor.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\WebGrease.dll
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\EntityFramework.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.Razor.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Downloads\Proyecto-masterGGGG\Proyecto-master\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Proyecto.dll.config
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Proyecto.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Proyecto.pdb
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\csc.exe
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\csc.exe.config
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\csc.rsp
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\csi.exe
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\csi.exe.config
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\csi.rsp
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.AppContext.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Console.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.IO.Compression.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.IO.Pipes.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.Claims.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.ValueTuple.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XPath.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\vbc.exe
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\vbc.exe.config
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\vbc.rsp
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\VBCSCompiler.exe
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Antlr3.Runtime.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\EntityFramework.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\EntityFramework.SqlServer.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Newtonsoft.Json.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Helpers.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Mvc.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Optimization.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Razor.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.WebPages.Deployment.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.WebPages.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.WebPages.Razor.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\WebGrease.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\EntityFramework.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\EntityFramework.SqlServer.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Helpers.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Mvc.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Optimization.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.Razor.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.WebPages.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.WebPages.Deployment.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Web.WebPages.Razor.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Newtonsoft.Json.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Antlr3.Runtime.pdb
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\obj\Debug\Proyecto.csprojAssemblyReference.cache
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\obj\Debug\Proyecto.dll
+C:\Users\DiegoPC\Documents\UCR\PI2\Master\Proyecto-master de carlos\Proyecto-master\Proyecto\obj\Debug\Proyecto.pdb
