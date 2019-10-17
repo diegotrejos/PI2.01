@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,61 +8,65 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
 
-
-
-
-
 namespace Proyecto.Controllers
 {
     public class ModuloeController : Controller
     {
         //private Gr02Proy3Entities db = new Gr02Proy3Entities(); 
-
+        Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         // GET: Moduloe
         public ActionResult Index()
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+
+
+                
                 var modulo = db.Modulo.Include(m => m.Proyecto);
                 return View(modulo.ToList());
+
             }
         }
 
 
 
-
-
-        public List<SelectListItem>  getProyectos()
+        // POST: Moduloe
+        [HttpPost]
+        public ActionResult Index([Bind(Include = "NombreProy,Nombre")]string filtro)
         {
-
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                /*posible metodo de inclusion de proyecto
-                @{
-                    ((ProyectoController)this.ViewContext.Controller).getProyectos();
-                }
-                */
+
+               
+                
+                 var query = from a in db.Modulo
+                             where ((a.NombreProy.Equals(filtro)))
+                             select a;
 
 
 
 
+                     return View(query.ToList());
+        
 
-
-                return( RedirectToAction("getProyectos", "ProyectoController"));
             }
         }
+
+
+
+
+
+
 
 
 
         // GET: Moduloe/Details/5
-        public ActionResult Details(int id, string nombreProy)
+public ActionResult Details(int id, string nombreProy)
         {
 
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-
-
-                /*Aqui podria poner un filtro*/
+                //Busca modulo con sus dos llaves
                 var query = from a in db.Modulo
                             where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
                             select a;
@@ -78,7 +81,7 @@ namespace Proyecto.Controllers
             }
 
         }
-        
+
         // GET: Moduloe/Create
         public ActionResult Create()
         {
@@ -87,29 +90,72 @@ namespace Proyecto.Controllers
                 ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo");
                 return View();
             }
-           
+
         }
-        
+
         // POST: Moduloe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
-        [ValidateAntiForgeryToken] //Buscar para que sirve 
-        public ActionResult Create([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
+        [ValidateAntiForgeryToken] //no me valida si existen en el mismo proyecto de ves en cuando
+        public ActionResult Create([Bind(Include = "NombreProy,Nombre")] Modulo modulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid)//Valida si Id y Proyecto esten correctos
                 {
-                    db.Modulo.Add(modulo);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+
+
+                   
+
+                    if (db.Proyecto.Any(model => model.nombre == modulo.NombreProy))//Reviso que el proyecto seleccionado sea valido
+                    {
+
+                       
+                        var queryCheck =
+                       from a in db.Modulo
+                       where ((a.NombreProy.ToString() == modulo.NombreProy.ToString() ) && a.Nombre.ToString() == modulo.NombreProy.ToString())
+                       select a.Nombre;
+                       
+                        if (!(queryCheck.Any()))
+                                               //if (db.Modulo.Any(model => (model.NombreProy == modulo.NombreProy) == true))//reviso si es el primer modulo de este proyecto
+                        {
+                            //if (db.Modulo.Any(model => (model.NombreProy == modulo.NombreProy) && !(model.Nombre == modulo.Nombre)))//reviso que no tenga modulos con nombres iguales
+                            //{
+                            
+                            db.Modulo.Add(modulo);
+                                db.SaveChanges();
+                                return RedirectToAction("index");
+                        //}
+
+
+                        }
+                        else
+                        {
+
+                            Response.Write("<script>alert('El nombre de este modulo ya existe en este proyecto. Intente con uno nuevo');</script>");
+
+                        }
+
+                    }
+                    else//Si la cédula ya existe, muestra mensaje de error
+                        Response.Write("<script>alert('Este proyecto no existe. Intente con otro');</script>");
                 }
                 ViewBag.NombreProy = new SelectList(db.Proyecto, "nombre", "objetivo", modulo.NombreProy);
             }
             return View(modulo);
         }
+
+
+
+
+
+
+
+
+
+
 
         // GET: Moduloe/Edit/5
         public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
@@ -147,16 +193,26 @@ namespace Proyecto.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
+
                     db.Entry(modulo).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-               
+
                 return View(modulo);
             }
         }
 
+    
 
+
+
+
+
+
+
+        // GET: Moduloe/Delete/5
         public ActionResult Delete(int id, string nombreProy) // comunica con el modelo
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
@@ -177,16 +233,19 @@ namespace Proyecto.Controllers
 
         }
 
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete([Bind(Include = "NombreProy,Id,Nombre")] Modulo modulo)
+        public ActionResult Delete([Bind(Include = "NombreProy,Id")] Modulo modulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 db.Entry(modulo).State = EntityState.Deleted;
                 db.Modulo.Remove(modulo);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
         }
 
@@ -202,6 +261,40 @@ namespace Proyecto.Controllers
                 base.Dispose(disposing);
             }
         }
+        //METODO Q OBTIENE LISTA DE CONTROLLADOR DE PROYECTO
+        public SelectList getProyectos()
+        {
+
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+
+                return this.proyController.getProyectos();
+
+
+            }
+        }
+
+
+        public SelectList getModulos(string nombreProy)
+        {
+
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+
+                var query = from Modulo in db.Modulo
+                            where Modulo.NombreProy.Equals(nombreProy)
+                            select Modulo.Nombre;
+                        
+                        
+                return new SelectList(query);
+
+
+            }
+        }
+
+      
+
+
 
 
     }

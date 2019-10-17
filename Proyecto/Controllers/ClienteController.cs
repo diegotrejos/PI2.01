@@ -10,7 +10,7 @@ using Proyecto.Models;
 
 namespace Proyecto.Controllers
 {
-    public class ClienteController : Controller
+    public class ClienteController : Controller         //Controlador del Módelo Cliente
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
@@ -21,7 +21,8 @@ namespace Proyecto.Controllers
         }
 
         // GET: Cliente/Details/5
-        public ActionResult Details(string id)
+        //Método que devuelve los detalles de un cliente en específico
+        public ActionResult Details(string id)  
         {
             if (id == null)
             {
@@ -48,17 +49,23 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cedula,nombre,apellido1,apellido2,telefono,direccionExacta,distrito,canton,provincia")] Cliente cliente)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //Para validar la cédula de cada cliente
             {
-                db.Cliente.Add(cliente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.Cliente.Any(model => model.cedula == cliente.cedula)) //Si es una cédula que no existe, lo guarda con normalidad
+                {
+                    db.Cliente.Add(cliente);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else //Si ya esa cédula existe, muestra un mensaje de error
+                    Response.Write("<script>alert('La cédula de este cliente ya existe. Intente con una nueva');</script>");
             }
 
             return View(cliente);
         }
 
         // GET: Cliente/Edit/5
+        //Método encargado de buscar el Cliente y poder editar sus datos y guardarlos.
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -83,13 +90,14 @@ namespace Proyecto.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges(); //Guarda los cambios al modificar
                 return RedirectToAction("Index");
             }
             return View(cliente);
         }
 
         // GET: Cliente/Delete/5
+        //Método que busca el cliente para que sea eliminado
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -105,6 +113,7 @@ namespace Proyecto.Controllers
         }
 
         // POST: Cliente/Delete/5
+        //Método que borra el cliente de la tabla
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

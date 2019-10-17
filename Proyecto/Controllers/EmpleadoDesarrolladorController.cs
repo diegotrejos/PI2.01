@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
 
+
+
 namespace Proyecto.Controllers
 {
     public class EmpleadoDesarrolladorController : Controller
@@ -21,7 +23,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
             {
@@ -40,7 +42,6 @@ namespace Proyecto.Controllers
         {
             return View();
         }
-
         // POST: EmpleadoDesarrollador/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -48,18 +49,29 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
-            if (ModelState.IsValid)
-            {
-                db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
+                //Para válidar 
+                if (ModelState.IsValid)
+                {
+                    //Valida si la cédula es nueva
+                    if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
+                    {
+                    DateTime fecha = empleadoDesarrollador.fechaNacimiento.Value;
+                    int edad = System.DateTime.Now.Year - fecha.Year; 
+                    empleadoDesarrollador.edad = (byte)edad;
+                    db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else {//Si la cédula ya existe, muestra mensaje de error
+                        Response.Write("<script>alert('La cédula de este empleado ya existe. Intente con una nueva');</script>");//Si la cédula ya existe, muestra mensaje de error)
+                }
+                }
             return View(empleadoDesarrollador);
-        }
+          }
 
         // GET: EmpleadoDesarrollador/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
             {
@@ -90,7 +102,7 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
             {
@@ -122,6 +134,12 @@ namespace Proyecto.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public List<EmpleadoDesarrollador> getEmpleados()
+        {
+            var query = from EmpleadoDesarrollador in db.EmpleadoDesarrollador
+                        select EmpleadoDesarrollador;
+            return new List<EmpleadoDesarrollador>(query);
         }
     }
 }
