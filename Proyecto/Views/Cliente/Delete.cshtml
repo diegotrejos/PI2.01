@@ -4,93 +4,157 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar</h2>
+<script>
 
-<h3>¿Esta seguro que desea eliminar este cliente?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Cédula
-        </dt>
+        $(document).ready(function () {
+            //@Html.DisplayFor(model => model.provincia)
+            if (@Html.DisplayFor(model => model.provincia) == 1) {
+                $("#provincia").html("San José");
+            } else if(@Html.DisplayFor(model => model.provincia) == 2){
+                $("#provincia").html("Alajuela");
+            } else if(@Html.DisplayFor(model => model.provincia) == 3){
+                $("#provincia").html("Cartago");
+            } else if(@Html.DisplayFor(model => model.provincia) == 4){
+                $("#provincia").html("Heredia");
+            } else if(@Html.DisplayFor(model => model.provincia) == 5){
+                $("#provincia").html("Guanacaste");
+            } else if(@Html.DisplayFor(model => model.provincia) == 6){
+                $("#provincia").html("Puntarenas");
+            } else if(@Html.DisplayFor(model => model.provincia) == 7){
+                $("#provincia").html("Limón");
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
 
-        <dt>
-            Nombre
-        </dt>
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#distrito").html(data[@Html.DisplayFor(model => model.distrito)]);
+                }
+            });
+        });
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+</script>
 
-        <dt>
-            Primer apellido
-        </dt>
+<div class="container-fluid text-center">
+    <h2>Eliminar Cliente</h2>
+    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este cliente?</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1)
-        </dd>
+     <table class="d-flex justify-content-center">
 
-        <dt>
-            Segundo apellido
-        </dt>
+        <tbody>
+            <tr style="line-height:20px">
+                <th>
+                    Cédula
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.cedula)
+                </td>
+            </tr>
 
-        <dt>
-            Teléfono
-        </dt>
+            <tr style="line-height:20px">
+                <th>
+                    Nombre
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.nombre)
+                </td>
+            </trstyle="line-height:20px">
 
-        <dt>
-            Provincia
-        </dt>
+            <tr style="line-height:20px">
+                <th>
+                    Primer apellido
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1)
+                </td>
+            </tr>
 
+            <tr style="line-height:20px">
+                <th>
+                    Segundo apellido
+                </th>
 
-        <dt>
-            Cantón
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
+            <tr style="line-height:20px">
+                <th>
+                    Teléfono
+                </th>
 
-        <dt>
-            Distrito
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
+            <tr style="line-height:20px">
+                <th>
+                    Provincia
+                </th>
 
-        <dt>
-            Dirección Exacta
-        </dt>
+                <td>
+                    <span id="provincia"></span>
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
+            <tr style="line-height:20px">
+                <th>
+                    Cantón
+                </th>
 
-    </dl>
+                <td>
+                    <span id="canton"></span>
+                </td>
+            </tr>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            <tr style="line-height:20px">
+                <th>
+                    Distrito
+                </th>
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        @Html.ActionLink("Cancelar", "Index")
+                <td>
+                    <span id="distrito"></span>
+                </td>
+            </tr>
+
+            <tr style="line-height:20px">
+                <th>
+                    Dirección Exacta
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="botones text-center">
+        <input type="submit" value="Eliminar" class="btn btn-danger" style="margin: 20px" />
+        <a href="~/Cliente/Index" class="btn btn-default">
+            Regresar
+        </a>
     </div>
-    }
+
+}
 </div>

@@ -1,0 +1,66 @@
+﻿@model Proyecto.Models.Requerimiento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Requerimiento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.complejidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.complejidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracionEstimada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracionReal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modulo.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modulo.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

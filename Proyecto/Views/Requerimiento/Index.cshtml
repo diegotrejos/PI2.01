@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Proyecto.Models.Requerimiento>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="display-label">
+            Filtrar por Proyecto
+        </div>
+        <div class="editor-field">
+
+            
+            @Html.DropDownList("Proyectos",
+ /*Lista de donde extraigo*/  ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos()
+                  )
+
+            
+
+
+       @*     
+            @Html.DropDownList("Modulos",
+                               ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik")
+           )
+        *@
+
+
+
+
+
+
+
+
+        </div>
+        <p>
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </p>
+    </fieldset>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class=" boton float-right">
+    <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
+    </a>
+</p>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.complejidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracionReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modulo.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.complejidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,147 +1,168 @@
 ﻿@model Proyecto.Models.EmpleadoDesarrollador
 
 
+@{
+                /**/
 
-<h2>Eliminar</h2>
+                ViewBag.Title = "Details";
+}
 
-<h3>¿Seguro que desea eliminar este empleado?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Cédula
-        </dt>
+<div class="container-fluid text-center">
+    <h2>Detalles de Empleado</h2>
+    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Empleado?</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.cedulaED)
-        </dd>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Cédula
+                </th>
 
-        <dt>
-            Nombre
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.cedulaED)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombreED)
-        </dd>
+            <tr>
+                <th>
+                    Nombre
+                </th>
 
-        <dt>
-            Primer Apellido
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.nombreED)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1ED)
-        </dd>
+            <tr>
+                <th>
+                    Primer apellido
+                </th>
 
-        <dt>
-            Segundo Apellido
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1ED)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2ED)
-        </dd>
+            <tr>
+                <th>
+                    Segundo apellido
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaNacimiento)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2ED)
+                </td>
+            <tr>
+                <th>
+                    Fecha de Nacimiento
+                <th>
 
-        <dt>
-            Edad
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.fechaNacimiento)
+                <td>
+            <tr>
+                <th>
+                    Edad
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.edad)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.edad)
+                <td>
+            <tr>
+                <th>
+                    Teléfono
+                </th>
 
-        <dt>
-            Teléfono
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            <tr>
+                <th>
+                    Correo
+                <th>
+                <td>
+                    @Html.DisplayFor(model => model.correo)
+                <td>
+            <tr>
+                <th>
+                    Provincia
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.provincia)
+                </td>
+            </tr>
 
-        <dt>
-            Correo
-        </dt>
+            <tr>
+                <th>
+                    Cantón
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.canton)
+                </td>
+            </tr>
 
-        <dt>
-            Fecha de Nacimiento
-        </dt>
+            <tr>
+                <th>
+                    Distrito
+                </th>
 
-        <dt>
-            Provincia
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.distrito)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
+            <tr>
+                <th>
+                    Dirección Exacta
+                </th>
 
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
 
-        <dt>
-            Cantón
-        </dt>
+            <tr>
+                <th>
+                    Disponibilidad
+                <th>
 
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.disponibilidad)
+                <td>
+            </tr>
+            <tr>
+                <th>
+                    Rol
+                <th>
+                    @* @if(model => model.flg == true){
 
-        <dt>
-            Distrito
-        </dt>
+                        }else{
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
-
-
-        <dt>
-            Dirección Exacta
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
-
-
-        <dt>
-            Fecha de Inicio
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-
-        <dt>
-            Disponibilidad
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
-        </dd>
-
-        <dt>
-           Rol
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.flg)
-        </dd>
-
-    </dl>
-
-    <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger form-group" />
-        <p class="btn btn-success form-group">
-            @Html.ActionLink("Cancelar", "Index")
-        </p>
-    </div>
-    
-    
+                        }*@
+                <td>
+                    @Html.DisplayFor(model => model.flg)
+                <td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="botones text-center">
+            <input type="submit" value="Eliminar" class="btn btn-danger" style="margin: 20px" />
+            <a href="~/EmpleadoDesarrollador/Index" class="btn btn-success ">
+                <span></span> Cancelar
+            </a>
+        </div>
+    }
+
+
+
+
 
 
 

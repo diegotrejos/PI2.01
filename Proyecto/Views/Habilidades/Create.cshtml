@@ -1,0 +1,54 @@
+﻿@model Proyecto.Models.Habilidades
+
+@{
+    /**/
+
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid text-center">
+        <h2>Agregar Habilidad</h2>
+        <hr />
+
+        <div class="container-fluid text-center">
+            <br>
+
+            <div class="d-flex justify-content-center">
+                @Html.LabelFor(model => model.cedulaEmpleadoPK_FK, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="d-flex justify-content-center" required>
+                    @Html.DropDownList("cedulaEmpleadoPK_FK", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.cedulaEmpleadoPK_FK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                @Html.LabelFor(model => model.conocimientos, "Habilidad", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="d-flex justify-content-center" required>
+                    @Html.EditorFor(model => model.conocimientos, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.conocimientos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Aceptar" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div>
+                @Html.ActionLink("Regresar", "Index/")
+            </div>
+
+        </div>
+
+
+    </div>
+}
+
+

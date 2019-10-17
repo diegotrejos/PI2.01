@@ -4,90 +4,150 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Consultar</h2>
+<script>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
+        $(document).ready(function () {
+            //@Html.DisplayFor(model => model.provincia)
+            if (@Html.DisplayFor(model => model.provincia) == 1) {
+                $("#provincia").html("San José");
+            } else if(@Html.DisplayFor(model => model.provincia) == 2){
+                $("#provincia").html("Alajuela");
+            } else if(@Html.DisplayFor(model => model.provincia) == 3){
+                $("#provincia").html("Cartago");
+            } else if(@Html.DisplayFor(model => model.provincia) == 4){
+                $("#provincia").html("Heredia");
+            } else if(@Html.DisplayFor(model => model.provincia) == 5){
+                $("#provincia").html("Guanacaste");
+            } else if(@Html.DisplayFor(model => model.provincia) == 6){
+                $("#provincia").html("Puntarenas");
+            } else if(@Html.DisplayFor(model => model.provincia) == 7){
+                $("#provincia").html("Limón");
+            }
 
-        <dt>
-            Cédula
-        </dt>
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
 
-        <dd>
-            @Html.DisplayFor(model => model.cedula)
-        </dd>
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#distrito").html(data[@Html.DisplayFor(model => model.distrito)]);
+                }
+            });
+        });
 
-        <dt>
-            Nombre
-        </dt>
+</script>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+<div class="container-fluid text-center">
+    <h2>Detalles del Cliente</h2>
 
-        <dt>
-            Primer apellido
-        </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr style="line-height:20px">
+                <th>
+                    Cédula
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.cedula)
+                </td>
+            </tr>
+        
+            <tr style="line-height:20px">
+                <th>
+                    Nombre
+                </th>
 
-        <dt>
-            Segundo apellido
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.nombre)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2)
-        </dd>
+            <tr style="line-height:20px">
+                <th>
+                    Primer apellido
+                </th>
 
-        <dt>
-            Teléfono
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+            <tr style="line-height:20px">
+                <th>
+                    Segundo apellido
+                </th>
 
-        <dt>
-            Provincia
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
+            <tr style="line-height:20px">
+                <th>
+                    Teléfono
+                </th>
 
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            </tr>
 
-        <dt>
-            Cantón
-        </dt>
+            <tr style="line-height:20px">
+                <th>
+                    Provincia
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
+                <td>
+                    <span id="provincia"></span>
+                </td>
+            </tr>
 
-        <dt>
-            Distrito
-        </dt>
+            <tr style="line-height:20px">
+                <th>
+                    Cantón
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
+                <td>
+                    <span id="canton"></span>
+                </td>
+            </tr>
 
-        <dt>
-            Dirección Exacta
-        </dt>
+            <tr style="line-height:20px">
+                <th>
+                    Distrito
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
+                <td>
+                    <span id="distrito"></span>
+                </td>
+            </tr>
 
+            <tr style="line-height:20px">
+                <th>
+                    Dirección Exacta
+                </th>
 
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-
-    </dl>
+    <p class=" boton">
+        <a href="~/Cliente/Index" class="btn btn-default " >
+            <span></span> Regresar
+        </a>
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Aceptar", "Index")
-</p>
+
+
+

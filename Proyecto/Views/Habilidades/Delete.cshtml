@@ -1,0 +1,47 @@
+﻿@model Proyecto.Models.Habilidades
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Habilidad</h2>
+
+<h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar esta habilidad?</h3>
+<table class="d-flex justify-content-center">
+    <tbody>
+        <tr style="line-height:40px">
+            <th>
+                Nombre:
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
+            </td>
+        </tr>
+
+        <tr style="line-height:40px">
+            <th>
+                Habilidad: 
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.conocimientos)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+   
+    @using (Html.BeginForm())
+    {
+@Html.AntiForgeryToken()
+
+
+<div class="botones text-center">
+    <input type="submit" value="Eliminar" class="btn btn-danger" style="margin: 20px" />
+    @Html.ActionLink("Cancelar ", "Index", new {id = Model.cedulaEmpleadoPK_FK }, new { @class = "btn btn-success" })
+    
+</div>
+}
+

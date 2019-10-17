@@ -1,137 +1,199 @@
 ﻿@model Proyecto.Models.EmpleadoDesarrollador
 
-<h2>Consultar</h2>
+@{
+ ViewBag.Title = "Details";
+}
 
-<div>
-    <h4>EmpleadoDesarrollador</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Cédula
-        </dt>
+<script>
 
-        <dd>
-            @Html.DisplayFor(model => model.cedulaED)
-        </dd>
+        $(document).ready(function () {
+            //@Html.DisplayFor(model => model.provincia)
+            if (@Html.DisplayFor(model => model.provincia) == 1) {
+                $("#provincia").html("San José");
+            } else if(@Html.DisplayFor(model => model.provincia) == 2){
+                $("#provincia").html("Alajuela");
+            } else if(@Html.DisplayFor(model => model.provincia) == 3){
+                $("#provincia").html("Cartago");
+            } else if(@Html.DisplayFor(model => model.provincia) == 4){
+                $("#provincia").html("Heredia");
+            } else if(@Html.DisplayFor(model => model.provincia) == 5){
+                $("#provincia").html("Guanacaste");
+            } else if(@Html.DisplayFor(model => model.provincia) == 6){
+                $("#provincia").html("Puntarenas");
+            } else if(@Html.DisplayFor(model => model.provincia) == 7){
+                $("#provincia").html("Limón");
+            }
 
-        <dt>
-            Nombre
-        </dt>
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
 
-        <dd>
-            @Html.DisplayFor(model => model.nombreED)
-        </dd>
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#distrito").html(data[@Html.DisplayFor(model => model.distrito)]);
+                }
+            });
+        });
 
-        <dt>
-            Primer Apellido
-        </dt>
+</script>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1ED)
-        </dd>
+<div class="container-fluid text-center">
+    <h2>Detalles de Empleado</h2>
 
-        <dt>
-            Segundo Apellido
-        </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Cédula
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2ED)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.cedulaED)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaNacimiento)
-        </dd>
+            <tr>
+                <th>
+                    Nombre
+                </th>
 
-        <dt>
-            Edad
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.nombreED)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.edad)
-        </dd>
+            <tr>
+                <th>
+                    Primer apellido
+                </th>
 
-        <dt>
-            Teléfono
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido1ED)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+            <tr>
+                <th>
+                    Segundo apellido
+                </th>
 
-        <dt>
-            Correo
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.apellido2ED)
+                </td>
+            <tr>
+                <th>
+                    Fecha de Nacimiento
+                <th>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.fechaNacimiento)
+                <td>
+            <tr>
+                <th>
+                    Edad
+                </th>
 
-        <dt>
-            Fecha de Nacimiento
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.edad)
+                <td>
+            <tr>
+                <th>
+                    Teléfono
+                </th>
 
-        <dt>
-            Provincia
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            <tr style="line-height:40px">
+                <th>
+                    Correo
+                <th>
+                <td>
+                    @Html.DisplayFor(model => model.correo)
+                <td>
+            <tr>
+                <th>
+                    Provincia
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.provincia)
+                </td>
+            </tr>
 
+            <tr>
+                <th>
+                    Cantón
+                </th>
 
-        <dt>
-            Cantón
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.canton)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
+            <tr>
+                <th>
+                    Distrito
+                </th>
 
-        <dt>
-            Distrito
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.distrito)
+                </td>
+            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
+            <tr>
+                <th>
+                    Dirección Exacta
+                </th>
 
+                <td>
+                    @Html.DisplayFor(model => model.direccionExacta)
+                </td>
+            </tr>
 
-        <dt>
-            Dirección Exacta
-        </dt>
+            <tr>
+                <th>
+                    Disponibilidad
+                <th>
 
-        <dd>
-            @Html.DisplayFor(model => model.direccionExacta)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.disponibilidad)
+                <td>
+            </tr>
+            <tr>
+                <th>
+                    Rol
+                <th>
+                    @*@if (model => model.flg.value != null)
+        {
+         @if (model => model.flg.value == true)
+         {
 
+         }
+         else
+         {
 
-        <dt>
-            Fecha de Inicio
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-
-        <dt>
-            Disponibilidad
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
-        </dd>
-
-        <dt>
-            Rol
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.flg)
-        </dd>
-
-    </dl>
+         }
+        }*@
+<td>
+                    @Html.DisplayFor(model => model.flg)
+                <td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<p
-    class = "btn btn-success form-group">
-    @Html.ActionLink("Aceptar", "Index")
-</p>
+
+    <p class="botones text-center">
+        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
+            <span></span> Regresar
+        </a>
+    </p>
+

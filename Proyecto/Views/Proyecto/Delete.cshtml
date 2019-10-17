@@ -4,82 +4,111 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar Proyecto</h2>
-
-<h3>¿Está seguro que desea borrar este proyecto?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-           nombre
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-        <dt>
-            Objetivo
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.objetivo)
-        </dd>
-        <dt>
-            Fecha de Inicio
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-        <dt>
-           Nombre de Cliente
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cliente.nombre)
-        </dd>
-        <dt>
-           Duración Estimada
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
-
-        <dt>
-            Costo de Trabajo
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costoTrabajo)
-        </dd>
-
-        <dt>
-            Costo Estimado
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costoEstimado)
-        </dd>
 
 
-        <dt>
-            Fecha de Finalización
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaFinalizacion)
-        </dd>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    </dl>
+    <div class="container-fluid text-center">
+        <h2>Eliminar Proyecto</h2>
+        <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <input type="button" value="Eliminar" class="btn btn-success" />
-        @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-success" })
+                    <td>
+                        @Html.DisplayFor(model => model.nombre)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Objetivo
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.objetivo)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Fecha de Inicio
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.fechaInicio)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Nombre de Cliente
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.Cliente.nombre)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Duración Estimada
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.duracionEstimada)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Costo de Trabajo
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.costoTrabajo)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Costo Estimado
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.costoEstimado)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Fecha de Finalización
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.fechaFinalizacion)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    }
-</div>
+
+    <div class="botones text-center">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a href="~/Proyecto/Index" class="btn btn-default">
+            Regresar
+        </a>
+    </div>
+}
+
+
+
+
+

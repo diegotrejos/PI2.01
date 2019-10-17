@@ -1,103 +1,122 @@
 ﻿@model Proyecto.Models.Cliente
 
 @{
-    ViewBag.Title = "Create";
+                /**/
+
+                ViewBag.Title = "Create";
 }
 
-<h2>Agregar Cliente</h2>
+<script>
+    $(document).ready(function () {
+        getProvincia();
+    })
+</script>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.cedula, "Cédula *", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10" required>
-            @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-            @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
-        </div>
+
+    <div class="container-fluid text-center">
+        <h2>Agregar Cliente</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr>
+                    <th>
+                        Cédula *
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Nombre *
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Primer Apellido *
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Segundo Apellido
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.apellido2, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.apellido2, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>
+                        Teléfono
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>
+                        Provincia
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.provincia, Enumerable.Empty<SelectListItem>(), "Seleccione Provincia", new { @class = "form-control", onchange = "getCanton()" })
+                        @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Cantón
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "Seleccione Canton", new { @class = "form-control", onchange = "getDistrict()" })
+                        @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Distrito
+                    </th>
+                    <td>
+                        @Html.DropDownListFor(model => model.distrito, Enumerable.Empty<SelectListItem>(), "Seleccione Distrito", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Dirección Exacta
+                    </th>
+                    <td>
+                        @Html.TextAreaFor(model => model.direccionExacta, new { htmlAttributes = new { @class = "form-control" }, style = "width: 200px; height: 10em" })
+                        @Html.ValidationMessageFor(model => model.direccionExacta, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombre, "Nombre *", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10" required>
-            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-        </div>
+    <div class="botones text-center">
+        <input type="submit" value="Aceptar" class="btn btn-success" style="margin: 20px" />
+        <a href="~/Cliente/Index" class="btn btn-default">
+            Cancelar
+        </a>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.apellido1, "Primer apellido *", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10" required>
-            @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-            @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.apellido2, "Segundo apellido", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.apellido2, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.apellido2, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.telefono, "Teléfono", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.provincia, "Provincia", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.provincia, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.canton, "Cantón", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.distrito, "Distrito", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.distrito, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.direccionExacta, "Dirección exacta", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.direccionExacta, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.direccionExacta, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-
-
-
-
-    <div class="btn btn-success form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Crear" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 
