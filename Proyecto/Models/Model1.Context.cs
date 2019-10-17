@@ -25,9 +25,13 @@ namespace Proyecto.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Autenticar> Autenticar { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<EmpleadoDesarrollador> EmpleadoDesarrollador { get; set; }
+        public virtual DbSet<Equipo> Equipo { get; set; }
+        public virtual DbSet<Habilidades> Habilidades { get; set; }
         public virtual DbSet<Modulo> Modulo { get; set; }
         public virtual DbSet<Proyecto> Proyecto { get; set; }
+        public virtual DbSet<Requerimiento> Requerimiento { get; set; }
     }
 }

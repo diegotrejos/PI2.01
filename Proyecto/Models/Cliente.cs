@@ -12,6 +12,7 @@ namespace Proyecto.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
     public partial class Cliente
     {
@@ -20,18 +21,27 @@ namespace Proyecto.Models
         {
             this.Proyecto = new HashSet<Proyecto>();
         }
-        
+
         [Key]
-        public string cedula { get; set; }
-        public string nombre { get; set; }
-        public string apellido1 { get; set; }
-        public string apellido2 { get; set; }
-        public string telefono { get; set; }
-        public string direccionExacta { get; set; }
-        public string distrito { get; set; }
-        public string canton { get; set; }
+        [Required(ErrorMessage = "Este campo es requerido")]                                                               //Muestra un mensaje de error cuando no se llena un campo obligatorio
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]                                             //Valida que solo se ingresen números
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]      //Valida el tamaño que debe tener el campo
+        public string cedula { get; set; }                                                  //Método que devuelve y establace la cédula del cliente
+        [Required(ErrorMessage = "Este campo es requerido")]                                //Muestra un mensaje de error cuando no se llena un campo obligatorio
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]                   //Valida que solo se ingresen letras
+        public string nombre { get; set; }                                                  //Método que devuelve y establace el nombre del cliente
+        [Required(ErrorMessage = "Este campo es requerido")]                                //Muestra un mensaje de error cuando no se llena un campo obligatorio
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]           //Valida que solo se ingresen letras
+        public string apellido1 { get; set; }                                                //Método que devuelve y establace el primer apellido del cliente
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]           //Valida que solo se ingresen letras
+        public string apellido2 { get; set; }                                               //Método que devuelve y establace el segundo apellido del cliente
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]               //Valida que solo se ingresen números
+        public string telefono { get; set; }                                                //Método que devuelve y establace el número de teléfono del cliente
+        public string direccionExacta { get; set; }                                         //Método que devuelve y establace la dirección exacta del cliente
+        public string distrito { get; set; }                                                //Método que devuelve y establace el distrito del cliente
+        public string canton { get; set; }                                                  //Método que devuelve y establace el cantón del cliente
         public string provincia { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proyecto> Proyecto { get; set; }
     }

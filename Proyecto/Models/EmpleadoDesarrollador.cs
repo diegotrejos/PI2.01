@@ -12,24 +12,71 @@ namespace Proyecto.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
     public partial class EmpleadoDesarrollador
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EmpleadoDesarrollador()
+        {
+            this.Habilidades = new HashSet<Habilidades>();
+            this.Equipo = new HashSet<Equipo>();
+            this.Requerimiento = new HashSet<Requerimiento>();
+        }
+
         [Key]
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean números
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaño
         public string cedulaED { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         public string nombreED { get; set; }
+
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
         public string apellido1ED { get; set; }
+
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         public string apellido2ED { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaInicio { get; set; }
+
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
+
         public Nullable<byte> edad { get; set; }
+
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean números
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "Número mayor a 8 dígitos")]//Valida tamaño
         public string telefono { get; set; }
+
+        [DataType(DataType.EmailAddress, ErrorMessage = "Ingresar correo válido")]//Para validar correo y si es incorrecto despliega este mensaje
         public string correo { get; set; }
+
         public Nullable<bool> disponibilidad { get; set; }
+
         public string direccionExacta { get; set; }
+
         public string distrito { get; set; }
+
         public string canton { get; set; }
+
         public string provincia { get; set; }
+
         public Nullable<bool> flg { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Habilidades> Habilidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipo> Equipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Requerimiento> Requerimiento { get; set; }
     }
 }
