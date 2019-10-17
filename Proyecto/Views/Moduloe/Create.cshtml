@@ -1,4 +1,4 @@
-﻿@model Proyecto.Models.Modulo
+@model Proyecto.Models.Modulo
 
 @{
     ViewBag.Title = "Create";
@@ -11,47 +11,43 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Modulo</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.NombreProy, "NombreProy", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @** @Html.DropDownList("NombreProy", null, htmlAttributes: new { @class = "form-control" })*@
-            @Html.EditorFor(model => model.NombreProy, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NombreProy, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-horizontal">
+        <h4>Modulo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreProy, "NombreProy", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                @*Dropdown list con datos de modulo*@
+                @Html.DropDownListFor(model => Model.NombreProy,
+                ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
+                "Seleccione Proyecto",
+                new { @class = "form-control"})
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                @*  @Html.EditorFor(model => model.NombreProy, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.NombreProy, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-default" })
+            </div>
+
         </div>
     </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
