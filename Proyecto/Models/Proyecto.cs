@@ -11,7 +11,7 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Proyecto
     {
@@ -21,9 +21,9 @@ namespace Proyecto.Models
             this.Equipo = new HashSet<Equipo>();
             this.Modulo = new HashSet<Modulo>();
         }
-        
+
         [Key]
-        [Required (ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         public string nombre { get; set; } //metodo que regista y devuelve el ingreso del nombre
 
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]               //Valida que solo se ingresen números
@@ -51,7 +51,8 @@ namespace Proyecto.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean números
         [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaño
         public string cedulaCliente { get; set; } //metodo que registra y devuelve la cedula cliente
-    
+
+
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipo> Equipo { get; set; }

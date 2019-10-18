@@ -12,22 +12,19 @@ namespace Proyecto.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
-    public partial class Equipo
+
+    public partial class Requerimiento
     {
-        [Key]
-        [Display(Name = "Cedula de empleado")]
-        public string cedulaEM_FK { get; set; }
-
-        [Key]
-        [Display(Name = "Nombre de proyecto")]
-        public string nombreProy_FK { get; set; }
-        public int Id { get; set; }
-
-        [Display(Name = "Rol")]
-        public bool rol { get; set; }
-
+        public string nombreProyecto_FK { get; set; }
+        public int idModulo_FK { get; set; }
+        public string nombre { get; set; }
+        public string complejidad { get; set; }
+        public int duracionEstimada { get; set; }
+        public int duracionReal { get; set; }
+        public string cedulaResponsable_FK { get; set; }
+        public string estado { get; set; }
+    
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
-        public virtual Proyecto Proyecto { get; set; }
+        public virtual Modulo Modulo { get; set; }
     }
 }

@@ -11,9 +11,8 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations; //Para hacer las validaciones
-    using System.Text.RegularExpressions;//Para validaciones con expresiones regulares
-
+    using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
     public partial class EmpleadoDesarrollador
     {
@@ -22,6 +21,7 @@ namespace Proyecto.Models
         {
             this.Habilidades = new HashSet<Habilidades>();
             this.Equipo = new HashSet<Equipo>();
+            this.Requerimiento = new HashSet<Requerimiento>();
         }
 
         [Key]
@@ -72,10 +72,11 @@ namespace Proyecto.Models
 
         public Nullable<bool> flg { get; set; }
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Habilidades> Habilidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equipo> Equipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Requerimiento> Requerimiento { get; set; }
     }
 }

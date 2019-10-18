@@ -11,8 +11,8 @@ namespace Proyecto.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;    //Para realizar validaciones
-    using System.Text.RegularExpressions;           //Para uso de expresiones regulares en las vaidaciones
+    using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
     public partial class Cliente
     {
@@ -28,7 +28,7 @@ namespace Proyecto.Models
         [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]      //Valida el tamaño que debe tener el campo
         public string cedula { get; set; }                                                  //Método que devuelve y establace la cédula del cliente
         [Required(ErrorMessage = "Este campo es requerido")]                                //Muestra un mensaje de error cuando no se llena un campo obligatorio
-[RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]                   //Valida que solo se ingresen letras
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]                   //Valida que solo se ingresen letras
         public string nombre { get; set; }                                                  //Método que devuelve y establace el nombre del cliente
         [Required(ErrorMessage = "Este campo es requerido")]                                //Muestra un mensaje de error cuando no se llena un campo obligatorio
         [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]           //Valida que solo se ingresen letras
@@ -40,7 +40,7 @@ namespace Proyecto.Models
         public string direccionExacta { get; set; }                                         //Método que devuelve y establace la dirección exacta del cliente
         public string distrito { get; set; }                                                //Método que devuelve y establace el distrito del cliente
         public string canton { get; set; }                                                  //Método que devuelve y establace el cantón del cliente
-        public string provincia { get; set; }                                               //Método que devuelve y establace la provincia del cliente
+        public string provincia { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proyecto> Proyecto { get; set; }
