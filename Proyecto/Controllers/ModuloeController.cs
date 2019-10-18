@@ -275,5 +275,27 @@ public ActionResult Details(int id, string nombreProy)
         }
 
 
+        public SelectList getModulos(string nombreProy)
+        {
+
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+
+                var query = from Modulo in db.Modulo
+                            where Modulo.NombreProy.Equals(nombreProy)
+                            select Modulo.Nombre;
+                        
+                        
+                return new SelectList(query);
+
+
+            }
+        }
+
+      
+
+
+
+
     }
 }

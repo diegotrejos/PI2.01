@@ -20,9 +20,11 @@ namespace Proyecto.Controllers
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
+            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos();
             //Guardan temporalmente los datos
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
+            TempData["proyectos"] = proyectos;
             TempData.Keep();
             return View(db.Equipo.ToList());
         }
@@ -62,12 +64,7 @@ namespace Proyecto.Controllers
         // POST: Equipo/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(string nombreEquipo,List<EmpleadoDesarrollador> empleadosAgregados,string nombreProy)
-        {
-            return RedirectToAction("Index", "Equipo");
-        }
+  
 
         // GET: Equipo/Delete/5
         public ActionResult Delete(string id)
@@ -124,7 +121,8 @@ namespace Proyecto.Controllers
                 try
                 {
                     EmpleadoDesarrollador item = db.EmpleadoDesarrollador.Where(x => x.cedulaED == itemId.ToString()).FirstOrDefault();
-                    item.disponibilidad = false;  //intento de que se pase a la otra columna 
+                    //item.disponibilidad = false;  //intento de que se pase a la otra columna 
+                    //var equipo()
                     db.SaveChanges();
                 }
                 catch (Exception)

@@ -189,5 +189,13 @@ namespace Proyecto.Controllers
             return new SelectList(query);
 
         }
+
+        public List<Proyecto.Models.Proyecto> gettProyectos()
+        {
+            var query = from proy in db.Proyecto
+                        select proy;
+            return new List<Proyecto.Models.Proyecto>(query);
+
+        }
     }
 }
