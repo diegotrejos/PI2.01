@@ -53,6 +53,9 @@ namespace Proyecto.Controllers
             {
                 if (!db.Cliente.Any(model => model.cedula == cliente.cedula)) //Si es una cédula que no existe, lo guarda con normalidad
                 {
+                    string input = cliente.nombre;
+                    string output = input.Replace("or 1=1 ", " ");
+                    cliente.nombre = output;
                     db.Cliente.Add(cliente);
                     db.SaveChanges();
                     return RedirectToAction("Index");
