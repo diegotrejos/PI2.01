@@ -143,8 +143,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuloeController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
+    <Compile Include="Controllers\RequerimientoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Autenticar.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -177,6 +181,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proyecto.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Requerimiento.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -255,6 +262,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\SortableConnect.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -271,6 +279,11 @@
     <Content Include="Views\Equipo\Details.cshtml" />
     <Content Include="Views\Equipo\Edit.cshtml" />
     <Content Include="Views\Equipo\Index.cshtml" />
+    <Content Include="Views\Requerimiento\Create.cshtml" />
+    <Content Include="Views\Requerimiento\Delete.cshtml" />
+    <Content Include="Views\Requerimiento\Details.cshtml" />
+    <Content Include="Views\Requerimiento\Edit.cshtml" />
+    <Content Include="Views\Requerimiento\Index.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
