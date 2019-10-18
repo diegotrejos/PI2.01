@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Autenticar">
+    <Key>
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="contrasena" />
+    </Key>
+    <Property Name="usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contrasena" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="cedula" />
@@ -36,15 +44,17 @@
     <Property Name="flg" Type="Boolean" />
     <NavigationProperty Name="Habilidades" Relationship="Self.FK_EmpleadoHabilidades" FromRole="EmpleadoDesarrollador" ToRole="Habilidades" />
     <NavigationProperty Name="Equipo" Relationship="Self.FK_EquipoEmpleado" FromRole="EmpleadoDesarrollador" ToRole="Equipo" />
+    <NavigationProperty Name="Requerimiento" Relationship="Self.FK_RequerimientoResponsable" FromRole="EmpleadoDesarrollador" ToRole="Requerimiento" />
   </EntityType>
   <EntityType Name="Equipo">
     <Key>
       <PropertyRef Name="cedulaEM_FK" />
       <PropertyRef Name="nombreProy_FK" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="cedulaEM_FK" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nombreProy_FK" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nombreEquipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="rol" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="EmpleadoDesarrollador" Relationship="Self.FK_EquipoEmpleado" FromRole="Equipo" ToRole="EmpleadoDesarrollador" />
     <NavigationProperty Name="Proyecto" Relationship="Self.FK_EquipoProyecto" FromRole="Equipo" ToRole="Proyecto" />
@@ -67,6 +77,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Proyecto" Relationship="Self.FK_ModuloProyecto" FromRole="Modulo" ToRole="Proyecto" />
+    <NavigationProperty Name="Requerimiento" Relationship="Self.FK_RequerimientoModulo" FromRole="Modulo" ToRole="Requerimiento" />
   </EntityType>
   <EntityType Name="Proyecto">
     <Key>
@@ -83,6 +94,23 @@
     <NavigationProperty Name="Cliente" Relationship="Self.FK_ProyectoCliente" FromRole="Proyecto" ToRole="Cliente" />
     <NavigationProperty Name="Equipo" Relationship="Self.FK_EquipoProyecto" FromRole="Proyecto" ToRole="Equipo" />
     <NavigationProperty Name="Modulo" Relationship="Self.FK_ModuloProyecto" FromRole="Proyecto" ToRole="Modulo" />
+  </EntityType>
+  <EntityType Name="Requerimiento">
+    <Key>
+      <PropertyRef Name="nombreProyecto_FK" />
+      <PropertyRef Name="idModulo_FK" />
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="nombreProyecto_FK" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idModulo_FK" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="complejidad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="duracionEstimada" Type="Int32" Nullable="false" />
+    <Property Name="duracionReal" Type="Int32" Nullable="false" />
+    <Property Name="cedulaResponsable_FK" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EmpleadoDesarrollador" Relationship="Self.FK_RequerimientoResponsable" FromRole="Requerimiento" ToRole="EmpleadoDesarrollador" />
+    <NavigationProperty Name="Modulo" Relationship="Self.FK_RequerimientoModulo" FromRole="Requerimiento" ToRole="Modulo" />
   </EntityType>
   <Association Name="FK_ProyectoCliente">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
@@ -122,6 +150,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RequerimientoResponsable">
+    <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1" />
+    <End Role="Requerimiento" Type="Self.Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoDesarrollador">
+        <PropertyRef Name="cedulaED" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="cedulaResponsable_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EquipoProyecto">
     <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="1" />
     <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
@@ -148,13 +188,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Gr02Proy3Entities3" annotation:LazyLoadingEnabled="true">
+  <Association Name="FK_RequerimientoModulo">
+    <End Role="Modulo" Type="Self.Modulo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Requerimiento" Type="Self.Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modulo">
+        <PropertyRef Name="NombreProy" />
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="nombreProyecto_FK" />
+        <PropertyRef Name="idModulo_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Gr02Proy3Entities5" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Autenticar" EntityType="Self.Autenticar" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" />
     <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" />
     <EntitySet Name="Equipo" EntityType="Self.Equipo" />
     <EntitySet Name="Habilidades" EntityType="Self.Habilidades" />
     <EntitySet Name="Modulo" EntityType="Self.Modulo" />
     <EntitySet Name="Proyecto" EntityType="Self.Proyecto" />
+    <EntitySet Name="Requerimiento" EntityType="Self.Requerimiento" />
     <AssociationSet Name="FK_ProyectoCliente" Association="Self.FK_ProyectoCliente">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Proyecto" EntitySet="Proyecto" />
@@ -167,6 +225,10 @@
       <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
       <End Role="Equipo" EntitySet="Equipo" />
     </AssociationSet>
+    <AssociationSet Name="FK_RequerimientoResponsable" Association="Self.FK_RequerimientoResponsable">
+      <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
+      <End Role="Requerimiento" EntitySet="Requerimiento" />
+    </AssociationSet>
     <AssociationSet Name="FK_EquipoProyecto" Association="Self.FK_EquipoProyecto">
       <End Role="Proyecto" EntitySet="Proyecto" />
       <End Role="Equipo" EntitySet="Equipo" />
@@ -174,6 +236,10 @@
     <AssociationSet Name="FK_ModuloProyecto" Association="Self.FK_ModuloProyecto">
       <End Role="Proyecto" EntitySet="Proyecto" />
       <End Role="Modulo" EntitySet="Modulo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequerimientoModulo" Association="Self.FK_RequerimientoModulo">
+      <End Role="Modulo" EntitySet="Modulo" />
+      <End Role="Requerimiento" EntitySet="Requerimiento" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

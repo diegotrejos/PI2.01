@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Autenticar">
+    <Key>
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="contrasena" />
+    </Key>
+    <Property Name="usuario" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="contrasena" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="cedula" />
@@ -38,10 +46,11 @@
     <Key>
       <PropertyRef Name="cedulaEM_FK" />
       <PropertyRef Name="nombreProy_FK" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="cedulaEM_FK" Type="varchar" MaxLength="12" Nullable="false" />
     <Property Name="nombreProy_FK" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="nombreEquipo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="rol" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Habilidades">
@@ -73,6 +82,21 @@
     <Property Name="fechaFinalizacion" Type="date" />
     <Property Name="fechaInicio" Type="date" />
     <Property Name="cedulaCliente" Type="varchar" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="Requerimiento">
+    <Key>
+      <PropertyRef Name="nombreProyecto_FK" />
+      <PropertyRef Name="idModulo_FK" />
+      <PropertyRef Name="nombre" />
+    </Key>
+    <Property Name="nombreProyecto_FK" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="idModulo_FK" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="complejidad" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="duracionEstimada" Type="int" Nullable="false" />
+    <Property Name="duracionReal" Type="int" Nullable="false" />
+    <Property Name="cedulaResponsable_FK" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="15" />
   </EntityType>
   <Association Name="FK_EmpleadoHabilidades">
     <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1">
@@ -138,13 +162,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RequerimientoModulo">
+    <End Role="Modulo" Type="Self.Modulo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Requerimiento" Type="Self.Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Modulo">
+        <PropertyRef Name="NombreProy" />
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="nombreProyecto_FK" />
+        <PropertyRef Name="idModulo_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequerimientoResponsable">
+    <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1" />
+    <End Role="Requerimiento" Type="Self.Requerimiento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmpleadoDesarrollador">
+        <PropertyRef Name="cedulaED" />
+      </Principal>
+      <Dependent Role="Requerimiento">
+        <PropertyRef Name="cedulaResponsable_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ModelsStoreContainer">
+    <EntitySet Name="Autenticar" EntityType="Self.Autenticar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Habilidades" EntityType="Self.Habilidades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Modulo" EntityType="Self.Modulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Requerimiento" EntityType="Self.Requerimiento" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_EmpleadoHabilidades" Association="Self.FK_EmpleadoHabilidades">
       <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
       <End Role="Habilidades" EntitySet="Habilidades" />
@@ -164,6 +218,14 @@
     <AssociationSet Name="FK_ProyectoCliente" Association="Self.FK_ProyectoCliente">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Proyecto" EntitySet="Proyecto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequerimientoModulo" Association="Self.FK_RequerimientoModulo">
+      <End Role="Modulo" EntitySet="Modulo" />
+      <End Role="Requerimiento" EntitySet="Requerimiento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequerimientoResponsable" Association="Self.FK_RequerimientoResponsable">
+      <End Role="EmpleadoDesarrollador" EntitySet="EmpleadoDesarrollador" />
+      <End Role="Requerimiento" EntitySet="Requerimiento" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

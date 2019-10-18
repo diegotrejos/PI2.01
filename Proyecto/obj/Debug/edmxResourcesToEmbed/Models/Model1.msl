@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Gr02Proy3Entities3">
+  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Gr02Proy3Entities5">
+    <EntitySetMapping Name="Autenticar">
+      <EntityTypeMapping TypeName="Models.Autenticar">
+        <MappingFragment StoreEntitySet="Autenticar">
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Cliente">
       <EntityTypeMapping TypeName="Models.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
@@ -42,7 +50,7 @@
         <MappingFragment StoreEntitySet="Equipo">
           <ScalarProperty Name="cedulaEM_FK" ColumnName="cedulaEM_FK" />
           <ScalarProperty Name="nombreProy_FK" ColumnName="nombreProy_FK" />
-          <ScalarProperty Name="nombreEquipo" ColumnName="nombreEquipo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="rol" ColumnName="rol" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -75,6 +83,20 @@
           <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
           <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
           <ScalarProperty Name="cedulaCliente" ColumnName="cedulaCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requerimiento">
+      <EntityTypeMapping TypeName="Models.Requerimiento">
+        <MappingFragment StoreEntitySet="Requerimiento">
+          <ScalarProperty Name="nombreProyecto_FK" ColumnName="nombreProyecto_FK" />
+          <ScalarProperty Name="idModulo_FK" ColumnName="idModulo_FK" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="complejidad" ColumnName="complejidad" />
+          <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
+          <ScalarProperty Name="duracionReal" ColumnName="duracionReal" />
+          <ScalarProperty Name="cedulaResponsable_FK" ColumnName="cedulaResponsable_FK" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
