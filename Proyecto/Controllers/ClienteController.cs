@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -53,11 +55,43 @@ namespace Proyecto.Controllers
             {
                 if (!db.Cliente.Any(model => model.cedula == cliente.cedula)) //Si es una cédula que no existe, lo guarda con normalidad
                 {
-                    string input = cliente.nombre;
-                    string output = input.Replace("or 1=1 ", " ");
-                    cliente.nombre = output;
-                    db.Cliente.Add(cliente);
-                    db.SaveChanges();
+                    string commandText = "INSERT INTO Cliente VALUES(@Cedula,@Nombre,@Apellido1,@Apellido2,@Telefono,@DireccionExacta,@Distrito,@Canton,@Provincia)";
+                    string con = "data source=172.16.202.23;user id=Gr02Proy3;password=Orion24!!!;MultipleActiveResultSets=True;App=EntityFramework";
+
+                    string apellido2, telefono, direccionExacta, distrito, canton, provincia;
+
+                    if (cliente.apellido2 == null) apellido2 = "NULL"; else apellido2 = cliente.apellido2;
+                    if (cliente.telefono == null) telefono = "NULL"; else telefono = cliente.telefono;
+                    if (cliente.direccionExacta == null) direccionExacta = "NULL"; else direccionExacta = cliente.direccionExacta;
+                    if (cliente.distrito == null) distrito = "NULL"; else distrito = cliente.distrito;
+                    if (cliente.canton == null) canton = "NULL"; else canton = cliente.canton;
+                    if (cliente.provincia == null) provincia = "NULL"; else provincia = cliente.provincia;
+
+                    using (SqlConnection connection = new SqlConnection(con))
+                    {
+                        SqlCommand command = new SqlCommand(commandText, connection);
+                        
+                        command.Parameters.Add("@Cedula", SqlDbType.VarChar, 12).Value = cliente.cedula;
+                        command.Parameters.Add("@Nombre", SqlDbType.VarChar, 15).Value = cliente.nombre;
+                        command.Parameters.Add("@Apellido1", SqlDbType.VarChar, 15).Value = cliente.apellido1;
+                        command.Parameters.Add("@Apellido2", SqlDbType.VarChar, 15).Value = apellido2;
+                        command.Parameters.Add("@Telefono", SqlDbType.VarChar, 8).Value = telefono;
+                        command.Parameters.Add("@DireccionExacta", SqlDbType.VarChar, 256).Value = direccionExacta;
+                        command.Parameters.Add("@Distrito", SqlDbType.VarChar, 25).Value = distrito;
+                        command.Parameters.Add("@Canton", SqlDbType.VarChar, 25).Value = canton;
+                        command.Parameters.Add("@Provincia", SqlDbType.VarChar, 25).Value = provincia;
+                        command.CommandType = CommandType.Text;
+
+                        try
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            connection.Close();
+                        }
+                        catch (Exception ex)
+                        { Response.Write(ex); }
+                    }
+
                     return RedirectToAction("Index");
                 }
                 else //Si ya esa cédula existe, muestra un mensaje de error

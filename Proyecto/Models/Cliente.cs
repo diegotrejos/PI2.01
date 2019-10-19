@@ -28,10 +28,10 @@ namespace Proyecto.Models
         [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]      //Valida el tamaño que debe tener el campo
         public string cedula { get; set; }                                                  //Método que devuelve y establace la cédula del cliente
         [Required(ErrorMessage = "Este campo es requerido")]                                //Muestra un mensaje de error cuando no se llena un campo obligatorio
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]                   //Valida que solo se ingresen letras
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]                //Valida que solo se ingresen letras
         public string nombre { get; set; }                                                  //Método que devuelve y establace el nombre del cliente
         [Required(ErrorMessage = "Este campo es requerido")]                                //Muestra un mensaje de error cuando no se llena un campo obligatorio
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]           //Valida que solo se ingresen letras
+        /*[RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]         //Valida que solo se ingresen letras*/
         public string apellido1 { get; set; }                                                //Método que devuelve y establace el primer apellido del cliente
         [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]           //Valida que solo se ingresen letras
         public string apellido2 { get; set; }                                               //Método que devuelve y establace el segundo apellido del cliente
