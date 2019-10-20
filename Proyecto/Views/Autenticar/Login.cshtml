@@ -1,0 +1,48 @@
+﻿@model Proyecto.Models.Autenticar
+
+@{
+
+    ViewBag.Title = "Login";
+}
+
+@{
+    Layout = null;
+}
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/nav.css" />
+
+
+<div class="sidenav">
+    <div class="login-main-text text-center" font color="white">
+        <h2 >Software Expert S.A<br > Pagina de Inicio</h2>
+    </div>
+</div>
+
+<div class="main align-content-center">
+    <div class="col-md-6 col-sm-12">
+        
+        <div class="row">
+            <div class="col-md-6 form-horizontal align-content-center">
+                <form action="/Autenticar/Login" method="post">
+                    <br />
+                    <input type="text" class="form-control" name="id" placeholder="Usuario" required autofocus>
+                    <br />
+                    <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
+                    <br />
+                    <button class="btn btn-black" type="submit">
+                        Iniciar sesión
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
