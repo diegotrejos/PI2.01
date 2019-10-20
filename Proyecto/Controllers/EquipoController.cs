@@ -20,7 +20,11 @@ namespace Proyecto.Controllers
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
+
+            //Listas que se usan para el despliegue de los proyectos
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos();
+           // List<Proyecto.Models.Equipo> proyectosConLider = getEmployees();
+
             //Guardan temporalmente los datos
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
@@ -29,42 +33,46 @@ namespace Proyecto.Controllers
             return View(db.Equipo.ToList());
         }
 
-        //Metodo Post que esta conectado al boton tipo submit de index que actualiza la lista segun el filtro del proyecto
-        // Intento fallido de tratar de filtrar por proyecto
-       /* [HttpPost]
-        public ActionResult Index([Bind(Include = "NombreProy,Nombre")]string filtro)
-        {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-                if (filtro != null)
-                {
-                    var equipo1 = from a in db.EmpleadoDesarrollador
-                                  where a.cedulaED is (from b in db.Equipo
-                                                       where b.nombreProy_FK == filtro)
-                                                       select b.cedulaEM_FK)
-                                  select a;
-                    return View(query.ToList());
-                }
-               else
-                    return View();
-            }
-        }*/
-            // GET: Equipo/Details/5
+
+
+        // GET: Equipo/Details/5
         public ActionResult Details(string nombreEquipo)
         {
-                return View();
+            return View();
         }
 
         // GET: Equipo/Create
-        public ActionResult Create(string nombreProy)
+        public ActionResult AsignarLider()
         {
             return View();
+        }
+
+
+        //metodo de tipo Post que al presionar el boton de submit envia el nombre de proyecto y empleado seleccionado para ser el lider del equipo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AsignarLider(string nombre,string cedula, Equipo equipo)
+        {
+            if (ModelState.IsValid)
+            {
+                new EmpleadoDesarrolladorController().modificarEstado(cedula); //llama a un metodo que hace que el empleado no este disponible
+                equipo.nombreProy_FK = nombre;
+                equipo.cedulaEM_FK = cedula;
+                equipo.rol = true; //Declaro que es lider
+                db.Equipo.Add(equipo);
+                db.SaveChanges();
+                return RedirectToAction("index");
+            }
+            else
+                Response.Write("<script>alert('Este proyecto no existe. Intente con otro');</script>");
+
+            return RedirectToAction("AsignarLider"); // cambiar esto para saber que algo fue mal 
         }
 
         // POST: Equipo/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-  
+
 
         // GET: Equipo/Delete/5
         public ActionResult Delete(string id)
