@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Proyecto.Models.Equipo>
 
 @{
-    /**/
+                /**/
+
+                /**/
 
 
-    ViewBag.Title = "Asignar Equipo"; @*Titulo que esta en el estandar *@
+                ViewBag.Title = "Asignar Equipo"; @*Titulo que esta en el estandar *@
 }
 
 <h2>@ViewBag.Title</h2>
@@ -45,6 +47,11 @@
 </style>
 
 
+<p class="botones text-center ">
+    @Html.ActionLink("Asignar Lider", "AsignarLider", null, new { @class = "btn btn-default btn-large" })
+</p>
+
+
 <div class="modal-body row">
     <div class=".col-6 .col-sm-4">
         @*Estilo para la letra de arriba de la columna*@
@@ -65,15 +72,18 @@
                 {
                     foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
                     {
-                        <tr>
-                            <td>
-                                <a href="@Url.Action("Details","EmpleadoDesarrollador", new {id = item.cedulaED})"><i>@item.cedulaED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
+                        if (item.disponibilidad == true)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.cedulaED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
 
-                            </td>
-                            <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
-                                <a href="@Url.Action("Details","EmpleadoDesarrollador", new {id = item.cedulaED})"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
-                            </td>
-                        </tr>
+                                </td>
+                                <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                    <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
+                                </td>
+                            </tr>
+                        }
                     }
                 }
             </tbody>
