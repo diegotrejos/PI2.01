@@ -16,7 +16,7 @@ namespace Proyecto
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Autenticar", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Autenticar", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

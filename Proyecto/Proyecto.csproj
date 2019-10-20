@@ -286,7 +286,7 @@
     <Content Include="Views\Requerimiento\Details.cshtml" />
     <Content Include="Views\Requerimiento\Edit.cshtml" />
     <Content Include="Views\Requerimiento\Index.cshtml" />
-    <Content Include="Views\Autenticar\Login.cshtml" />
+    <Content Include="Views\Autenticar\Index.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

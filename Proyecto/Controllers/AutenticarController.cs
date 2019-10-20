@@ -14,7 +14,7 @@ namespace Proyecto.Models
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
-        public ActionResult Login()
+        public ActionResult Index()
         {
             return View();
         }
@@ -22,7 +22,7 @@ namespace Proyecto.Models
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Login(string id, string password)
+        public ActionResult Index(string id, string password)
         {
            
             if (id == null)
