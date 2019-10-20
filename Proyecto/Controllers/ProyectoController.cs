@@ -67,12 +67,20 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
         {
+                  
 
 
                 if (ModelState.IsValid)
                 {
                     if (!db.Proyecto.Any(model => model.nombre == proyecto.nombre))
                     {
+
+                        SqlConnection con = new SqlConnection("data source=172.16.202.23;user id=Gr02Proy3;password=Orion24!!!;MultipleActiveResultSets=True;App=EntityFramework");
+                        SqlCommand cmd = new SqlCommand("SELECT * FROM Proyecto WHERE nombre=@nombre AND objetivo=@objetivo", con);
+                        /* Convertimos en literal estos parámetros, por lo que no podrán hacer la inyección */
+                        cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 15).Value = proyecto.nombre;
+                        cmd.Parameters.Add("@objetivo", SqlDbType.VarChar, 256).Value = proyecto.objetivo;
+
                         db.Proyecto.Add(proyecto);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -122,8 +130,7 @@ namespace Proyecto.Controllers
         {
             if (ModelState.IsValid)
             {
-               
-                
+
                     db.Entry(proyecto).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
