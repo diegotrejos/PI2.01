@@ -18,10 +18,12 @@
             Filtrar por Proyecto
         </div>
         <div class="editor-field">
+         
             @Html.DropDownList("filtro",
-      /*Lista de donde extraigo*/  ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos()
-                       )
-            
+      /*Lista de donde extraigo*/  ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
+                 "Seleccione un Proyecto"      
+                )
+
         </div>
         <p>
             <input type="submit" value="Buscar"  class="btn btn-default" />

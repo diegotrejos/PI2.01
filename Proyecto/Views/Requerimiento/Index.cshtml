@@ -22,18 +22,22 @@
         <div class="editor-field">
 
             
-            @Html.DropDownList("Proyectos",
- /*Lista de donde extraigo*/  ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos()
-                  )
+            @Html.DropDownList("nombreProyecto",
+ /*Lista de donde extraigo*/  ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos(),
+                "Seleccione Proyecto"
 
+                  )
+            
             
 
 
-       @*     
-            @Html.DropDownList("Modulos",
-                               ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik")
-           )
-        *@
+        
+           @Html.DropDownList("nombreModulo",
+                               ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"),
+                               "Seleccione Modulo"
+          
+                               )
+        
 
 
 
@@ -110,10 +114,10 @@
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+                @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+                @Html.DisplayFor(modelItem => item.idModulo_FK)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

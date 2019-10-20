@@ -15,17 +15,17 @@ namespace Proyecto.Models
     
     public partial class Equipo
     {
-        [Key]
+        [Key] 
         [Display(Name = "Cedula de empleado")]
-        public string cedulaEM_FK { get; set; }
+        public string cedulaEM_FK { get; set; } //metodo que asigna y devuelve la cedula del empleado en el proyecto
 
         [Key]
         [Display(Name = "Nombre de proyecto")]
-        public string nombreProy_FK { get; set; }
-        public int Id { get; set; }
+        public string nombreProy_FK { get; set; } ////metodo que asigna y devuelve el nombre del Proyecto en el que esta el equipo
+        public int Id { get; set; } //Id que identifica el equipo (autogenerado)
 
         [Display(Name = "Rol")]
-        public bool rol { get; set; }
+        public bool rol { get; set; } //rol que cumple el empleado en el proyecto
 
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
         public virtual Proyecto Proyecto { get; set; }

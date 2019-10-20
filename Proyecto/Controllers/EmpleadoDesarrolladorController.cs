@@ -135,11 +135,20 @@ namespace Proyecto.Controllers
             }
             base.Dispose(disposing);
         }
+        
+         //metodo que devuelve una lista con los empleados 
         public List<EmpleadoDesarrollador> getEmpleados()
         {
             var query = from EmpleadoDesarrollador in db.EmpleadoDesarrollador
                         select EmpleadoDesarrollador;
             return new List<EmpleadoDesarrollador>(query);
+        }
+
+        //Metodo que se encarga de cambiar la disponibilidad por medio de la cedula mandada por equipo
+        public void modificarEstado(string cedula) {
+            EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(cedula);
+            empleadoDesarrollador.disponibilidad = false;
+            db.SaveChanges();
         }
     }
 }
