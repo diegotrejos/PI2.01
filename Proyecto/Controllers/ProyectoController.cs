@@ -179,7 +179,7 @@ namespace Proyecto.Controllers
             base.Dispose(disposing);
         }
 
-        /*Método para obtener una lista de proyectos
+        /*Método para obtener una SelectLista de proyectos
          * @return lista de proyectos
          */
         public SelectList getProyectos()
@@ -190,6 +190,9 @@ namespace Proyecto.Controllers
 
         }
 
+         /*Método para obtener una lista de proyectos
+         * @return lista de proyectos
+         */
         public List<Proyecto.Models.Proyecto> gettProyectos()
         {
             var query = from proy in db.Proyecto
