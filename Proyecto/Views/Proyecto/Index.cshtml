@@ -13,7 +13,7 @@
     <table class="table">
         <tr>
             <th>
-               Nombre
+                Nombre
             </th>
             <th>
                 Nombre de Cliente
@@ -39,9 +39,9 @@
                 </td>
                 <td>
                     <p class="botones">
-                        <a href= @Url.Action(item.nombre, "Proyecto/Edit") class="btn  btn-info glyphicon glyphicon-wrench float-right ">
+                        <a href=@Url.Action(item.nombre, "Proyecto/Edit") onclick="Desabilitar()" class="btn Lider btn-info glyphicon glyphicon-wrench float-right ">
                         </a>
-                        <a  href= @Url.Action(item.nombre, "Proyecto/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
+                        <a href=@Url.Action(item.nombre, "Proyecto/Delete") onclick="Desabilitar()" class="btn  Lider btn-danger glyphicon glyphicon-trash float-right ">
                         </a>
                     </p>
                 </td>
@@ -51,3 +51,24 @@
     </table>
 
 </div>
+
+<apex:page controller="ProyectoController">
+    <apex:form id="form">
+        <apex:outputText id="script">
+            <script>
+                function Desabilitar() {
+                    var rol = "{!JSENCODE(rol)}"
+                    var lista = document.getElementsByClassName(rol);
+                    for (var i = 0; i < length(lista); ++i) {
+                        lista[i].disabled = true;
+                    }
+                    alert("Hello! I am an alert box!!");
+                }
+            </script>
+        </apex:outputText>
+        @* <apex:actionFunction action="Desabilitar()" reRender="script" name="Desabilitar" />
+         <button onclick="callUpdateA()">Call Update A</button>
+        <button onclick="Desabilitar()">Say Something!</button>*@
+
+    </apex:form>
+</apex:page>

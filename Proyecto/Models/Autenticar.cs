@@ -16,5 +16,6 @@ namespace Proyecto.Models
     {
         public string usuario { get; set; }
         public string contrasena { get; set; }
+        public Nullable<bool> flag { get; set; }
     }
 }

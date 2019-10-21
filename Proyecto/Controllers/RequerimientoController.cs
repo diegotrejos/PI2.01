@@ -13,8 +13,8 @@ namespace Proyecto.Controllers
 {
     public class RequerimientoController : Controller
     {
-       
 
+        string rol = new AutenticarController().getUsuario();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.ModuloeController moduloController = new Proyecto.Controllers.ModuloeController();
 

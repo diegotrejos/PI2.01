@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e54c93f1257c4ada8d9d02c2659b02df" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Autenticar" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Cliente" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.EmpleadoDesarrollador" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+      <Diagram DiagramId="f17541d68dc34e3e81dc72ba70ff2b37" Name="Diagram1">
+        <EntityTypeShape EntityType="Models.Autenticar" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Cliente" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.EmpleadoDesarrollador" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.Equipo" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Habilidades" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Modulo" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Proyecto" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Requerimiento" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Habilidades" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Modulo" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Proyecto" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Requerimiento" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
         <AssociationConnector Association="Models.FK_ProyectoCliente" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_EmpleadoHabilidades" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_EquipoEmpleado" ManuallyRouted="false" />

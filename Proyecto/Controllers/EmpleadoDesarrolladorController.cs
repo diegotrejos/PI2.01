@@ -15,7 +15,7 @@ namespace Proyecto.Controllers
     public class EmpleadoDesarrolladorController : Controller
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-
+        string rol = new AutenticarController().getUsuario();
         // GET: EmpleadoDesarrollador
         public ActionResult Index()
         {

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Proyecto.Models.Habilidades>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <h2>Lista habilidades</h2>
@@ -44,7 +44,7 @@
         </tr>
     }
 
-    
+
 
 </table>
 
@@ -53,3 +53,24 @@
         <span></span> Regresar
     </a>
 </div>
+
+
+<apex:page controller="HabilidadesController">
+    <apex:form id="form">
+        <apex:outputText id="script">
+            <script>
+                function Desabilitar() {
+                    var rol = "{!JSENCODE(rol)}"
+                    var lista = document.getElementsByClassName(rol);
+                    for (var i = 0; i < length(lista); ++i) {
+                        lista[i].disabled = true;
+                    }
+                    alert("Hello! I am an alert box!!");
+                } 
+            </script>
+        </apex:outputText>
+        @* <apex:actionFunction action="{!updateVarA}" reRender="script" name="callUpdateA" />
+        <button onclick="callUpdateA()">Call Update A</button>
+        <button onclick="hello()">Say Something!</button>*@
+    </apex:form>
+</apex:page>

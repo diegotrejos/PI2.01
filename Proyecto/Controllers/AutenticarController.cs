@@ -14,8 +14,18 @@ namespace Proyecto.Models
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
+        string user = "";
+        string pass = "";
         public ActionResult Index()
         {
+            var user = from a in db.Autenticar
+                       where a.flag == true
+                       select a;
+            if (user.FirstOrDefault() != null)
+            {
+                user.FirstOrDefault().flag = false;
+                db.SaveChanges();
+            }
             return View();
         }
         // POST: Autenticar/Edit/5
@@ -27,7 +37,7 @@ namespace Proyecto.Models
            
             if (id == null)
             {
-                Response.Write("<script>alert('Id es nulo');</script>");
+                Response.Write("<script>alert('Usuario no digitado');</script>");
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Autenticar autenticar = db.Autenticar.Find(id, password);
@@ -38,12 +48,22 @@ namespace Proyecto.Models
             }
             else if (autenticar.contrasena == password)
             {
+               
+                autenticar.flag = true;
+                db.SaveChanges();
                 return RedirectToAction("Index", "Proyecto");
             }
             else {
                 Response.Write("<script>alert('Datos Incorrectos');</script>");
             }
             return View();
+        }
+
+        public string getUsuario() {
+            var usuario = from a in db.Autenticar
+                          where a.flag == true
+                          select a;
+            return usuario.FirstOrDefault().usuario;
         }
 
         // GET: Autenticar/Delete/5

@@ -14,6 +14,7 @@ namespace Proyecto.Controllers
 {
     public class ProyectoController : Controller
     {
+        string rol = new AutenticarController().getUsuario();
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
         // GET: Proyecto
