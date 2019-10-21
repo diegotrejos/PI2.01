@@ -95,14 +95,20 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+        public async Task<ActionResult> Create(string Proyecto, string Modulo,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (ModelState.IsValid)
                 {
+                    var queryMod = from a in db.Modulo
+                                   where a.NombreProy.Equals(Proyecto) && (a.Nombre.Equals(Modulo))
+                                   select a.Id;
+                    requerimiento.nombreProyecto_FK = Proyecto;
+                    requerimiento.idModulo_FK = queryMod.FirstOrDefault();
+                    requerimiento.cedulaResponsable_FK = "302250355";
                     db.Requerimiento.Add(requerimiento);
-                    await db.SaveChangesAsync();
+                    db.SaveChanges();
                     return RedirectToAction("Index");
                 }
 
