@@ -104,14 +104,20 @@ public ActionResult Details(int id, string nombreProy)
                        
                         var queryCheck =
                        from a in db.Modulo
-                       where ((a.NombreProy.ToString() == modulo.NombreProy.ToString() ) && a.Nombre.ToString() == modulo.NombreProy.ToString())
+                       where (a.NombreProy  == modulo.NombreProy  && a.Nombre == modulo.Nombre)
                        select a.Nombre;
                        
+
                         if (!(queryCheck.Any()))
                                    
                         {
+                        
+                        string input = modulo.Nombre;
+                        string output = input.Replace("or 1=1", " ");
+                             output = output.Replace("modulo", "_");
+                            modulo.Nombre = output;
                             
-                            
+
                             db.Modulo.Add(modulo);
                                 db.SaveChanges();
                                 return RedirectToAction("index");
@@ -146,7 +152,7 @@ public ActionResult Details(int id, string nombreProy)
         // GET: Moduloe/Edit/5
         public ActionResult Edit(int id, string nombreProy) // comunica con el modelo
         {
-            /*Aqui podria poner un filtro*/
+           
 
 
 
@@ -169,9 +175,6 @@ public ActionResult Details(int id, string nombreProy)
 
 
         // POST: Moduloe/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -181,8 +184,12 @@ public ActionResult Details(int id, string nombreProy)
                 if (ModelState.IsValid)
                 {
 
+                string input = modulo.Nombre;
+                string output = input.Replace("or 1=1", " ");
+                output = output.Replace("modulo", "_");
+                modulo.Nombre = output;
 
-                    db.Entry(modulo).State = EntityState.Modified;
+                db.Entry(modulo).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -202,13 +209,15 @@ public ActionResult Details(int id, string nombreProy)
         // GET: Moduloe/Delete/5
         public ActionResult Delete(int id, string nombreProy) // comunica con el modelo
         {
-       
-                /*Aqui podria poner un filtro*/
-                var query = from a in db.Modulo
-                            where ((a.Id.Equals(id)).Equals(a.NombreProy.Equals(nombreProy)))
-                            select a;
 
-                var item = query.FirstOrDefault();
+          
+
+            var query = from a in db.Modulo
+                        where (a.Id == id && a.NombreProy == nombreProy)
+                        select a;
+
+
+            var item = query.FirstOrDefault();
 
                 if (item != null)
                     return View(item);
@@ -249,12 +258,8 @@ public ActionResult Details(int id, string nombreProy)
         public SelectList getProyectos()
         {
 
-          
-
                 return this.proyController.getProyectos();
-
-
-            
+ 
         }
 
 
