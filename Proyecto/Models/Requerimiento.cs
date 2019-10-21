@@ -12,15 +12,21 @@ namespace Proyecto.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
 
     public partial class Requerimiento
     {
+        [Key]
         public string nombreProyecto_FK { get; set; }
+        [Key]
         public int idModulo_FK { get; set; }
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         public string nombre { get; set; }
         public string complejidad { get; set; }
         public int duracionEstimada { get; set; }
         public int duracionReal { get; set; }
+        [Display(Name = "Responsable")]
         public string cedulaResponsable_FK { get; set; }
         public string estado { get; set; }
     
