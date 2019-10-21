@@ -56,9 +56,12 @@ namespace Proyecto.Controllers
                     //Valida si la cédula es nueva
                     if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
                     {
-                    DateTime fecha = empleadoDesarrollador.fechaNacimiento.Value;
-                    int edad = System.DateTime.Now.Year - fecha.Year; 
-                    empleadoDesarrollador.edad = (byte)edad;
+                    if (empleadoDesarrollador.fechaNacimiento != null)
+                    {
+                        DateTime fecha = empleadoDesarrollador.fechaNacimiento.Value;
+                        int edad = System.DateTime.Now.Year - fecha.Year;
+                        empleadoDesarrollador.edad = (byte)edad;
+                    }
                     db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
                         db.SaveChanges();
                         return RedirectToAction("Index");
