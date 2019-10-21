@@ -78,19 +78,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.complejidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duracionReal)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
+            @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Modulo.Nombre)
@@ -100,31 +97,28 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.complejidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.duracionEstimada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.duracionReal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.idModulo_FK)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.complejidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
     }
 
 </table>
