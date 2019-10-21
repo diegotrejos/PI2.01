@@ -32,7 +32,8 @@ namespace Proyecto.Models
 
         [Required(ErrorMessage = "Debe tener Nombre")] //Constraint es necesario
         [Display(Name = "Nombre de Modulo")]
-        [StringLength(15)]
+        [StringLength(25)]
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres invalidos")]//valida que solo se ingresen letras
         public string Nombre { get; set; }
 
         public virtual Proyecto Proyecto { get; set; }
