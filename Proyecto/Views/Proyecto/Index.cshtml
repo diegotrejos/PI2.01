@@ -4,71 +4,65 @@
     ViewBag.Title = "Proyectos";
 }
 
-<div class=" Container" align-items-center>
-    <h2>Lista de Proyectos</h2>
-    <p class=" boton float-right">
-        <a href="~/Proyecto/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-        </a>
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Nombre de Cliente
-            </th>
-            <th>
-                Fecha de inicio
-            </th>
+<body onload="Desabilitar();" >
 
-            <th></th>
-        </tr>
 
-        @foreach (var item in Model)
-        {
+    <div class=" Container" align-items-center>
+        <h2>Lista de Proyectos</h2>
+        <p class=" boton float-right">
+            <button onclick= "location.href = 'Proyecto/Create'" class="btn btn-success Lider btn-lg glyphicon glyphicon-plus float-right ">
+            </button>
+        </p>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.ActionLink(item.nombre, "Details", new { id = item.nombre })
-                </td>
-                <td>
-                    @Html.ActionLink(item.Cliente.nombre, "Details", new { id = item.nombre })
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaInicio)
-                </td>
-                <td>
-                    <p class="botones">
-                        <a href=@Url.Action(item.nombre, "Proyecto/Edit") onclick="Desabilitar()" class="btn Lider btn-info glyphicon glyphicon-wrench float-right ">
-                        </a>
-                        <a href=@Url.Action(item.nombre, "Proyecto/Delete") onclick="Desabilitar()" class="btn  Lider btn-danger glyphicon glyphicon-trash float-right ">
-                        </a>
-                    </p>
-                </td>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Nombre de Cliente
+                </th>
+                <th>
+                    Fecha de inicio
+                </th>
+
+                <th></th>
             </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.nombre, "Details", new { id = item.nombre })
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Cliente.nombre, "Details", new { id = item.nombre })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaInicio)
+                    </td>
+                    <td>
+                        <p class="botones">
+                            <button onclick= "location.href ='@Url.Action(item.nombre, "Proyecto/Edit")'" id= "item.nombre" class="btn btn-info glyphicon glyphicon-wrench float-right ">
+                            </button>
+                            <button onclick= "location.href = '@Url.Action(item.nombre, "Proyecto/Delete")'" class="btn  Lider btn-danger glyphicon glyphicon-trash float-right ">
+                            </button>
+                        </p>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+   
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].disabled = true;
+            }
         }
-
-    </table>
-
-</div>
-
-<apex:page controller="ProyectoController">
-    <apex:form id="form">
-        <apex:outputText id="script">
-            <script>
-                function Desabilitar() {
-                    var rol = "{!JSENCODE(rol)}"
-                    var lista = document.getElementsByClassName(rol);
-                    for (var i = 0; i < length(lista); ++i) {
-                        lista[i].disabled = true;
-                    }
-                    alert("Hello! I am an alert box!!");
-                }
-            </script>
-        </apex:outputText>
-        @* <apex:actionFunction action="Desabilitar()" reRender="script" name="Desabilitar" />
-         <button onclick="callUpdateA()">Call Update A</button>
-        <button onclick="Desabilitar()">Say Something!</button>*@
-
-    </apex:form>
-</apex:page>
+    </script>
+</body>

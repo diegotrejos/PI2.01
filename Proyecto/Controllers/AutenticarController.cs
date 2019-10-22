@@ -14,8 +14,6 @@ namespace Proyecto.Models
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
-        string user = "";
-        string pass = "";
         public ActionResult Index()
         {
             var user = from a in db.Autenticar

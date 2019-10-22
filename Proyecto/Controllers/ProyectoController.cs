@@ -14,8 +14,13 @@ namespace Proyecto.Controllers
 {
     public class ProyectoController : Controller
     {
-        string rol = new AutenticarController().getUsuario();
+
+        
+        public string rol = new AutenticarController().getUsuario();
+
+
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
+
 
         // GET: Proyecto
 
@@ -24,6 +29,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Index()
         {
+            ViewBag.user = rol;
             var proyecto = db.Proyecto.Include(p => p.Cliente);
             return View(proyecto.ToList());
         }
@@ -35,6 +41,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Details(string id)
         {
+            ViewBag.user = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -53,6 +60,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Create()
         {
+            ViewBag.user = rol;
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre");
             return View();
         }
@@ -68,10 +76,10 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
         {
-                  
 
 
-                if (ModelState.IsValid)
+            ViewBag.user = rol;
+            if (ModelState.IsValid)
                 {
                     if (!db.Proyecto.Any(model => model.nombre == proyecto.nombre))
                     {
@@ -104,6 +112,7 @@ namespace Proyecto.Controllers
         // GET: Proyecto/Edit/5C:\Users\Katherine\Desktop\Proyecto\Proyecto\Controllers\ProyectoController.cs
         public ActionResult Edit(string id)
         {
+            ViewBag.user = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -129,6 +138,7 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
         {
+            ViewBag.user = rol;
             if (ModelState.IsValid)
             {
 
@@ -149,6 +159,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Delete(string id)
         {
+            ViewBag.user = rol;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -172,6 +183,7 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            ViewBag.user = rol;
             Proyecto.Models.Proyecto proyecto = db.Proyecto.Find(id);
             db.Proyecto.Remove(proyecto);
             db.SaveChanges();
@@ -180,6 +192,7 @@ namespace Proyecto.Controllers
 
         protected override void Dispose(bool disposing)
         {
+            ViewBag.user = rol;
             if (disposing)
             {
                 db.Dispose();
