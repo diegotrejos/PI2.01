@@ -49,11 +49,11 @@
     </style>
 
     <p class="botones text-center ">
-        <button onclick="location.href ='@Url.Action("Equipo/AsignarLider")'" class="btn btn-default btn-large Lider Desarrollador Cliente ">Asignar Lider</button>
+        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-default btn-large Lider Desarrollador Cliente ">Asignar Lider</button>
     </p>
 
 
-    <div class="Lider Desarrollador Cliente modal-body row">
+    <div class=" Desarrollador Cliente modal-body row">
         <div class=".col-6 .col-sm-4">
             @*Estilo para la letra de arriba de la columna*@
             <p style="font-size:14px; color:#b3b0d5; font-weight:bold; font-style:italic;"> Desarrolladores disponibles</p>
@@ -91,7 +91,7 @@
             </table>
         </div>
 
-        <div class=" Lider Desarrollador Cliente col">
+        <div class=" Desarrollador Cliente col">
         </div>
         <div class=".col-6 .col-sm-4">
             @*Estilo para la letra de arriba de la columna*@
@@ -116,7 +116,7 @@
                 <tbody id="asignacion" style="cursor:pointer;">
                     @*Id que identifica en los scripts de arriba*@
                     @*Lista de la derecha de los empleados que ya estan asignados a un proyecto*@
-                    @if (TempData["empleadosAsignados"] != null)
+                    @if (TempData["empleadosAsignados"] != null )
                     {
                         foreach (var item in TempData["empleadosAsignados"] as List<Proyecto.Models.EmpleadoDesarrollador>)
                         {
@@ -144,7 +144,7 @@
                  lista[i].setAttribute('readonly', 'readonly');
                  lista[i].hidden = true;
             }
-            if (rol != "Jefe") {
+            if (rol != "Jefe" || rol != "Lider") {
                 alert("Lo sentimos, no cuenta con los permisos necesarios para ejecutar esta acción");
             }
         }
