@@ -21,11 +21,9 @@ namespace Proyecto.Controllers
         // GET: Moduloe
         public ActionResult Index()
         {
-            
-
-                
-                var modulo = db.Modulo.Include(m => m.Proyecto);
-                return View(modulo.ToList());
+            ViewBag.user = rol;
+            var modulo = db.Modulo.Include(m => m.Proyecto);
+            return View(modulo.ToList());
 
             
         }

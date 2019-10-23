@@ -10,7 +10,7 @@
     <div class=" Container" align-items-center>
         <h2>Lista de Proyectos</h2>
         <p class=" boton float-right">
-            <button onclick= "location.href = 'Proyecto/Create'" class="btn btn-success Lider btn-lg glyphicon glyphicon-plus float-right ">
+            <button onclick= "location.href = 'Proyecto/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right ">
             </button>
         </p>
         <table class="table">
@@ -42,9 +42,9 @@
                     </td>
                     <td>
                         <p class="botones">
-                            <button onclick= "location.href ='@Url.Action(item.nombre, "Proyecto/Edit")'" id= "item.nombre" class="btn btn-info glyphicon glyphicon-wrench float-right ">
+                            <button onclick= "location.href ='@Url.Action(item.nombre, "Proyecto/Edit")'" id= "item.nombre" class="btn Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right ">
                             </button>
-                            <button onclick= "location.href = '@Url.Action(item.nombre, "Proyecto/Delete")'" class="btn  Lider btn-danger glyphicon glyphicon-trash float-right ">
+                            <button onclick= "location.href = '@Url.Action(item.nombre, "Proyecto/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right ">
                             </button>
                         </p>
                     </td>
@@ -61,7 +61,7 @@
             var rol = '@ViewBag.user';
             var lista = document.getElementsByClassName(rol);
             for (var i = 0; i < lista.length; ++i) {
-                lista[i].disabled = true;
+                lista[i].hidden = true;
             }
         }
     </script>

@@ -5,74 +5,84 @@
 
     ViewBag.Title = "Modulos";
 }
-<h2> Modulos </h2>
-@**@
 
-@*Genera una dropdown list con todos los proyectos*@
+<body onload="Desabilitar();">
+    <h2> Modulos </h2>
+    @**@
 
-@*DROPDOWN LIST QUE LLAMA A METODO POST INDEX EN CONTROLLER*@
-@using (Html.BeginForm())
-{
-    <fieldset>
-        <div class="display-label">
-            Filtrar por Proyecto
-        </div>
-        <div class="editor-field">
-         
-            @Html.DropDownList("filtro",
-      /*Lista de donde extraigo*/  ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
-                 "Seleccione un Proyecto"      
-                )
+    @*Genera una dropdown list con todos los proyectos*@
 
-        </div>
-        <p>
-            <input type="submit" value="Buscar"  class="btn btn-default" />
-        </p>
-    </fieldset>
-}
-
-<p class=" boton float-right">
-    <a href="~/Moduloe/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
-</p>
-
-
-<br />
-<br />
-
-@*Tabla de Modulos*@
-
-
-
-<table class="table">
-    <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreProy)
-        </th>
-    </tr>
-
-
-    @foreach (var item in Model)
+    @*DROPDOWN LIST QUE LLAMA A METODO POST INDEX EN CONTROLLER*@
+    @using (Html.BeginForm())
     {
+        <fieldset>
+            <div class="display-label">
+                Filtrar por Proyecto
+            </div>
+            <div class="editor-field">
+
+                @Html.DropDownList("filtro",
+          /*Lista de donde extraigo*/  ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
+                     "Seleccione un Proyecto"
+                    )
+
+            </div>
+            <p>
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </p>
+        </fieldset>
+    }
+
+    <p class=" boton float-right">
+        <button onclick="location.href = 'Moduloe/Create'" class="btn btn-success Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+    </p>
+
+
+    <br />
+    <br />
+
+    @*Tabla de Modulos*@
+
+
+
+    <table class="table">
         <tr>
 
-            <td>
-                @Html.ActionLink(item.Nombre, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreProy)
-            </td>
-            <td>
-                <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
-                @Html.ActionLink(" ", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-info glyphicon glyphicon-wrench float-right " })
-
-                @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProy)
+            </th>
         </tr>
-    }
-</table>
 
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.ActionLink(item.Nombre, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProy)
+                </td>
+                <td>
+                    <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
+                    @Html.ActionLink(" ", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right " })
+
+                    @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+                </td>
+            </tr>
+        }
+    </table>
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].hidden = true;
+            }
+        }
+    </script>
+</body>

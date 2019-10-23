@@ -4,121 +4,132 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 
-
-
-@using (Html.BeginForm())
-{
-    <fieldset>
-        <div class="display-label">
-            Filtrar por Proyecto
-        </div>
-        <div class="editor-field">
-
-            
-            @Html.DropDownList("nombreProyecto",
- /*Lista de donde extraigo*/  ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos(),
-                "Seleccione Proyecto"
-
-                  )
-            
-            
-
-
-        
-           @Html.DropDownList("nombreModulo",
-                               ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"),
-                               "Seleccione Modulo"
-          
-                               )
-        
+<body onload="Desabilitar();">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
 
 
 
-
-
-
-
-        </div>
-        <p>
-            <input type="submit" value="Buscar" class="btn btn-default" />
-        </p>
-    </fieldset>
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p class=" boton float-right">
-    <a href="~/Requerimiento/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
-</p>
-
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.complejidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Modulo.Nombre)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+    @using (Html.BeginForm())
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.complejidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modulo.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+        <fieldset>
+            <div class="display-label">
+                Filtrar por Proyecto
+            </div>
+            <div class="editor-field">
+
+
+                @Html.DropDownList("nombreProyecto",
+     /*Lista de donde extraigo*/  ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos(),
+                    "Seleccione Proyecto"
+
+                      )
+
+
+
+
+
+                @Html.DropDownList("nombreModulo",
+                                    ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"),
+                                    "Seleccione Modulo"
+
+                                    )
+
+
+
+
+
+
+
+
+
+            </div>
+            <p>
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </p>
+        </fieldset>
     }
 
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p class=" boton float-right">
+        <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+    </p>
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.complejidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modulo.Nombre)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.complejidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
+
+                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].hidden = true;
+            }
+        }
+    </script>
+</body>

@@ -4,68 +4,76 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Lista de Empleados</h2>
-<p class=" boton float-right">
-    <a href="~/EmpleadoDesarrollador/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
-</p>
-<table class="table">
-    <tr>
+<body onload="Desabilitar();">
+    <h2>Lista de Empleados</h2>
+    <p class=" boton float-right">
+        <button onclick="location.href = 'EmpleadoDesarrollador/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+    </p>
+    <table class="table">
+        <tr>
 
-        <th>
-            Cédula
-        </th>
-        <th>
-            Nombre
-        </th>
-        <th>
-            Primer Apellido
-        </th>
-        <th>
-            Segundo Apellido
-        </th>
-        <th>
-            Fecha Inicio
-        </th>
-    </tr>
+            <th>
+                Cédula
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Primer Apellido
+            </th>
+            <th>
+                Segundo Apellido
+            </th>
+            <th>
+                Fecha Inicio
+            </th>
+        </tr>
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
-        </td>
-        <td>
-            @Html.ActionLink(item.nombreED, "Details", new { id = item.cedulaED })
-        </td>
-        <td>
-            @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellido2ED)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInicio)
-        </td>
-        <td>
-            <p class="botones">
-                <a href=@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Edit") class="btn  btn-info glyphicon glyphicon-wrench float-right ">
-                </a>
-                <a href=@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete") class="btn  btn-danger glyphicon glyphicon-trash float-right ">
-                </a>
-                <div class="form-group">
-                    @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-success float - right" })
-                </div>
-            </p>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
+                </td>
+                <td>
+                    @Html.ActionLink(item.nombreED, "Details", new { id = item.cedulaED })
+                </td>
+                <td>
+                    @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido2ED)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaInicio)
+                </td>
+                <td>
+                    <p class="botones">
+                        <button onclick="location.href ='@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Edit")'" id="item.nombre" class="btn Lider Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
+                        <button onclick="location.href = '@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
+                        <button onclick="location.href = '@Url.Action(item.cedulaED, "Habilidades/Index")'" class="btn btn-success float-right  Lider Desarrollador Cliente">Habilidades</button>
+                        @*<div class="form-group">
+                                @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-success float - right" })
+                            </div>*@
+                    </p>
 
-        </td>
-
-
-    </tr>
-    }
-
-</table>
+                </td>
 
 
+            </tr>
+        }
+    </table>
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].hidden = true;
+            }
+        }
+    </script>
+
+</body>
 
 

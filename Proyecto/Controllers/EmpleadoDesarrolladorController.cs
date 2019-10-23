@@ -19,6 +19,7 @@ namespace Proyecto.Controllers
         // GET: EmpleadoDesarrollador
         public ActionResult Index()
         {
+            ViewBag.user = rol;
             return View(db.EmpleadoDesarrollador.ToList());
         }
 

@@ -21,6 +21,7 @@ namespace Proyecto.Controllers
         // GET: Requerimiento
         public async Task<ActionResult> Index()
         {
+            ViewBag.user = rol;
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
@@ -124,6 +125,7 @@ namespace Proyecto.Controllers
         // GET: Requerimiento/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
+            ViewBag.user = rol;
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (id == null)
