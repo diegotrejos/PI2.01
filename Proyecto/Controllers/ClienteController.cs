@@ -19,6 +19,7 @@ namespace Proyecto.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
+            ViewBag.user = rol;
             return View(db.Cliente.ToList());
         }
 
