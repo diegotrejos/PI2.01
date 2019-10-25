@@ -13,7 +13,7 @@ namespace Proyecto.Controllers
     public class HabilidadesController : Controller
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-        string rol = new AutenticarController().getUsuario();
+       
 
         // GET: Habilidades
         public ActionResult Index(string id)//id para conectar habilidad con empleado

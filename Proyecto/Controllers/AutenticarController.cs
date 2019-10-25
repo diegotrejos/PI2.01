@@ -16,28 +16,56 @@ namespace Proyecto.Models
 
         public ActionResult Index()
         {
-            var user = from a in db.Autenticar
-                       where a.flag == true
-                       select a;
-            if (user.FirstOrDefault() != null)
-            {
-                user.FirstOrDefault().flag = false;
-                db.SaveChanges();
-            }
             return View();
         }
         // POST: Autenticar/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Index(string id, string password)
+        public ActionResult Index(string cedula, string password)
         {
-           
-            if (id == null)
+            if (cedula == null)
             {
-                Response.Write("<script>alert('Usuario no digitado');</script>");
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Response.Write("<script>alert('Datos Incorrectos');</script>");
+                return View();
             }
+            string id = "";
+            var cliente = from a in db.Cliente
+                       where a.cedula == cedula
+                       select a;
+            var desarrollador = from a in db.EmpleadoDesarrollador
+                          where a.cedulaED == cedula
+                          select a;
+            if (cliente.FirstOrDefault() != null)
+            {
+                id = "Cliente";
+                System.Web.HttpContext.Current.Session["rol"] = "Cliente";
+                var proyecto = from a in db.Proyecto
+                               where a.cedulaCliente == cedula
+                               select a;
+                System.Web.HttpContext.Current.Session["proyecto"] = proyecto.FirstOrDefault().nombre;
+
+            }
+            else if (desarrollador.FirstOrDefault() != null)
+            {
+                id = "Desarrollador";
+                System.Web.HttpContext.Current.Session["rol"] = "Desarrollador";
+                var proyecto = from a in db.Equipo
+                               where a.cedulaEM_FK == cedula
+                               select a;
+                if (proyecto.FirstOrDefault().rol == true)
+                {
+                    id = "Lider";
+                    System.Web.HttpContext.Current.Session["rol"] = "Lider";
+                }
+                System.Web.HttpContext.Current.Session["proyecto"] = proyecto.FirstOrDefault().nombreProy_FK;
+
+            }
+            else if (cedula == "Jefe") {
+                id = "Jefe";
+                System.Web.HttpContext.Current.Session["rol"] = "Jefe";
+            }
+            System.Web.HttpContext.Current.Session["cedula"] = cedula;
             Autenticar autenticar = db.Autenticar.Find(id, password);
             if (autenticar == null)
             {
@@ -46,8 +74,6 @@ namespace Proyecto.Models
             }
             else if (autenticar.contrasena == password)
             {
-               
-                autenticar.flag = true;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Proyecto");
             }
@@ -57,12 +83,7 @@ namespace Proyecto.Models
             return View();
         }
 
-        public string getUsuario() {
-            var usuario = from a in db.Autenticar
-                          where a.flag == true
-                          select a;
-            return usuario.FirstOrDefault().usuario;
-        }
+
 
         // GET: Autenticar/Delete/5
 

@@ -12,7 +12,7 @@ namespace Proyecto.Controllers
 {
     public class ModuloeController : Controller
     {
-        string rol = new AutenticarController().getUsuario();
+        
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         //incluyo la tabla de proyectos
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
@@ -21,7 +21,7 @@ namespace Proyecto.Controllers
         // GET: Moduloe
         public ActionResult Index()
         {
-            ViewBag.user = rol;
+            
             var modulo = db.Modulo.Include(m => m.Proyecto);
             return View(modulo.ToList());
 

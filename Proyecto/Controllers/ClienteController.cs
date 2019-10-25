@@ -15,11 +15,11 @@ namespace Proyecto.Controllers
     public class ClienteController : Controller         //Controlador del Módelo Cliente
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-        string rol = new AutenticarController().getUsuario();
+      
         // GET: Cliente
         public ActionResult Index()
         {
-            ViewBag.user = rol;
+            
             return View(db.Cliente.ToList());
         }
 

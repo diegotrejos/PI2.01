@@ -14,14 +14,14 @@ namespace Proyecto.Controllers
     public class EquipoController : Controller
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-        string rol = new AutenticarController().getUsuario();
+       
         // GET: Equipo
         public ActionResult Index()
         {
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
-            ViewBag.user = rol;
+            
 
             //Listas que se usan para el despliegue de los proyectos
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos();

@@ -16,7 +16,10 @@ namespace Proyecto.Controllers
     {
 
         
-        public string rol = new AutenticarController().getUsuario();
+       
+        public string usuario = "";
+        public string cedula = "";
+        public string proy = "";
 
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
@@ -29,9 +32,35 @@ namespace Proyecto.Controllers
          */
         public ActionResult Index()
         {
-            ViewBag.user = rol;
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
             var proyecto = db.Proyecto.Include(p => p.Cliente);
-            return View(proyecto.ToList());
+
+            if (usuario == "Desarrollador" || usuario == "Lider")
+            {
+                var obj = from a in db.Proyecto
+                          from b in db.Equipo
+                          where a.nombre == b.nombreProy_FK
+                          where b.cedulaEM_FK == cedula
+                          select a;
+
+                return View(obj.ToList());
+
+            }
+            else if (usuario == "Cliente")
+            {
+                var obj = from a in db.Proyecto
+                          where a.cedulaCliente == cedula
+                          select a;
+                return View(obj.ToList());
+            }
+            else if (usuario == "Jefe") {
+                return View(proyecto.ToList());
+            }
+
+            return View();
         }
 
         // GET: Proyecto/Details/5
@@ -41,7 +70,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Details(string id)
         {
-            ViewBag.user = rol;
+          
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -60,7 +89,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Create()
         {
-            ViewBag.user = rol;
+            
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre");
             return View();
         }
@@ -78,17 +107,17 @@ namespace Proyecto.Controllers
         {
 
 
-            ViewBag.user = rol;
+           
             if (ModelState.IsValid)
                 {
                     if (!db.Proyecto.Any(model => model.nombre == proyecto.nombre))
                     {
 
-                        SqlConnection con = new SqlConnection("data source=172.16.202.23;user id=Gr02Proy3;password=Orion24!!!;MultipleActiveResultSets=True;App=EntityFramework");
+                      /*  SqlConnection con = new SqlConnection("data source=172.16.202.23;user id=Gr02Proy3;password=Orion24!!!;MultipleActiveResultSets=True;App=EntityFramework");
                         SqlCommand cmd = new SqlCommand("SELECT * FROM Proyecto WHERE nombre=@nombre AND objetivo=@objetivo", con);
                         /* Convertimos en literal estos parámetros, por lo que no podrán hacer la inyección */
-                        cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 15).Value = proyecto.nombre;
-                        cmd.Parameters.Add("@objetivo", SqlDbType.VarChar, 256).Value = proyecto.objetivo;
+                       /* cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 15).Value = proyecto.nombre;
+                        cmd.Parameters.Add("@objetivo", SqlDbType.VarChar, 256).Value = proyecto.objetivo;*/
 
                         db.Proyecto.Add(proyecto);
                         db.SaveChanges();
@@ -112,7 +141,8 @@ namespace Proyecto.Controllers
         // GET: Proyecto/Edit/5C:\Users\Katherine\Desktop\Proyecto\Proyecto\Controllers\ProyectoController.cs
         public ActionResult Edit(string id)
         {
-            ViewBag.user = rol;
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,7 +168,7 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
         {
-            ViewBag.user = rol;
+            
             if (ModelState.IsValid)
             {
 
@@ -159,7 +189,7 @@ namespace Proyecto.Controllers
          */
         public ActionResult Delete(string id)
         {
-            ViewBag.user = rol;
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -183,7 +213,7 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            ViewBag.user = rol;
+            
             Proyecto.Models.Proyecto proyecto = db.Proyecto.Find(id);
             db.Proyecto.Remove(proyecto);
             db.SaveChanges();
@@ -192,7 +222,7 @@ namespace Proyecto.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            ViewBag.user = rol;
+           
             if (disposing)
             {
                 db.Dispose();
