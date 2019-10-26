@@ -14,13 +14,22 @@ namespace Proyecto.Controllers
 {
     public class ClienteController : Controller         //Controlador del Módelo Cliente
     {
+
+        public string usuario = "";
+        public string cedula = "";
+        public string proy = "";
+
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-      
+
         // GET: Cliente
         public ActionResult Index()
         {
-            
-            return View(db.Cliente.ToList());
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            return View(db.Cliente.ToList());           
         }
 
         // GET: Cliente/Details/5
