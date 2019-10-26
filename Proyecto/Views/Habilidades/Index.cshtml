@@ -60,13 +60,13 @@
         <apex:outputText id="script">
             <script>
                 function Desabilitar() {
-                    var rol = "{!JSENCODE(rol)}"
-                    var lista = document.getElementsByClassName(rol);
-                    for (var i = 0; i < length(lista); ++i) {
-                        lista[i].disabled = true;
+                     var rol = '@ViewBag.user';
+                     var lista = document.getElementsByClassName(rol);
+                    for (var i = 0; i < lista.length; ++i) {
+                        lista[i].setAttribute('readonly', 'readonly');
+                        lista[i].hidden = true;
                     }
-                    alert("Hello! I am an alert box!!");
-                } 
+                 }
             </script>
         </apex:outputText>
         @* <apex:actionFunction action="{!updateVarA}" reRender="script" name="callUpdateA" />

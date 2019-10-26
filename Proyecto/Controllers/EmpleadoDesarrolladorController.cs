@@ -14,13 +14,52 @@ namespace Proyecto.Controllers
 {
     public class EmpleadoDesarrolladorController : Controller
     {
+        //Variables para saber quien está logeado y a que proyecto pertenece
+        public string usuario = "";
+        public string cedula = "";
+        public string proy = "";
+
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
        
         // GET: EmpleadoDesarrollador
         public ActionResult Index()
         {
-         
-            return View(db.EmpleadoDesarrollador.ToList());
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            if (usuario != "Jefe")
+            {
+                if (usuario == "Desarrollador")
+                {
+                    var obj = from a in db.EmpleadoDesarrollador
+                              where a.cedulaED == cedula
+                              select a;
+
+                    return View(obj.ToList());
+                }
+                else
+                {
+                        var obj = from a in db.EmpleadoDesarrollador
+                                  from b in db.Habilidades
+                                  from c in db.Equipo
+                                  from d in db.Proyecto
+                                  where a.cedulaED == b.cedulaEmpleadoPK_FK
+                                  where a.cedulaED == c.cedulaEM_FK
+                                  where c.nombreProy_FK == d.nombre
+                                  select a;
+
+                        return View(obj.Distinct().ToList());
+                    
+                    
+                }
+            }
+            else
+            {
+                return View(db.EmpleadoDesarrollador.ToList());
+            }
+          
         }
 
         // GET: EmpleadoDesarrollador/Details/5
