@@ -14,14 +14,15 @@ namespace Proyecto.Controllers
     public class EquipoController : Controller
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-       
+        string rol = new AutenticarController().getUsuario();
+
         // GET: Equipo
         public ActionResult Index()
         {
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
-            
+            ViewBag.user = rol;
 
             //Listas que se usan para el despliegue de los proyectos
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos();
@@ -33,6 +34,26 @@ namespace Proyecto.Controllers
             TempData["proyectos"] = proyectos;
             TempData.Keep();
             return View(db.Equipo.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
+        {
+            //Equipo que pertenece al filtro 
+            var query = from a in db.Equipo
+                        where a.nombreProy_FK == filtro
+                        select a;
+            var lider = from l in db.Equipo
+                        where l.rol == true && l.nombreProy_FK == filtro
+                        select l;
+            var empleadosAsignados = from e in db.EmpleadoDesarrollador
+                                     where e.cedulaED == query.FirstOrDefault().cedulaEM_FK
+                                     select e;
+            //Intento de hacerle saber a la vista quien es el lider y los miembros del equipo
+            ViewBag.Lider = lider.FirstOrDefault().cedulaEM_FK;
+            ViewBag.empleados = empleadosAsignados;
+            TempData.Keep();
+            return View();
         }
 
 
@@ -69,6 +90,11 @@ namespace Proyecto.Controllers
                 Response.Write("<script>alert('Este proyecto no existe. Intente con otro');</script>");
 
             return RedirectToAction("AsignarLider"); // cambiar esto para saber que algo fue mal 
+        }
+
+        public ActionResult AsignarMiembros()
+        {
+            return View();
         }
 
         // POST: Equipo/Create
@@ -120,9 +146,8 @@ namespace Proyecto.Controllers
 
         //Codigo que se llama en el script de create que permiete realizar el evento de arrastre 
         //Aporte del grupo #1
-        public ActionResult UpdateItem(string itemIds)
+        public ActionResult UpdateItem(string itemIds,Equipo equipo)
         {
-            Gr02Proy3Entities db = new Gr02Proy3Entities();
             int count = 1;
             List<int> itemIdList = new List<int>(); 
             itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
