@@ -6,25 +6,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Lista habilidades</h2>
+<body onload="Desabilitar();">
+    <h2>Lista habilidades</h2>
+    <p class=" boton float-right">
+        <button onclick="location.href =  '/Habilidades/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+    </p>
 
-<p class=" boton float-right">
-    <a href="~/Habilidades/Create" class="btn btn-success btn-lg glyphicon glyphicon-plus float-right ">
-    </a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Nombre
-        </th>
-        <th>
-            Habilidades
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Habilidades
+            </th>
+            <th></th>
+        </tr>
 
-    @foreach (var item in Model)
-    {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
@@ -34,31 +34,36 @@
             </td>
 
 
+            @* <td>
+                        <p class="botones">
+                            <button onclick="location.href = '@Url.Action(id = item.EmpleadoDesarrollador.cedulaED, habilidad = item.conocimientos)'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
+              </td>*@
+
             <td>
                 <p class="botones">
 
-                    @Html.ActionLink(" ", "Delete", new { id = item.EmpleadoDesarrollador.cedulaED, habilidad = item.conocimientos }, new { @class = "btn  btn-danger glyphicon glyphicon-trash float-right " })
+                    @Html.ActionLink(" ", "Delete", new { id = item.EmpleadoDesarrollador.cedulaED, habilidad = item.conocimientos }, new { @class = "btn Lider Desarrollador Cliente  btn-danger glyphicon glyphicon-trash float-right " })
 
                 </p>
             </td>
         </tr>
-    }
+        }
 
 
 
-</table>
+    </table>
 
-<div class="botones text-center">
-    <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
-        <span></span> Regresar
-    </a>
-</div>
+    <div class="botones text-center">
+        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
+            <span></span> Regresar
+        </a>
+    </div>
 
 
-<apex:page controller="HabilidadesController">
-    <apex:form id="form">
-        <apex:outputText id="script">
-            <script>
+    <apex:page controller="HabilidadesController">
+        <apex:form id="form">
+            <apex:outputText id="script">
+                <script>
                 function Desabilitar() {
                      var rol = '@ViewBag.user';
                      var lista = document.getElementsByClassName(rol);
@@ -67,10 +72,13 @@
                         lista[i].hidden = true;
                     }
                  }
-            </script>
-        </apex:outputText>
-        @* <apex:actionFunction action="{!updateVarA}" reRender="script" name="callUpdateA" />
-        <button onclick="callUpdateA()">Call Update A</button>
-        <button onclick="hello()">Say Something!</button>*@
-    </apex:form>
-</apex:page>
+                </script>
+            </apex:outputText>
+            @* <apex:actionFunction action="{!updateVarA}" reRender="script" name="callUpdateA" />
+                <button onclick="callUpdateA()">Call Update A</button>
+                <button onclick="hello()">Say Something!</button>*@
+        </apex:form>
+    </apex:page>
+
+</body>
+

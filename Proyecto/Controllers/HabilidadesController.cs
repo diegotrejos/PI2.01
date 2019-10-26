@@ -12,12 +12,22 @@ namespace Proyecto.Controllers
 {
     public class HabilidadesController : Controller
     {
+        //Variables para saber quien está logeado y a que proyecto pertenece
+        public string usuario = "";
+        public string cedula = "";
+        public string proy = "";
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
        
 
         // GET: Habilidades
         public ActionResult Index(string id)//id para conectar habilidad con empleado
         {
+            //Para obtener usuario registrado el ros que maneja y el proyecto
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
             Habilidades modelo = new Habilidades();
             List<Habilidades> aList;//lista de habilidades
             if (id == null)
