@@ -287,6 +287,8 @@
     <Content Include="Views\Requerimiento\Edit.cshtml" />
     <Content Include="Views\Requerimiento\Index.cshtml" />
     <Content Include="Views\Autenticar\Index.cshtml" />
+    <Content Include="Views\Equipo\AsignarLider.cshtml" />
+    <Content Include="Views\Equipo\AsignarMiembros.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

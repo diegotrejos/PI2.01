@@ -270,12 +270,26 @@ namespace Proyecto.Controllers
         /*Método para obtener una lista de proyectos
         * @return lista de proyectos
         */
-        public List<Proyecto.Models.Proyecto> gettProyectos()
+        public List<Proyecto.Models.Proyecto> gettProyectos(String rol, String cedula)
         {
-            var query = from proy in db.Proyecto
-                        select proy;
-            return new List<Proyecto.Models.Proyecto>(query);
+            if (rol == "Lider")
+            {
+                var query = from proy in db.Proyecto
+                            from equip in db.Equipo
+                            from emp in db.EmpleadoDesarrollador
+                            where proy.nombre == equip.nombreProy_FK
+                            where equip.cedulaEM_FK == emp.cedulaED
+                            where emp.cedulaED == cedula
+                            select proy;
+                return new List<Proyecto.Models.Proyecto>(query);
+            }
+            else
+            {
+                var query = from proy in db.Proyecto
+                            select proy;
+                return new List<Proyecto.Models.Proyecto>(query);
 
+            }
         }
     }
 }

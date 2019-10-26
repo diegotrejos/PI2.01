@@ -22,11 +22,14 @@ namespace Proyecto.Controllers
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
-            
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
             //Listas que se usan para el despliegue de los proyectos
-            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos();
-           // List<Proyecto.Models.Equipo> proyectosConLider = getEmployees();
+            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos(usuario, cedula);
+            // List<Proyecto.Models.Equipo> proyectosConLider = getEmployees();
 
             //Guardan temporalmente los datos
             TempData["empleadosDisponibles"] = empleados;

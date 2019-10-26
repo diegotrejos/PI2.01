@@ -37,7 +37,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" onclick="estilo(0)" href="~/Proyecto">Proyectos</a>
-                <a class="nav-item nav-link" href="~/Equipo">Equipo</a>
+
+                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe" || (string)System.Web.HttpContext.Current.Session["rol"] == "Lider")
+                {
+                    <a class="nav-item nav-link" href="~/Equipo">Equipo</a>
+                }
                 <a class="nav-item nav-link" href="~/Moduloe">Modulo</a>
                 <a class="nav-item nav-link" href="~/Requerimiento">Requerimientos</a>
                 <a class="nav-item nav-link" href="~/EmpleadoDesarrollador">Empleado</a>

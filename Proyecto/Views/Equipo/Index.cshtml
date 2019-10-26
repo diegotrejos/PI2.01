@@ -14,34 +14,35 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            <div class="display-label">
+            <div class= "Cliente Desarrollador display-label " >
                 Filtrar por Proyecto
             </div>
-            <td>
+            <div class="Cliente Desarrollador">
                 @if (TempData["proyectos"] != null)
                 {
                     @Html.DropDownList("filtro", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
                 }
-            </td>
-            <p>
-                <input type="submit" value="Buscar" class="btn btn-default" />
-            </p>
+                <p>
+                    <input type="submit" value="Buscar" class="btn btn-default" />
+                </p>
+            </div>
+            
         </fieldset>
     }
 
     <p class="botones text-right ">
         <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-default btn-large Lider Desarrollador Cliente ">Asignar Lider</button>
-        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-default btn-large Lider Desarrollador Cliente ">Asignar Miembros</button>
+        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-default btn-large  Desarrollador Cliente ">Asignar Miembros</button>
     </p>
 
     <br />
     <br />
 
-    
 
 
 
-    <table class="table table-responsive-md">
+
+    <table class= "Cliente Desarrollador" "table table-responsive-md">
 
         <thead class="thead-light">
             <tr>
@@ -56,20 +57,20 @@
             @if (@ViewBag.empleados != null)
             {
                 <ul>
-                @foreach (var empleado in @ViewBag.empleados)
-                {
-                    <li>@empleado.cedulaED</li>
-                    <li>@empleado.nombreED</li>
-                    if (@empleado.cedulaED == @ViewBag.Lider)
+                    @foreach (var empleado in @ViewBag.empleados)
                     {
-                          <li>Lider</li>
+                        <li>@empleado.cedulaED</li>
+                        <li>@empleado.nombreED</li>
+                        if (@empleado.cedulaED == @ViewBag.Lider)
+                        {
+                            <li>Lider</li>
+                        }
+                        else
+                        {
+                            <li>Desarrollador</li>
+                        }
                     }
-                    else
-                    {
-                         <li>Desarrollador</li>
-                    }
-                }
-                 </ul>
+                </ul>
             }
         </tbody>
     </table>
@@ -79,7 +80,11 @@
             var rol = '@ViewBag.user';
             var lista = document.getElementsByClassName(rol);
             for (var i = 0; i < lista.length; ++i) {
-                lista[i].hidden = true;
+                 lista[i].setAttribute('readonly', 'readonly');
+                 lista[i].hidden = true;
+            }
+            if (rol != "Jefe" && rol != "Lider") {
+                alert("Lo sentimos, no cuenta con los permisos necesarios para ejecutar esta acción");
             }
         }
     </script>

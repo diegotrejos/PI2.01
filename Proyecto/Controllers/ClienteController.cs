@@ -29,7 +29,36 @@ namespace Proyecto.Controllers
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            return View(db.Cliente.ToList());           
+            if (usuario != "Jefe")
+            {
+                if (usuario == "Cliente")
+                {
+                    var obj = from a in db.Cliente
+                              where a.cedula == cedula
+                              select a;
+
+                    return View(obj.ToList());
+                }
+                else
+                {
+                    var obj = from a in db.Cliente
+                              from b in db.Proyecto
+                              from c in db.Equipo
+                              from d in db.EmpleadoDesarrollador
+                              where a.cedula == b.cedulaCliente
+                              where b.nombre == c.nombreProy_FK
+                              where c.cedulaEM_FK == d.cedulaED
+                              where d.cedulaED == cedula
+                              select a;
+
+                    return View(obj.Distinct().ToList());
+                }
+            }
+            else
+            {
+                return View(db.Cliente.ToList());
+            }
+               
         }
 
         // GET: Cliente/Details/5

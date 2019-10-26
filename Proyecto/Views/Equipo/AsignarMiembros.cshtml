@@ -29,7 +29,7 @@
 
 <body onload="Desabilitar();">
     @*Codigo aportado por el grupo #1*@
-    <p class="Lider Desarrollador Cliente" align="center">Para asignar empleados a un proyecto por favor arrastrar de empleados disponibles a empleados asignados</p>
+    <p class="Desarrollador Cliente" align="center">Para asignar empleados a un proyecto por favor arrastrar de empleados disponibles a empleados asignados</p>
 
     @*Llamo al codigo de java script que se encuentra es esa ruta*@
     <script src="~/Scripts/SortableConnect.js"></script>
@@ -145,9 +145,6 @@
             for (var i = 0; i < lista.length; ++i) {
                  lista[i].setAttribute('readonly', 'readonly');
                  lista[i].hidden = true;
-            }
-            if (rol != "Jefe" && rol != "Lider") {
-                alert("Lo sentimos, no cuenta con los permisos necesarios para ejecutar esta acción");
             }
         }
     </script>
