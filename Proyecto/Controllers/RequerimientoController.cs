@@ -217,8 +217,6 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-
-
                 return this.proyController.getProyectos();
             }
         }

@@ -12,7 +12,10 @@ namespace Proyecto.Controllers
 {
     public class ModuloeController : Controller
     {
-        
+        public string usuario = "";
+        public string cedula = "";
+        public string proy = "";
+
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         //incluyo la tabla de proyectos
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
@@ -21,11 +24,44 @@ namespace Proyecto.Controllers
         // GET: Moduloe
         public ActionResult Index()
         {
-            
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
             var modulo = db.Modulo.Include(m => m.Proyecto);
-            return View(modulo.ToList());
 
-            
+            if (usuario != "Jefe")
+            {
+                if (usuario == "Cliente") {
+                    var obj = from a in db.Modulo
+                              from b in db.Proyecto
+                              from c in db.Cliente
+                              where a.NombreProy == b.nombre
+                              where b.cedulaCliente == c.cedula
+                              where c.cedula == cedula
+                              select a;
+
+                    return View(obj.ToList());
+                }
+                else
+                {
+                    var obj = from a in db.Modulo
+                              from b in db.Proyecto
+                              from c in db.Equipo
+                              from d in db.EmpleadoDesarrollador
+                              where a.NombreProy == b.nombre
+                              where b.nombre == c.nombreProy_FK
+                              where c.cedulaEM_FK == d.cedulaED
+                              where d.cedulaED == cedula
+                              select a;
+
+                    return View(obj.ToList());
+                }
+            }
+            else
+            {
+                return View(modulo.ToList());
+            }
         }
 
 
@@ -254,13 +290,15 @@ public ActionResult Details(int id, string nombreProy)
             
         }
         //METODO Q OBTIENE LISTA DE CONTROLLADOR DE PROYECTO
-        public SelectList getProyectos()
+        public SelectList getProyectos(String rol, String cedula)
         {
-
-                return this.proyController.getProyectos();
- 
+            return this.proyController.getProyectos(rol, cedula);
         }
 
+        public SelectList getProyectos()
+        {
+            return this.proyController.getProyectos();
+        }
 
         public SelectList getModulos(string nombreProy)
         {

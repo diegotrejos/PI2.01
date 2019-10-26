@@ -233,17 +233,43 @@ namespace Proyecto.Controllers
         /*Método para obtener una SelectLista de proyectos
          * @return lista de proyectos
          */
-        public SelectList getProyectos()
+        public SelectList getProyectos(String rol, String cedula)
         {
-            var query = from proy in db.Proyecto
-                        select proy.nombre;
-            return new SelectList(query);
-
+            if (rol == "Cliente") {
+                var query = from proy in db.Proyecto
+                            from cliente in db.Cliente
+                            where proy.cedulaCliente == cliente.cedula
+                            where cliente.cedula == cedula
+                            select proy.nombre;
+                return new SelectList(query);
+            }
+            else if (rol == "Empleado") {
+                var query = from proy in db.Proyecto
+                            from equip in db.Equipo
+                            from emp in db.EmpleadoDesarrollador
+                            where proy.nombre == equip.nombreProy_FK
+                            where equip.cedulaEM_FK == emp.cedulaED
+                            where emp.cedulaED == cedula
+                            select proy.nombre;
+                return new SelectList(query);
+            }
+            else {
+                var query = from proy in db.Proyecto
+                            select proy.nombre;
+                return new SelectList(query);
+            }
         }
 
-         /*Método para obtener una lista de proyectos
-         * @return lista de proyectos
-         */
+        public SelectList getProyectos()
+        {
+                var query = from proy in db.Proyecto
+                            select proy.nombre;
+                return new SelectList(query);
+        }
+
+        /*Método para obtener una lista de proyectos
+        * @return lista de proyectos
+        */
         public List<Proyecto.Models.Proyecto> gettProyectos()
         {
             var query = from proy in db.Proyecto

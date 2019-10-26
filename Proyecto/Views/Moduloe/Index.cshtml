@@ -1,8 +1,7 @@
 @model IEnumerable<Proyecto.Models.Modulo>
 
 @{
-
-
+   
     ViewBag.Title = "Modulos";
 }
 
@@ -20,12 +19,18 @@
                 Filtrar por Proyecto
             </div>
             <div class="editor-field">
-
-                @Html.DropDownList("filtro",
-          /*Lista de donde extraigo*/  ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
-                     "Seleccione un Proyecto"
-                    )
-
+                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                {
+                    @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                }
+                else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                {
+                    @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                }
+                else
+                {
+                    @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                }
             </div>
             <p>
                 <input type="submit" value="Buscar" class="btn btn-default" />
