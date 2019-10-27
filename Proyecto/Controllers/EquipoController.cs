@@ -149,27 +149,43 @@ namespace Proyecto.Controllers
 
         //Codigo que se llama en el script de create que permiete realizar el evento de arrastre 
         //Aporte del grupo #1
-        public ActionResult UpdateItem(string itemIds,Equipo equipo)
+         [HttpPost]
+        public ActionResult Asignar(string Miembros, string Proyecto)
         {
-            int count = 1;
-            List<int> itemIdList = new List<int>(); 
-            itemIdList = itemIds.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-            foreach (var itemId in itemIds)
+            if (Proyecto != null && Miembros != null)
             {
-                try
+                //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
+                string[] eachMember = Miembros.Split(',');
+                foreach (var itemId in eachMember)
                 {
-                    EmpleadoDesarrollador item = db.EmpleadoDesarrollador.Where(x => x.cedulaED == itemId.ToString()).FirstOrDefault();
-                    //item.disponibilidad = false;  //intento de que se pase a la otra columna 
-                    //var equipo()
-                    db.SaveChanges();
+                    //es el equipo con la tupla que se va a agregar a la base
+                    db.Equipo.Add(new Equipo
+                    {
+                        cedulaEM_FK = itemId,
+                        nombreProy_FK = Proyecto,
+                        rol = false
+                    });
+                    try
+                    {
+                        new EmpleadoDesarrolladorController().modificarEstado(itemId); //para que ese empleado deje de estar disponible
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
-                catch (Exception)
+                //retorna al script al success
+                return Json(new
                 {
-                    continue;
-                }
-                count++;
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    isRedirect = true
+                });
             }
-            return Json(true, JsonRequestBehavior.AllowGet);
+            else {
+                //Aqui deberia de aparecer un error
+                return RedirectToAction("AsignarMiembros", "Equipo");
+            }
         }
     }
 }
