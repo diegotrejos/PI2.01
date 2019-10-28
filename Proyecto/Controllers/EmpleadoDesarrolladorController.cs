@@ -31,7 +31,7 @@ namespace Proyecto.Controllers
 
             if (usuario != "Jefe")
             {
-                if (usuario == "Desarrollador")
+                if (usuario == "Desarrollador" || usuario == "Lider")//Solo ve sus datos
                 {
                     var obj = from a in db.EmpleadoDesarrollador
                               where a.cedulaED == cedula
