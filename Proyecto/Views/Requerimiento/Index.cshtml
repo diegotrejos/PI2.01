@@ -31,7 +31,14 @@
                 }
                 else
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    if ((string)System.Web.HttpContext.Current.Session["rol"] == "Desarrollador")
+                    {
+                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Desarrollador", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    }
+                    else
+                    {
+                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Lider", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    }
                 }
 
 

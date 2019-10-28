@@ -213,11 +213,11 @@ namespace Proyecto.Controllers
 
 
 
-        public SelectList getProyectos()
+        public SelectList getProyectos(string rol, string cedula)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                return this.proyController.getProyectos();
+                return this.proyController.getProyectos(rol, cedula);
             }
         }
 
