@@ -13,8 +13,11 @@ namespace Proyecto.Controllers
 {
     public class RequerimientoController : Controller
     {
+        //Variables para saber quien está logeado y a que proyecto pertenece
+        public string usuario = "";
+        public string cedula = "";
+        public string proy = "";
 
-      
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.ModuloeController moduloController = new Proyecto.Controllers.ModuloeController();
 
@@ -32,31 +35,79 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Index(string nombreProyecto,string nombreModulo)
         {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            
+
+
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                
-                var queryMod = from a in db.Modulo
-                               where a.NombreProy.Equals(nombreProyecto)&&(a.Nombre.Equals(nombreModulo))
-                               select a.Id;
 
+                var queryMod = from a in db.Modulo
+                               where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
+                               select a.Id;
                 if (queryMod != null)
                 {
                     var queryReq = from a in db.Requerimiento
-                                   where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK== queryMod.FirstOrDefault()
+                                   where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault()
                                    select a;
                     return View(queryReq.ToList());
                 }
                 else
                 {
                     var queryReq = from a in db.Requerimiento
-                                   where a.nombreProyecto_FK==nombreProyecto
+                                   where a.nombreProyecto_FK == nombreProyecto
                                    select a;
 
 
                     return View(queryReq.ToList());
                 }
 
-              
+                /*if (usuario != "Jefe")
+                {
+                    if (usuario == "Cliente"  || usuario == "Lider")
+                    {//Para cliente y lider ven los requerimientos de su proyecto
+                        var obj = from a in db.Requerimiento
+                                  from b in db.Cliente
+                                  from c in db.Equipo
+                                  from d in db.Proyecto
+                                  from e in db.EmpleadoDesarrollador
+                                  where d.cedulaCliente == b.cedula
+                                  where c.rol == true
+                                  where c.cedulaEM_FK == e.cedulaED
+                                  where c.nombreProy_FK == d.nombre
+                                  where a.nombreProyecto_FK == d.nombre
+                                  select a;
+
+
+                        return View(obj.ToList());
+                    }
+                    else
+                    {//Para desarrollador solo puede ver los requerimientos en los que está asignado 
+                        var obj = from a in db.Requerimiento
+                                  from c in db.Equipo
+                                  from d in db.Proyecto
+                                  from e in db.EmpleadoDesarrollador
+                                  where c.cedulaEM_FK == e.cedulaED
+                                  where c.nombreProy_FK == d.nombre
+                                  where a.nombreProyecto_FK == d.nombre
+                                  where a.cedulaResponsable_FK == e.cedulaED
+                                  select a;
+
+                        return View(obj.ToList());
+                    }
+                }
+                else
+                {
+                    return View(db.Requerimiento.ToList());
+                }*/
+
+
+
+
             }
         }
 
@@ -212,12 +263,12 @@ namespace Proyecto.Controllers
 
 
 
-
-        public SelectList getProyectos()
+        //Obtiene proyectos de controlador
+        public SelectList getProyectos(string rol, string cedula)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                return this.proyController.getProyectos();
+                return this.proyController.getProyectos(rol, cedula);
             }
         }
 

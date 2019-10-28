@@ -31,7 +31,7 @@ namespace Proyecto.Controllers
 
             if (usuario != "Jefe")
             {
-                if (usuario == "Desarrollador")
+                if (usuario == "Desarrollador")//Solo ve sus datos
                 {
                     var obj = from a in db.EmpleadoDesarrollador
                               where a.cedulaED == cedula
@@ -40,7 +40,7 @@ namespace Proyecto.Controllers
                     return View(obj.ToList());
                 }
                 else
-                {
+                {//Cliente solo ve los desarrolladores de su proyecto
                         var obj = from a in db.EmpleadoDesarrollador
                                   from b in db.Habilidades
                                   from c in db.Equipo
