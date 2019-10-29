@@ -6,16 +6,78 @@
 
 
 
+
+
+@**
+    <script src = "~/Scripts/jquery-1.10.2.js" > </script> 
+<script>
+    $(document).ready(function() {
+ $("#nombreModulo").prop("disabled", true);
+ $("#nombreProyecto").change(function() {
+ if ($("#nombreProyecto").val() != "Select") {
+ var ModulosProyecto = {};
+     ModulosProyecto.url = "/Requerimiento/Modulos";
+     ModulosProyecto.type = "POST";
+     ModulosProyecto.data = JSON.stringify({
+         nombreProyecto: $("#nombreProyecto").val()
+ });
+     ModulosProyecto.datatype = "json";
+     ModulosProyecto.contentType = "application/json";
+     ModulosProyecto.success = function(Modulos) {
+     $("#nombreModulo").empty();
+ for (var i = 0; i < Modulos.length; i++) {
+     $("#nombreModulo").append("<option>" + Modulos[i] + "</option>");
+ }
+     $("#nombreModulo").prop("disabled", false);
+ };
+     ModulosProyecto.error = function() {
+ alert("Error in Getting States!!");
+ };
+     $.ajax(ModulosProyecto);
+ } else {
+     $("#nombreModulo").empty();
+     $("#nombreModulo").prop("disabled", true);
+ }
+ });
+    }); 
+</script>
+*@
+
+
+
+@*
 <body onload="Desabilitar();">
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+    *@
+
+
+    @*
+        @using (Html.BeginForm("Index", "Requerimiento", FormMethod.Post))
+        {
+
+            @Html.AntiForgeryToken()
+            <h4> Select Country & States</h4> <hr /> @Html.ValidationSummary()
+            @Html.AntiForgeryToken() <h4> Select Country & States </h4> <hr/> @Html.ValidationSummary() <div class = "form-group" > @Html.Label("Select Country:", new { @class = "col-md-2 control-label" })
+        <div class = "col-md-10"> @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), new { @class = "form-control" })
+            </div> </div><br/> <div class = "form-group"> @Html.Label("Select States:", new { @class = "col-md-2 control-label" })
+        <div class = "col-md-10"> <select id = "Modulo" > </select> </div> </div>
+        <div class = "form-group" > <div class = "col-md-offset-2 col-md-10" > <input type = "submit" class = "btn btn-default" value = "Buscar" /> </div> </div>
+        }
+    *@
 
 
 
 
-    @using (Html.BeginForm())
-    {
+
+
+
+
+
+
+
+    @*
         <fieldset>
             <div class="display-label">
                 Filtrar por Proyecto
@@ -48,78 +110,121 @@
                 <input type="submit" value="Buscar" class="btn btn-default" />
             </p>
         </fieldset>
+                }*@
+
+
+
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        @using (Html.BeginForm("Index", "Requerimiento", FormMethod.Post))
+        {
+            @Html.DropDownListFor(m => m.CountryId, ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { onchange = "document.forms[0].submit();" })
+        <br />
+        <br />
+
+        @Html.DropDownListFor(m => m.StateId, Model.States, "Please select", new { onchange = "document.forms[0].submit();", disabled = "disabled" })
+        <br />
+        <br />
+
+        @Html.DropDownListFor(m => m.CityId, Model.Cities, "Please select", new { disabled = "disabled" })
+        <br />
+        <br />
+        <input type="submit" value="Submit" />
+        }
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                if ($("#StateId option").length > 1) {
+                    $("#StateId").removeAttr("disabled");
+                }
+
+                if ($("#CityId option").length > 1) {
+                    $("#CityId").removeAttr("disabled");
+                }
+
+                if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
+                    var message = "Country: " + $("#CountryId option:selected").text();
+                    message += "\nState: " + $("#StateId option:selected").text();
+                    message += "\nCity: " + $("#CityId option:selected").text();
+                    alert(message);
+                }
+            });
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<p class=" boton float-right">
+    <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+</p>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.complejidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modulo.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.complejidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
+
+                @Html.ActionLink(" ", "Delete", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+            </td>
+        </tr>
     }
 
+</table>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <p class=" boton float-right">
-        <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
-    </p>
-
-
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.complejidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modulo.Nombre)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.complejidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Modulo.Nombre)
-                </td>
-                <td>
-                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
-
-                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
-                </td>
-            </tr>
-        }
-
-    </table>
-
-    <script>
+<script>
         function Desabilitar() {
             var rol = '@ViewBag.user';
             var lista = document.getElementsByClassName(rol);
@@ -127,5 +232,5 @@
                 lista[i].hidden = true;
             }
         }
-    </script>
+</script>
 </body>

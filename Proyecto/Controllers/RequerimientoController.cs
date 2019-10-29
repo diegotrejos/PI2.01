@@ -29,32 +29,33 @@ namespace Proyecto.Controllers
             }
         }
         //luego de dropdowns index view se ajusta con esto
+        /*
+          public JsonResult Modulos(string nombreProy)
+        {
+              return Json(getModulos(nombreProy));
+        }
+        */
+
+
+
+
         [HttpPost]
         public ActionResult Index(string nombreProyecto,string nombreModulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                
+                              
                 var queryMod = from a in db.Modulo
                                where a.NombreProy.Equals(nombreProyecto)&&(a.Nombre.Equals(nombreModulo))
                                select a.Id;
 
-                if (queryMod != null)
-                {
+                
                     var queryReq = from a in db.Requerimiento
                                    where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK== queryMod.FirstOrDefault()
                                    select a;
                     return View(queryReq.ToList());
-                }
-                else
-                {
-                    var queryReq = from a in db.Requerimiento
-                                   where a.nombreProyecto_FK==nombreProyecto
-                                   select a;
+                
 
-
-                    return View(queryReq.ToList());
-                }
 
               
             }
@@ -217,7 +218,8 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                return this.proyController.getProyectos(rol, cedula);
+                var listaproyectos = this.proyController.getProyectos(rol, cedula);
+                return listaproyectos;
             }
         }
 
