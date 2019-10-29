@@ -8,49 +8,56 @@
 
 
 
-@**
-    <script src = "~/Scripts/jquery-1.10.2.js" > </script> 
+
+<script src = "~/Scripts/jquery-1.10.2.js" > </script> 
 <script>
     $(document).ready(function() {
- $("#nombreModulo").prop("disabled", true);
- $("#nombreProyecto").change(function() {
- if ($("#nombreProyecto").val() != "Select") {
- var ModulosProyecto = {};
-     ModulosProyecto.url = "/Requerimiento/Modulos";
-     ModulosProyecto.type = "POST";
-     ModulosProyecto.data = JSON.stringify({
-         nombreProyecto: $("#nombreProyecto").val()
- });
-     ModulosProyecto.datatype = "json";
-     ModulosProyecto.contentType = "application/json";
-     ModulosProyecto.success = function(Modulos) {
-     $("#nombreModulo").empty();
- for (var i = 0; i < Modulos.length; i++) {
-     $("#nombreModulo").append("<option>" + Modulos[i] + "</option>");
- }
-     $("#nombreModulo").prop("disabled", false);
- };
-     ModulosProyecto.error = function() {
- alert("Error in Getting States!!");
- };
-     $.ajax(ModulosProyecto);
- } else {
-     $("#nombreModulo").empty();
-     $("#nombreModulo").prop("disabled", true);
- }
- });
+        $("#nombreModulo").prop("disabled", true);
+
+        $("#nombreProyecto").change(function () {
+
+            if ($("#nombreProyecto").val() != "Seleccione un Proyecto") {
+
+                var ModulosProyecto = {};
+
+                ModulosProyecto.url = "Requerimientos/getModulos";
+                ModulosProyecto.type = "POST";
+                ModulosProyecto.data = JSON.stringify({
+                    nombreProyecto: $("#nombreProyecto").val()
+                });
+                ModulosProyecto.datatype = "json";
+                ModulosProyecto.contentType = "application/json";
+                ModulosProyecto.success = function(data) {
+
+                    $("#nombreModulo").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $("#nombreModulo").append("<option>" + data[i] + "</option>");
+                    }
+                    $("#nombreModulo").prop("disabled", false);
+                };
+
+                ModulosProyecto.error = function () {
+                    alert("Error obteniendo los modulos");
+                };
+
+                $.ajax(ModulosProyecto);
+            } else {
+                $("#nombreModulo").empty();
+                $("#nombreModulo").prop("disabled", true);
+            }
+        });
     }); 
 </script>
-*@
 
 
 
-@*
+
+
 <body onload="Desabilitar();">
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    *@
+    
 
 
     @*
@@ -77,7 +84,7 @@
 
 
 
-    @*
+    
         <fieldset>
             <div class="display-label">
                 Filtrar por Proyecto
@@ -85,113 +92,26 @@
             <div class="editor-field">
                 @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                 {
-                    @Html.DropDownList("filtro", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
                 else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
                 {
-                    @Html.DropDownList("filtro", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
                 else
                 {
-                    @Html.DropDownList("filtro", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
+                <div class = "col-md-10"> <select id = "nombreModulo"> </select> </div>
 
-
-                @Html.DropDownList("nombreModulo",((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"), "Seleccione Modulo" )
+                @*@Html.DropDownList("nombreModulo",null, String.Empty, "Seleccione Modulo" )*@
             </div>
             <p>
                 <input type="submit" value="Buscar" class="btn btn-default" />
             </p>
         </fieldset>
 
-                }*@
-
-
-
-
-  @*      <script type="text/javascript">
-
-    function getModulos() {
-
-
-        var CategoryId = $('#nombreProyecto').val();
-        //console.log(CategoryId);
-
-        $.ajax({
-            url: 'getModulos',
-            type: "GET",
-            dataType: "JSON",
-            data: { nombreProyecto: nombreProyecto },
-            success: function (response) {
-                console.log(response);
-                $("#nombreModulo").html("");
-                $.each(response, function (index, value) {
-                    $("#nombreModulo").append(
-                        $('<option></option>').val(value.nombreModulo).html(value.moduloNombre));
-                });
-            }
-        });
-    }
-
-</script>
-    }
-*@
-
-
-
-    <!DOCTYPE html>
-
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Index</title>
-    </head>
-    <body>
-        @using (Html.BeginForm("Index", "Requerimiento", FormMethod.Post))
-        {
-            @Html.DropDownListFor(m => m.CountryId, ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { onchange = "document.forms[0].submit();" })
-        <br />
-        <br />
-
-        @Html.DropDownListFor(m => m.StateId, Model.States, "Please select", new { onchange = "document.forms[0].submit();", disabled = "disabled" })
-        <br />
-        <br />
-
-        @Html.DropDownListFor(m => m.CityId, Model.Cities, "Please select", new { disabled = "disabled" })
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-        }
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript">
-            $(function () {
-                if ($("#StateId option").length > 1) {
-                    $("#StateId").removeAttr("disabled");
                 }
-
-                if ($("#CityId option").length > 1) {
-                    $("#CityId").removeAttr("disabled");
-                }
-
-                if ($("#CountryId").val() != "" && $("#StateId").val() != "" && $("#CityId").val() != "") {
-                    var message = "Country: " + $("#CountryId option:selected").text();
-                    message += "\nState: " + $("#StateId option:selected").text();
-                    message += "\nCity: " + $("#CityId option:selected").text();
-                    alert(message);
-                }
-            });
-        </script>
-    </body>
-</html>
-
-
-
-
-
-
-
-
-
 
 
 <p class=" boton float-right">

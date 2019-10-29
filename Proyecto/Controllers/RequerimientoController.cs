@@ -8,13 +8,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Proyecto.Models;
+using Newtonsoft.Json;
+
+
 
 namespace Proyecto.Controllers
 {
+    
     public class RequerimientoController : Controller
     {
 
-      
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.ModuloeController moduloController = new Proyecto.Controllers.ModuloeController();
 
@@ -32,19 +35,12 @@ namespace Proyecto.Controllers
                 return View(await requerimiento.ToListAsync());
             }
         }
-        //luego de dropdowns index view se ajusta con esto
-        /*
-          public JsonResult Modulos(string nombreProy)
-        {
-              return Json(getModulos(nombreProy));
-        }
-        */
 
 
 
 
         [HttpPost]
-        public ActionResult Index(string nombreProyecto,string nombreModulo)
+        public ActionResult Index(string nombreProyecto, string nombreModulo)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
@@ -52,21 +48,24 @@ namespace Proyecto.Controllers
                 ViewBag.user = usuario;
                 string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
                 string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-                ViewBag.proyectos = getProyectos(usuario,cedula);
-
-                var queryMod = from a in db.Modulo
-                               where a.NombreProy.Equals(nombreProyecto)&&(a.Nombre.Equals(nombreModulo))
-                               select a.Id;
-
-                
-                    var queryReq = from a in db.Requerimiento
-                                   where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK== queryMod.FirstOrDefault()
-                                   select a;
-                    return View(queryReq.ToList());
-                
-
+                ViewBag.proyectos = getProyectos(usuario, cedula);
 
               
+
+
+                var queryMod = from a in db.Modulo
+                               where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
+                               select a.Id;
+
+
+                var queryReq = from a in db.Requerimiento
+                               where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault()
+                               select a;
+                return View(queryReq.ToList());
+
+
+
+
             }
         }
 
@@ -106,7 +105,7 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string Proyecto, string Modulo,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+        public ActionResult Create(string Proyecto, string Modulo, [Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
@@ -135,7 +134,7 @@ namespace Proyecto.Controllers
         // GET: Requerimiento/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
-           
+
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (id == null)
@@ -232,13 +231,21 @@ namespace Proyecto.Controllers
             }
         }
 
-
-        public  SelectList getModulos(string nombreproyecto)
+        
+        public class Proyectito
         {
+            public string nombreProyecto { get; set; }
+        }
+        
+        [HttpPost]
+        public JsonResult getModulos(string nombreproyecto)
+        {
+                       
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                Proyectito jsonData = JsonConvert.DeserializeObject<RequerimientoController.Proyectito>(nombreproyecto);
 
-                return this.moduloController.getModulos(nombreproyecto);
+                return Json(this.moduloController.getModulos(jsonData.nombreProyecto));
             }
         }
 
