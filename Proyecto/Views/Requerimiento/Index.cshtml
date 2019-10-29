@@ -21,33 +21,19 @@
                 Filtrar por Proyecto
             </div>
             <div class="editor-field">
-                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
-                {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
-                {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                else
-                {
-                    if ((string)System.Web.HttpContext.Current.Session["rol"] == "Desarrollador")
-                    {
-                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Desarrollador", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                    }
-                    else
-                    {
-                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Lider", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                    }
-                }
+
+                 @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos((string)System.Web.HttpContext.Current.Session["rol"], (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", htmlAttributes: new { @class = "form-control", @onchange = "getModulos()" })
+             
 
 
-                @Html.DropDownList("nombreModulo", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"), "Seleccione Modulo")
+                @Html.DropDownList("nombreModulo", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"), "Seleccione Modulo", htmlAttributes: new { @class = "form-control" })
             </div>
             <p>
                 <input type="submit" value="Buscar" class="btn btn-default" />
             </p>
         </fieldset>
+
+
     }
 
 

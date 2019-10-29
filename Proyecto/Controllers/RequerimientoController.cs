@@ -21,7 +21,11 @@ namespace Proyecto.Controllers
         // GET: Requerimiento
         public async Task<ActionResult> Index()
         {
-           
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
@@ -34,6 +38,11 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+                ViewBag.user = usuario;
+                string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+                string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+                ViewBag.proyectos = getProyectos(usuario,cedula);
                 
                 var queryMod = from a in db.Modulo
                                where a.NombreProy.Equals(nombreProyecto)&&(a.Nombre.Equals(nombreModulo))
