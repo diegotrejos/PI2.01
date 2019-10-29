@@ -19,7 +19,7 @@
                 Filtrar por Proyecto
             </div>
             <div class="editor-field">
-                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                 @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                 {
                     @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
@@ -31,6 +31,7 @@
                 {
                     @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
+
             </div>
             <p>
                 <input type="submit" value="Buscar" class="btn btn-default" />

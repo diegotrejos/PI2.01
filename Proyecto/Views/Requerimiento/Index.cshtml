@@ -85,33 +85,57 @@
             <div class="editor-field">
                 @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    @Html.DropDownList("filtro", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
                 else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                    @Html.DropDownList("filtro", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
                 else
                 {
-                    if ((string)System.Web.HttpContext.Current.Session["rol"] == "Desarrollador")
-                    {
-                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Desarrollador", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                    }
-                    else
-                    {
-                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Lider", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                    }
+                    @Html.DropDownList("filtro", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
                 }
 
 
-                @Html.DropDownList("nombreModulo", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"), "Seleccione Modulo")
+                @Html.DropDownList("nombreModulo",((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getModulos("Camaik"), "Seleccione Modulo" )
             </div>
             <p>
                 <input type="submit" value="Buscar" class="btn btn-default" />
             </p>
         </fieldset>
+
                 }*@
 
+
+
+
+  @*      <script type="text/javascript">
+
+    function getModulos() {
+
+
+        var CategoryId = $('#nombreProyecto').val();
+        //console.log(CategoryId);
+
+        $.ajax({
+            url: 'getModulos',
+            type: "GET",
+            dataType: "JSON",
+            data: { nombreProyecto: nombreProyecto },
+            success: function (response) {
+                console.log(response);
+                $("#nombreModulo").html("");
+                $.each(response, function (index, value) {
+                    $("#nombreModulo").append(
+                        $('<option></option>').val(value.nombreModulo).html(value.moduloNombre));
+                });
+            }
+        });
+    }
+
+</script>
+    }
+*@
 
 
 
