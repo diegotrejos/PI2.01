@@ -243,9 +243,13 @@ namespace Proyecto.Controllers
                        
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                Proyectito jsonData = JsonConvert.DeserializeObject<RequerimientoController.Proyectito>(nombreproyecto);
+             
 
-                return Json(this.moduloController.getModulos(jsonData.nombreProyecto));
+                
+               // Proyectito jsonData = JsonConvert.DeserializeObject<RequerimientoController.Proyectito>(nombreproyecto);
+
+                // return Json(this.moduloController.getModulos(jsonData.nombreProyecto));
+                return Json(this.moduloController.getModulos(nombreproyecto));
             }
         }
 

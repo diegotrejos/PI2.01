@@ -20,7 +20,7 @@
 
                 var ModulosProyecto = {};
 
-                ModulosProyecto.url = "Requerimientos/getModulos";
+                ModulosProyecto.url = "/Requerimiento/getModulos";
                 ModulosProyecto.type = "POST";
                 ModulosProyecto.data = JSON.stringify({
                     nombreProyecto: $("#nombreProyecto").val()
@@ -31,7 +31,7 @@
 
                     $("#nombreModulo").empty();
                     for (var i = 0; i < data.length; i++) {
-                        $("#nombreModulo").append("<option>" + data[i] + "</option>");
+                        $("#nombreModulo").append("<option>" + data[i].Text + "</option>");
                     }
                     $("#nombreModulo").prop("disabled", false);
                 };
@@ -58,60 +58,34 @@
         @Html.ActionLink("Create New", "Create")
     </p>
     
-
-
-    @*
-        @using (Html.BeginForm("Index", "Requerimiento", FormMethod.Post))
-        {
-
-            @Html.AntiForgeryToken()
-            <h4> Select Country & States</h4> <hr /> @Html.ValidationSummary()
-            @Html.AntiForgeryToken() <h4> Select Country & States </h4> <hr/> @Html.ValidationSummary() <div class = "form-group" > @Html.Label("Select Country:", new { @class = "col-md-2 control-label" })
-        <div class = "col-md-10"> @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), new { @class = "form-control" })
-            </div> </div><br/> <div class = "form-group"> @Html.Label("Select States:", new { @class = "col-md-2 control-label" })
-        <div class = "col-md-10"> <select id = "Modulo" > </select> </div> </div>
-        <div class = "form-group" > <div class = "col-md-offset-2 col-md-10" > <input type = "submit" class = "btn btn-default" value = "Buscar" /> </div> </div>
-        }
-    *@
-
-
-
-
-
-
-
-
-
-
-
-    
         <fieldset>
             <div class="display-label">
                 Filtrar por Proyecto
             </div>
             <div class="editor-field">
-                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
-                {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
-                {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                else
-                {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                <div class = "col-md-10"> <select id = "nombreModulo"> </select> </div>
+                <form action="/Requerimiento/Index" method="post">
+                    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                    {
+                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                    }
+                    else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                    {
+                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                    }
+                    else
+                    {
+                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                    }
 
-                @*@Html.DropDownList("nombreModulo",null, String.Empty, "Seleccione Modulo" )*@
+                    <div class="col-md-10"> <select id="nombreModulo" name="nombreModulo">Seleccione Modulo</select> </div>
+                    <p>
+                        <input type="submit" value="Buscar" class="btn btn-default" />
+                    </p>
+                </form>
             </div>
-            <p>
-                <input type="submit" value="Buscar" class="btn btn-default" />
-            </p>
+            
         </fieldset>
 
-                }
 
 
 <p class=" boton float-right">
@@ -155,9 +129,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
             </td>
-            <td>
+           @* <td>
                 @Html.DisplayFor(modelItem => item.Modulo.Nombre)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink(" ", "Edit", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
