@@ -51,7 +51,7 @@ namespace Proyecto.Controllers
                 ViewBag.proyectos = getProyectos(usuario, cedula);
 
               
-
+                
 
                 var queryMod = from a in db.Modulo
                                where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
@@ -61,6 +61,10 @@ namespace Proyecto.Controllers
                 var queryReq = from a in db.Requerimiento
                                where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault()
                                select a;
+
+
+                ViewBag.Modulo = nombreModulo;
+
                 return View(queryReq.ToList());
 
 
