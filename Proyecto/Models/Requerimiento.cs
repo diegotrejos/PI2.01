@@ -29,8 +29,9 @@ namespace Proyecto.Models
         [Display(Name = "Responsable")]
         public string cedulaResponsable_FK { get; set; }
         public string estado { get; set; }
-    
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
         public virtual Modulo Modulo { get; set; }
+
+
     }
 }

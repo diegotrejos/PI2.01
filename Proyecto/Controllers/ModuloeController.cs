@@ -20,7 +20,7 @@ namespace Proyecto.Controllers
         //incluyo la tabla de proyectos
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
        
-        
+
         // GET: Moduloe
         public ActionResult Index()
         {
@@ -70,13 +70,21 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
-                                  
-             //consulto para obtener solo los modulos de un proyecto
-                 var query = from a in db.Modulo
-                             where ((a.NombreProy.Equals(filtro)))
-                             select a;
-                   return View(query.ToList());
-        
+            if (filtro != "Seleccione un Proyecto")
+            {  //consulto para obtener solo los modulos de un proyecto
+                var query = from a in db.Modulo
+                            where ((a.NombreProy.Equals(filtro)))
+                            select a;
+                return View(query.ToList());
+            }
+            else
+            {
+                var query = from a in db.Modulo
+                            select a;
+                return View(query.ToList());
+            }
+
+
 
             
         }
@@ -84,13 +92,8 @@ namespace Proyecto.Controllers
 
 
 
-
-
-
-
-
         // GET: Moduloe/Details/5
-public ActionResult Details(int id, string nombreProy)
+        public ActionResult Details(int id, string nombreProy)
         {
 
          
@@ -311,8 +314,6 @@ public ActionResult Details(int id, string nombreProy)
                         
                         
                 return new SelectList(query);
-
-
             
         }
 

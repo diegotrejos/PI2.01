@@ -152,7 +152,7 @@ namespace Proyecto.Controllers
          [HttpPost]
         public ActionResult Asignar(string Miembros, string Proyecto)
         {
-            if (Proyecto != null && Miembros != null)
+            if (Proyecto != "" && Miembros != "")
             {
                 //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
                 string[] eachMember = Miembros.Split(',');
@@ -179,12 +179,17 @@ namespace Proyecto.Controllers
                 return Json(new
                 {
                     redirectUrl = Url.Action("Index", "Equipo"),
-                    isRedirect = true
+                    isRedirect = true, //se redireccionara
+                    error = false //no paso ningun error
                 });
             }
             else {
-                //Aqui deberia de aparecer un error
-                return RedirectToAction("AsignarMiembros", "Equipo");
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    error = true, //paso un error
+                    isRedirect = false //como es falso no se va a redirigir
+                });
             }
         }
     }

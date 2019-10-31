@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Proyecto.Models.Requerimiento>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Requerimientos";
 }
+
+<h2>Requerimientos</h2>
+
 
 
 
@@ -11,9 +14,39 @@
         @Html.ActionLink("Create New", "Create")
     </p>
 
+    <fieldset>
+        <div class="display-label">
+            Filtrar por Proyecto
+        </div>
+        <div class="editor-field">
+            <form action="/Requerimiento/Index" method="post">
+                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                {
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                }
+                else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                {
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                }
+                else
+                {
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                }
 
+                <div class="display-label">
+                    Filtrar por Modelos
+                </div>
 
+                <div>
+                    <select id="nombreModulo" name="nombreModulo">Seleccione Modulo</select>
+                </div>
+                <p>
+                    <input type="submit" value="Buscar" class="btn btn-default" />
+                </p>
+            </form>
+        </div>
 
+<<<<<<< HEAD
     @using (Html.BeginForm())
     {
     <fieldset>
@@ -43,12 +76,19 @@
         </p>
     </fieldset>
     }
+=======
+    </fieldset>
+
+
+
+
+
+>>>>>>> 4e86fa6f7e27be256334e4a3041615e744bf1adb
 
     <p class=" boton float-right">
         <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
     </p>
-
-
+   <H2>Modulo: @ViewBag.Modulo</H2>
 
     <table class="table">
         <tr>
@@ -69,8 +109,8 @@
             </th>
             <th></th>
         </tr>
-
-        @foreach (var item in Model)
+        
+  @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -85,13 +125,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
                 </td>
+                @* <td>
+                        @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+                    </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.Modulo.Nombre)
-                </td>
-                <td>
-                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
+                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
-                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
                 </td>
             </tr>
         }
@@ -108,3 +148,50 @@
         }
     </script>
 </body>
+
+
+
+
+@*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#nombreModulo").prop("disabled", true);//se desactiva el primer drowpdown mientras se trabaja esto
+
+        $("#nombreProyecto").change(function () {
+
+            if ($("#nombreProyecto").val() != "Seleccione un Proyecto") {//si esta el valor default del primer dropdown no se hace nada
+
+                var ModulosProyecto = {};
+
+                ModulosProyecto.url = "/Requerimiento/getModulos";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
+                ModulosProyecto.type = "POST";
+                ModulosProyecto.data = JSON.stringify({
+                    nombreProyecto: $("#nombreProyecto").val()//parametro q se pasa
+                });
+                ModulosProyecto.datatype = "json";
+                ModulosProyecto.contentType = "application/json";
+                ModulosProyecto.success = function (data) {//datos q retorna getmodulo
+
+                    $("#nombreModulo").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $("#nombreModulo").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
+                    }
+                    $("#nombreModulo").prop("disabled", false);
+                };
+
+                ModulosProyecto.error = function () {
+                    alert("Error obteniendo los modulos");
+                };
+
+                $.ajax(ModulosProyecto);
+            } else {
+                $("#nombreModulo").empty();
+                $("#nombreModulo").prop("disabled", true);
+            }
+        });
+    });
+</script>
+
+
+
