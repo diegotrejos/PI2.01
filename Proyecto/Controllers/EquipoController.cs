@@ -152,7 +152,7 @@ namespace Proyecto.Controllers
          [HttpPost]
         public ActionResult Asignar(string Miembros, string Proyecto)
         {
-            if (Proyecto != null && Miembros != null)
+            if (Proyecto != "" && Miembros != "")
             {
                 //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
                 string[] eachMember = Miembros.Split(',');
@@ -183,8 +183,11 @@ namespace Proyecto.Controllers
                 });
             }
             else {
-                //Aqui deberia de aparecer un error
-                return RedirectToAction("AsignarMiembros", "Equipo");
+                return Json(new
+                {
+                    error = true,
+                    isRedirect = false
+                });
             }
         }
     }
