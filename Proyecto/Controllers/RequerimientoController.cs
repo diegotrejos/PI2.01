@@ -75,6 +75,39 @@ namespace Proyecto.Controllers
 
 
 
+
+
+        public ActionResult consulReq(int modID,string nombreModulo, string nombreProy)
+        {
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+                string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+                ViewBag.user = usuario;
+                string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+                string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+
+                ViewBag.Proyecto = nombreProy;
+                ViewBag.Modulo = nombreModulo;
+
+                // var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
+                //var requerimiento = reqController.getRequerimientos(modID, nombreProy, "BackLog");
+                var requerimiento = from Req in db.Requerimiento
+                            where Req.idModulo_FK == modID && Req.nombreProyecto_FK == nombreProy
+                            select Req;
+
+
+
+
+                return View(requerimiento.ToList());
+
+            }
+
+        }
+
+        
+
+
         // GET: Requerimiento/Details/5
         public async Task<ActionResult> Details(string id)
         {
@@ -136,20 +169,18 @@ namespace Proyecto.Controllers
         }
 
         // GET: Requerimiento/Edit/5
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(string nombreProyecto,int modID , string nombreReq)
         {
 
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(id);
+
+                Requerimiento requerimiento = await db.Requerimiento.FindAsync(modID,nombreProyecto);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
                 }
+
                 ViewBag.cedulaResponsable_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", requerimiento.cedulaResponsable_FK);
                 ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre", requerimiento.nombreProyecto_FK);
                 return View(requerimiento);
@@ -256,6 +287,7 @@ namespace Proyecto.Controllers
                 return Json(this.moduloController.getModulos(nombreproyecto));
             }
         }
+
 
 
     }

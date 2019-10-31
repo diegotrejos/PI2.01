@@ -47,8 +47,7 @@
     <br />
     <br />
 
-  
-
+    @*Tabla de Modulos*@
 
     <table class="table">
         <tr>
@@ -77,6 +76,8 @@
                     @Html.ActionLink(" ", "Edit", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn  Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
                     @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+                    @*Va ventana donde se muestran todos los requerimientos de este modulo*@
+                    @Html.ActionLink("Requerimientos", "consulReq", "Requerimiento", new { modID = item.Id, nombreModulo=item.Nombre ,nombreProy = item.NombreProy }, new { @class = "btn btn-default float-right  " })
                 </td>
             </tr>
         }
