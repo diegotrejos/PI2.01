@@ -56,37 +56,6 @@
     <p class=" boton float-right">
         <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
     </p>
-
-
-<<<<<<< Updated upstream
-=======
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.complejidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
-                </td>
-                @* <td>
-                        @Html.DisplayFor(modelItem => item.Modulo.Nombre)
-                    </td>*@
-                <td>
-                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
-
-                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
-                </td>
-            </tr>
-        }
->>>>>>> Stashed changes
-
    <H2>Modulo: @ViewBag.Modulo</H2>
 
     <table class="table">
@@ -108,8 +77,8 @@
             </th>
             <th></th>
         </tr>
-
-        @foreach (var item in Model)
+        
+  @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -128,9 +97,9 @@
                         @Html.DisplayFor(modelItem => item.Modulo.Nombre)
                     </td>*@
                 <td>
-                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
+                    @Html.ActionLink(" ", "Edit", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
-                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { /*id = item.nombre, modulo = item.idModulo_FK, nombreProy = item.nombreProyecto_FK*/ }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
                 </td>
             </tr>
         }
