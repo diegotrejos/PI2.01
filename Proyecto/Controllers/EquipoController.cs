@@ -192,5 +192,15 @@ namespace Proyecto.Controllers
                 });
             }
         }
+        
+         public SelectList getEmpleadosProyecto(string nombreProy)
+        {
+            var query = from eq in db.Equipo
+                        where eq.nombreProy_FK == nombreProy
+                        select eq.cedulaEM_FK;
+            
+            return new SelectList(query);
+        }
+
     }
 }
