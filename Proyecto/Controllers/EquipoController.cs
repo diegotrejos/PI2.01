@@ -179,14 +179,14 @@ namespace Proyecto.Controllers
                 return Json(new
                 {
                     redirectUrl = Url.Action("Index", "Equipo"),
-                    isRedirect = true //se redireccionara
+                    isRedirect = true, //se redireccionara
                     error = false //no paso ningun error
                 });
             }
             else {
                 return Json(new
                 {
-                    redirectUrl = Url.Action("Index", "Equipo")
+                    redirectUrl = Url.Action("Index", "Equipo"),
                     error = true, //paso un error
                     isRedirect = false //como es falso no se va a redirigir
                 });
