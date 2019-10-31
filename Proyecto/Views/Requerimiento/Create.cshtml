@@ -79,14 +79,15 @@
                 @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
             </div>
 
-         
-            @Html.LabelFor(model => model.EmpleadoDesarrollador, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
 
-              
-                    @Html.DropDownList("cedulaResponsable_FK", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.cedulaResponsable_FK, "", new { @class = "text-danger" })
-                
+            @Html.LabelFor(model => model.EmpleadoDesarrollador, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+            <br></br>
+
+
+            <div>
+                <select id="miembro" name="miembro">Seleccione responsable</select>
             </div>
 
 
@@ -115,7 +116,7 @@
 
 
 
-@*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
+@*Script para pasarle por parametro el resultado del primer dropdown al segundo de proyecto a modulo*@
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
     $(document).ready(function () {
@@ -151,6 +152,50 @@
             } else {
                 $("#nombreModulo").empty();
                 $("#nombreModulo").prop("disabled", true);
+            }
+        });
+    });
+</script>
+
+
+
+
+@*Script para pasarle por parametro el resultado del primer dropdown al segundo proyecto a equipo*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#miembro").prop("disabled", true);//se desactiva el primer drowpdown mientras se trabaja esto
+
+        $("#nombreProyecto").change(function () {
+
+            if ($("#nombreProyecto").val() != "Seleccione un Proyecto") {//si esta el valor default del primer dropdown no se hace nada
+
+                var ModulosProyecto = {};
+
+                ModulosProyecto.url = "/Equipo/getEmpleadosProyecto";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
+                ModulosProyecto.type = "POST";
+                ModulosProyecto.data = JSON.stringify({
+                    nombreProyecto: $("#nombreProyecto").val()//parametro q se pasa
+                });
+                ModulosProyecto.datatype = "json";
+                ModulosProyecto.contentType = "application/json";
+                ModulosProyecto.success = function (data) {//datos q retorna getmodulo
+
+                    $("#miembro").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $("#miembro").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
+                    }
+                    $("#miembro").prop("disabled", false);
+                };
+
+                ModulosProyecto.error = function () {
+                    alert("Error obteniendo los modulos");
+                };
+
+                $.ajax(ModulosProyecto);
+            } else {
+                $("#miembro").empty();
+                $("#miembro").prop("disabled", true);
             }
         });
     });
