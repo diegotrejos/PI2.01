@@ -197,7 +197,7 @@ namespace Proyecto.Controllers
         {
             var query = from eq in db.Equipo
                         where eq.nombreProy_FK == nombreProy
-                        eq.EmpleadoDesarrollador.nombreED;
+                        select eq.EmpleadoDesarrollador.nombreED;
             
             return new SelectList(query);
         }
