@@ -132,8 +132,8 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-              //  Proyecto.Controllers.EquipoController EqController = 
-
+                //  Proyecto.Controllers.EquipoController EqController = 
+                TempData["Complejidad"] = crearListaComplejidad();
                 //ViewBag.cedulaResponsable_FK = new Proyecto.Controllers.EquipoController().getEmpleadosProyecto();
                // ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre");
                 return View();
@@ -145,21 +145,24 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string Proyecto, string Modulo, [Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+        public ActionResult Create(string nombreProyecto,string nombreModulo,  string miembro,string complejidad ,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (ModelState.IsValid)
                 {
                     var queryMod = from a in db.Modulo
-                                   where a.NombreProy.Equals(Proyecto) && (a.Nombre.Equals(Modulo))
+                                   where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
                                    select a.Id;
+                    var queryResponsable = from b in db.EmpleadoDesarrollador
+                                           where (b.nombreED.Equals(miembro))
+                                           select b.cedulaED;
                     string input = requerimiento.nombre;
                     string output = input.Replace("requerimiento", "");
                     requerimiento.nombre = output;
-                    requerimiento.nombreProyecto_FK = Proyecto;
+                    requerimiento.nombreProyecto_FK = nombreProyecto;
                     requerimiento.idModulo_FK = queryMod.FirstOrDefault();
-                    requerimiento.cedulaResponsable_FK = "302250355";
+                    requerimiento.cedulaResponsable_FK = queryResponsable.FirstOrDefault();
                     db.Requerimiento.Add(requerimiento);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -308,7 +311,15 @@ namespace Proyecto.Controllers
             }
         }
 
-
+        private List<string> crearListaComplejidad()
+        {
+            List<string> listaLocal = new List<string>();
+            listaLocal.Add("Simple");
+            listaLocal.Add("Mediano");
+            listaLocal.Add("Complejo");
+            listaLocal.Add("Muy Complejo");
+            return listaLocal;
+        }
 
 
     }
