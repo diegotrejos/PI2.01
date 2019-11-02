@@ -110,15 +110,12 @@ namespace Proyecto.Controllers
 
 
         // GET: Requerimiento/Details/5
-        public async Task<ActionResult> Details(string id)
+        public async Task<ActionResult> Details(string nombreProy, int modID, string nombreReq)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(id);
+
+                Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProy,modID,nombreReq);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
@@ -181,7 +178,7 @@ namespace Proyecto.Controllers
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
 
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(modID,nombreProyecto);
+                Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProyecto,modID,nombreReq);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
@@ -215,15 +212,12 @@ namespace Proyecto.Controllers
         }
 
         // GET: Requerimiento/Delete/5
-        public async Task<ActionResult> Delete(string id)
+       public async Task<ActionResult> Delete(string nombreProyecto, int modID, string nombreReq)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(id);
+          
+                Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProyecto,modID,nombreReq);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
