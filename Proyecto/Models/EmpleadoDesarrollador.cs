@@ -32,16 +32,16 @@ namespace Proyecto.Models
 
         [Display(Name = "Nombre de desarrollador")] //Cuando se llama en una referencia sea este nombre
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
-        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020.']+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string nombreED { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020.']+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
         [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string apellido1ED { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020.']+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string apellido2ED { get; set; }
 

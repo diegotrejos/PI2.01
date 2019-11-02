@@ -29,54 +29,43 @@ namespace Proyecto.Controllers
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            if (usuario != "Jefe")
+            if ( usuario == "Lider")
             {
+                var obj = from a in db.EmpleadoDesarrollador
+                          from b in db.Equipo
+                          from c in db.Proyecto
+                          where a.cedulaED == b.cedulaEM_FK
+                          where c.nombre == b.nombreProy_FK
+                          where b.cedulaEM_FK == cedula
+                          select a;
 
-                if (usuario == "Desarrollador")
-                {
-                    var obj = from a in db.EmpleadoDesarrollador
-                              where a.cedulaED == cedula
-                              select a;
-
-                    return View(obj.ToList());
-                }
-                else
-                { if (usuario == "Lider")
-                    {
-                        var obj = from a in db.EmpleadoDesarrollador
-                                  from b in db.Habilidades
-                                  from c in db.Equipo
-                                  from d in db.Proyecto
-                                  where a.cedulaED == b.cedulaEmpleadoPK_FK
-                                  where a.cedulaED == c.cedulaEM_FK
-                                  where c.nombreProy_FK == d.nombre
-                                  select a;
-
-                        return View(obj.Distinct().ToList());
-                    }
-                    else {
-                        var obj = from a in db.EmpleadoDesarrollador
-                                  from b in db.Habilidades
-                                  from c in db.Equipo
-                                  from d in db.Proyecto
-                                  from e in db.Cliente
-                                  where d.cedulaCliente == e.cedula
-                                  where c.nombreProy_FK == d.nombre
-                                  where a.cedulaED == c.cedulaEM_FK
-                                  where a.cedulaED == b.cedulaEmpleadoPK_FK
-                                  select a;
-
-                        return View(obj.Distinct().ToList());
-                    }
-
-
-
-                }
+                return View(obj.Distinct().ToList());
             }
-            else
+            else if (usuario == "Cliente")
+            {
+                var obj = from a in db.EmpleadoDesarrollador
+                          from b in db.Equipo
+                          from c in db.Proyecto
+                          where a.cedulaED == b.cedulaEM_FK
+                          where c.nombre == b.nombreProy_FK
+                          where c.cedulaCliente == cedula
+                          select a;
+
+                return View(obj.Distinct().ToList());
+            }
+            else if (usuario == "Desarrollador")
+            {
+                var obj = from a in db.EmpleadoDesarrollador
+                          where a.cedulaED == cedula
+                          select a;
+
+                return View(obj.ToList());
+            }
+            else if (usuario == "Jefe")
             {
                 return View(db.EmpleadoDesarrollador.ToList());
             }
+            return View();
 
         }
 
