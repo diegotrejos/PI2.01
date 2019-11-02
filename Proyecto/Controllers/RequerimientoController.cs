@@ -28,7 +28,8 @@ namespace Proyecto.Controllers
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-
+            
+            TempData["Complejidad"] = crearListaComplejidad();
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
@@ -143,7 +144,6 @@ namespace Proyecto.Controllers
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 //  Proyecto.Controllers.EquipoController EqController = 
-                TempData["Complejidad"] = crearListaComplejidad();
                 //ViewBag.cedulaResponsable_FK = new Proyecto.Controllers.EquipoController().getEmpleadosProyecto();
                // ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre");
                 return View();
