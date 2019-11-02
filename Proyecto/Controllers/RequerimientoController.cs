@@ -110,16 +110,29 @@ namespace Proyecto.Controllers
 
 
         // GET: Requerimiento/Details/5
-        public async Task<ActionResult> Details(string nombreProy, int modID, string nombreReq)
+         public async Task<ActionResult> Details(string nombreProy, int modID, string nombreReq)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                ViewBag.nombreModulo = db.Modulo.Find(nombreProy, modID).Nombre;
+                
 
                 Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProy,modID,nombreReq);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
                 }
+
+                if (requerimiento.cedulaResponsable_FK != null)
+                {
+                    ViewBag.ApellidoEmpleado = db.EmpleadoDesarrollador.Find(requerimiento.cedulaResponsable_FK).apellido1ED;
+                }
+                else
+                {
+                    ViewBag.ApellidoEmpleado = "No asignado";
+                }
+               
+
                 return View(requerimiento);
             }
         }
