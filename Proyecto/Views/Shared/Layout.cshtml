@@ -13,42 +13,108 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css‌​/bootstrap-glyphicon‌​s.css">
+    <style>
+        .dropbtn {
+            background-color: #808080;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #808080;
+        }
+    </style>
+
+
 
 
 </head>
 <body>
-    <script>
-        function estilo(numero) {
-            listaElementos = document.getElementsByClassName('navbar-nav');
-            for (var elemento in listaElementos) {
-                elemento.style.font = "italics";
-            }
-            listaElementos[numero].style.font = "bold";
-            document.write('Termineee');
-        }
-
-    </script>
     <h1 class=" titulo text-center ">Software Expert S.A </h1>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Camaik</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" onclick="estilo(0)" href="~/Proyecto">Proyectos</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    <a class="nav-item nav-link" href="~/Proyecto">Proyectos</a>
+                </li>
 
-                @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe" || (string)System.Web.HttpContext.Current.Session["rol"] == "Lider")
-                {
-                    <a class="nav-item nav-link" href="~/Equipo">Equipo</a>
+                <li class="nav-item">
+                    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe" || (string)System.Web.HttpContext.Current.Session["rol"] == "Lider")
+                    {
+                        <a class="nav-item nav-link" href="~/Equipo">Equipo</a>
+                    }
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="~/Moduloe">Modulo</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="~/Requerimiento">Requerimientos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="~/EmpleadoDesarrollador">Empleado</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="~/Cliente">Cliente</a>
+                </li>
+             
+            </ul>
+
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">
+                Usuario
+                <span class="glyphicon glyphicon-user"></span>
+            </button>
+            <div class="dropdown-content">
+
+                @{
+                    string nombre = (string)System.Web.HttpContext.Current.Session["nombreUsuario"];
+                    <a href="#">@nombre</a>
                 }
-                <a class="nav-item nav-link" href="~/Moduloe">Modulo</a>
-                <a class="nav-item nav-link" href="~/Requerimiento">Requerimientos</a>
-                <a class="nav-item nav-link" href="~/EmpleadoDesarrollador">Empleado</a>
-                <a class="nav-item nav-link" href="~/Cliente">Cliente</a>
-                <a class="nav-item nav-link" href="~/Autenticar">Salir</a>
+                <a class=" btn-danger" href="Autenticar">Cerrar Sesión</a>
             </div>
         </div>
+
     </nav>
     <div class="container body-content">
         @RenderBody()
@@ -59,8 +125,6 @@
             Copyright &copy; 2019 <span>Camaik</span>
         </div>
     </footer>
-
-
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/jquery-ui.js")

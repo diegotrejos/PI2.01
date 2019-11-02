@@ -31,11 +31,8 @@ namespace Proyecto.Controllers
 
             if (usuario != "Jefe")
             {
-<<<<<<< HEAD
-                if (usuario == "Desarrollador")//Solo ve sus datos
-=======
                 if (usuario == "Desarrollador" || usuario == "Lider")//Solo ve sus datos
->>>>>>> 4e86fa6f7e27be256334e4a3041615e744bf1adb
+
                 {
                     var obj = from a in db.EmpleadoDesarrollador
                               where a.cedulaED == cedula

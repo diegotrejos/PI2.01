@@ -43,6 +43,10 @@ namespace Proyecto.Models
                 var proyecto = from a in db.Proyecto
                                where a.cedulaCliente == cedula
                                select a;
+                var nombre = from a in db.Cliente
+                             where a.cedula == cedula
+                             select a;
+                System.Web.HttpContext.Current.Session["nombreUsuario"] = nombre.FirstOrDefault().nombre +" "+ nombre.FirstOrDefault().apellido1 + " "+ nombre.FirstOrDefault().apellido2;
                 System.Web.HttpContext.Current.Session["proyecto"] = proyecto.FirstOrDefault().nombre;
 
             }
@@ -58,11 +62,17 @@ namespace Proyecto.Models
                     id = "Lider";
                     System.Web.HttpContext.Current.Session["rol"] = "Lider";
                 }
+                var nombre = from a in db.EmpleadoDesarrollador
+                             where a.cedulaED == cedula
+                             select a;
+                System.Web.HttpContext.Current.Session["nombreUsuario"] = nombre.FirstOrDefault().nombreED + " " + nombre.FirstOrDefault().apellido1ED + " " + nombre.FirstOrDefault().apellido2ED; 
+
                 System.Web.HttpContext.Current.Session["proyecto"] = proyecto.FirstOrDefault().nombreProy_FK;
 
             }
             else if (cedula == "Jefe") {
                 id = "Jefe";
+                System.Web.HttpContext.Current.Session["nombreUsuario"] = "Administrador";
                 System.Web.HttpContext.Current.Session["rol"] = "Jefe";
             }
             System.Web.HttpContext.Current.Session["cedula"] = cedula;
