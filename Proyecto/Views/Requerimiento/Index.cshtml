@@ -79,9 +79,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modulo.Nombre)
-            </th>
+
             <th></th>
         </tr>
         
@@ -100,9 +98,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.cedulaResponsable_FK)
                 </td>
-                @* <td>
-                        @Html.DisplayFor(modelItem => item.Modulo.Nombre)
-                    </td>*@
+
                 <td>
                     @Html.ActionLink(" ", "Edit", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
