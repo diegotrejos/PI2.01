@@ -25,20 +25,23 @@ namespace Proyecto.Models
         }
 
         [Key]
-        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacÌo
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean n˙meros
-        [StringLength(12, MinimumLength = 9, ErrorMessage = "La cÈdula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaÒo
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vac√≠o
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean n√∫meros
+        [StringLength(12, MinimumLength = 9, ErrorMessage = "La c√©dula debe estar entre un rango de 9 a 12 digitos")]//Valida tama√±o
         public string cedulaED { get; set; }
 
-        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacÌo
-        [RegularExpression("^[a-zA-Z0-9Ò—·ÈÌÛ˙¡…Õ”⁄\x020]+$", ErrorMessage = "Caracteres inv·lidos")]//Valida que solo sean letras
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vac√≠o
+        [RegularExpression("^[a-zA-Z0-9√±√ë√°√©√≠√≥√∫√Å√â√ç√ì√ö\x020]+$", ErrorMessage = "Caracteres inv√°lidos")]//Valida que solo sean letras
+        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string nombreED { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9Ò—·ÈÌÛ˙¡…Õ”⁄\x020]+$", ErrorMessage = "Caracteres inv·lidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9√±√ë√°√©√≠√≥√∫√Å√â√ç√ì√ö\x020]+$", ErrorMessage = "Caracteres inv√°lidos")]//Valida que solo sean letras
         [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
+        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string apellido1ED { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9Ò—·ÈÌÛ˙¡…Õ”⁄\x020]+$", ErrorMessage = "Caracteres inv·lidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9√±√ë√°√©√≠√≥√∫√Å√â√ç√ì√ö\x020]+$", ErrorMessage = "Caracteres inv√°lidos")]//Valida que solo sean letras
+        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string apellido2ED { get; set; }
 
 
@@ -53,15 +56,17 @@ namespace Proyecto.Models
 
         public Nullable<byte> edad { get; set; }
 
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inv·lidos")]//Valida que solo sean n˙meros
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "N˙mero mayor a 8 dÌgitos")]//Valida tamaÒo
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inv√°lidos")]//Valida que solo sean n√∫meros
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "N√∫mero mayor a 8 d√≠gitos")]//Valida tama√±o
         public string telefono { get; set; }
 
-        [DataType(DataType.EmailAddress, ErrorMessage = "Ingresar correo v·lido")]//Para validar correo y si es incorrecto despliega este mensaje
+        [DataType(DataType.EmailAddress, ErrorMessage = "Ingresar correo v√°lido")]//Para validar correo y si es incorrecto despliega este mensaje
+        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
         public string correo { get; set; }
 
         public Nullable<bool> disponibilidad { get; set; }
 
+        [StringLength(256, ErrorMessage = "Demasiados caracteres")]
         public string direccionExacta { get; set; }
 
         public string distrito { get; set; }
