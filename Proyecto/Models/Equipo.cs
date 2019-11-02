@@ -22,9 +22,8 @@ namespace Proyecto.Models
         [Key]
         [Display(Name = "Nombre de proyecto")]
         public string nombreProy_FK { get; set; } ////metodo que asigna y devuelve el nombre del Proyecto en el que esta el equipo
-        public int Id { get; set; } //Id que identifica el equipo (autogenerado)
 
-        [Display(Name = "Rol")]
+        [Display(Name = "Lider")]
         public bool rol { get; set; } //rol que cumple el empleado en el proyecto
 
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
