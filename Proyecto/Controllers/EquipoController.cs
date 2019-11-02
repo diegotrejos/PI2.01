@@ -43,20 +43,18 @@ namespace Proyecto.Controllers
         public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
             //Equipo que pertenece al filtro 
-            var query = from a in db.Equipo
-                        where a.nombreProy_FK == filtro
+            var empleadosAsignados = from a in db.Equipo
+                        from b in db.EmpleadoDesarrollador
+                        where a.nombreProy_FK == filtro && b.cedulaED == a.cedulaEM_FK
                         select a;
-            var lider = from l in db.Equipo
-                        where l.rol == true && l.nombreProy_FK == filtro
-                        select l;
-            var empleadosAsignados = from e in db.EmpleadoDesarrollador
-                                     where e.cedulaED == query.FirstOrDefault().cedulaEM_FK
-                                     select e;
+           
+            
             //Intento de hacerle saber a la vista quien es el lider y los miembros del equipo
-            ViewBag.Lider = lider.FirstOrDefault().cedulaEM_FK;
-            ViewBag.empleados = empleadosAsignados;
-            TempData.Keep();
-            return View();
+            //ViewBag.Lider = lider.FirstOrDefault().cedulaEM_FK;
+            
+           
+            // TempData.Keep();
+            return View(empleadosAsignados.ToList());
         }
 
 
@@ -192,8 +190,9 @@ namespace Proyecto.Controllers
                 });
             }
         }
-        
-         public SelectList getEmpleadosProyecto(string nombreProy)
+
+
+        public SelectList getEmpleadosProyecto(string nombreProy)
         {
             var query = from eq in db.Equipo
                         where eq.nombreProy_FK == nombreProy
@@ -201,6 +200,9 @@ namespace Proyecto.Controllers
             
             return new SelectList(query);
         }
+
+
+
 
     }
 }
