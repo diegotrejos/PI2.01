@@ -89,7 +89,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
+                    @Html.ActionLink(item.nombre, "Details", new {nombreProy = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, null)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.complejidad)
