@@ -17,7 +17,7 @@ namespace Proyecto.Controllers
     
     public class RequerimientoController : Controller
     {
-
+        private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.ModuloeController moduloController = new Proyecto.Controllers.ModuloeController();
         Proyecto.Controllers.EquipoController EqController = new Proyecto.Controllers.EquipoController();
