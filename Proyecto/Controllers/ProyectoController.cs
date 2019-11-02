@@ -15,11 +15,10 @@ namespace Proyecto.Controllers
     public class ProyectoController : Controller
     {
 
-        
-       
-        public string usuario = "";
-        public string cedula = "";
-        public string proy = "";
+        /*Variables que se utilizan en el inicio de sección para guardar datos necesarios*/
+        public string usuario = "";     //Guarda el rol del usuario
+        public string cedula = "";      //Guarda la cédula de la persona que entra
+        public string proy = "";        //Guarda el proyecto en el que tiene participación la persona que entra
 
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
@@ -32,13 +31,15 @@ namespace Proyecto.Controllers
          */
         public ActionResult Index()
         {
+            //Uso de variables temporales que guardan los datos necesarias para el inicio de sección
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
             var proyecto = db.Proyecto.Include(p => p.Cliente);
 
-            if (usuario == "Desarrollador" || usuario == "Lider")
+            //Dependiendo del rol que se tenga se crean las consultas necesarias para devolver los datos del proyecto en el cual participan
+            if (usuario == "Desarrollador" || usuario == "Lider") //Si es Lider o Desarrollador se devuelve el mismo proyecto dependiendo de su cédula
             {
                 var obj = from a in db.Proyecto
                           from b in db.Equipo
@@ -49,14 +50,14 @@ namespace Proyecto.Controllers
                 return View(obj.ToList());
 
             }
-            else if (usuario == "Cliente")
+            else if (usuario == "Cliente") //El cliente ve solo sus proyecto
             {
                 var obj = from a in db.Proyecto
                           where a.cedulaCliente == cedula
                           select a;
                 return View(obj.ToList());
             }
-            else if (usuario == "Jefe") {
+            else if (usuario == "Jefe") { //Como el Jefe puede ver todo, se le muestran todos los proyectos
                 return View(proyecto.ToList());
             }
 
@@ -235,6 +236,7 @@ namespace Proyecto.Controllers
          */
         public SelectList getProyectos(String rol, String cedula)
         {
+            //Se hacen las consultas necesarias que devuelven el nombre del proyecto dependiendo del rol que se tiene
             if (rol == "Cliente") {
                 var query = from proy in db.Proyecto
                             from cliente in db.Cliente
@@ -260,6 +262,9 @@ namespace Proyecto.Controllers
             }
         }
 
+        /*
+         Método que retorna un SelectList con el nombre del proyecto
+         */
         public SelectList getProyectos()
         {
                 var query = from proy in db.Proyecto
@@ -272,6 +277,7 @@ namespace Proyecto.Controllers
         */
         public List<Proyecto.Models.Proyecto> gettProyectos(String rol, String cedula)
         {
+            //Se hacen las consultas necesarias que devuelven una lista con informacion del proyecto dependiendo del rol que se tiene
             if (rol == "Lider")
             {
                 var query = from proy in db.Proyecto
