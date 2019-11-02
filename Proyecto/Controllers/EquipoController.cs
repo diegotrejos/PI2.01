@@ -191,6 +191,48 @@ namespace Proyecto.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Eliminar(string Proyecto)
+        {
+            if (Proyecto != "")
+            {
+                //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
+                var eachTeam = from a in db.Equipo
+                               where a.nombreProy_FK == Proyecto
+                               select a;
+                
+               
+                foreach (var item in eachTeam.ToList())
+                {
+                    db.Equipo.Remove(item);
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                //retorna al script al success
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    isRedirect = true, //se redireccionara
+                    error = false //no paso ningun error
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    error = true, //paso un error
+                    isRedirect = false //como es falso no se va a redirigir
+                });
+            }
+        }
+
 
         public SelectList getEmpleadosProyecto(string nombreProy)
         {
