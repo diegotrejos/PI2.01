@@ -16,22 +16,32 @@ namespace Proyecto.Models
 
     public partial class Requerimiento
     {
-        [Key]
+   [Key]
         public string nombreProyecto_FK { get; set; }
         [Key]
         public int idModulo_FK { get; set; }
-        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacÌo
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inv·lidos")]//Valida que solo sean letras
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vac√≠o
+        [StringLength(15)] //Constraint que limita los strings 
+        [Display(Name = "Nombre de Requerimiento")]
+        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inv√°lidos")]//Valida que solo sean letras
         public string nombre { get; set; }
+        [StringLength(15)] //Constraint que limita los strings 
+        [Display(Name = "Complejidad")]
         public string complejidad { get; set; }
+
+        [Display(Name = "Duracion Estimada")]
         public int duracionEstimada { get; set; }
+
+        [Display(Name = "Duracion Real")]
         public int duracionReal { get; set; }
+
         [Display(Name = "Responsable")]
         public string cedulaResponsable_FK { get; set; }
+    
+        [Display(Name = "Estado")]
         public string estado { get; set; }
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
         public virtual Modulo Modulo { get; set; }
-
 
     }
 }
