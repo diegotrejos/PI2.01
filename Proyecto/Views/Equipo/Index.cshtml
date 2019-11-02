@@ -13,22 +13,19 @@
     @*DROPDOWN LIST QUE LLAMA A METODO POST INDEX EN CONTROLLER*@
     @using (Html.BeginForm())
     {
-        <fieldset>
-            <div class="Cliente Desarrollador display-label ">
-                Filtrar por Proyecto
-            </div>
-            <div class="Cliente Desarrollador">
-                @if (TempData["proyectos"] != null)
-                {
-                    @Html.DropDownList("filtro", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
-                }
-                <p>
-                    <input type="submit" value="Buscar" class="btn btn-default" />
+    <fieldset>
+        <div class="Cliente Desarrollador display-label ">
+            Filtrar por Proyecto
+        </div>
+        <div class="Cliente Desarrollador">
+            @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto")
+        </div>
 
-                </p>
-            </div>
-
-        </fieldset>
+        <div>
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </fieldset>
+       
     }
 
     <p class="botones text-right ">
@@ -47,16 +44,16 @@
             if (opcion)
             {
                 var p = document.getElementById('filtro'); //Aqui es para conseguir el proyecto del dropdown
-                var project = p.options[p.selectedIndex].value; //para sacar el valor 
+                var project = p.options[p.selectedIndex].value; //para sacar el valor
                 console.log(project); //para ver si todo bien con esa variable
                 $.ajax(
                 {
                     type: "post",
-                    dataType: "json", //es el tipo del dato que devuelve el metodo del controlador 
+                    dataType: "json", //es el tipo del dato que devuelve el metodo del controlador
                     url: '@Url.Action("Eliminar","Equipo")', //metodo del controlador que se llama
                     traditional: true, //para permitir arrays
                     async: false,
-                    //Notese que los nombres Miembros y Proyecto tienen que conincidir con los nombres de los parametros en el metodo del controlador 
+                    //Notese que los nombres Miembros y Proyecto tienen que conincidir con los nombres de los parametros en el metodo del controlador
                     data:
                     {
                         Proyecto: project
@@ -74,10 +71,10 @@
                         console.log("error")
                     }
                 })
-            }    
+            }
         }
 
-    </script>
+    </Script>
 
 
     <table class="table">
@@ -97,19 +94,19 @@
 
         @foreach (var item in Model)
         {
-        <tr>
+            <tr>
 
-            <td>
-                @*  @Html.ActionLink(item.cedulaEM_FK, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)*@
-                @Html.DisplayFor(modelItem => item.cedulaEM_FK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.rol)
-            </td>
-        </tr>
+                <td>
+                    @*  @Html.ActionLink(item.cedulaEM_FK, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)*@
+                    @Html.DisplayFor(modelItem => item.cedulaEM_FK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rol)
+                </td>
+            </tr>
         }
     </table>
 
@@ -125,7 +122,7 @@
                 alert("Lo sentimos, no cuenta con los permisos necesarios para ejecutar esta acción");
             }
         }
-    </Script>
+    </script>
 </body>
 
 
