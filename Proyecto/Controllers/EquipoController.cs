@@ -22,10 +22,12 @@ namespace Proyecto.Controllers
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
-            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+
+            /*Variables que se utilizan en el inicio de sección para guardar datos necesarios*/
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;   //Guarda el rol del usuario
             ViewBag.user = usuario;
-            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
-            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;   //Guarda el proyecto en el que tiene participación la persona que entra
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string; //Guarda la cédula de la persona que entra
 
             //Listas que se usan para el despliegue de los proyectos
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos(usuario, cedula);
@@ -60,6 +62,7 @@ namespace Proyecto.Controllers
 
 
         // GET: Equipo/Details/5
+        //Método que devuelve los detalles 
         public ActionResult Details(string nombreEquipo)
         {
             return View();
