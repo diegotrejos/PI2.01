@@ -30,6 +30,7 @@ namespace Proyecto.Models
         [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaño
         public string cedulaED { get; set; }
 
+        [Display(Name = "Nombre de desarrollador")] //Cuando se llama en una referencia sea este nombre
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         [StringLength(15, ErrorMessage = "Demasiados caracteres")]
