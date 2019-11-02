@@ -31,14 +31,14 @@ namespace Proyecto.Models
         public string cedulaED { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         public string nombreED { get; set; }
 
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
         public string apellido1ED { get; set; }
 
-        [RegularExpression("^[a-zA-z]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         public string apellido2ED { get; set; }
 
 

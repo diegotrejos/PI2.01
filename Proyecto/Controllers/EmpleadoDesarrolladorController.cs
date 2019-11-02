@@ -31,11 +31,7 @@ namespace Proyecto.Controllers
 
             if (usuario != "Jefe")
             {
-<<<<<<< HEAD
-                if (usuario == "Desarrollador")//Solo ve sus datos
-=======
-                if (usuario == "Desarrollador" || usuario == "Lider")//Solo ve sus datos
->>>>>>> 4e86fa6f7e27be256334e4a3041615e744bf1adb
+                if (usuario == "Desarrollador")
                 {
                     var obj = from a in db.EmpleadoDesarrollador
                               where a.cedulaED == cedula
@@ -44,26 +40,26 @@ namespace Proyecto.Controllers
                     return View(obj.ToList());
                 }
                 else
-                {//Cliente solo ve los desarrolladores de su proyecto
-                        var obj = from a in db.EmpleadoDesarrollador
-                                  from b in db.Habilidades
-                                  from c in db.Equipo
-                                  from d in db.Proyecto
-                                  where a.cedulaED == b.cedulaEmpleadoPK_FK
-                                  where a.cedulaED == c.cedulaEM_FK
-                                  where c.nombreProy_FK == d.nombre
-                                  select a;
+                {
+                    var obj = from a in db.EmpleadoDesarrollador
+                              from b in db.Habilidades
+                              from c in db.Equipo
+                              from d in db.Proyecto
+                              where a.cedulaED == b.cedulaEmpleadoPK_FK
+                              where a.cedulaED == c.cedulaEM_FK
+                              where c.nombreProy_FK == d.nombre
+                              select a;
 
-                        return View(obj.Distinct().ToList());
-                    
-                    
+                    return View(obj.Distinct().ToList());
+
+
                 }
             }
             else
             {
                 return View(db.EmpleadoDesarrollador.ToList());
             }
-          
+
         }
 
         // GET: EmpleadoDesarrollador/Details/5
