@@ -184,46 +184,72 @@ namespace Proyecto.Controllers
             }
         }
 
-        // GET: Requerimiento/Edit/5
-        public async Task<ActionResult> Edit(string nombreProyecto,int modID , string nombreReq)
+         public ActionResult Edit(int ModId, string nombreProy,string nombreReq) // comunica con el modelo
         {
+            //se obtiene el requerimiento que se va editar
+            var query = from a in db.Modulo
+                        from b in db.Requerimiento
+                        where a.Id == ModId
+                        select b;
+            var item = query.FirstOrDefault(); //aqui se guarda el requerimiento que se busco
 
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
+            //el nombre de proyecto llega nulo asi que se busca con este magiver
+            var proy = from a in db.Modulo
+                       where a.Id == ModId
+                       select a.NombreProy;
 
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProyecto,modID,nombreReq);
-                if (requerimiento == null)
-                {
-                    return HttpNotFound();
-                }
+            //los modulos del proyecto respectivo para poder editar el modulo en el edit
+            var mods = from a in db.Modulo
+                       where a.NombreProy == proy.FirstOrDefault()
+                       select a.Nombre;
 
-                ViewBag.cedulaResponsable_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", requerimiento.cedulaResponsable_FK);
-                ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre", requerimiento.nombreProyecto_FK);
-                return View(requerimiento);
-            }
+            //los posibles responsables a asignar
+            var responsables = from a in db.Equipo
+                              where a.nombreProy_FK == proy.FirstOrDefault()
+                              select a.EmpleadoDesarrollador.nombreED;
+
+            //variables utilizadas para pasar la informacion anterior a la vista
+            TempData["Proyecto"] = proy.FirstOrDefault().ToList();
+
+            TempData["Modulos"] = mods.ToList();
+
+            TempData["Responsables"] = responsables.ToList(); 
+
+            if (item != null)
+                return View(item);
+            else
+                return View("NotFound");
         }
 
-        // POST: Requerimiento/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+        public ActionResult Edit(string responsable, string modulo,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (ModelState.IsValid)
                 {
+                    //encuentro el id respectivo para modificarlo en requerimimiento
+                    var mod = from a in db.Modulo
+                              where a.NombreProy == requerimiento.nombreProyecto_FK
+                              select a.Id;
+                    //encuentro el usuario respectivo 
+                    var desarrollador = from a in db.Equipo
+                                        where a.EmpleadoDesarrollador.nombreED == responsable
+                                        && a.nombreProy_FK == requerimiento.nombreProyecto_FK
+                                        select a.cedulaEM_FK;
+                    //los modifico
+                    requerimiento.idModulo_FK = mod.FirstOrDefault();
+                    requerimiento.cedulaResponsable_FK = desarrollador.FirstOrDefault();
+                    //guardo el cambio en la base
                     db.Entry(requerimiento).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
+                    db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                ViewBag.cedulaResponsable_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", requerimiento.cedulaResponsable_FK);
-                ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre", requerimiento.nombreProyecto_FK);
                 return View(requerimiento);
             }
         }
-
+        
         // GET: Requerimiento/Delete/5
        public async Task<ActionResult> Delete(string nombreProyecto, int modID, string nombreReq)
         {
