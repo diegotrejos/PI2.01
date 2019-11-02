@@ -41,17 +41,34 @@ namespace Proyecto.Controllers
                     return View(obj.ToList());
                 }
                 else
-                {
-                    var obj = from a in db.EmpleadoDesarrollador
-                              from b in db.Habilidades
-                              from c in db.Equipo
-                              from d in db.Proyecto
-                              where a.cedulaED == b.cedulaEmpleadoPK_FK
-                              where a.cedulaED == c.cedulaEM_FK
-                              where c.nombreProy_FK == d.nombre
-                              select a;
+                { if (usuario == "Lider")
+                    {
+                        var obj = from a in db.EmpleadoDesarrollador
+                                  from b in db.Habilidades
+                                  from c in db.Equipo
+                                  from d in db.Proyecto
+                                  where a.cedulaED == b.cedulaEmpleadoPK_FK
+                                  where a.cedulaED == c.cedulaEM_FK
+                                  where c.nombreProy_FK == d.nombre
+                                  select a;
 
-                    return View(obj.Distinct().ToList());
+                        return View(obj.Distinct().ToList());
+                    }
+                    else {
+                        var obj = from a in db.EmpleadoDesarrollador
+                                  from b in db.Habilidades
+                                  from c in db.Equipo
+                                  from d in db.Proyecto
+                                  from e in db.Cliente
+                                  where d.cedulaCliente == e.cedula
+                                  where c.nombreProy_FK == d.nombre
+                                  where a.cedulaED == c.cedulaEM_FK
+                                  where a.cedulaED == b.cedulaEmpleadoPK_FK
+                                  select a;
+
+                        return View(obj.Distinct().ToList());
+                    }
+
 
 
                 }
