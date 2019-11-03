@@ -3,42 +3,42 @@
 @{
     ViewBag.Title = "Eliminar Modulo";
 }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<h2>@ViewBag.Title</h2>
+    <div class="container-fluid text-center">
+        <h2>@ViewBag.Title</h2>
+        <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Modulo?</h3>
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Nombre)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Nombre Proyecto
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.NombreProy)
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
 
-<h3>¿Está seguro que desea borrar este Modulo?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-
-        <dt>
-            Nombre Proyecto
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NombreProy)
-        </dd>
-        <dt>
-            Requerimientos:
-        </dt>
 
 
-    </dl>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-default" })
+    </div>
+}
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" />
-            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-default" })
-        </div>
-    }
-</div>
