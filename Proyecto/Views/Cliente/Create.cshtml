@@ -26,29 +26,35 @@
                     <th>
                         Cédula *
                     </th>
+
                     <td required="true">
                         @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Nombre *
                     </th>
+
                     <td required="true">
                         @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Primer Apellido *
                     </th>
+
                     <td required="true">
                         @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Segundo Apellido
@@ -83,29 +89,35 @@
                     <th>
                         Cantón
                     </th>
+
                     <td>
                         @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "Seleccione Canton", new { @class = "form-control", onchange = "getDistrict()" })
                         @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Distrito
                     </th>
+
                     <td>
                         @Html.DropDownListFor(model => model.distrito, Enumerable.Empty<SelectListItem>(), "Seleccione Distrito", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Dirección Exacta
                     </th>
+
                     <td>
                         @Html.TextAreaFor(model => model.direccionExacta, new { htmlAttributes = new { @class = "form-control" }, style = "width: 200px; height: 10em" })
                         @Html.ValidationMessageFor(model => model.direccionExacta, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
             </tbody>
         </table>
 

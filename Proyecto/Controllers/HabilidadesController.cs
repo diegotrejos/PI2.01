@@ -13,22 +13,25 @@ namespace Proyecto.Controllers
     public class HabilidadesController : Controller
     {
         //Variables para saber quien está logeado y a que proyecto pertenece
-        public string usuario = "";
-        public string cedula = "";
-        public string proy = "";
+        public string usuario = "";//EL usuario que está en el sistema
+        public string cedula = "";//La édula de quien esta en el sistema
+        public string proy = "";//Proyecto al que pertenece quien esta en el sistema
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-       
+
 
         // GET: Habilidades
+        /* Vista de habilidades
+         * @return lista de habilidades
+         */
         public ActionResult Index(string id)//id para conectar habilidad con empleado
         {
-            //Para obtener usuario registrado el ros que maneja y el proyecto
+            //Estas variables guardan los datos del usuario en sesion
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            Habilidades modelo = new Habilidades();
+            Habilidades modelo = new Habilidades();//Modelo
             List<Habilidades> aList;//lista de habilidades
             if (id == null)
             {
@@ -49,7 +52,11 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Details/5
-        public ActionResult Details(string id)//id para conectar habilidad con empleado
+        /*Metodo para consultas de habilidades
+         * @param id : llave de habilidades
+         * @return vista de habilidades
+         */
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -65,6 +72,9 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Create
+        /*Vista de create
+        * @return vista
+        */
         public ActionResult Create()
         {
             ViewBag.cedulaEmpleadoPK_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED");
@@ -76,23 +86,17 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /*Crea empleado
+          * @param atributos para crear habilidad
+          * @return vista de habilidades
+          */
         public ActionResult Create([Bind(Include = "cedulaEmpleadoPK_FK,conocimientos")] Habilidades habilidades)
         {
-            if (ModelState.IsValid)
-            {   //Valida que no tenga dos conocimientos iguales para un mismo empleado
-                //if (!db.Habilidades.Any(model => model.conocimientos == habilidades.conocimientos))
-               // {
-                   // if (!db.Habilidades.Any(model => model.cedulaEmpleadoPK_FK == habilidades.cedulaEmpleadoPK_FK)) {
+            if (ModelState.IsValid)//Para válidar 
+            {  
                         db.Habilidades.Add(habilidades);
                         db.SaveChanges();
                         return RedirectToAction("Index", new { id = habilidades.cedulaEmpleadoPK_FK });
-                    //}
-                    
-                //}
-              //  else
-              //  {//Si ya esatab esta habilidad, muestra mensaje de error
-                //    Response.Write("<script>alert('Esta habilidada ya fue agregada.');</script>");//Si la habilidad ya existe, muestra mensaje de error)
-               // }
 
             }
 
@@ -101,6 +105,10 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Edit/5
+        /*Vista para editar 
+         * @param id: llave
+         * @return vista de editar
+         */
         public ActionResult Edit(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
             if (id == null || habilidad == null)
@@ -121,6 +129,10 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /*Editar habilidad
+          * @param atributos para editar 
+          * @return vista 
+          */
         public ActionResult Edit([Bind(Include = "cedulaEmpleadoPK_FK,conocimientos")] Habilidades habilidades)
         {
             if (ModelState.IsValid)
@@ -134,6 +146,10 @@ namespace Proyecto.Controllers
         }
 
         // GET: Habilidades/Delete/5
+        /*Vista para borrar habilidad
+          * @param llavedo
+          * @return vista
+          */
         public ActionResult Delete(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
             if (id == null || habilidad == null)
@@ -151,6 +167,10 @@ namespace Proyecto.Controllers
         // POST: Habilidades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /*Para confirmar si borrar la habilidad
+          * @param llave
+          * @return vista de la lista de habilidades
+          */
         public ActionResult DeleteConfirmed(string id, string habilidad)//id para conectar habilidad con empleado y la habilidad
         {
             Habilidades habilidade = db.Habilidades.Find(id, habilidad);
@@ -159,6 +179,11 @@ namespace Proyecto.Controllers
             return RedirectToAction("Index", new { id = habilidade.cedulaEmpleadoPK_FK });
         }
 
+        /*
+          * 
+          * @param 
+          * @return 
+          */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

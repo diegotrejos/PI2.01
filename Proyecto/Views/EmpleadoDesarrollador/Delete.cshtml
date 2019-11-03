@@ -51,14 +51,18 @@
                 <td>
                     @Html.DisplayFor(model => model.apellido2ED)
                 </td>
+            </tr>
+
             <tr>
                 <th>
                     Fecha de Nacimiento
-                <th>
+                </th>
 
                 <td>
                     @Html.DisplayFor(model => model.fechaNacimiento)
-                <td>
+                </td>
+            </tr>
+
             <tr>
                 <th>
                     Edad
@@ -66,22 +70,29 @@
 
                 <td>
                     @Html.DisplayFor(model => model.edad)
-                <td>
-            <tr>
-                <th>
-                    Teléfono
-                </th>
-
-                <td>
-                    @Html.DisplayFor(model => model.telefono)
                 </td>
+            </tr>
+
+                <tr>
+                    <th>
+                        Teléfono
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.telefono)
+                    </td>
+                </tr>
+
             <tr>
                 <th>
                     Correo
-                <th>
+                </th>
+
                 <td>
                     @Html.DisplayFor(model => model.correo)
-                <td>
+                </td>
+             </tr>
+
             <tr>
                 <th>
                     Provincia
@@ -125,16 +136,17 @@
             <tr>
                 <th>
                     Disponibilidad
-                <th>
+                </th>
 
                 <td>
                     @Html.DisplayFor(model => model.disponibilidad)
-                <td>
+                </td>
             </tr>
+
             <tr>
                 <th>
                     Rol
-                <th>
+                </th>
                     @* @if(model => model.flg == true){
 
                         }else{
@@ -142,7 +154,7 @@
                         }*@
                 <td>
                     @Html.DisplayFor(model => model.flg)
-                <td>
+                </td>
             </tr>
         </tbody>
     </table>

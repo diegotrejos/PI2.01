@@ -14,75 +14,72 @@ namespace Proyecto.Models
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
 
+    //Modelo de tabla Empleado Desarrollador
     public partial class EmpleadoDesarrollador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EmpleadoDesarrollador()
+        public EmpleadoDesarrollador()//Para ver todos los desarrolladores
         {
-            this.Habilidades = new HashSet<Habilidades>();
-            this.Equipo = new HashSet<Equipo>();
-            this.Requerimiento = new HashSet<Requerimiento>();
+            this.Habilidades = new HashSet<Habilidades>();//Para drop down en habilidades
+            this.Equipo = new HashSet<Equipo>();//Para drop down en equipo
+            this.Requerimiento = new HashSet<Requerimiento>();//Para drop down en requerimientos
         }
 
         [Key]
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]//Valida que solo sean números
         [StringLength(12, MinimumLength = 9, ErrorMessage = "La cédula debe estar entre un rango de 9 a 12 digitos")]//Valida tamaño
-        public string cedulaED { get; set; }
+        public string cedulaED { get; set; }//Atributo de empleado
 
         [Display(Name = "Nombre de desarrollador")] //Cuando se llama en una referencia sea este nombre
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020.']+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
-        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
-        public string nombreED { get; set; }
+        public string nombreED { get; set; }//Atributo de empleado
 
         [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020.']+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
         [Required(ErrorMessage = "Este campo es requerido")]//para los campos obligatorios
-        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
-        public string apellido1ED { get; set; }
+        public string apellido1ED { get; set; }//Atributo de empleado
 
         [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020.']+$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean letras
-        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
-        public string apellido2ED { get; set; }
+        public string apellido2ED { get; set; }//Atributo de empleado
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> fechaInicio { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]//Formato de fecha
+        public Nullable<System.DateTime> fechaInicio { get; set; }//Atributo de empleado
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> fechaNacimiento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]//Formato de fecha
+        public Nullable<System.DateTime> fechaNacimiento { get; set; }//Atributo de empleado
 
-        public Nullable<byte> edad { get; set; }
+        public Nullable<byte> edad { get; set; }//Atributo de empleado
 
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]//Valida que solo sean números
         [StringLength(20, MinimumLength = 8, ErrorMessage = "Número mayor a 8 dígitos")]//Valida tamaño
-        public string telefono { get; set; }
+        public string telefono { get; set; }//Atributo de empleado
 
         [DataType(DataType.EmailAddress, ErrorMessage = "Ingresar correo válido")]//Para validar correo y si es incorrecto despliega este mensaje
-        [StringLength(15, ErrorMessage = "Demasiados caracteres")]
-        public string correo { get; set; }
+        [StringLength(15, ErrorMessage = "Demasiados caracteres")]//SE DEBE ARREGLAR TAMAÑO EN TABLA
+        public string correo { get; set; }//Atributo de empleado
 
-        public Nullable<bool> disponibilidad { get; set; }
+        public Nullable<bool> disponibilidad { get; set; }//Atributo de empleado
 
-        [StringLength(256, ErrorMessage = "Demasiados caracteres")]
-        public string direccionExacta { get; set; }
+        public string direccionExacta { get; set; }//Atributo de empleado
 
-        public string distrito { get; set; }
+        public string distrito { get; set; }//Atributo de empleado
 
-        public string canton { get; set; }
+        public string canton { get; set; }//Atributo de empleado
 
-        public string provincia { get; set; }
+        public string provincia { get; set; }//Atributo de empleado
 
-        public Nullable<bool> flg { get; set; }
+        public Nullable<bool> flg { get; set; }//Atributo de empleado
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Habilidades> Habilidades { get; set; }
+        public virtual ICollection<Habilidades> Habilidades { get; set; }//Drop down de empleados en Habilidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Equipo> Equipo { get; set; }
+        public virtual ICollection<Equipo> Equipo { get; set; }//Drop down de empleados en Equipo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Requerimiento> Requerimiento { get; set; }
+        public virtual ICollection<Requerimiento> Requerimiento { get; set; }//Drop down de empleados en Requerimiento
     }
 }

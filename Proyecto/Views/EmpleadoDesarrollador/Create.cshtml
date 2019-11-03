@@ -6,6 +6,7 @@
                 ViewBag.Title = "Agregar Empleado";
 }
 
+@*Script para el llamado de la provincia *@
 <script>
     $(document).ready(function () {
         getProvincia();
@@ -18,7 +19,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="container-fluid text-center">
+    <div class="container-fluid text-center"> 
         <h2>Agregar Empleado</h2>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <table class="d-flex justify-content-center">
@@ -27,69 +28,85 @@
                     <th>
                         Cédula *
                     </th>
-                    <td required="true">
+
+                    <td required="true"> 
                         @Html.EditorFor(model => model.cedulaED, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.cedulaED, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Nombre *
                     </th>
+
                     <td required="true">
                         @Html.EditorFor(model => model.nombreED, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.nombreED, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Primer Apellido *
                     </th>
+
                     <td required="true">
                         @Html.EditorFor(model => model.apellido1ED, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         @Html.ValidationMessageFor(model => model.apellido1ED, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Segundo Apellido
                     </th>
+
                     <td>
                         @Html.EditorFor(model => model.apellido2ED, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.apellido2ED, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Fecha de Nacimiento
                     </th>
+
                     <td>
+
                         @Html.EditorFor(model => model.fechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.fechaNacimiento, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Teléfono
                     </th>
+
                     <td>
                         @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Correo
                     </th>
+
                     <td>
                         @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Provincia
                     </th>
+
                     <td>
                         @Html.DropDownListFor(model => model.provincia, Enumerable.Empty<SelectListItem>(), "Seleccione Provincia", new { @class = "form-control", onchange = "getCanton()" })
                         @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
@@ -100,11 +117,13 @@
                     <th>
                         Cantón
                     </th>
+
                     <td>
                         @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "Seleccione Canton", new { @class = "form-control", onchange = "getDistrict()" })
                         @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Distrito
@@ -114,60 +133,67 @@
                         @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Dirección Exacta
                     </th>
+
                     <td>
-                        @Html.TextAreaFor(model => model.direccionExacta, new { htmlAttributes = new { @class = "form-control" }, style = "width: 200px; height: 10em" })
-                        @Html.ValidationMessageFor(model => model.direccionExacta, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.direccionExacta, new { htmlAttributes = new { @class = "form-control" }, style = "width: 200px; height: 10em" })
+                    @Html.ValidationMessageFor(model => model.direccionExacta, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Fecha de Inicio
                     </th>
-                    <td>
+
+                    <td>@*Guardar fecha de inicio de empleado*@
                         @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Disponibilidad
                     </th>
+
                     <td>
-                        <div class="checkbox">
-                            @Html.DropDownListFor(model => model.disponibilidad, new SelectList(
-             new[] {
+                        <div class="checkbox">@*Guardar disponilidad de empleado*@
+                            @Html.DropDownListFor(model => model.disponibilidad, new SelectList(new[] {
                                     new { Value = "true", Text = "SI" },
                                     new { Value = "false", Text = "NO" },
-             },
-             "Value",
-             "Text"
-         ))
+                            },
+                            "Value",
+                            "Text"
+                            ))
                             @Html.ValidationMessageFor(model => model.disponibilidad, "", new { @class = "text-danger" })
                         </div>
                     </td>
                 </tr>
+
                 <tr>
                     <th>
                         Rol
                     </th>
+
                     <td>
-                        <div class="checkbox">
-                            @Html.DropDownListFor(model => model.flg, new SelectList(
-             new[] {
+                        <div class="checkbox">@*Guardar rol de empleado*@
+                            @Html.DropDownListFor(model => model.flg, new SelectList(new[] {
                                     new { Value = "true", Text = "Desarrollador" },
                                     new { Value = "false", Text = "Otro" }
-             },
-             "Value",
-             "Text"
-         ))
+                                 },
+                                 "Value",
+                                 "Text"
+                             ))
                             @Html.ValidationMessageFor(model => model.flg, "", new { @class = "text-danger" })
                         </div>
                     </td>
                 </tr>
+
             </tbody>
         </table>
 

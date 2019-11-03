@@ -15,12 +15,12 @@ namespace Proyecto.Models
 
     public partial class Habilidades
     {
-        public string cedulaEmpleadoPK_FK { get; set; }
+        public string cedulaEmpleadoPK_FK { get; set; }//Cedula del empleado de la habilidad
         [Display(Name = "Habilidades")]
-        public string conocimientos { get; set; }
+        public string conocimientos { get; set; }//Atributo de conocimientos
 
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
-        public List<Habilidades> listaHabilidades { get; set; }
+        public List<Habilidades> listaHabilidades { get; set; }//Lista de habilidades
 
         public Habilidades modeloHabilidades { get; set; }
     }

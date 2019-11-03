@@ -88,14 +88,18 @@
                 <td>
                     @Html.DisplayFor(model => model.apellido2ED)
                 </td>
+            </tr>
+
             <tr>
                 <th>
                     Fecha de Nacimiento
-                <th>
+                </th>
 
                 <td>
                     @Html.DisplayFor(model => model.fechaNacimiento)
-                <td>
+                </td>
+            </tr>
+
             <tr>
                 <th>
                     Edad
@@ -104,6 +108,8 @@
                 <td>
                     @Html.DisplayFor(model => model.edad)
                 <td>
+            </tr>
+
             <tr>
                 <th>
                     Teléfono
@@ -112,13 +118,17 @@
                 <td>
                     @Html.DisplayFor(model => model.telefono)
                 </td>
-            <tr style="line-height:40px">
+            </tr>
+
+            <tr>
                 <th>
                     Correo
-                <th>
+                </th>
                 <td>
                     @Html.DisplayFor(model => model.correo)
-                <td>
+                </td>
+            </tr>
+
             <tr>
                 <th>
                     Provincia
@@ -162,30 +172,30 @@
             <tr>
                 <th>
                     Disponibilidad
-                <th>
+                </th>
 
                 <td>
-                    @Html.DisplayFor(model => model.disponibilidad)
-                <td>
+                        @Html.DisplayFor(model => model.disponibilidad)
+                </td>
             </tr>
             <tr>
                 <th>
                     Rol
-                <th>
+                </th>
                     @*@if (model => model.flg.value != null)
-        {
-         @if (model => model.flg.value == true)
-         {
+                {
+                 @if (model => model.flg.value == true)
+                 {
 
-         }
-         else
-         {
+                 }
+                 else
+                 {
 
-         }
-        }*@
-<td>
-                    @Html.DisplayFor(model => model.flg)
+                 }
+                }*@
                 <td>
+                    @Html.DisplayFor(model => model.flg)
+                </td>
             </tr>
         </tbody>
     </table>

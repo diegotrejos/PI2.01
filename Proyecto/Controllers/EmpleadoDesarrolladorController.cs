@@ -23,7 +23,7 @@ namespace Proyecto.Controllers
 
         // GET: EmpleadoDesarrollador
         /* Se devuelve los empleados dependiendo del rol del sistema
-         * @return lista de proyectos
+         * @return lista empleados
          */
         public ActionResult Index()
         {
@@ -79,7 +79,11 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Details/5
-        public ActionResult Details(string id)//String id para conectar empleado con la tabla habilidades
+        /*Metodo para consultas de empleado
+         * @param id : llave de empleado
+         * @return vista de empleado desarrollador
+         */
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -94,6 +98,9 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Create
+        /*Vista de create
+        * @return vista
+        */
         public ActionResult Create()
         {
             return View();
@@ -103,20 +110,24 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        /*Crea empleado
+          * @param atributos para crear empleado
+          * @return vista de empleados
+          */
         public ActionResult Create([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
 
                 //Para válidar 
                 if (ModelState.IsValid)
                 {
-                    //Valida si la cédula es nueva
+                    //Valida si la cédula eno existe
                     if (!db.EmpleadoDesarrollador.Any(model => model.cedulaED == empleadoDesarrollador.cedulaED))
                     {
-                    if (empleadoDesarrollador.fechaNacimiento != null)
+                    if (empleadoDesarrollador.fechaNacimiento != null)//verifica si introdujeron fecha de nacimiento
                     {
-                        DateTime fecha = empleadoDesarrollador.fechaNacimiento.Value;
-                        int edad = System.DateTime.Now.Year - fecha.Year;
-                        empleadoDesarrollador.edad = (byte)edad;
+                        DateTime fecha = empleadoDesarrollador.fechaNacimiento.Value;//Saca el valor de la fecha introducida
+                        int edad = System.DateTime.Now.Year - fecha.Year;//Calcula la edad
+                        empleadoDesarrollador.edad = (byte)edad;//La guarda en el atributo edad, convertida en bytes
                     }
                     db.EmpleadoDesarrollador.Add(empleadoDesarrollador);
                         db.SaveChanges();
@@ -130,6 +141,10 @@ namespace Proyecto.Controllers
           }
 
         // GET: EmpleadoDesarrollador/Edit/5
+        /*Vista para editar uno
+         * @param id: llave
+         * @return vista de editar
+         */
         public ActionResult Edit(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
@@ -148,6 +163,10 @@ namespace Proyecto.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        /*Editar empleado
+          * @param atributos para editar empleado
+          * @return vista de empleados
+          */
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "cedulaED,nombreED,apellido1ED,apellido2ED,fechaInicio,fechaNacimiento,edad,telefono,correo,disponibilidad,direccionExacta,distrito,canton,provincia,flg")] EmpleadoDesarrollador empleadoDesarrollador)
         {
@@ -161,6 +180,10 @@ namespace Proyecto.Controllers
         }
 
         // GET: EmpleadoDesarrollador/Delete/5
+        /*Vista para borrar empleado
+          * @param llavedo
+          * @return vista
+          */
         public ActionResult Delete(string id)//String id para conectar empleado con la tabla habilidades
         {
             if (id == null)
@@ -178,6 +201,10 @@ namespace Proyecto.Controllers
         // POST: EmpleadoDesarrollador/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        /*Para confirmar si borrar empleado
+          * @param llave
+          * @return vista de la lista de empleados
+          */
         public ActionResult DeleteConfirmed(string id)
         {
             EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(id);
@@ -186,6 +213,11 @@ namespace Proyecto.Controllers
             return RedirectToAction("Index");
         }
 
+        /*
+          * 
+          * @param 
+          * @return 
+          */
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -194,8 +226,11 @@ namespace Proyecto.Controllers
             }
             base.Dispose(disposing);
         }
-        
-         //metodo que devuelve una lista con los empleados 
+
+        /*
+          *lista con los empleados 
+          * @return devuelve la lista de empleado
+          */
         public List<EmpleadoDesarrollador> getEmpleados()
         {
             var query = from EmpleadoDesarrollador in db.EmpleadoDesarrollador
@@ -203,7 +238,11 @@ namespace Proyecto.Controllers
             return new List<EmpleadoDesarrollador>(query);
         }
 
-        //Metodo que se encarga de cambiar la disponibilidad por medio de la cedula mandada por equipo
+        /*
+          * Metodo que se encarga de cambiar la disponibilidad por medio de la cedula mandada por equipo
+          * @param llave
+          * @return 
+          */
         public void modificarEstado(string cedula) {
             EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(cedula);
             empleadoDesarrollador.disponibilidad = false;
