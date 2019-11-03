@@ -37,7 +37,7 @@ namespace Proyecto.Controllers
                               where a.cedula == cedula
                               select a;
 
-                    return View(obj.ToList());
+                    return View(obj.Distinct().ToList());
                 }
                 else
                 {

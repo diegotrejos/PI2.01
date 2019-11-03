@@ -41,7 +41,7 @@ namespace Proyecto.Controllers
                               where c.cedula == cedula
                               select a;
 
-                    return View(obj.ToList());
+                    return View(obj.Distinct().ToList());
                 }
                 else
                 {
@@ -55,7 +55,7 @@ namespace Proyecto.Controllers
                               where d.cedulaED == cedula
                               select a;
 
-                    return View(obj.ToList());
+                    return View(obj.Distinct().ToList());
                 }
             }
             else
@@ -88,12 +88,12 @@ namespace Proyecto.Controllers
                     var obj = from a in db.Modulo
                               from b in db.Proyecto
                               from c in db.Cliente
-                              where a.NombreProy == b.nombre
+                              where a.NombreProy == filtro
                               where b.cedulaCliente == c.cedula
                               where c.cedula == cedula
                               select a;
 
-                    return View(obj.ToList());
+                    return View(obj.Distinct().ToList());
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace Proyecto.Controllers
                               where d.cedulaED == cedula
                               select a;
 
-                    return View(obj.ToList());
+                    return View(obj.Distinct().ToList());
                 }
             }
             else

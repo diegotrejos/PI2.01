@@ -42,7 +42,9 @@
                 </div>
 
                 <div>
-                    <select id="nombreModulo" name="nombreModulo">Seleccione Modulo</select>
+                    <select id="nombreModulo" name="nombreModulo">
+                        <option>Seleccione un módulo</option>
+                    </select>
                 </div>
 
                 <br>
@@ -145,6 +147,7 @@
                 ModulosProyecto.success = function (data) {//datos q retorna getmodulo
 
                     $("#nombreModulo").empty();
+                    $("#nombreModulo").append("<option>" + "Seleccione un módulo" + "</option>");
                     for (var i = 0; i < data.length; i++) {
                         $("#nombreModulo").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
                     }
