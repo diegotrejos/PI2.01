@@ -66,10 +66,10 @@
             <tr>
 
                 <td>
-                    @Html.ActionLink(item.Nombre, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)
+                    @Html.ActionLink(item.Nombre, "Details","Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NombreProy)
+                    @Html.ActionLink(item.NombreProy, "Details", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, null)
                 </td>
                 <td>
                     <!--ActionLink(como quiero que se llame, A donde va el link, controllador,dato que quiero pasar) -->
