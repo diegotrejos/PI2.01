@@ -23,12 +23,6 @@
                 <th>
                     Primer Apellido
                 </th>
-                <th>
-                    Segundo apellido
-                </th>
-                <th>
-                    Teléfono
-                </th>
                 <th></th>
             </tr>
 
@@ -44,13 +38,6 @@
                     <td>
                         @Html.ActionLink(item.apellido1, "Details", new { id = item.cedula })
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.apellido2)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.telefono)
-                    </td>
-
                     <td>
                         <p class="botones">
                             <button onclick="location.href ='@Url.Action(item.cedula, "Cliente/Edit")'"  class="btn Lider Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
