@@ -70,18 +70,51 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
+            //consulto para obtener solo los modulos de un proyecto
+
+
+
+
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
-            if (filtro != "Seleccione un Proyecto")
-            {  //consulto para obtener solo los modulos de un proyecto
-                var query = from a in db.Modulo
-                            where ((a.NombreProy.Equals(filtro)))
-                            select a;
-                return View(query.ToList());
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            var modulo = db.Modulo.Include(m => m.Proyecto);
+
+            if (usuario != "Jefe")
+            {
+                if (usuario == "Cliente")
+                {
+                    var obj = from a in db.Modulo
+                              from b in db.Proyecto
+                              from c in db.Cliente
+                              where a.NombreProy == b.nombre
+                              where b.cedulaCliente == c.cedula
+                              where c.cedula == cedula
+                              select a;
+
+                    return View(obj.ToList());
+                }
+                else
+                {
+                    var obj = from a in db.Modulo
+                              from b in db.Proyecto
+                              from c in db.Equipo
+                              from d in db.EmpleadoDesarrollador
+                              where a.NombreProy == b.nombre
+                              where b.nombre == c.nombreProy_FK
+                              where b.nombre == filtro
+                              where c.cedulaEM_FK == d.cedulaED
+                              where d.cedulaED == cedula
+                              select a;
+
+                    return View(obj.ToList());
+                }
             }
             else
             {
                 var query = from a in db.Modulo
+                            where ((a.NombreProy.Equals(filtro)))
                             select a;
                 return View(query.ToList());
             }
@@ -90,7 +123,6 @@ namespace Proyecto.Controllers
 
             
         }
-
 
 
 
