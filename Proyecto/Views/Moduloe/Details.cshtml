@@ -1,33 +1,41 @@
-﻿@model Proyecto.Models.Modulo
+@model Proyecto.Models.Modulo
 @{
     /**/
 
-    ViewBag.Title = "Consulta";
+    ViewBag.Title = "Consultar Modulo";
 }
-<h2>@ViewBag.Title</h2>
-<div>
-    <h4>Modulo</h4>
-    <hr />
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre de Modulo
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt>
-            Nombre de Proyecto
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NombreProy)
-        </dd>
-        <dt>
 
-    </dl>
-    @*Primera idea con un for each desplegando cada requerimiento*@
+<div class="container-fluid text-center">
+    <h2>@ViewBag.Title</h2>
 
+
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Nombre de Modulo
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Nombre)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    Nombre de Proyecto
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.NombreProy)
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </div>
+
+
 <div>
 
 </div>
