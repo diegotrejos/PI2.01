@@ -15,34 +15,43 @@ namespace Proyecto.Controllers
     public class EmpleadoDesarrolladorController : Controller
     {
         //Variables para saber quien está logeado y a que proyecto pertenece
-        public string usuario = "";
-        public string cedula = "";
-        public string proy = "";
+        public string usuario = "";//EL usuario que está en el sistema
+        public string cedula = "";//La édula de quien esta en el sistema
+        public string proy = "";//Proyecto al que pertenece quien esta en el sistema
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-       
+
         // GET: EmpleadoDesarrollador
+        /* Se devuelve los empleados dependiendo del rol del sistema
+         * @return lista de proyectos
+         */
         public ActionResult Index()
         {
+            //Estas variables guardan los datos del usuario en sesion
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            
+            if ( usuario == "Lider")//Si el usuarion en sesion es lider
+            {//Puede ver los empleados que pertenecen a su equipo
+                         var info = from b in db.Equipo
+                                    from c in db.Proyecto
+                                    where b.cedulaEM_FK == cedula
+                                    where c.nombre == b.nombreProy_FK
+                                    select b;
+                
 
-            if ( usuario == "Lider")
-            {
-                var obj = from a in db.EmpleadoDesarrollador
-                          from b in db.Equipo
-                          from c in db.Proyecto
-                          where a.cedulaED == b.cedulaEM_FK
-                          where c.nombre == b.nombreProy_FK
-                          where b.cedulaEM_FK == cedula
-                          select a;
-
+                        var obj = from a in db.EmpleadoDesarrollador
+                                  from b in db.Equipo
+                                  where b.nombreProy_FK == info.FirstOrDefault().nombreProy_FK
+                                  where b.cedulaEM_FK == a.cedulaED
+                                  select a;
+                
                 return View(obj.Distinct().ToList());
             }
-            else if (usuario == "Cliente")
-            {
+            else if (usuario == "Cliente")//Si el usuarion en sesion es cliente
+            {//Solo puede ver los empleados que estan en su proyecto
                 var obj = from a in db.EmpleadoDesarrollador
                           from b in db.Equipo
                           from c in db.Proyecto
@@ -53,19 +62,19 @@ namespace Proyecto.Controllers
 
                 return View(obj.Distinct().ToList());
             }
-            else if (usuario == "Desarrollador")
-            {
+            else if (usuario == "Desarrollador")//Si el usuarion en sesion es desarrollador
+            {//solo puede ver su propia información y no la de otros desarrolladores
                 var obj = from a in db.EmpleadoDesarrollador
                           where a.cedulaED == cedula
                           select a;
 
                 return View(obj.ToList());
             }
-            else if (usuario == "Jefe")
-            {
+            else if (usuario == "Jefe")//Si el usuarion en sesion es jefe
+            {//Tiene acceso a todo el sistema
                 return View(db.EmpleadoDesarrollador.ToList());
             }
-            return View();
+            return View();//retorna la vista
 
         }
 
