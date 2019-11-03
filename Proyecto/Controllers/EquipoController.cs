@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Migrations;
@@ -14,11 +14,13 @@ namespace Proyecto.Controllers
     public class EquipoController : Controller
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-        
+        Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
 
         // GET: Equipo
         public ActionResult Index()
         {
+
+
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
@@ -37,6 +39,11 @@ namespace Proyecto.Controllers
             TempData["proyectos"] = proyectos;
             TempData.Keep();
             return View(db.Equipo.ToList());
+
+
+
+
+       
         }
 
         [HttpPost]
@@ -62,6 +69,7 @@ namespace Proyecto.Controllers
 
 
         // GET: Equipo/Details/5
+        //Método que devuelve los detalles 
         public ActionResult Details(string nombreEquipo)
         {
             return View();
@@ -152,7 +160,7 @@ namespace Proyecto.Controllers
          [HttpPost]
         public ActionResult Asignar(string Miembros, string Proyecto)
         {
-            if (Proyecto != null && Miembros != null)
+            if (Proyecto != "" && Miembros != "")
             {
                 //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
                 string[] eachMember = Miembros.Split(',');
@@ -179,13 +187,80 @@ namespace Proyecto.Controllers
                 return Json(new
                 {
                     redirectUrl = Url.Action("Index", "Equipo"),
-                    isRedirect = true
+                    isRedirect = true, //se redireccionara
+                    error = false //no paso ningun error
                 });
             }
             else {
-                //Aqui deberia de aparecer un error
-                return RedirectToAction("AsignarMiembros", "Equipo");
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    error = true, //paso un error
+                    isRedirect = false //como es falso no se va a redirigir
+                });
             }
         }
+
+        [HttpPost]
+        public ActionResult Eliminar(string Proyecto)
+        {
+            if (Proyecto != "")
+            {
+                //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
+                var eachTeam = from a in db.Equipo
+                               where a.nombreProy_FK == Proyecto
+                               select a;
+                
+               
+                foreach (var item in eachTeam.ToList())
+                {
+                    db.Equipo.Remove(item);
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                //retorna al script al success
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    isRedirect = true, //se redireccionara
+                    error = false //no paso ningun error
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Equipo"),
+                    error = true, //paso un error
+                    isRedirect = false //como es falso no se va a redirigir
+                });
+            }
+        }
+
+
+        public SelectList getProyectos(String rol, String cedula)
+        {
+            return this.proyController.getProyectos(rol, cedula);
+        }
+
+
+        public SelectList getEmpleadosProyecto(string nombreProy)
+        {
+            var query = from eq in db.Equipo
+                        where eq.nombreProy_FK == nombreProy
+                        select eq.EmpleadoDesarrollador.nombreED;
+            
+            return new SelectList(query);
+        }
+
+
+
+
     }
 }
