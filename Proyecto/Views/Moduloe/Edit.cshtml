@@ -1,62 +1,51 @@
 @model Proyecto.Models.Modulo
 @{
-    ViewBag.Title = "Editar";
+                /**/
+
+                ViewBag.Title = "Editar";
 }
-<h2>  @ViewBag.Title </h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Modulo</h4>
-    <hr />
+<div class="container-fluid text-center">
+    <h2>  @ViewBag.Title </h2>
+
+
     @Html.ValidationSummary(true)
 
 
     <h4>@Model.NombreProy</h4>
 
-    <div class="form-group">
-
-
-        @*
-            @Html.LabelFor(model => model.NombreProy, "Nombre de Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div>
-
-                @*Dropdown list con datos de modulo que si intenta cambiar la tabla
-                @Html.DropDownListFor(model => Model.NombreProy,
-                ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
-                "Seleccione Proyecto",
-                new { @class = "form-control"})
-        *@
-        @*
-                @Html.DropDownList( "Seleccione",
-                    Model.NombreProy,
-                    ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos(),
-                    ,
-                    new { @class = "form-control", onchange = "" })
-
-
-                @Html.ValidationMessageFor(model => model.NombreProy, "", new { @class = "text-danger" })
-
-            </div>
-        *@
-        @Html.LabelFor(model => model.Nombre, "Nombre del Modulo*", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div>
-            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-        </div>
-
-    </div>
 
 
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Nombre Modulo *
+                </th>
+
+                <td required="true" readonly>
+                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+    <div class="botones text-center">
+        
             <input type="submit" value="Aceptar" class="btn btn-success" />
             @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
-        </div>
+    
     </div>
-</div>
+
 }
+
