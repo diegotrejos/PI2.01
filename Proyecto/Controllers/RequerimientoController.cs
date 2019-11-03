@@ -186,6 +186,8 @@ namespace Proyecto.Controllers
 
          public ActionResult Edit(int ModId, string nombreProy,string nombreReq) // comunica con el modelo
         {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
             //se obtiene el requerimiento que se va editar
             var query = from a in db.Modulo
                         from b in db.Requerimiento
@@ -225,6 +227,8 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(string responsable, string modulo,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (ModelState.IsValid)

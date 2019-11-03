@@ -21,9 +21,7 @@
                 <th>
                     Nombre de Cliente
                 </th>
-                <th>
-                    Fecha de inicio
-                </th>
+   
 
                 <th></th>
             </tr>
@@ -37,9 +35,7 @@
                     <td>
                         @Html.ActionLink(item.Cliente.nombre, "Details", new { id = item.nombre })
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fechaInicio)
-                    </td>
+       
                     <td>
                         <p class="botones">
                             <button onclick= "location.href ='@Url.Action(item.nombre, "Proyecto/Edit")'" id= "item.nombre" class="btn Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right ">
