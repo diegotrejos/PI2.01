@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Proyecto.Models.Equipo>
+@model IEnumerable<Proyecto.Models.Equipo>
 
 @{
     ViewBag.Title = "Lista de Equipos";
@@ -14,35 +14,31 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            <div class= "Cliente Desarrollador display-label " >
+            <div class="Cliente Desarrollador display-label ">
                 Filtrar por Proyecto
             </div>
             <div class="Cliente Desarrollador">
-                @if (TempData["proyectos"] != null)
-                {
-                    @Html.DropDownList("filtro", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
-                }
-                <p>
-                    <input type="submit" value="Buscar" class="btn btn-default" />
-                </p>
+                @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto")
             </div>
-            
+
+            <div>
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </div>
         </fieldset>
+
     }
 
     <p class="botones text-right ">
-        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-default btn-large Lider Desarrollador Cliente ">Asignar Lider</button>
-        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-default btn-large  Desarrollador Cliente ">Asignar Miembros</button>
+        <button onclick="myFunction();" class="btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
+        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-success btn-large Lider Desarrollador Cliente ">Asignar Lider</button>
+        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-success btn-large  Desarrollador Cliente ">Asignar Miembros</button>
     </p>
 
     <br />
     <br />
 
 
-
-
-
-    <table class= "Cliente Desarrollador" "table table-responsive-md">
+    <table class="Cliente Desarrollador" "table-responsive-md">
 
         <thead class="thead-light">
             <tr>
@@ -83,12 +79,58 @@
                  lista[i].setAttribute('readonly', 'readonly');
                  lista[i].hidden = true;
             }
-            if (rol != "Jefe" && rol != "Lider") {
+            if (rol == "Cliente" || rol == "Desarrollador") {
                 alert("Lo sentimos, no cuenta con los permisos necesarios para ejecutar esta acción");
             }
         }
     </script>
 </body>
+
+
+
+
+<Script type="text/javascript">
+        function myFunction() //este nombre tiene que coincidir con el que se pone en el boton que lo llama
+        {
+            var opcion = confirm("Esta seguro que desea eliminar este equipo?");
+            if (opcion)
+            {
+                var p = document.getElementById('filtro'); //Aqui es para conseguir el proyecto del dropdown
+                var project = p.options[p.selectedIndex].value; //para sacar el valor
+                console.log(project); //para ver si todo bien con esa variable
+                $.ajax(
+                {
+                    type: "post",
+                    dataType: "json", //es el tipo del dato que devuelve el metodo del controlador
+                    url: '@Url.Action("Eliminar","Equipo")', //metodo del controlador que se llama
+                    traditional: true, //para permitir arrays
+                    async: false,
+                    //Notese que los nombres Miembros y Proyecto tienen que conincidir con los nombres de los parametros en el metodo del controlador
+                    data:
+                    {
+                        Proyecto: project
+                    },
+                    success: function (json) //si todo sale bien el json que se retorna en el controlador viene aqui
+                    {
+                        if (json.error)
+                            alert("Seleccione el proyecto al cual desea eliminar el equipo");
+                        if (json.isRedirect)
+                            window.location.href = json.redirectUrl;
+                    },
+                    error: function (errorList) //si pasa algun error
+                    {
+                        console.log(errorList);
+                        console.log("error")
+                    }
+                })
+            }
+        }
+
+</Script>
+
+
+
+
 
 
 
