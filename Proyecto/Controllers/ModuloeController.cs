@@ -70,6 +70,8 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
             if (filtro != "Seleccione un Proyecto")
             {  //consulto para obtener solo los modulos de un proyecto
                 var query = from a in db.Modulo
