@@ -101,19 +101,22 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+            if(TempData["muestra"].Tostring() != "")
+            {
+                <tr>
 
-                <td>
-                    @*  @Html.ActionLink(item.cedulaEM_FK, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)*@
-                    @Html.DisplayFor(modelItem => item.cedulaEM_FK)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.rol)
-                </td>
-            </tr>
+                    <td>
+                        @*  @Html.ActionLink(item.cedulaEM_FK, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)*@
+                        @Html.DisplayFor(modelItem => item.cedulaEM_FK)
+                    </td>
+                    <td>
+                     @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.rol)
+                    </td>
+                </tr>
+            }
         }
     </table>
 
