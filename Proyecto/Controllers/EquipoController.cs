@@ -42,6 +42,7 @@ namespace Proyecto.Controllers
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
             TempData["proyectos"] = proyectos;
+            TempData["mostra"] = "";
             TempData.Keep();
             return View(db.Equipo.ToList());
         }
@@ -51,21 +52,13 @@ namespace Proyecto.Controllers
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;   //Guarda el rol del usuario
             ViewBag.user = usuario;
-
+            TempData["muestra"] = filtro;
             //Equipo que pertenece al filtro 
             var empleadosAsignados = from a in db.Equipo
                                          from b in db.EmpleadoDesarrollador
                                          where a.nombreProy_FK == filtro && b.cedulaED == a.cedulaEM_FK
                                          select a;
                 return View(empleadosAsignados.ToList());
-            
-
-
-            //Intento de hacerle saber a la vista quien es el lider y los miembros del equipo
-            //ViewBag.Lider = lider.FirstOrDefault().cedulaEM_FK;
-
-
-            // TempData.Keep();
            
         }
 
