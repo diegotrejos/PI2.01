@@ -75,6 +75,14 @@ namespace Proyecto.Controllers
         }
 
 
+        public EmpleadoDesarrollador getNombre(string cedula)
+        {
+            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
+            {
+                var empleado = db.EmpleadoDesarrollador.Find(cedula);
+                return empleado;
+            }
+        }
 
 
 
