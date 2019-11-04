@@ -50,8 +50,8 @@
                     <td required="true">
 
                         <select id="nombreModulo" name="nombreModulo">
-                            Seleccione Modulo
-                            <option>Seleccione un módulo
+                            Seleccione modulo
+                            <option>Seleccione un modulo
                         </select>
                     </td>
                 </tr>
@@ -140,6 +140,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Crear" class="btn btn-success" />
+                 @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
             </div>
 
         </div>
@@ -159,7 +160,7 @@
 <div>
 
 
-    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
+   
 
 </div>
 
