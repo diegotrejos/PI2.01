@@ -22,7 +22,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <table class="d-flex justify-content-center">
         <tbody>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Cédula *
                 </th>
@@ -31,7 +31,7 @@
                     @Html.ValidationMessageFor(model => model.cedula, "", new { @class = "text-danger" })
                 </td>
             </tr>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Nombre *
                 </th>
@@ -40,7 +40,7 @@
                     @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
                 </td>
             </tr>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Primer Apellido *
                 </th>
@@ -49,7 +49,7 @@
                     @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
                 </td>
             </tr>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Segundo Apellido
                 </th>
@@ -59,7 +59,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Teléfono
                 </th>
@@ -69,7 +69,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Provincia
                 </th>
@@ -79,7 +79,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Cantón
                 </th>
@@ -88,7 +88,7 @@
                     @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
                 </td>
             </tr>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Distrito
                 </th>
@@ -97,7 +97,7 @@
                     @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
                 </td>
             </tr>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Dirección Exacta
                 </th>
@@ -116,7 +116,7 @@
     <div class="botones text-center">
         <input type="submit" value="Aceptar" class="btn btn-success"  style="margin: 20px"/>
         <a href="~/Cliente/Index" class="btn btn-default">
-            Regresar
+            Cancelar
         </a>
     </div>
 
