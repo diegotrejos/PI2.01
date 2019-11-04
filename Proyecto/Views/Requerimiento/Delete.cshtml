@@ -8,84 +8,83 @@
     ViewBag.Title = "Eliminar requerimiento";
 }
 
-<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Requerimiento</h4>
+<div class="container-fluid text-center">
+    <h2>Eliminar Proyecto</h2>
+    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <td>
 
-    <hr />
-    <dl class="dl-horizontal">
+                    @Html.DisplayFor(model => model.nombre)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Complejidad
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.complejidad)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Duracion Estimada
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.duracionEstimada)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Duracion Real
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.duracionReal)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Estado
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.estado)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Responsable
+                </th>
+                <td>
+                    <H5>@TempData["ResponsableAsociado"]</H5>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Modulo
+                </th>
+                <td>
+                    <H5>@TempData["ModuloAsociado"]</H5>
+                </td>
+            </tr>
 
+        </tbody>
+    </table>
 
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.complejidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.complejidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionReal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.duracionReal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cedulaResponsable_FK)
-        </dt>
-
-        <dd>
-            <H5>@TempData["ResponsableAsociado"]</H5>
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.idModulo_FK)
-        </dt>
-
-        <dd>
-            <H5>@TempData["ModuloAsociado"]</H5>
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-          @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
-        </div>
-    }
+    <div class="botones text-center">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a href="~/Requerimiento/Index" class="btn btn-default">
+            Regresar
+        </a>
+    </div>
+    
 </div>
+}
+
