@@ -155,7 +155,7 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string nombreProyecto,string nombreModulo,  string miembro,string complejidad ,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+        public ActionResult Create(string nombreProyecto,string nombreModulo,  string miembro,string complejidad ,string estado,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
@@ -212,7 +212,7 @@ namespace Proyecto.Controllers
 
             //variables utilizadas para pasar la informacion anterior a la vista
             TempData["Proyecto"] = proy.FirstOrDefault().ToList();
-
+             ViewBag.nombre = nombreReq;
             TempData["Modulos"] = mods.ToList();
 
             TempData["Responsables"] = responsables.ToList(); 
