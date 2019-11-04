@@ -13,8 +13,13 @@ namespace Proyecto.Controllers
 {
     public class EquipoController : Controller
     {
+        /*Variables que se utilizan en el inicio de sección para guardar datos necesarios*/
+        public string usuario = "";     //Guarda el rol del usuario
+        public string cedula = "";      //Guarda la cédula de la persona que entra
+        public string proy = "";        //Guarda el proyecto en el que tiene participación la persona que entra
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-        
+        Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
+
 
         // GET: Equipo
         public ActionResult Index()
@@ -143,9 +148,10 @@ namespace Proyecto.Controllers
         }
 
         //Codigo que se comunica con la controladora de proyectos para recibir los proyectos actuales creados
-        public SelectList getProyectos()
+        public SelectList getProyectos(String rol, String cedula)
         {
-            return new Proyecto.Controllers.ProyectoController().getProyectos();
+            
+            return this.proyController.getProyectos(rol, cedula);
         }
 
         //Codigo que se llama en el script de create que permiete realizar el evento de arrastre 

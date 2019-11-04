@@ -10,51 +10,65 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<body onload="Desabilitar();">
 
-@using (Html.BeginForm()) //necesario para el funcionamiento del boton tipo submit
-{
-    @Html.AntiForgeryToken()
-<fieldset>
-    @*Despliega los proyectos por medio de un dropdown y el proyecto seleccionado se identifica por medio del "nombre en el primer parametro el cual es llamado en el metodo post AsignarLider en el controlador"*@
-    <td> Seleccionar proyecto </td>
-    <p>
-        @if (TempData["proyectos"] != null)
-        {
-            @Html.DropDownList("nombre", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
-        }
-    </p>
-    <input type="submit" value="Asignar" class="btn btn-success float-right" /> @*Boton que llama al metodo AsignarLider tipo Post del controlador*@
-    <table class="table table-responsive-md">
-       @*Titulos de la tabla de la vista*@
-        <thead class="thead-light">
-            <tr>
-                <th>Cédula</th>
-                <th>Nombre</th>
-            </tr>
-        </thead>
-
-        <tbody id="disponibilidad" style="cursor:pointer;">
-            @*Id es lo que reconoce el script de mas arriba*@
-            @*Listado de los desarrolladores disponibles *@
-            @if (TempData["empleadosDisponibles"] != null)
-            {
-                foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+    @using (Html.BeginForm()) //necesario para el funcionamiento del boton tipo submit
+    {
+        @Html.AntiForgeryToken()
+        <fieldset>
+            @*Despliega los proyectos por medio de un dropdown y el proyecto seleccionado se identifica por medio del "nombre en el primer parametro el cual es llamado en el metodo post AsignarLider en el controlador"*@
+            <td> Seleccionar proyecto </td>
+            <p>
+                @if (TempData["proyectos"] != null)
                 {
-                    if (item.disponibilidad == true)
-                    {
-                        <tr>
-                            <td>
-                                <input type="radio" name="cedula" value="@item.cedulaED">@item.cedulaED<br> @*Permite seleccionar por medio de un circulo el empleado al cual quiero hacer lider*@
-                               
-                            </td>
-                            <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
-                                <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
-                            </td>
-                        </tr>
-                    }
+                    @Html.DropDownList("nombre", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
                 }
+            </p>
+            <input type="submit" value="Asignar" class="btn btn-success float-right" /> @*Boton que llama al metodo AsignarLider tipo Post del controlador*@
+            <table class="table table-responsive-md">
+                @*Titulos de la tabla de la vista*@
+                <thead class="thead-light">
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+
+                <tbody id="disponibilidad" style="cursor:pointer;">
+                    @*Id es lo que reconoce el script de mas arriba*@
+                    @*Listado de los desarrolladores disponibles *@
+                    @if (TempData["empleadosDisponibles"] != null)
+                    {
+                        foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+                        {
+                            if (item.disponibilidad == true)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="cedula" value="@item.cedulaED">@item.cedulaED<br> @*Permite seleccionar por medio de un circulo el empleado al cual quiero hacer lider*@
+
+                                    </td>
+                                    <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+
+    }
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                 lista[i].setAttribute('readonly', 'readonly');
+                 lista[i].hidden = true;
             }
-        </tbody>
-    </table>
-</fieldset>
-}
+        }
+    </script>
+</body>

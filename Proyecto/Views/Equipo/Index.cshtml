@@ -18,7 +18,14 @@
             Filtrar por Proyecto
         </div>
         <div class="Cliente Desarrollador">
-            @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto")
+            @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+            {
+                @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+            }
+            else
+            {
+                @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+            }
         </div>
 
         <div>
@@ -30,8 +37,8 @@
 
     <p class="botones text-right ">
         <button style="background:transparent;" onclick="myFunction();">Borrar</button>
-        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-default btn-large Lider Desarrollador Cliente ">Asignar Lider</button>
-        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-default btn-large  Desarrollador Cliente ">Asignar Miembros</button>
+        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-default btn-large Lider">Asignar Lider</button>
+        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-default btn-large ">Asignar Miembros</button>
     </p>
 
     <br />
