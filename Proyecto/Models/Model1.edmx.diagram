@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f17541d68dc34e3e81dc72ba70ff2b37" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Autenticar" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Cliente" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.EmpleadoDesarrollador" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Equipo" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Habilidades" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Modulo" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Proyecto" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Requerimiento" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
-        <AssociationConnector Association="Models.FK_ProyectoCliente" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_EmpleadoHabilidades" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_EquipoEmpleado" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_RequerimientoResponsable" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_EquipoProyecto" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_ModuloProyecto" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_RequerimientoModulo" ManuallyRouted="false" />
+      <Diagram DiagramId="d32b55c448fb41a6b198df624788c827" Name="Diagram1">
+        <EntityTypeShape EntityType="Gr02Proy3Model.Autenticar" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.Cliente" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.EmpleadoDesarrollador" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.Equipo" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.Habilidades" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.Modulo" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.Proyecto" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gr02Proy3Model.Requerimiento" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_ProyectoCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_EmpleadoHabilidades" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_EquipoEmpleado" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_RequerimientoResponsable" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_EquipoProyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_ModuloProyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy3Model.FK_RequerimientoModulo" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

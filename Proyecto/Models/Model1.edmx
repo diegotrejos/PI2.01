@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Gr02Proy3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Autenticar">
           <Key>
             <PropertyRef Name="usuario" />
@@ -96,9 +96,9 @@
           <Property Name="nombreProyecto_FK" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="idModulo_FK" Type="int" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="complejidad" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="duracionEstimada" Type="int" Nullable="false" />
-          <Property Name="duracionReal" Type="int" Nullable="false" />
+          <Property Name="complejidad" Type="varchar" MaxLength="15" />
+          <Property Name="duracionEstimada" Type="int" />
+          <Property Name="duracionReal" Type="int" />
           <Property Name="cedulaResponsable_FK" Type="varchar" MaxLength="12" />
           <Property Name="estado" Type="varchar" MaxLength="15" />
         </EntityType>
@@ -117,7 +117,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EquipoEmpleado">
-          <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1" />
+          <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmpleadoDesarrollador">
@@ -194,7 +196,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelsStoreContainer">
+        <EntityContainer Name="Gr02Proy3ModelStoreContainer">
           <EntitySet Name="Autenticar" EntityType="Self.Autenticar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" Schema="dbo" store:Type="Tables" />
@@ -236,7 +238,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Gr02Proy3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Autenticar">
           <Key>
             <PropertyRef Name="usuario" />
@@ -340,9 +342,9 @@
           <Property Name="nombreProyecto_FK" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idModulo_FK" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="complejidad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="duracionEstimada" Type="Int32" Nullable="false" />
-          <Property Name="duracionReal" Type="Int32" Nullable="false" />
+          <Property Name="complejidad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="duracionEstimada" Type="Int32" />
+          <Property Name="duracionReal" Type="Int32" />
           <Property Name="cedulaResponsable_FK" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EmpleadoDesarrollador" Relationship="Self.FK_RequerimientoResponsable" FromRole="Requerimiento" ToRole="EmpleadoDesarrollador" />
@@ -375,7 +377,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EquipoEmpleado">
-          <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1" />
+          <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmpleadoDesarrollador">
@@ -440,7 +444,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Gr02Proy3Entities9" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Gr02Proy3Entities10" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Autenticar" EntityType="Self.Autenticar" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" />
@@ -483,9 +487,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Gr02Proy3Entities9">
+        <EntityContainerMapping StorageEntityContainer="Gr02Proy3ModelStoreContainer" CdmEntityContainer="Gr02Proy3Entities10">
           <EntitySetMapping Name="Autenticar">
-            <EntityTypeMapping TypeName="Models.Autenticar">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Autenticar">
               <MappingFragment StoreEntitySet="Autenticar">
                 <ScalarProperty Name="usuario" ColumnName="usuario" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
@@ -494,7 +498,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="Models.Cliente">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="cedula" ColumnName="cedula" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -509,7 +513,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmpleadoDesarrollador">
-            <EntityTypeMapping TypeName="Models.EmpleadoDesarrollador">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.EmpleadoDesarrollador">
               <MappingFragment StoreEntitySet="EmpleadoDesarrollador">
                 <ScalarProperty Name="cedulaED" ColumnName="cedulaED" />
                 <ScalarProperty Name="nombreED" ColumnName="nombreED" />
@@ -530,7 +534,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Equipo">
-            <EntityTypeMapping TypeName="Models.Equipo">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Equipo">
               <MappingFragment StoreEntitySet="Equipo">
                 <ScalarProperty Name="cedulaEM_FK" ColumnName="cedulaEM_FK" />
                 <ScalarProperty Name="nombreProy_FK" ColumnName="nombreProy_FK" />
@@ -539,7 +543,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Habilidades">
-            <EntityTypeMapping TypeName="Models.Habilidades">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Habilidades">
               <MappingFragment StoreEntitySet="Habilidades">
                 <ScalarProperty Name="cedulaEmpleadoPK_FK" ColumnName="cedulaEmpleadoPK_FK" />
                 <ScalarProperty Name="conocimientos" ColumnName="conocimientos" />
@@ -547,7 +551,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Modulo">
-            <EntityTypeMapping TypeName="Models.Modulo">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Modulo">
               <MappingFragment StoreEntitySet="Modulo">
                 <ScalarProperty Name="NombreProy" ColumnName="NombreProy" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -556,7 +560,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Proyecto">
-            <EntityTypeMapping TypeName="Models.Proyecto">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Proyecto">
               <MappingFragment StoreEntitySet="Proyecto">
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
@@ -570,7 +574,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Requerimiento">
-            <EntityTypeMapping TypeName="Models.Requerimiento">
+            <EntityTypeMapping TypeName="Gr02Proy3Model.Requerimiento">
               <MappingFragment StoreEntitySet="Requerimiento">
                 <ScalarProperty Name="nombreProyecto_FK" ColumnName="nombreProyecto_FK" />
                 <ScalarProperty Name="idModulo_FK" ColumnName="idModulo_FK" />

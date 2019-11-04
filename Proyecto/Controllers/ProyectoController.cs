@@ -57,7 +57,11 @@ namespace Proyecto.Controllers
                           select a;
                 return View(obj.ToList());
             }
-            else if (usuario == "Jefe") { //Como el Jefe puede ver todo, se le muestran todos los proyectos
+            else if (usuario == "Jefe")
+            { //Como el Jefe puede ver todo, se le muestran todos los proyectos
+                return View(proyecto.ToList());
+            }
+            else {
                 return View(proyecto.ToList());
             }
 
@@ -104,7 +108,7 @@ namespace Proyecto.Controllers
   */
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
+        public ActionResult Create([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto, string lider)
         {
 
 
@@ -114,13 +118,19 @@ namespace Proyecto.Controllers
                     if (!db.Proyecto.Any(model => model.nombre == proyecto.nombre))
                     {
 
-                      /*  SqlConnection con = new SqlConnection("data source=172.16.202.23;user id=Gr02Proy3;password=Orion24!!!;MultipleActiveResultSets=True;App=EntityFramework");
-                        SqlCommand cmd = new SqlCommand("SELECT * FROM Proyecto WHERE nombre=@nombre AND objetivo=@objetivo", con);
-                        /* Convertimos en literal estos parámetros, por lo que no podrán hacer la inyección */
-                       /* cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 15).Value = proyecto.nombre;
-                        cmd.Parameters.Add("@objetivo", SqlDbType.VarChar, 256).Value = proyecto.objetivo;*/
+                    /*  SqlConnection con = new SqlConnection("data source=172.16.202.23;user id=Gr02Proy3;password=Orion24!!!;MultipleActiveResultSets=True;App=EntityFramework");
+                      SqlCommand cmd = new SqlCommand("SELECT * FROM Proyecto WHERE nombre=@nombre AND objetivo=@objetivo", con);
+                      /* Convertimos en literal estos parámetros, por lo que no podrán hacer la inyección */
+                    /* cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 15).Value = proyecto.nombre;
+                     cmd.Parameters.Add("@objetivo", SqlDbType.VarChar, 256).Value = proyecto.objetivo;*/
+                    db.Equipo.Add(new Equipo
+                    {
+                        cedulaEM_FK = lider ,
+                        nombreProy_FK = proyecto.nombre,
+                        rol = true
+                    });
 
-                        db.Proyecto.Add(proyecto);
+                    db.Proyecto.Add(proyecto);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -296,6 +306,15 @@ namespace Proyecto.Controllers
                 return new List<Proyecto.Models.Proyecto>(query);
 
             }
+        }
+
+        public SelectList getEmpledos() {
+
+            var item = from a in db.EmpleadoDesarrollador
+                       where a.disponibilidad == true
+                       select a.cedulaED;
+            return new SelectList(item);
+
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Gr02Proy3Entities9">
+  <EntityContainerMapping StorageEntityContainer="Gr02Proy3ModelStoreContainer" CdmEntityContainer="Gr02Proy3Entities10">
     <EntitySetMapping Name="Autenticar">
-      <EntityTypeMapping TypeName="Models.Autenticar">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Autenticar">
         <MappingFragment StoreEntitySet="Autenticar">
           <ScalarProperty Name="usuario" ColumnName="usuario" />
           <ScalarProperty Name="contrasena" ColumnName="contrasena" />
@@ -11,7 +11,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cliente">
-      <EntityTypeMapping TypeName="Models.Cliente">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
           <ScalarProperty Name="cedula" ColumnName="cedula" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -26,7 +26,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EmpleadoDesarrollador">
-      <EntityTypeMapping TypeName="Models.EmpleadoDesarrollador">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.EmpleadoDesarrollador">
         <MappingFragment StoreEntitySet="EmpleadoDesarrollador">
           <ScalarProperty Name="cedulaED" ColumnName="cedulaED" />
           <ScalarProperty Name="nombreED" ColumnName="nombreED" />
@@ -47,7 +47,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Equipo">
-      <EntityTypeMapping TypeName="Models.Equipo">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Equipo">
         <MappingFragment StoreEntitySet="Equipo">
           <ScalarProperty Name="cedulaEM_FK" ColumnName="cedulaEM_FK" />
           <ScalarProperty Name="nombreProy_FK" ColumnName="nombreProy_FK" />
@@ -56,7 +56,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Habilidades">
-      <EntityTypeMapping TypeName="Models.Habilidades">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Habilidades">
         <MappingFragment StoreEntitySet="Habilidades">
           <ScalarProperty Name="cedulaEmpleadoPK_FK" ColumnName="cedulaEmpleadoPK_FK" />
           <ScalarProperty Name="conocimientos" ColumnName="conocimientos" />
@@ -64,7 +64,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Modulo">
-      <EntityTypeMapping TypeName="Models.Modulo">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Modulo">
         <MappingFragment StoreEntitySet="Modulo">
           <ScalarProperty Name="NombreProy" ColumnName="NombreProy" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -73,7 +73,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Proyecto">
-      <EntityTypeMapping TypeName="Models.Proyecto">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Proyecto">
         <MappingFragment StoreEntitySet="Proyecto">
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
@@ -87,7 +87,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Requerimiento">
-      <EntityTypeMapping TypeName="Models.Requerimiento">
+      <EntityTypeMapping TypeName="Gr02Proy3Model.Requerimiento">
         <MappingFragment StoreEntitySet="Requerimiento">
           <ScalarProperty Name="nombreProyecto_FK" ColumnName="nombreProyecto_FK" />
           <ScalarProperty Name="idModulo_FK" ColumnName="idModulo_FK" />

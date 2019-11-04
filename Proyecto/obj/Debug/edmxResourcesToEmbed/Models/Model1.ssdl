@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Gr02Proy3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Autenticar">
     <Key>
       <PropertyRef Name="usuario" />
@@ -91,9 +91,9 @@
     <Property Name="nombreProyecto_FK" Type="varchar" MaxLength="256" Nullable="false" />
     <Property Name="idModulo_FK" Type="int" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="complejidad" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="duracionEstimada" Type="int" Nullable="false" />
-    <Property Name="duracionReal" Type="int" Nullable="false" />
+    <Property Name="complejidad" Type="varchar" MaxLength="15" />
+    <Property Name="duracionEstimada" Type="int" />
+    <Property Name="duracionReal" Type="int" />
     <Property Name="cedulaResponsable_FK" Type="varchar" MaxLength="12" />
     <Property Name="estado" Type="varchar" MaxLength="15" />
   </EntityType>
@@ -112,7 +112,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EquipoEmpleado">
-    <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1" />
+    <End Role="EmpleadoDesarrollador" Type="Self.EmpleadoDesarrollador" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EmpleadoDesarrollador">
@@ -189,7 +191,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ModelsStoreContainer">
+  <EntityContainer Name="Gr02Proy3ModelStoreContainer">
     <EntitySet Name="Autenticar" EntityType="Self.Autenticar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmpleadoDesarrollador" EntityType="Self.EmpleadoDesarrollador" Schema="dbo" store:Type="Tables" />
