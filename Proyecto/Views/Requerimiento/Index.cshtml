@@ -96,10 +96,11 @@
                     @Html.DisplayFor(modelItem => item.estado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => (item.EmpleadoDesarrollador.nombreED))
+                    @Html.DisplayFor(modelItem => ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getNombre(item.cedulaResponsable_FK).nombreED)
                 </td>
-
+                
                 <td>
+                    
                     @Html.ActionLink(" ", "Edit", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
                     @Html.ActionLink(" ", "Delete", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
