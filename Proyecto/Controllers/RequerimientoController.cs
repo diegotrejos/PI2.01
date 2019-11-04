@@ -40,6 +40,19 @@ namespace Proyecto.Controllers
                                    select a;
                     return View(queryReq.ToList());
                 }
+                else if (usuario == "Lider")
+                {
+                    var queryReq = from a in db.Requerimiento
+                                   where a.nombreProyecto_FK == proy
+                                   select a;
+                    return View(queryReq.ToList());
+                }
+                else if (usuario == "Cliente") {
+                    var queryReq = from a in db.Requerimiento
+                                   where a.nombreProyecto_FK == proy
+                                   select a;
+                    return View(queryReq.ToList());
+                }
                 return View(await requerimiento.ToListAsync());
                 
             }
@@ -59,22 +72,33 @@ namespace Proyecto.Controllers
                 string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
                 ViewBag.proyectos = getProyectos(usuario, cedula);
 
-              
-                
+                ViewBag.Modulo = nombreModulo;
+
 
                 var queryMod = from a in db.Modulo
                                where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
                                select a.Id;
 
+                if (usuario == "Desarrollador")
+                {
+                    var queryReq = from a in db.Requerimiento
+                                   where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault() && a.cedulaResponsable_FK == cedula
+                                   select a;
+                    return View(queryReq.ToList());
+                }
+                else
+                {
+                    var queryReq = from a in db.Requerimiento
+                                   where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault()
+                                   select a;
+                    return View(queryReq.ToList());
+                }
+            
 
-                var queryReq = from a in db.Requerimiento
-                               where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault() && a.cedulaResponsable_FK == cedula
-                               select a;
 
+                
 
-                ViewBag.Modulo = nombreModulo;
-
-                return View(queryReq.ToList());
+                
 
 
 
