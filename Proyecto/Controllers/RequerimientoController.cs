@@ -288,9 +288,9 @@ namespace Proyecto.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string nombreProy,int? m,string n)
+        public ActionResult DeleteConfirmed(string nombreProyecto, int modID, string nombreReq)
         {
-            Requerimiento requerimiento = db.Requerimiento.Find(nombreProy,m,n);
+            Requerimiento requerimiento = db.Requerimiento.Find(nombreProyecto,modID,nombreReq);
             db.Requerimiento.Remove(requerimiento);
             db.SaveChanges();
             return RedirectToAction("Index");
