@@ -21,12 +21,6 @@
             <th>
                 Primer Apellido
             </th>
-            <th>
-                Segundo Apellido
-            </th>
-            <th>
-                Fecha Inicio
-            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -40,12 +34,6 @@
                 </td>
                 <td>
                     @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.apellido2ED)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaInicio)
                 </td>
                 <td>
                     <p class="botones">
