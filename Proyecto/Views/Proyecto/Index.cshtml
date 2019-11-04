@@ -3,45 +3,55 @@
 @{
     ViewBag.Title = "Proyectos";
 }
-
-<body onload="Desabilitar();" >
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url("../Imagenes/fondo.png");
+            background-color: transparent;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body onload="Desabilitar();" style="background-color: white">
 
 
     <div class=" Container" align-items-center>
         <h2>Lista de Proyectos</h2>
         <p class=" boton float-right">
-            <button onclick= "location.href = 'Proyecto/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right ">
-            </button>
+            <button onclick="location.href = 'Proyecto/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
         </p>
-        <table class="table">
-            <tr>
+        <table class="table table-striped table-bordered">
+            <tr style="line-height:50px">
                 <th>
                     Nombre
                 </th>
                 <th>
                     Nombre de Cliente
                 </th>
-   
+
 
                 <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="line-height:50px">
                     <td>
                         @Html.ActionLink(item.nombre, "Details", new { id = item.nombre })
                     </td>
                     <td>
                         @Html.ActionLink(item.Cliente.nombre, "Details", new { id = item.nombre })
                     </td>
-       
+
                     <td>
                         <p class="botones">
-                            <button onclick= "location.href ='@Url.Action(item.nombre, "Proyecto/Edit")'" id= "item.nombre" class="btn Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right ">
-                            </button>
-                            <button onclick= "location.href = '@Url.Action(item.nombre, "Proyecto/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right ">
-                            </button>
+                            <button onclick="location.href ='@Url.Action(item.nombre, "Proyecto/Edit")'" id="item.nombre" class="btn Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
+                            <button onclick="location.href = '@Url.Action(item.nombre, "Proyecto/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
                         </p>
                     </td>
                 </tr>
@@ -51,7 +61,7 @@
 
     </div>
 
-   
+
     <script>
         function Desabilitar() {
             var rol = '@ViewBag.user';
@@ -62,3 +72,4 @@
         }
     </script>
 </body>
+</html>

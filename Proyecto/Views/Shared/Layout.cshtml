@@ -21,6 +21,17 @@
             font-size: 16px;
             border: none;
         }
+        body {
+            background-image: url("../Imagenes/fondo.png");
+        }
+        a {
+            font: oblique 600%;
+            color: black;
+            font-size: 150%;
+        }
+        .navbar {
+            color: crimson;
+        }
 
         .dropdown {
             position: relative;
@@ -62,7 +73,7 @@
 </head>
 <body>
     <h1 class=" titulo text-center ">Software Expert S.A </h1>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " >
         <a class="navbar-brand" href="#">Camaik</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -120,9 +131,9 @@
         @RenderBody()
         <hr />
     </div>
-    <footer class="fixed-bottom bg-dark pt-4 pb-4">
+    <footer class="fixed-bottom  pt-4 pb-4 bg-dark" >
         <div class="copyright text-sm-center text-white small">
-            Copyright &copy; 2019 <span>Camaik</span>
+           Copyright &copy; 2019 <span>Camaik</span>
         </div>
     </footer>
     @Scripts.Render("~/bundles/modernizr")
