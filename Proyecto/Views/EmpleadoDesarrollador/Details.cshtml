@@ -46,11 +46,14 @@
 </script>
 
 <div class="container-fluid text-center">
+
+  
+
     <h2>Detalles de Empleado</h2>
 
     <table class="d-flex justify-content-center">
         <tbody>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Cédula
                 </th>
@@ -60,7 +63,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Nombre
                 </th>
@@ -70,7 +73,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Primer apellido
                 </th>
@@ -80,7 +83,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Segundo apellido
                 </th>
@@ -90,7 +93,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Fecha de Nacimiento
                 </th>
@@ -100,7 +103,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Edad
                 </th>
@@ -110,7 +113,7 @@
                 <td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Teléfono
                 </th>
@@ -120,7 +123,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Correo
                 </th>
@@ -129,7 +132,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Provincia
                 </th>
@@ -139,7 +142,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Cantón
                 </th>
@@ -149,7 +152,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Distrito
                 </th>
@@ -159,7 +162,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Dirección Exacta
                 </th>
@@ -169,33 +172,45 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Disponibilidad
                 </th>
 
-                <td>
-                        @Html.DisplayFor(model => model.disponibilidad)
-                </td>
+
+                @if (ViewBag.disp == "true")
+                {
+                    <td>
+                        Sí
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        No
+                    </td >
+                }
+
+
             </tr>
-            <tr>
+
+            <tr style="line-height:50px">
                 <th>
                     Rol
                 </th>
-                    @*@if (model => model.flg.value != null)
+                @if (ViewBag.rol == "true")
                 {
-                 @if (model => model.flg.value == true)
-                 {
-
-                 }
-                 else
-                 {
-
-                 }
-                }*@
-                <td>
-                    @Html.DisplayFor(model => model.flg)
-                </td>
+                    <td>
+                        Desarrollador
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Otro
+                    </td>
+                }
+                
             </tr>
         </tbody>
     </table>

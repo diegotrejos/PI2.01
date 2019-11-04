@@ -13,7 +13,7 @@
 
     <table class="d-flex justify-content-center">
         <tbody>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Cédula
                 </th>
@@ -23,7 +23,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Nombre
                 </th>
@@ -33,7 +33,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Primer apellido
                 </th>
@@ -43,7 +43,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Segundo apellido
                 </th>
@@ -53,7 +53,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Fecha de Nacimiento
                 </th>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Edad
                 </th>
@@ -73,17 +73,17 @@
                 </td>
             </tr>
 
-                <tr>
-                    <th>
-                        Teléfono
-                    </th>
+            <tr style="line-height:50px">
+                <th>
+                    Teléfono
+                </th>
 
-                    <td>
-                        @Html.DisplayFor(model => model.telefono)
-                    </td>
-                </tr>
+                <td>
+                    @Html.DisplayFor(model => model.telefono)
+                </td>
+            </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Correo
                 </th>
@@ -91,9 +91,9 @@
                 <td>
                     @Html.DisplayFor(model => model.correo)
                 </td>
-             </tr>
+            </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Provincia
                 </th>
@@ -103,7 +103,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Cantón
                 </th>
@@ -113,7 +113,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Distrito
                 </th>
@@ -123,7 +123,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Dirección Exacta
                 </th>
@@ -133,28 +133,41 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Disponibilidad
                 </th>
 
-                <td>
-                    @Html.DisplayFor(model => model.disponibilidad)
-                </td>
+                @if (ViewBag.disp == "true")
+                {
+                    <td>
+                        Sí
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        No
+                    </td>
+                }
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Rol
                 </th>
-                    @* @if(model => model.flg == true){
-
-                        }else{
-
-                        }*@
-                <td>
-                    @Html.DisplayFor(model => model.flg)
-                </td>
+                @if (ViewBag.rol == "true")
+                {
+                    <td>
+                        Desarrollador
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Otro
+                    </td>
+                }
             </tr>
         </tbody>
     </table>

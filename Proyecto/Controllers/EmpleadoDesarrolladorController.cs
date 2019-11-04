@@ -90,6 +90,24 @@ namespace Proyecto.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(id);
+            if (empleadoDesarrollador.disponibilidad == true)
+            {
+                ViewBag.disp = "true";
+            }
+            else {
+                ViewBag.disp = "false";
+            }
+
+            if (empleadoDesarrollador.flg == true)
+            {
+                ViewBag.rol = "true";
+            }
+            else
+            {
+                ViewBag.rol = "false";
+            }
+
+
             if (empleadoDesarrollador == null)
             {
                 return HttpNotFound();
@@ -208,6 +226,23 @@ namespace Proyecto.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(id);
+            if (empleadoDesarrollador.disponibilidad == true)
+            {
+                ViewBag.disp = "true";
+            }
+            else
+            {
+                ViewBag.disp = "false";
+            }
+
+            if (empleadoDesarrollador.flg == true)
+            {
+                ViewBag.rol = "true";
+            }
+            else
+            {
+                ViewBag.rol = "false";
+            }
             db.EmpleadoDesarrollador.Remove(empleadoDesarrollador);
             db.SaveChanges();
             return RedirectToAction("Index");

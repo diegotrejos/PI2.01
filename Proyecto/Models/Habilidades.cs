@@ -17,6 +17,8 @@ namespace Proyecto.Models
     {
         public string cedulaEmpleadoPK_FK { get; set; }//Cedula del empleado de la habilidad
         [Display(Name = "Habilidades")]
+
+        [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
         public string conocimientos { get; set; }//Atributo de conocimientos
 
         public virtual EmpleadoDesarrollador EmpleadoDesarrollador { get; set; }
