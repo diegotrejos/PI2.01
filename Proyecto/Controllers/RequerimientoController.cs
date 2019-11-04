@@ -373,7 +373,7 @@ namespace Proyecto.Controllers
              private List<string> crearListaEstados()
         {
             List<string> listaLocal = new List<string>();
-            listaLocal.Add("No Asigando");
+            listaLocal.Add("No Asignado");
             listaLocal.Add("Asignado");
             listaLocal.Add("En Progreso");
             listaLocal.Add("Terminado");
