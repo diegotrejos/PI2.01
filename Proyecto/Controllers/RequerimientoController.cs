@@ -33,7 +33,15 @@ namespace Proyecto.Controllers
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
+                if (usuario == "Desarrollador")
+                {
+                    var queryReq = from a in db.Requerimiento
+                                   where a.cedulaResponsable_FK == cedula
+                                   select a;
+                    return View(queryReq.ToList());
+                }
                 return View(await requerimiento.ToListAsync());
+                
             }
         }
 
@@ -60,7 +68,7 @@ namespace Proyecto.Controllers
 
 
                 var queryReq = from a in db.Requerimiento
-                               where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault()
+                               where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault() && a.cedulaResponsable_FK == cedula
                                select a;
 
 
