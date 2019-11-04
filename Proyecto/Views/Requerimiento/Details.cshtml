@@ -1,66 +1,81 @@
-﻿@model Proyecto.Models.Requerimiento
+@model Proyecto.Models.Requerimiento
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Requerimiento</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.complejidad)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.complejidad)
-        </dd>
+<div class="container-fluid text-center">
+    <h2>Detalles del Requerimiento</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </dt>
+    <table class="d-flex justify-content-center">
+        <tbody>
+            <tr>
+                <th>
+                    Complejidad
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.complejidad)
+                </td>
+            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionReal)
-        </dt>
+            <tr>
+                <th>
+                    Duracion Estimada
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.duracionReal)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.duracionEstimada)
+                </td>
+            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
+            <tr>
+                <th>
+                    Duracion Real
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.duracionReal)
+                </td>
+            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
-        </dt>
+            <tr>
+                <th>
+                    Estado
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.estado)
+                </td>
+            </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Modulo.Nombre)
-        </dt>
+            <tr>
+                <th>
+                    Empleado Responsable
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.Modulo.Nombre)
-        </dd>
+                <td>
+                    @Html.DisplayFor(model => model.EmpleadoDesarrollador.nombreED)
+                </td>
+            </tr>
 
-    </dl>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+
+                <td>
+                    @Html.DisplayFor(model => model.Modulo.Nombre)
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class=" boton text-center">
+    <a href="~/Requerimiento/Index" class="btn btn-default ">
+        <span></span> Regresar
+    </a>
 </p>
+

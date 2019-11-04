@@ -28,7 +28,7 @@ namespace Proyecto.Controllers
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-            
+             TempData["Estado"] = crearListaEstados();
             TempData["Complejidad"] = crearListaComplejidad();
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
@@ -254,13 +254,22 @@ namespace Proyecto.Controllers
             }
         }
         
-        // GET: Requerimiento/Delete/5
-       public async Task<ActionResult> Delete(string nombreProyecto, int modID, string nombreReq)
+       public ActionResult Delete(string nombreProyecto, int modID, string nombreReq)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-          
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProyecto,modID,nombreReq);
+                var mod = from a in db.Modulo
+                          where a.Id == modID
+                          select a.Nombre;
+
+                var responsable = from a in db.EmpleadoDesarrollador
+                                  from b in db.Requerimiento
+                                  where a.cedulaED == b.cedulaResponsable_FK
+                                  select a.nombreED;
+
+                TempData["ModuloAsociado"] = mod.FirstOrDefault();
+                TempData["ResponsableAsociado"] = responsable.FirstOrDefault();
+                Requerimiento requerimiento = db.Requerimiento.Find(nombreProyecto,modID,nombreReq);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
@@ -269,18 +278,14 @@ namespace Proyecto.Controllers
             }
         }
 
-        // POST: Requerimiento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string nombreProy,int? m,string n)
         {
-            using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-                Requerimiento requerimiento = await db.Requerimiento.FindAsync(id);
-                db.Requerimiento.Remove(requerimiento);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            Requerimiento requerimiento = db.Requerimiento.Find(nombreProy,m,n);
+            db.Requerimiento.Remove(requerimiento);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 
@@ -355,6 +360,16 @@ namespace Proyecto.Controllers
             listaLocal.Add("Mediano");
             listaLocal.Add("Complejo");
             listaLocal.Add("Muy Complejo");
+            return listaLocal;
+        }
+             private List<string> crearListaEstados()
+        {
+            List<string> listaLocal = new List<string>();
+            listaLocal.Add("No Asigando");
+            listaLocal.Add("Asignado");
+            listaLocal.Add("En Progreso");
+            listaLocal.Add("Terminado");
+            listaLocal.Add("Cancelado");
             return listaLocal;
         }
 

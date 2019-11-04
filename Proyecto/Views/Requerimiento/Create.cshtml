@@ -1,4 +1,4 @@
-﻿@model Proyecto.Models.Requerimiento
+model Proyecto.Models.Requerimiento
 
 @{
     /**/
@@ -6,104 +6,150 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
 
 @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+{
+    @Html.AntiForgeryToken()
+       
+    <div class="container-fluid text-center">
+        <h2>Agregar Requerimiento</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="d-flex justify-content-center">
 
-<fieldset>
-    <div class="form-group">
-        Filtrar por Proyecto
-    </div>
-    <div class="editor-field">
-        <form action="/Requerimiento/Create" method="post">
-            @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
-            {
-                @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
-            }
-            else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
-            {
-                @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
-            }
-            else
-            {
-                @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
-            }
-
-            <div class="form-group">
-                Filtrar por Modelos
-            </div>
-
-            <div>
-                <select id="nombreModulo" name="nombreModulo">Seleccione Modulo</select>
-            </div>
-
-            <br></br>
-
-            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-            </div>
-
-            <br></br>
-
-            @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
-            </div>
-
-            <br></br>
-
-            @Html.LabelFor(model => model.duracionReal, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger" })
-            </div>
+            <tbody>
+                <tr>
+                    <th>
+                        Seleccione Proyecto*
+                    </th>
+                    <td required="true">
 
 
-            @*
-        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-        </div>
-            *@
+                        @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                        {
+                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                        }
+                        else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                        {
+                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                        }
+                        else
+                        {
+                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                        }
+                        @Html.ValidationMessageFor(model => model.nombreProyecto_FK, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
 
-            <br></br>
 
-            <div class="form-group">
-                Responsable
-            </div>
 
-            <div>
-                <select id="miembro" name="miembro">Seleccione responsable</select>
-            </div>
+                <tr>
+                    <th>
+                        Seleccione Modulo*
+                    </th>
+                    <td required="true">
 
-            <br></br>
+                        <select id="nombreModulo" name="nombreModulo">
+                            Seleccione Modulo
+                            <option>Seleccione un módulo
+                        </select>
+                    </td>
+                </tr>
 
-            @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
 
-                @if (TempData["Complejidad"] != null)
-                {
-                    @Html.DropDownList("complejidad", new SelectList(TempData["Complejidad"] as List<string>), "----------")
-                }
-            </div>
 
-            <br></br>
+                <tr>
+                    <th>
+                        Nombre de Requerimiento*
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
 
-            <p>
+
+                <tr>
+                    <th>
+                        Duracion estimada
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>
+                        Duracion Real
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <th>
+                        Estado
+                    </th>
+                    <td required="true">
+                        @if (TempData["Estado"] != null)
+                        {
+                            @Html.DropDownList("estado", new SelectList(TempData["Estado"] as List<string>))
+                        }
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <th>
+                        Responsable
+                    </th>
+                    <td required="true">
+                        <select id="miembro" name="miembro">
+                            Seleccione Miembro responsable
+                            <option>Seleccione un miembro
+                        </select>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+                    <th>
+                        Complejidad
+                    </th>
+                    <td required="true">
+                        @if (TempData["Complejidad"] != null)
+                        {
+                            @Html.DropDownList("complejidad", new SelectList(TempData["Complejidad"] as List<string>))
+                        }
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Crear" class="btn btn-success" />
-            </p>
-        </form>
+            </div>
+
+        </div>
+
+
     </div>
 
-</fieldset>
-    }
+
+
+}
 
 
 
@@ -111,10 +157,10 @@
 
 
 <div>
-   
 
-        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
-    
+
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
+
 </div>
 
 @section Scripts {
@@ -146,6 +192,7 @@
                 ModulosProyecto.success = function (data) {//datos q retorna getmodulo
 
                     $("#nombreModulo").empty();
+                    $("#nombreModulo").append("<option>" + "Seleccione un módulo" + "</option>");
                     for (var i = 0; i < data.length; i++) {
                         $("#nombreModulo").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
                     }
@@ -190,6 +237,7 @@
                 ModulosProyecto.success = function (data) {//datos q retorna getmodulo
 
                     $("#miembro").empty();
+                    $("#nombreModulo").append("<option>" + "Seleccione un módulo" + "</option>");
                     for (var i = 0; i < data.length; i++) {
                         $("#miembro").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
                     }
@@ -208,3 +256,4 @@
         });
     });
 </script>
+

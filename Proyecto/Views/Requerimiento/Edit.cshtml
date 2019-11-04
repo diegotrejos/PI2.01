@@ -2,8 +2,9 @@
 
 @{
     ViewBag.Title = "Editar Requerimiento";
+    
 }
-<h2>@ViewBag.Title</h2>
+
 
 
 <body onload="Desabilitar();">
@@ -12,67 +13,98 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.nombreProyecto_FK)
+    <div class="container-fluid text-center">
+        <h2>@ViewBag.Title</h2>
+        <h4>@ViewBag.nombre</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.nombreProyecto_FK)
 
-            @Html.HiddenFor(model => model.idModulo_FK)
-
-            @Html.HiddenFor(model => model.nombre)@*Debo ver el nombre donde estoy y debe ser solo lectura*@
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Modulo, htmlAttributes: new { @class = "Desarrollador control-label col-md-2" })
-                <div class="col-md-10">
-
-                    @if (TempData["Modulos"] != null)
-                    {
-                        @Html.DropDownList("modulos", new SelectList(TempData["Modulos"] as List<string>), "Seleccione el nuevo modulo", htmlAttributes: new { @class = "Desarrollador" })
-                    }
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "Desarrollador control-label col-md-2" })
-                <div class="col-md-10">
-
-                    @if (TempData["Complejidad"] != null)
-                    {
-                        @Html.DropDownList("complejidad", new SelectList(TempData["Complejidad"] as List<string>), "----------", htmlAttributes: new { @class = "Desarrollador" })
-                    }
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "Desarrollador control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "Desarrollador form-control" } })
-                    @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = " Desarrollador text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.duracionReal, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.cedulaResponsable_FK, htmlAttributes: new { @class = "Desarrollador control-label col-md-2" })
-                <div class="col-md-10">
-
-                    @if (TempData["Responsables"] != null)
-                    {
-                        @Html.DropDownList("responsable", new SelectList(TempData["Responsables"] as List<string>), "Seleccione el nuevo responsable", htmlAttributes: new { @class = "Desarrollador"})
-                    }
-                </div>
-            </div>
+        @Html.HiddenFor(model => model.idModulo_FK)
 
 
-        </div>
+
+
+
+
+
+
+
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr>
+                    <th>
+                        Seleccione Modulo*
+                    </th>
+                    <td required="true">
+
+                        @if (TempData["Modulos"] != null)
+                        {
+                            @Html.DropDownList("modulos", new SelectList(TempData["Modulos"] as List<string>))
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Seleccione Estado
+                    </th>
+                    <td required="true">
+
+                        @if (TempData["Estado"] != null)
+                        {
+                            @Html.DropDownList("estado", new SelectList(TempData["Estado"] as List<string>))
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        Seleccione Complejidad
+                    </th>
+                    <td required="true">
+
+                        @if (TempData["Complejidad"] != null)
+                        {
+                            @Html.DropDownList("complejidad", new SelectList(TempData["Complejidad"] as List<string>))
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Duracion Estimada
+                    </th>
+                    <td required="true">
+                        @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = " Desarrollador text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Duracion Real
+                    </th>
+                    <td>
+                        @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Empleado Responsable
+                    </th>
+                    <td>
+
+                        @if (TempData["Responsables"] != null)
+                        {
+                            @Html.DropDownList("responsable", new SelectList(TempData["Responsables"] as List<string>))
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
 
         <div class="botones text-center">
             <input type="submit" value="Aceptar" class="btn btn-success text-center" />

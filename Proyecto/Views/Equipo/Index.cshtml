@@ -35,10 +35,10 @@
        
     }
 
-    <p class="botones text-right ">
-        <button style="background:transparent;" onclick="myFunction();">Borrar</button>
-        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-default btn-large Lider">Asignar Lider</button>
-        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-default btn-large ">Asignar Miembros</button>
+  <p class="botones text-right ">
+        <button onclick="myFunction();" class="btn btn-danger glyphicon glyphicon-trash float-right"></button>
+        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn btn-success btn-large ">Asignar Lider</button>
+        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn btn-success btn-large ">Asignar Miembros</button>
     </p>
 
     <br />
@@ -84,7 +84,7 @@
     </Script>
 
 
-    <table class="table Lider">
+    <table class="table">
         <tr>
 
             <th>
