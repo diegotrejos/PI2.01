@@ -28,7 +28,7 @@ namespace Proyecto.Controllers
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-            
+             TempData["Estado"] = crearListaEstados();
             TempData["Complejidad"] = crearListaComplejidad();
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
@@ -355,6 +355,16 @@ namespace Proyecto.Controllers
             listaLocal.Add("Mediano");
             listaLocal.Add("Complejo");
             listaLocal.Add("Muy Complejo");
+            return listaLocal;
+        }
+             private List<string> crearListaEstados()
+        {
+            List<string> listaLocal = new List<string>();
+            listaLocal.Add("No Asigando");
+            listaLocal.Add("Asignado");
+            listaLocal.Add("En Progreso");
+            listaLocal.Add("Terminado");
+            listaLocal.Add("Cancelado");
             return listaLocal;
         }
 
