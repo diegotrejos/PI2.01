@@ -49,19 +49,22 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
-            //Equipo que pertenece al filtro 
-            var empleadosAsignados = from a in db.Equipo
-                        from b in db.EmpleadoDesarrollador
-                        where a.nombreProy_FK == filtro && b.cedulaED == a.cedulaEM_FK
-                        select a;
-           
             
+                //Equipo que pertenece al filtro 
+                var empleadosAsignados = from a in db.Equipo
+                                         from b in db.EmpleadoDesarrollador
+                                         where a.nombreProy_FK == filtro && b.cedulaED == a.cedulaEM_FK
+                                         select a;
+                return View(empleadosAsignados.ToList());
+            
+
+
             //Intento de hacerle saber a la vista quien es el lider y los miembros del equipo
             //ViewBag.Lider = lider.FirstOrDefault().cedulaEM_FK;
-            
-           
+
+
             // TempData.Keep();
-            return View(empleadosAsignados.ToList());
+           
         }
 
 
