@@ -419,6 +419,7 @@ C:\Users\b70442\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
 C:\Users\b70442\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.dll
 C:\Users\b70442\Desktop\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\b55049\Downloads\Proyecto\Proyecto\bin\Proyecto.dll.config
 C:\Users\b55049\Downloads\Proyecto\Proyecto\bin\Proyecto.dll
 C:\Users\b55049\Downloads\Proyecto\Proyecto\bin\Proyecto.pdb
@@ -504,6 +505,8 @@ C:\Users\b55049\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComple
 C:\Users\b55049\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.dll
 C:\Users\b55049\Downloads\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
 =======
+=======
+>>>>>>> 1837c1c7248e4cba4848ac9ee168186d01fdd82f
 C:\Users\b61996\Documents\Proyecto\Proyecto\bin\Proyecto.dll.config
 C:\Users\b61996\Documents\Proyecto\Proyecto\bin\Proyecto.dll
 C:\Users\b61996\Documents\Proyecto\Proyecto\bin\Proyecto.pdb
@@ -588,4 +591,7 @@ C:\Users\b61996\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompil
 C:\Users\b61996\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CopyComplete
 C:\Users\b61996\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.dll
 C:\Users\b61996\Documents\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
+<<<<<<< HEAD
+>>>>>>> 1837c1c7248e4cba4848ac9ee168186d01fdd82f
+=======
 >>>>>>> 1837c1c7248e4cba4848ac9ee168186d01fdd82f
