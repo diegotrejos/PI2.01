@@ -214,6 +214,7 @@ namespace Proyecto.Controllers
                     db.Equipo.Remove(item);
                     try
                     {
+                        new EmpleadoDesarrolladorController().modificarEstado(item.cedulaEM_FK);
                         db.SaveChanges();
                     }
                     catch (Exception)
