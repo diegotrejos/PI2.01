@@ -65,7 +65,7 @@ namespace Proyecto.Controllers
                 return View(proyecto.ToList());
             }
 
-            return View();
+          
         }
 
         // GET: Proyecto/Details/5
@@ -123,9 +123,12 @@ namespace Proyecto.Controllers
                       /* Convertimos en literal estos parámetros, por lo que no podrán hacer la inyección */
                     /* cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 15).Value = proyecto.nombre;
                      cmd.Parameters.Add("@objetivo", SqlDbType.VarChar, 256).Value = proyecto.objetivo;*/
+                    var person = from b in db.EmpleadoDesarrollador
+                                           where (b.nombreED.Equals(lider))
+                                           select b.cedulaED;
                     db.Equipo.Add(new Equipo
                     {
-                        cedulaEM_FK = lider ,
+                        cedulaEM_FK = person.FirstOrDefault(),
                         nombreProy_FK = proyecto.nombre,
                         rol = true
                     });
@@ -312,7 +315,7 @@ namespace Proyecto.Controllers
 
             var item = from a in db.EmpleadoDesarrollador
                        where a.disponibilidad == true
-                       select a.cedulaED;
+                       select a.nombreED;
             return new SelectList(item);
 
         }

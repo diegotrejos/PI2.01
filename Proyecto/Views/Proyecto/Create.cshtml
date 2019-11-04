@@ -16,7 +16,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <table class="d-flex justify-content-center">
         <tbody>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Nombre Proyecto *
                 </th>
@@ -27,7 +27,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Objetivo *
                 </th>
@@ -38,7 +38,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Fecha de inicio *
                 </th>
@@ -48,7 +48,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Nombre de Cliente *
                 </th>
@@ -58,7 +58,7 @@
                     @Html.ValidationMessageFor(model => model.cedulaCliente, "", new { @class = "text-danger" })
                 </td>
             </tr>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Duración Estimada
                 </th>
@@ -69,7 +69,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Costo de Trabajo
                 </th>
@@ -80,7 +80,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Costo Estimado
                 </th>
@@ -91,7 +91,7 @@
             </tr>
 
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Fecha de Finalización
                 </th>
@@ -102,7 +102,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="line-height:50px">
                 <th>
                     Nombre de Lider
                 </th>
@@ -121,7 +121,7 @@
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Crear" class="btn btn-success" />
             <a href="~/Proyecto/Index" class="btn btn-default">
-                Regresar
+                Cancelar
             </a>
         </div>
     </div>
