@@ -49,9 +49,11 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
-            
-                //Equipo que pertenece al filtro 
-                var empleadosAsignados = from a in db.Equipo
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;   //Guarda el rol del usuario
+            ViewBag.user = usuario;
+
+            //Equipo que pertenece al filtro 
+            var empleadosAsignados = from a in db.Equipo
                                          from b in db.EmpleadoDesarrollador
                                          where a.nombreProy_FK == filtro && b.cedulaED == a.cedulaEM_FK
                                          select a;
