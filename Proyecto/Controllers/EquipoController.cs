@@ -42,7 +42,7 @@ namespace Proyecto.Controllers
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
             TempData["proyectos"] = proyectos;
-            TempData["mostra"] = "";
+            TempData["muestra"] = "";
             TempData.Keep();
             return View(db.Equipo.ToList());
         }
