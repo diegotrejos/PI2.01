@@ -17,7 +17,7 @@
                 <tbody>
                     <tr style="line-height:50px">
                         <th>
-                            Nombre Proyecto *
+                            Nombre Proyecto<a style="color:red"> *</a>
                         </th>
 
                         <td required="true" readonly>
@@ -28,7 +28,7 @@
 
                     <tr style="line-height:50px">
                         <th class="Lider">
-                            Objetivo *
+                            Objetivo<a style="color:red"> *</a>
                         </th>
 
                         <td required="true">
@@ -36,7 +36,8 @@
                             {
                                 @Html.EditorFor(model => model.objetivo, new { htmlAttributes = new { @class = "form-control Lider", required = "required" }, style = "width: 300px; height: 10em" })
                             }
-                            else{
+                            else
+                            {
                                 @Html.TextAreaFor(model => model.objetivo, new { htmlAttributes = new { @class = "form-control Lider", required = "required" }, style = "width: 300px; height: 10em" })
                             }
                             @Html.ValidationMessageFor(model => model.objetivo, "", new { @class = "text-danger" })
@@ -45,7 +46,7 @@
 
                     <tr style="line-height:50px">
                         <th class="Lider">
-                            Fecha de inicio *
+                            Fecha de inicio<a style="color:red"> *</a>
                         </th>
                         <td required="true">
                             @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control Lider", required = "required", type = "date" } })
@@ -54,13 +55,23 @@
                     </tr>
 
                     <tr style="line-height:50px">
-                        <th class="Lider" >
-                            Nombre de Cliente *
+                        <th class="Lider">
+                            Nombre de Cliente<a style="color:red"> *</a>
                         </th>
 
                         <td>
                             @Html.DropDownList("cedulaCliente", null, htmlAttributes: new { @class = "form-control Lider" })
                             @Html.ValidationMessageFor(model => model.cedulaCliente, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr style="line-height:50px">
+                        <th>
+                            Nombre de Lider<a style="color:red"> *</a>
+                        </th>
+
+                        <td>
+                            @Html.DropDownList("cedulaLider", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", required = "required" })
+
                         </td>
                     </tr>
                     <tr style="line-height:50px">
@@ -106,6 +117,8 @@
                             @Html.ValidationMessageFor(model => model.fechaFinalizacion, "", new { @class = "text-danger" })
                         </td>
                     </tr>
+
+
                 </tbody>
             </table>
 

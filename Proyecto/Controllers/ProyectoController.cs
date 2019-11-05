@@ -133,7 +133,12 @@ namespace Proyecto.Controllers
                         rol = true
                     });
 
-                    db.Proyecto.Add(proyecto);
+                    var item = from a in db.EmpleadoDesarrollador
+                               where a.cedulaED == person.FirstOrDefault()
+                               select a;
+                    item.FirstOrDefault().disponibilidad = false;
+
+                            db.Proyecto.Add(proyecto);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -166,7 +171,19 @@ namespace Proyecto.Controllers
             {
                 return HttpNotFound();
             }
+            var equipo = from a in db.Equipo
+                         where a.nombreProy_FK == proyecto.nombre && a.rol == true
+                         select a;
+            var empleado = from a in db.EmpleadoDesarrollador
+                           where equipo.FirstOrDefault().cedulaEM_FK == a.cedulaED
+                           select a;
+            List<SelectListItem> empl = getEmpledos();
+            var newItem = new SelectListItem { Text = empleado.FirstOrDefault().nombreED, Value = empleado.FirstOrDefault().nombreED };
+            empl.Add(newItem);
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre", proyecto.cedulaCliente);
+            ViewBag.cedulaLider = new SelectList(empl, "Value", "Text", empleado.FirstOrDefault().nombreED);
+
+
             return View(proyecto);
         }
 
@@ -180,19 +197,44 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto)
+        public ActionResult Edit([Bind(Include = "nombre,duracionEstimada,costoTrabajo,costoEstimado,objetivo,fechaFinalizacion,fechaInicio,cedulaCliente")] Proyecto.Models.Proyecto proyecto, string lider)
         {
             
             if (ModelState.IsValid)
             {
+              
 
                     db.Entry(proyecto).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+
+                var equipo = from a in db.Equipo
+                             where a.nombreProy_FK == proyecto.nombre && a.rol == true
+                             select a;
+                var person = from b in db.EmpleadoDesarrollador
+                             where (b.nombreED.Equals(lider))
+                             select b.cedulaED;
+
+                //equipo.FirstOrDefault().cedulaEM_FK = person.FirstOrDefault();
+                
+                return RedirectToAction("Index");
+
+
               
                    
             }
+            var equip = from a in db.Equipo
+                         where a.nombreProy_FK == proyecto.nombre && a.rol == true
+                         select a;
+            var empleado = from a in db.EmpleadoDesarrollador
+                           where equip.FirstOrDefault().cedulaEM_FK == a.cedulaED
+                           select a;
+
+            List < SelectListItem > empl = getEmpledos();
+            var newItem = new SelectListItem { Text = empleado.FirstOrDefault().nombreED, Value = empleado.FirstOrDefault().nombreED };
+            empl.Add(newItem);
             ViewBag.cedulaCliente = new SelectList(db.Cliente, "cedula", "nombre", proyecto.cedulaCliente);
+            ViewBag.cedulaLider = new SelectList(empl, "Value", "Text", empleado.FirstOrDefault().nombreED);
+
             return View(proyecto);
         }
 
@@ -311,12 +353,13 @@ namespace Proyecto.Controllers
             }
         }
 
-        public SelectList getEmpledos() {
+        public List<SelectListItem> getEmpledos() {
 
             var item = from a in db.EmpleadoDesarrollador
-                       where a.disponibilidad == true
-                       select a.nombreED;
-            return new SelectList(item);
+                       where a.disponibilidad == true && a.flg == true
+                       select  new SelectListItem { Text = a.nombreED, Value = a.nombreED };
+            List<SelectListItem> list = item.ToList();
+            return list;
 
         }
     }

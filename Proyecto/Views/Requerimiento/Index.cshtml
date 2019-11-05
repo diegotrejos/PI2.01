@@ -7,7 +7,10 @@
 <h2>Requerimientos</h2>
 
 
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" / >
 
+</head>
 
 <body onload="Desabilitar();">
 
@@ -65,7 +68,7 @@
     </p>
    <H2>Modulo: @ViewBag.Modulo</H2>
 
-    <table class="table">
+    <table class="table table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.nombre)
