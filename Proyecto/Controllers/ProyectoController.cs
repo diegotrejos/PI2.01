@@ -61,6 +61,7 @@ namespace Proyecto.Controllers
             { //Como el Jefe puede ver todo, se le muestran todos los proyectos
                 return View(proyecto.ToList());
             }
+             return View();
         }
 
         // GET: Proyecto/Details/5
