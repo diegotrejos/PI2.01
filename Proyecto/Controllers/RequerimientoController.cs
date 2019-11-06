@@ -404,11 +404,10 @@ namespace Proyecto.Controllers
              private List<string> crearListaEstados()
         {
             List<string> listaLocal = new List<string>();
-            listaLocal.Add("No Asignado");
-            listaLocal.Add("Asignado");
-            listaLocal.Add("En Progreso");
-            listaLocal.Add("Terminado");
-            listaLocal.Add("Cancelado");
+            listaLocal.Add("Sin iniciar");
+            listaLocal.Add("En ejecucion");
+            listaLocal.Add("Finalizado");
+            listaLocal.Add("Suspendido");
             return listaLocal;
         }
 
