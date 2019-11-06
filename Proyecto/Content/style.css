@@ -1,24 +1,17 @@
-﻿body {
-    background-image: url('images/fondo.png');  
-    position: absolute;
-    z-index: 1;
-
-    width: 100%;
-    height: 100%;
-}
+﻿
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-    background-color: #6f2f28;
+    background-color: #e2c436;
    
 }
 
 .table-striped > tbody > tr:nth-child(even) > td,
 .table-striped > tbody > tr:nth-child(even) > th {
-    background-color: #650e64;
+    background-color: #d0c9c9;
     
 }
 
 .table-striped > thead > tr > th {
-    background-color: palegoldenrod;
+    background-color: #000000;
 }

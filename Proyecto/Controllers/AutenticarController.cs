@@ -14,6 +14,7 @@ namespace Proyecto.Models
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
+        /*Metodo que muestra la vista inicial de autenticar*/
         public ActionResult Index()
         {
             return View();
@@ -21,6 +22,12 @@ namespace Proyecto.Models
         // POST: Autenticar/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /*Metodo index de autenticar, este recibe una cedula y una contraseña valida si son 
+         * correctos de serlo inicia en la sesion correspondiente, ademas se asigna el rol correspondiente del empleado
+         * @param cedula
+         * @param password
+         * @return vista correspondiente con rol
+         */
         [HttpPost]
         public ActionResult Index(string cedula, string password)
         {
@@ -94,8 +101,6 @@ namespace Proyecto.Models
         }
 
 
-
-        // GET: Autenticar/Delete/5
 
 
 

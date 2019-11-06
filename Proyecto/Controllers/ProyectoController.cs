@@ -61,11 +61,6 @@ namespace Proyecto.Controllers
             { //Como el Jefe puede ver todo, se le muestran todos los proyectos
                 return View(proyecto.ToList());
             }
-            else {
-                return View(proyecto.ToList());
-            }
-
-          
         }
 
         // GET: Proyecto/Details/5
@@ -140,7 +135,7 @@ namespace Proyecto.Controllers
 
                             db.Proyecto.Add(proyecto);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("");
                     }
                     else
                         Response.Write("<script>alert('El nombre del proyecto ya existe. Intente con uno nuevo');</script>");
@@ -216,7 +211,7 @@ namespace Proyecto.Controllers
 
                 //equipo.FirstOrDefault().cedulaEM_FK = person.FirstOrDefault();
                 
-                return RedirectToAction("Index");
+                return RedirectToAction("");
 
 
               
@@ -273,7 +268,7 @@ namespace Proyecto.Controllers
             Proyecto.Models.Proyecto proyecto = db.Proyecto.Find(id);
             db.Proyecto.Remove(proyecto);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("");
         }
 
         protected override void Dispose(bool disposing)

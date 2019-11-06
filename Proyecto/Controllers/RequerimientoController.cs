@@ -24,30 +24,34 @@ namespace Proyecto.Controllers
         // GET: Requerimiento
         public async Task<ActionResult> Index()
         {
-            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-            ViewBag.user = usuario;
+            //variables de sesión para obtener vista de acuerdo al rol
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;  
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-             TempData["Estado"] = crearListaEstados();
+
+            //variable para enviar a la vista
+            ViewBag.user = usuario;
+
+            TempData["Estado"] = crearListaEstados();
             TempData["Complejidad"] = crearListaComplejidad();
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
-                if (usuario == "Desarrollador")
+                if (usuario == "Desarrollador") //si soy desarrollador veo los requerimientos asignados a mi
                 {
                     var queryReq = from a in db.Requerimiento
                                    where a.cedulaResponsable_FK == cedula
                                    select a;
                     return View(queryReq.ToList());
                 }
-                else if (usuario == "Lider")
+                else if (usuario == "Lider") //si soy lider veo los requerimientos de mi proyecto
                 {
                     var queryReq = from a in db.Requerimiento
                                    where a.nombreProyecto_FK == proy
                                    select a;
                     return View(queryReq.ToList());
                 }
-                else if (usuario == "Cliente") {
+                else if (usuario == "Cliente") { //si soy cliente veo los requerimientos de mi proyecto
                     var queryReq = from a in db.Requerimiento
                                    where a.nombreProyecto_FK == proy
                                    select a;
@@ -66,12 +70,14 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                //variables de sesion para saber sobre la información del usuario
                 string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-                ViewBag.user = usuario;
                 string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
                 string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-                ViewBag.proyectos = getProyectos(usuario, cedula);
 
+                //variables para la vista
+                ViewBag.proyectos = getProyectos(usuario, cedula);
+                ViewBag.user = usuario;
                 ViewBag.Modulo = nombreModulo;
 
 
@@ -79,14 +85,14 @@ namespace Proyecto.Controllers
                                where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
                                select a.Id;
 
-                if (usuario == "Desarrollador")
+                if (usuario == "Desarrollador") //Desarrollador ve requerimientos asignados a el
                 {
                     var queryReq = from a in db.Requerimiento
                                    where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault() && a.cedulaResponsable_FK == cedula
                                    select a;
                     return View(queryReq.ToList());
                 }
-                else
+                else //los otros usuarios ven requerimientos de sus proyectos
                 {
                     var queryReq = from a in db.Requerimiento
                                    where a.nombreProyecto_FK == nombreProyecto && a.idModulo_FK == queryMod.FirstOrDefault()
@@ -94,14 +100,6 @@ namespace Proyecto.Controllers
                     return View(queryReq.ToList());
                 }
             
-
-
-                
-
-                
-
-
-
 
             }
         }
@@ -122,12 +120,13 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                //variables de sesion
                 string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-                ViewBag.user = usuario;
                 string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
                 string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-
+                //variables para uso de vista 
+                ViewBag.user = usuario;
                 ViewBag.Proyecto = nombreProy;
                 ViewBag.Modulo = nombreModulo;
 

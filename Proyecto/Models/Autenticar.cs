@@ -14,6 +14,7 @@ namespace Proyecto.Models
     
     public partial class Autenticar
     {
+        //
         public string usuario { get; set; }
         public string contrasena { get; set; }
         public Nullable<bool> flag { get; set; }

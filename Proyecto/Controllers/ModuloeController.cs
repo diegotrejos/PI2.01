@@ -12,6 +12,7 @@ namespace Proyecto.Controllers
 {
     public class ModuloeController : Controller
     {
+        /*Variables utilizadas para obtener la información del usuario en la sesión*/
         public string usuario = "";
         public string cedula = "";
         public string proy = "";
@@ -24,15 +25,18 @@ namespace Proyecto.Controllers
         // GET: Moduloe
         public ActionResult Index()
         {
+            //Inicializacion de variables de sesion 
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-            ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
             var modulo = db.Modulo.Include(m => m.Proyecto);
 
+            //variable para la vista
+            ViewBag.user = usuario;
+
             if (usuario != "Jefe")
             {
-                if (usuario == "Cliente") {
+                if (usuario == "Cliente") { //si soy cliente puedo solamente ver los modulos de mis proyectos
                     var obj = from a in db.Modulo
                               from b in db.Proyecto
                               from c in db.Cliente
@@ -43,7 +47,7 @@ namespace Proyecto.Controllers
 
                     return View(obj.Distinct().ToList());
                 }
-                else
+                else //si soy desarrollador puedo ver los módulos de mi proyecto 
                 {
                     var obj = from a in db.Modulo
                               from b in db.Proyecto
@@ -58,7 +62,7 @@ namespace Proyecto.Controllers
                     return View(obj.Distinct().ToList());
                 }
             }
-            else
+            else //como jefe puedo ver todos los modulos 
             {
                 return View(modulo.ToList());
             }
@@ -74,16 +78,19 @@ namespace Proyecto.Controllers
 
 
 
-
+            //inicialización de variables de sesion
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-            ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            
+            //variable de vista
+            ViewBag.user = usuario;
+
             var modulo = db.Modulo.Include(m => m.Proyecto);
 
             if (usuario != "Jefe")
             {
-                if (usuario == "Cliente")
+                if (usuario == "Cliente") //si soy cliente puedo ver los módulos de mi proyecto
                 {
                     var obj = from a in db.Modulo
                               from b in db.Proyecto
@@ -95,7 +102,7 @@ namespace Proyecto.Controllers
 
                     return View(obj.Distinct().ToList());
                 }
-                else
+                else //si soy desarrollador puedo ver los módulos de mi proyecto
                 {
                     var obj = from a in db.Modulo
                               from b in db.Proyecto
@@ -111,7 +118,7 @@ namespace Proyecto.Controllers
                     return View(obj.Distinct().ToList());
                 }
             }
-            else
+            else //si soy jefe puedo ver todos los módulos
             {
                 var query = from a in db.Modulo
                             where ((a.NombreProy.Equals(filtro)))
