@@ -14,9 +14,13 @@ namespace Proyecto.Models
     
     public partial class Autenticar
     {
-        //
+        //rol de usuario en el sistema
         public string usuario { get; set; }
+
+        //contraseña para el rol indicado
         public string contrasena { get; set; }
+
+        //bandera indicando la sesion activa
         public Nullable<bool> flag { get; set; }
     }
 }
