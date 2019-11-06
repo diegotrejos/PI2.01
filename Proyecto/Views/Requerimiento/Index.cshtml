@@ -23,15 +23,15 @@
             <form action="/Requerimiento/Index" method="post">
                 @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto", @class= "form-control" })
                 }
                 else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" , @class= "form-control" })
                 }
                 else
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" , @class= "form-control" })
                 }
 
                 <br>
@@ -43,7 +43,7 @@
                 </div>
 
                 <div>
-                    <select id="nombreModulo" name="nombreModulo">
+                    <select id="nombreModulo" name="nombreModulo" class="form-control">
                         <option>Seleccione un módulo</option>
                     </select>
                 </div>
@@ -64,7 +64,7 @@
 
 
     <p class=" boton float-right">
-        <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+        <button onclick="location.href = 'Requerimiento/Create'" class="btn btn-success Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
     </p>
    <H2>Modulo: @ViewBag.Modulo</H2>
 
