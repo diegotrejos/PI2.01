@@ -27,7 +27,9 @@
             </div>
             <br>
             <div class="d-flex justify-content-center">
-                @Html.LabelFor(model => model.conocimientos, "Habilidad *", htmlAttributes: new { @class = "control-label col-md-2" })
+                <p>
+                Habilidad < a style = "color:red" > *</ a >
+                </p>
                 <div class="d-flex justify-content-center" required = "true">
                     @Html.EditorFor(model => model.conocimientos, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                     @Html.ValidationMessageFor(model => model.conocimientos, "", new { @class = "text-danger" })
@@ -41,9 +43,6 @@
                 </div>
             </div>
 
-            <div>
-                @Html.ActionLink("Regresar", "Index/")
-            </div>
 
         </div>
 

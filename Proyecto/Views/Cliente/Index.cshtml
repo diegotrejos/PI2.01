@@ -4,16 +4,16 @@
     ViewBag.Title = "Clientes";
 }
 <head>
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css" / >
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
 
 </head>
 
 <body onload="Desabilitar();">
-  
+
     <div class=" Container" align-items-center>
         <h2>Lista de clientes</h2>
         <p class=" boton float-right">
-            <button onclick="location.href = 'Cliente/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+            <button onclick="location.href = 'Cliente/Create'" class="btn  Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right " style="background: #5B3924; color:white"></button>
         </p>
 
         <table class="table table-striped">
@@ -44,11 +44,11 @@
                     </td>
                     <td>
                         <p class="botones">
-                            <button onclick="location.href ='@Url.Action(item.cedula, "Cliente/Edit")'"  class="btn Lider Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
+                            <button onclick="location.href ='@Url.Action(item.cedula, "Cliente/Edit")'" class="btn Lider Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
                             <button onclick="location.href = '@Url.Action(item.cedula, "Cliente/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
                         </p>
                     </td>
-                    </tr>
+                </tr>
             }
 
         </table>
@@ -66,5 +66,13 @@
         }
     </script>
 
+    <script>
+        function negrita() {
        
+            var cliente = document.getElementsByClassName("cliente");
+            cliente.element.classList.add("btn-danger");
+        }
+    </script>
+
+
 </body>

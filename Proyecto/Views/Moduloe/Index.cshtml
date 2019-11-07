@@ -43,7 +43,7 @@
     }
 
     <p class=" boton float-right">
-        <button onclick="location.href = 'Moduloe/Create'" class="btn btn-success Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
+        <button onclick="location.href = 'Moduloe/Create'" class="btn Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right " style="background: #5B3924; color:white"></button>
     </p>
 
 
@@ -80,7 +80,7 @@
 
                     @Html.ActionLink(" ", "Delete", "Moduloe", new { id = item.Id, nombreProy = item.NombreProy }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
                     @*Va ventana donde se muestran todos los requerimientos de este modulo*@
-                    @Html.ActionLink("Requerimientos", "consulReq", "Requerimiento", new { modID = item.Id, nombreModulo=item.Nombre ,nombreProy = item.NombreProy }, new { @class = "btn btn-default float-right  " })
+                    @Html.ActionLink("Requerimientos", "consulReq", "Requerimiento", new { modID = item.Id, nombreModulo=item.Nombre ,nombreProy = item.NombreProy }, new { @class = "btn float-right cafe"  })
                 </td>
             </tr>
         }

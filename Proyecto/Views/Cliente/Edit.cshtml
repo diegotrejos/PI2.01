@@ -24,7 +24,7 @@
         <tbody>
             <tr style="line-height:50px">
                 <th>
-                    Cédula *
+                    Cédula<a style="color:red"> *</a>
                 </th>
                 <td required="true">
                     @Html.EditorFor(model => model.cedula, new { htmlAttributes = new { @class = "form-control", required = "required" } })
@@ -33,7 +33,7 @@
             </tr>
             <tr style="line-height:50px">
                 <th>
-                    Nombre *
+                    Nombre<a style="color:red"> *</a>
                 </th>
                 <td required="true">
                     @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", required = "required" } })
@@ -42,7 +42,7 @@
             </tr>
             <tr style="line-height:50px">
                 <th>
-                    Primer Apellido *
+                    Primer Apellido<a style="color:red"> *</a>
                 </th>
                 <td required="true">
                     @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control", required = "required" } })

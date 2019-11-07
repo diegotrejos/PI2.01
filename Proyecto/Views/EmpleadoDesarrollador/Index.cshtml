@@ -9,52 +9,56 @@
 </head>
 
 <body onload="Desabilitar();">
-    <h2>Lista de Empleados</h2>
-    <p class=" boton float-right">
-        <button onclick="location.href = 'EmpleadoDesarrollador/Create'" class="btn btn-success Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right "></button>
-    </p>
-    <table class="table table-striped">
-        <tr>
 
-            <th>
-                Cédula
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Primer Apellido
-            </th>
-        </tr>
+    <div class=" Container" align-items-center>
+        <h2>Lista de Empleados</h2>
+        <p class=" boton float-right">
+            <button onclick="location.href = 'EmpleadoDesarrollador/Create'" class="btn  Lider Desarrollador Cliente btn-lg glyphicon glyphicon-plus float-right " style="background: #5B3924; color:white"></button>
+        </p>
 
-        @foreach (var item in Model)
-        {
+        <table class="table table-striped">
             <tr>
-                <td>
-                    @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
-                </td>
-                <td>
-                    @Html.ActionLink(item.nombreED, "Details", new { id = item.cedulaED })
-                </td>
-                <td>
-                    @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
-                </td>
-                <td>
-                    <p class="botones">
-                        <button onclick="location.href ='@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Edit")'" id="item.nombre" class="btn Lider Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
-                        <button onclick="location.href = '@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
-                        <button onclick="location.href = '@Url.Action(item.cedulaED, "Habilidades/Index")'" class="btn btn-success float-right ">Habilidades</button>
-                        @*<div class="form-group">
-                                @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-success float - right" })
-                            </div>*@
-                    </p>
-
-                </td>
-
-
+                <th>
+                    Cédula
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Primer Apellido
+                </th>
+                <th></th>
             </tr>
-        }
-    </table>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.cedulaED, "Details", new { id = item.cedulaED })
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.nombreED, "Details", new { id = item.cedulaED })
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.apellido1ED, "Details", new { id = item.cedulaED })
+                    </td>
+                    <td>
+                        <p class="botones">
+                            <button onclick="location.href ='@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Edit")'" id="item.nombre" class="btn Lider Desarrollador Cliente btn-info glyphicon glyphicon-wrench float-right "></button>
+                            <button onclick="location.href = '@Url.Action(item.cedulaED, "EmpleadoDesarrollador/Delete")'" class="btn  Lider Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right "></button>
+                            <button onclick="location.href = '@Url.Action(item.cedulaED, "Habilidades/Index")'" class="btn  float-right " style="background: #5B3924; color:white">Habilidades</button>
+                            @*<div class="form-group">
+                                    @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaED }, new { @class = "btn btn-success float - right" })
+                                </div>*@
+                        </p>
+
+                    </td>
+
+
+                </tr>
+            }
+        </table>
+    </div>
 
     <script>
         function Desabilitar() {

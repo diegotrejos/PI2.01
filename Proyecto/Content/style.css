@@ -2,13 +2,13 @@
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-    background-color: #e2c436;
+    background-color: #EEC170;
    
 }
 
 .table-striped > tbody > tr:nth-child(even) > td,
 .table-striped > tbody > tr:nth-child(even) > th {
-    background-color: #d0c9c9;
+    background-color: #F2EADC;
     
 }
 

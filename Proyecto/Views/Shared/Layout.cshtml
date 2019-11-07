@@ -24,6 +24,11 @@
             font-size: 16px;
             border: none;
         }
+
+        .cafe {
+            background: #5B3924;
+            color:white;
+        }
   
         a {
             font: oblique 600%;
@@ -83,7 +88,7 @@
 </head>
 <body>
     <h1 class=" titulo text-center " >Software Expert S.A </h1>
-    <nav class="navbar bg-primary navbar-expand-lg navbar-dark  " >
+    <nav class="navbar navbar-expand-lg navbar-dark   " style="background: #5B3924">
         <a class="navbar-brand" href="#">Camaik</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -91,30 +96,30 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item ">
-                    <a style="color:white" class="nav-item nav-link" href="~/Proyecto">Proyectos</a>
+                    <a style="color:white" class=" proyecto nav-item nav-link" href="~/Proyecto">Proyectos</a>
                 </li>
 
                 <li class="nav-item">
                     @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe" || (string)System.Web.HttpContext.Current.Session["rol"] == "Lider")
                     {
-                        <a style="color:white" class="nav-item nav-link" href="~/Equipo">Equipo</a>
+                        <a style="color:white" class=" equipo nav-item nav-link" href="~/Equipo">Equipo</a>
                     }
                 </li>
 
                 <li class="nav-item">
-                    <a style="color:white" class="nav-item nav-link" href="~/Moduloe">Modulo</a>
+                    <a style="color:white" class="modulo nav-item nav-link" href="~/Moduloe">Modulo</a>
                 </li>
 
                 <li class="nav-item">
-                    <a style="color:white" class="nav-item nav-link" href="~/Requerimiento">Requerimientos</a>
+                    <a style="color:white" class="requerimiento nav-item nav-link" href="~/Requerimiento">Requerimientos</a>
                 </li>
 
                 <li class="nav-item">
-                    <a style="color:white" class="nav-item nav-link" href="~/EmpleadoDesarrollador">Empleado</a>
+                    <a style="color:white" class=" empleado nav-item nav-link" href="~/EmpleadoDesarrollador">Empleado</a>
                 </li>
 
-                <li class="nav-item">
-                    <a style="color:white" class="nav-item nav-link" href="~/Cliente">Cliente</a>
+                <li class="nav-item cliente" onclick="negrita();">
+                    <a  style="color:white" class="cliente nav-item nav-link" href="~/Cliente">Cliente</a>
                 </li>
              
             </ul>
@@ -141,7 +146,7 @@
         @RenderBody()
         <hr />
     </div>
-    <footer class="fixed-bottom bg-primary pt-4 pb-4 " >
+    <footer class="fixed-bottom  pt-4 pb-4 " style="background: #5B3924">
         <div class="copyright text-sm-center text-white small">
            Copyright &copy; 2019 <span>Camaik</span>
         </div>
