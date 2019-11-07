@@ -247,6 +247,13 @@ namespace Proyecto.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Proyecto.Models.Proyecto proyecto = db.Proyecto.Find(id);
+            var equipo = from a in db.Equipo
+                         where a.nombreProy_FK == proyecto.nombre && a.rol == true
+                         select a;
+            var empleado = from a in db.EmpleadoDesarrollador
+                           where equipo.FirstOrDefault().cedulaEM_FK == a.cedulaED
+                           select a;
+            ViewBag.lider = empleado.FirstOrDefault().nombreED;
             if (proyecto == null)
             {
                 return HttpNotFound();
