@@ -20,6 +20,7 @@
             Filtrar por Proyecto
         </div>
         <div class="editor-field">
+            @**@
             <form action="/Requerimiento/Index" method="post">
                 @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                 {
@@ -42,17 +43,15 @@
                     Filtrar por Modulos
                 </div>
 
-                <div>
-                    <select id="nombreModulo" name="nombreModulo" class="form-control">
+                <div>@*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
+                    <select id="nombreModulo" name="nombreModulo" class="form-control" onchange='this.form.submit()'>
                         <option>Seleccione un módulo</option>
                     </select>
                 </div>
 
-                <br>
-                </br>
-                <p>
-                    <input type="submit" value="Buscar" class="btn btn-default" />
-                </p>
+                <noscript><input type="submit" value="Submit"></noscript>
+
+        
             </form>
         </div>
 
