@@ -137,7 +137,9 @@
                 <th>
                     Disponibilidad
                 </th>
-
+                @*Ve el valor que le pasa el controlador*@
+                @*Si esta en true, entonces está disponible*@
+                @*Si esta en false, entonces NO está disponible*@
                 @if (ViewBag.disp == "true")
                 {
                     <td>
@@ -156,6 +158,9 @@
                 <th>
                     Rol
                 </th>
+                @*Ve el valor que le pasa el controlador del rol*@
+                @*Si esta en true, entonces es un  desarrollador*@
+                @*Si esta en false, entonces es otro (jefe,soporte, etc), no se atrapan todos porque es una relación ISA*@
                 @if (ViewBag.rol == "true")
                 {
                     <td>

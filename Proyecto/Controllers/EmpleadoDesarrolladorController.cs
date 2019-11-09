@@ -90,21 +90,22 @@ namespace Proyecto.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(id);
-            if (empleadoDesarrollador.disponibilidad == true)
+            //Saber que valor hay en disponibilidad para presentarlo al usuario de manera entendible
+            if (empleadoDesarrollador.disponibilidad == true)//Si está disponible
             {
-                ViewBag.disp = "true";
+                ViewBag.disp = "true";//Le pasa a la vista un true
             }
             else {
-                ViewBag.disp = "false";
+                ViewBag.disp = "false";//Sino le pasa un false
             }
-
-            if (empleadoDesarrollador.flg == true)
+            //Saber que valor hay en la bandera de rol para presentarlo al usuario de manera entendible
+            if (empleadoDesarrollador.flg == true)//Si la bandera está en true
             {
-                ViewBag.rol = "true";
+                ViewBag.rol = "true";//Se lo comunica a la vista
             }
             else
             {
-                ViewBag.rol = "false";
+                ViewBag.rol = "false";//Si esta en false lo comunica
             }
 
 
@@ -226,22 +227,24 @@ namespace Proyecto.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             EmpleadoDesarrollador empleadoDesarrollador = db.EmpleadoDesarrollador.Find(id);
-            if (empleadoDesarrollador.disponibilidad == true)
+            //Saber que valor hay en disponibilidad para presentarlo al usuario de manera entendible
+            if (empleadoDesarrollador.disponibilidad == true)//Si está disponible
             {
-                ViewBag.disp = "true";
+                ViewBag.disp = "true";//Le pasa a la vista un true
             }
             else
             {
-                ViewBag.disp = "false";
+                ViewBag.disp = "false";//sino pasa a la vista un false
             }
 
-            if (empleadoDesarrollador.flg == true)
+            //Saber que valor hay en la bandera de rol para presentarlo al usuario de manera entendible
+            if (empleadoDesarrollador.flg == true)//Si el rol es true
             {
-                ViewBag.rol = "true";
+                ViewBag.rol = "true";//Se lo comunica a la vista
             }
             else
             {
-                ViewBag.rol = "false";
+                ViewBag.rol = "false";//si esta en false lo comunica
             }
             db.EmpleadoDesarrollador.Remove(empleadoDesarrollador);
             db.SaveChanges();
