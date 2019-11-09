@@ -2,14 +2,14 @@
 
 @{
    
-    ViewBag.Title = "Modulos";
+    ViewBag.Title = "Módulos";
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/style.css" / >
 
 </head>
 <body onload="Desabilitar();">
-    <h2> Modulos </h2>
+    <h2>Lista Módulos </h2>
     @**@
 
     @*Genera una dropdown list con todos los proyectos*@
@@ -19,26 +19,29 @@
     {
         <fieldset>
             <div class="display-label">
-                Filtrar por Proyecto
+                Buscar por Proyecto
             </div>
             <div class="editor-field">
-                 @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
-                {
-                    @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
-                {
-                    @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
-                else
-                {
-                    @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-                }
 
-            </div>
-            <p>
-                <input type="submit" value="Buscar" class="btn btn-default" />
-            </p>
+                <form action="/Moduloe/Index" method="post">
+                    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                    {
+                        @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    }
+                    else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                    {
+                        @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control" , @onchange = "this.form.submit()" })
+                    }
+                    else
+                    {
+                        @Html.DropDownList("filtro", ((Proyecto.Controllers.ModuloeController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    }
+
+
+                    @*<input type="submit" value="Buscar" class="btn btn-default" />*@
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+                </div>
         </fieldset>
     }
 

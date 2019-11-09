@@ -2,7 +2,7 @@
 @{
                 /**/
 
-                ViewBag.Title = "Editar";
+                ViewBag.Title = "Editar Módulo";
 }
 
 
@@ -17,19 +17,25 @@
     @Html.ValidationSummary(true)
 
 
-    <h4>@Model.NombreProy</h4>
-
-
-
-
     <table class="d-flex justify-content-center">
         <tbody>
-            <tr>
+            <tr style="line-height:50px">
                 <th>
-                    Nombre Modulo *
+                    Proyecto
                 </th>
 
                 <td required="true" readonly>
+                    @Html.TextBoxFor(model => model.NombreProy, new { @readonly = "readonly", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NombreProy, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr style="line-height:50px">
+
+                <th>
+                    Nombre Modulo  <a style="color:red"> *</a>
+                </th>
+
+                <td>
                     @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
                 </td>
@@ -40,12 +46,19 @@
 </div>
 
 
-    <div class="botones text-center">
-        
-            <input type="submit" value="Aceptar" class="btn btn-success" />
-            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default btn-large" })
+<div class="botones text-center">
+
+    <input type="submit" value="Aceptar" class="btn btn-success" />
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+
     
-    </div>
+
+</div>
+
+
+<div class="botones text-right">
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default " })
+</div>
 
 }
 
