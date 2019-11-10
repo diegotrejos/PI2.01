@@ -26,7 +26,7 @@ namespace Proyecto.Controllers
         {
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
-            List<EmpleadoDesarrollador> empleadosA = new List<EmpleadoDesarrollador>();
+            List<Equipo> empleadosA = new List<Equipo>();
 
             /*Variables que se utilizan en el inicio de sección para guardar datos necesarios*/
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;   //Guarda el rol del usuario
@@ -42,99 +42,29 @@ namespace Proyecto.Controllers
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
             TempData["proyectos"] = proyectos;
-            TempData["muestra"] = "";
             TempData.Keep();
             return View(db.Equipo.ToList());
         }
 
         [HttpPost]
-        public ActionResult Index(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
+        public ActionResult Index(string Proyecto)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;   //Guarda el rol del usuario
             ViewBag.user = usuario;
-            TempData["muestra"] = filtro;
-            //Equipo que pertenece al filtro 
+
+            //codigo para buscar los empleados que se deberian de mostrar dependiendo del proyecto
             var empleadosAsignados = from a in db.Equipo
-                                         from b in db.EmpleadoDesarrollador
-                                         where a.nombreProy_FK == filtro && b.cedulaED == a.cedulaEM_FK
-                                         select a;
-                return View(empleadosAsignados.ToList());
+                                     where a.nombreProy_FK == Proyecto 
+                                     select a;
+
+            //asignacion para mostrarlos en la  vista
+            TempData["empleadosAsignados"] = empleadosAsignados as List<Equipo>;
+            return View(/*empleadosAsignados.ToList()*/);
            
         }
 
 
-
-        // GET: Equipo/Details/5
-        //Método que devuelve los detalles 
-        public ActionResult Details(string nombreEquipo)
-        {
-            return View();
-        }
-
-        // GET: Equipo/Create
-        public ActionResult AsignarLider()
-        {
-            return View();
-        }
-
-
-        //metodo de tipo Post que al presionar el boton de submit envia el nombre de proyecto y empleado seleccionado para ser el lider del equipo
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AsignarLider(string nombre,string cedula, Equipo equipo)
-        {
-            if (ModelState.IsValid)
-            {
-                new EmpleadoDesarrolladorController().modificarEstado(cedula); //llama a un metodo que hace que el empleado no este disponible
-                equipo.nombreProy_FK = nombre;
-                equipo.cedulaEM_FK = cedula;
-                equipo.rol = true; //Declaro que es lider
-                db.Equipo.Add(equipo);
-                db.SaveChanges();
-                return RedirectToAction("index");
-            }
-            else
-                Response.Write("<script>alert('Este proyecto no existe. Intente con otro');</script>");
-
-            return RedirectToAction("AsignarLider"); // cambiar esto para saber que algo fue mal 
-        }
-
-        public ActionResult AsignarMiembros()
-        {
-            return View();
-        }
-
-        // POST: Equipo/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-
-
-        // GET: Equipo/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Equipo equipo = db.Equipo.Find(id);
-            if (equipo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(equipo);
-        }
-
-        // POST: Equipo/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Equipo equipo = db.Equipo.Find(id);
-            db.Equipo.Remove(equipo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+      
         //Codigo que traia por default visual y como se referencia 5 veces mejor no lo borro xD
         protected override void Dispose(bool disposing)
         {
@@ -152,24 +82,32 @@ namespace Proyecto.Controllers
             return this.proyController.getProyectos(rol, cedula);
         }
 
-        //Codigo que se llama en el script de create que permiete realizar el evento de arrastre 
-        //Aporte del grupo #1
-         [HttpPost]
+        //Codigo llamado al hacer click en el boton aceptar que permite a los miembros arrastrados agregarlos a la tabla equipo
+        [HttpPost]
         public ActionResult Asignar(string Miembros, string Proyecto)
         {
+            //condicion para ver si al menos se agrego un empleado y se coloco un proyecto en el dropdown 
             if (Proyecto != "" && Miembros != "")
             {
                 //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
                 string[] eachMember = Miembros.Split(',');
                 foreach (var itemId in eachMember)
                 {
-                    //es el equipo con la tupla que se va a agregar a la base
-                    db.Equipo.Add(new Equipo
+                   
+                    var empleado = from a in db.EmpleadoDesarrollador
+                                   where a.cedulaED == itemId
+                                   select a.disponibilidad;
+                    //como en la lista se muestran empleados que ya estan asignados en el momento esto toma en cuenta solo los nuevos
+                    if (empleado.FirstOrDefault() == true)
                     {
-                        cedulaEM_FK = itemId,
-                        nombreProy_FK = Proyecto,
-                        rol = false
-                    });
+                        //es el equipo con la tupla que se va a agregar a la base
+                        db.Equipo.Add(new Equipo
+                        {
+                            cedulaEM_FK = itemId,
+                            nombreProy_FK = Proyecto,
+                            rol = false
+                        });
+                    }
                     try
                     {
                         new EmpleadoDesarrolladorController().modificarEstado(itemId); //para que ese empleado deje de estar disponible
@@ -197,50 +135,6 @@ namespace Proyecto.Controllers
                 });
             }
         }
-
-        [HttpPost]
-        public ActionResult Eliminar(string Proyecto)
-        {
-            if (Proyecto != "")
-            {
-                //separa el string Miembros en un array de string donde cada casilla es una cedula de desarrollador
-                var eachTeam = from a in db.Equipo
-                               where a.nombreProy_FK == Proyecto
-                               select a;
-                
-               
-                foreach (var item in eachTeam.ToList())
-                {
-                    db.Equipo.Remove(item);
-                    try
-                    {
-                        new EmpleadoDesarrolladorController().modificarEstado(item.cedulaEM_FK);
-                        db.SaveChanges();
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-                //retorna al script al success
-                return Json(new
-                {
-                    redirectUrl = Url.Action("Index", "Equipo"),
-                    isRedirect = true, //se redireccionara
-                    error = false //no paso ningun error
-                });
-            }
-            else
-            {
-                return Json(new
-                {
-                    redirectUrl = Url.Action("Index", "Equipo"),
-                    error = true, //paso un error
-                    isRedirect = false //como es falso no se va a redirigir
-                });
-            }
-        }
-
 
         public SelectList getEmpleadosProyecto(string nombreProy)
         {
