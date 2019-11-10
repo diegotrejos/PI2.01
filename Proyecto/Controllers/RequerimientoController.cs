@@ -18,6 +18,7 @@ namespace Proyecto.Controllers
     public class RequerimientoController : Controller
     {
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
+        //instancias de controladores externos que se utilizan en en este
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.ModuloeController moduloController = new Proyecto.Controllers.ModuloeController();
         Proyecto.Controllers.EquipoController EqController = new Proyecto.Controllers.EquipoController();
@@ -32,6 +33,7 @@ namespace Proyecto.Controllers
             //variable para enviar a la vista
             ViewBag.user = usuario;
 
+            //variables temporales que permiten el uso de los dropdown en las vistas, con valores ya predeterminados
             TempData["Estado"] = crearListaEstados();
             TempData["Complejidad"] = crearListaComplejidad();
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
@@ -80,7 +82,7 @@ namespace Proyecto.Controllers
                 ViewBag.user = usuario;
                 ViewBag.Modulo = nombreModulo;
 
-
+                //busca el id del modulo que entra por parametro
                 var queryMod = from a in db.Modulo
                                where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
                                select a.Id;
@@ -104,7 +106,7 @@ namespace Proyecto.Controllers
             }
         }
 
-
+        //conseguir el nombre de un empleado segun la cedula 
         public EmpleadoDesarrollador getNombre(string cedula)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
@@ -113,7 +115,6 @@ namespace Proyecto.Controllers
                 return empleado;
             }
         }
-
 
 
         public ActionResult consulReq(int modID,string nombreModulo, string nombreProy)
@@ -130,15 +131,10 @@ namespace Proyecto.Controllers
                 ViewBag.Proyecto = nombreProy;
                 ViewBag.Modulo = nombreModulo;
 
-                // var requerimiento = db.Requerimiento.Include(r => r.EmpleadoDesarrollador).Include(r => r.Modulo);
-                //var requerimiento = reqController.getRequerimientos(modID, nombreProy, "BackLog");
-
+                //busca el requerimiento por medio de sus llaves primarias
                 var requerimiento = from Req in db.Requerimiento
                             where Req.idModulo_FK == modID && Req.nombreProyecto_FK == nombreProy
                             select Req;
-
-
-
 
                 return View(requerimiento.ToList());
 
@@ -154,15 +150,17 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                //obtiene el nombre del modulo por medio de sus llaves primarias
                 ViewBag.nombreModulo = db.Modulo.Find(nombreProy, modID).Nombre;
                 
-
+                //busca el requerimiento por medio de sus llaves primarias
                 Requerimiento requerimiento = await db.Requerimiento.FindAsync(nombreProy,modID,nombreReq);
                 if (requerimiento == null)
                 {
                     return HttpNotFound();
                 }
 
+                //busca el responsable del requerimiento y en otro caso coloca que no se a asignado
                 if (requerimiento.cedulaResponsable_FK != null)
                 {
                     ViewBag.ApellidoEmpleado = db.EmpleadoDesarrollador.Find(requerimiento.cedulaResponsable_FK).apellido1ED;
@@ -182,9 +180,6 @@ namespace Proyecto.Controllers
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-                //  Proyecto.Controllers.EquipoController EqController = 
-                //ViewBag.cedulaResponsable_FK = new Proyecto.Controllers.EquipoController().getEmpleadosProyecto();
-               // ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre");
                 return View();
             }
         }
@@ -200,71 +195,76 @@ namespace Proyecto.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //busca el id del nombre de modulo que entra por parametro
                     var queryMod = from a in db.Modulo
                                    where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
                                    select a.Id;
+                    //busca la cedula del nombre de responsable que entra por parametro
                     var queryResponsable = from b in db.EmpleadoDesarrollador
                                            where (b.nombreED.Equals(miembro))
                                            select b.cedulaED;
+                    //uso del replace(evita tipos de inyecciones SQL)
                     string input = requerimiento.nombre;
                     string output = input.Replace("requerimiento", "");
                     requerimiento.nombre = output;
+
+                    //asignacion
                     requerimiento.nombreProyecto_FK = nombreProyecto;
                     requerimiento.idModulo_FK = queryMod.FirstOrDefault();
                     requerimiento.cedulaResponsable_FK = queryResponsable.FirstOrDefault();
+
+                    //agregado a la base de datos
                     db.Requerimiento.Add(requerimiento);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-
+                //actualizacion de datos de la vista para que no se pierdan 
                 ViewBag.cedulaResponsable_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", requerimiento.cedulaResponsable_FK);
                 ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre", requerimiento.nombreProyecto_FK);
                 return View(requerimiento);
             }
         }
 
-         public ActionResult Edit(int ModId, string nombreProy,string nombreReq) // comunica con el modelo
+     
+        public ActionResult Edit(int ModID, string nombreProyecto, string nombreReq) // comunica con el modelo
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
-            //se obtiene el requerimiento que se va editar
-            var query = from a in db.Modulo
-                        from b in db.Requerimiento
-                        where a.Id == ModId
-                        select b;
-            var item = query.FirstOrDefault(); //aqui se guarda el requerimiento que se busco
+            if (nombreReq == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //busco requerimiento
+            Proyecto.Models.Requerimiento requerimiento = db.Requerimiento.Find(nombreProyecto, ModID, nombreReq);
+            if (nombreProyecto == null)
+            {
+                return HttpNotFound();
+            }
+            //los modulos del proyecto respectivo para poder editar el modulo en el edit en dropdown
+            List<SelectListItem> modulos = this.moduloController.getModulos(nombreProyecto).ToList();
+            //los miembros del equipo del proyecto respectivo para poder editar el modulo en el edit en dropdown
+            List<SelectListItem> equipo = this.EqController.getEmpleadosProyecto(nombreProyecto).ToList();
+            //busco modulo actual
+            Proyecto.Models.Modulo modulo = db.Modulo.Find(nombreProyecto, ModID);
+            //busco empleado actual
+            Proyecto.Models.EmpleadoDesarrollador desarrollador = db.EmpleadoDesarrollador.Find(requerimiento.cedulaResponsable_FK);
 
-            //el nombre de proyecto llega nulo asi que se busca con este magiver
-            var proy = from a in db.Modulo
-                       where a.Id == ModId
-                       select a.NombreProy;
+            //datos que se envian a la vista para desplegar en dropdown de seleccion
+            var newItem = new SelectListItem { Text = modulo.Nombre, Value = modulo.Nombre };
+            modulos.Add(newItem);
+            var newItem2 = new SelectListItem { Text = desarrollador.nombreED, Value = desarrollador.nombreED };
+            equipo.Add(newItem2);
 
-            //los modulos del proyecto respectivo para poder editar el modulo en el edit
-            var mods = from a in db.Modulo
-                       where a.NombreProy == proy.FirstOrDefault()
-                       select a.Nombre;
+            ViewBag.Modulos = new SelectList(modulos, "Value", "Text", modulo.Nombre);
+            ViewBag.miembros = new SelectList(equipo, "Value", "Text", desarrollador.nombreED);
 
-            //los posibles responsables a asignar
-            var responsables = from a in db.Equipo
-                              where a.nombreProy_FK == proy.FirstOrDefault()
-                              select a.EmpleadoDesarrollador.nombreED;
+            return View(requerimiento);
 
-            //variables utilizadas para pasar la informacion anterior a la vista
-            TempData["Proyecto"] = proy.FirstOrDefault().ToList();
-             ViewBag.nombre = nombreReq;
-            TempData["Modulos"] = mods.ToList();
-
-            TempData["Responsables"] = responsables.ToList(); 
-
-            if (item != null)
-                return View(item);
-            else
-                return View("NotFound");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string responsable, string modulo,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+        public ActionResult Edit([Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento, string nombreProyecto, string miembros, string complejidad, string estado, string Modulos)
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
@@ -274,16 +274,19 @@ namespace Proyecto.Controllers
                 {
                     //encuentro el id respectivo para modificarlo en requerimimiento
                     var mod = from a in db.Modulo
-                              where a.NombreProy == requerimiento.nombreProyecto_FK
+                              where a.NombreProy == nombreProyecto
+                              where a.Nombre == Modulos
                               select a.Id;
                     //encuentro el usuario respectivo 
                     var desarrollador = from a in db.Equipo
-                                        where a.EmpleadoDesarrollador.nombreED == responsable
+                                        where a.EmpleadoDesarrollador.nombreED == miembros
                                         && a.nombreProy_FK == requerimiento.nombreProyecto_FK
                                         select a.cedulaEM_FK;
                     //los modifico
                     requerimiento.idModulo_FK = mod.FirstOrDefault();
                     requerimiento.cedulaResponsable_FK = desarrollador.FirstOrDefault();
+                    requerimiento.complejidad = complejidad;
+                    requerimiento.estado = estado;
                     //guardo el cambio en la base
                     db.Entry(requerimiento).State = EntityState.Modified;
                     db.SaveChanges();
@@ -291,21 +294,25 @@ namespace Proyecto.Controllers
                 }
                 return View(requerimiento);
             }
+
         }
-        
-       public ActionResult Delete(string nombreProyecto, int modID, string nombreReq)
+
+        public ActionResult Delete(string nombreProyecto, int modID, string nombreReq)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
+                //busca el modulo segun el id para obtener su nombre
                 var mod = from a in db.Modulo
                           where a.Id == modID
                           select a.Nombre;
 
+                //busca el responsable por su cedula para obtener su nombre
                 var responsable = from a in db.EmpleadoDesarrollador
                                   from b in db.Requerimiento
                                   where a.cedulaED == b.cedulaResponsable_FK
                                   select a.nombreED;
 
+                //con el nombre del responsable y modulos obtenidos arriba se utilizan estos tempdata para pasarselos a la vista
                 TempData["ModuloAsociado"] = mod.FirstOrDefault();
                 TempData["ResponsableAsociado"] = responsable.FirstOrDefault();
                 Requerimiento requerimiento = db.Requerimiento.Find(nombreProyecto,modID,nombreReq);
@@ -317,6 +324,7 @@ namespace Proyecto.Controllers
             }
         }
 
+        //metodo tipo post de delete que se encarga de borrar luego de haber presionado submit
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string nombreProyecto, int modID, string nombreReq)
@@ -343,7 +351,7 @@ namespace Proyecto.Controllers
 
 
 
-
+        
         public SelectList getProyectos(string rol, string cedula)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
@@ -353,45 +361,36 @@ namespace Proyecto.Controllers
             }
         }
 
-        
+        //no se si volarmelo aqui dice que no se llama ni una vez
         public class Proyectito
         {
             public string nombreProyecto { get; set; }
         }
         
+
+        //retorna un json con los modulos por proyecto que entra por parametro
         [HttpPost]
         public JsonResult getModulos(string nombreproyecto)
         {
                        
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
-             
-
-                
-               // Proyectito jsonData = JsonConvert.DeserializeObject<RequerimientoController.Proyectito>(nombreproyecto);
-
-                // return Json(this.moduloController.getModulos(jsonData.nombreProyecto));
                 return Json(this.moduloController.getModulos(nombreproyecto));
             }
         }
 
 
+        //Retorna los empleados segun el proyecto que entra por parametro
         [HttpPost]
         public JsonResult getEmpleadosProyecto(string nombreproyecto)
         {
-
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
-            {
-
-
-
-                // Proyectito jsonData = JsonConvert.DeserializeObject<RequerimientoController.Proyectito>(nombreproyecto);
-
-                // return Json(this.moduloController.getModulos(jsonData.nombreProyecto));
+            { 
                 return Json(this.EqController.getEmpleadosProyecto(nombreproyecto));
             }
         }
 
+        //Crea la lista predefinida con las complejidades
         private List<string> crearListaComplejidad()
         {
             List<string> listaLocal = new List<string>();
@@ -401,7 +400,8 @@ namespace Proyecto.Controllers
             listaLocal.Add("Muy Complejo");
             return listaLocal;
         }
-             private List<string> crearListaEstados()
+        //Crea la lista predefinida con los estados
+        private List<string> crearListaEstados()
         {
             List<string> listaLocal = new List<string>();
             listaLocal.Add("Sin iniciar");
@@ -410,7 +410,5 @@ namespace Proyecto.Controllers
             listaLocal.Add("Suspendido");
             return listaLocal;
         }
-
-
     }
 }
