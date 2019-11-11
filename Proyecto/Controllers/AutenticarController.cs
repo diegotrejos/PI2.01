@@ -62,7 +62,8 @@ namespace Proyecto.Models
                 id = "Desarrollador";
                 System.Web.HttpContext.Current.Session["rol"] = "Desarrollador";
                 var proyecto = from a in db.Equipo
-                               where a.cedulaEM_FK == cedula
+                               from b in db.Proyecto
+                               where a.cedulaEM_FK == cedula && a.nombreProy_FK == b.nombre && b.fechaFinalizacion != null
                                select a;
                 if (proyecto.FirstOrDefault()!= null)
                 {
@@ -104,10 +105,6 @@ namespace Proyecto.Models
             }
             return View();
         }
-
-
-
-
 
     }
 }

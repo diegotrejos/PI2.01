@@ -24,7 +24,7 @@ namespace Proyecto.Models
 
         [Key]
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
-       // [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres invalidos")]
+       [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres invalidos")]//error si no son letras establecidas
         public string nombre { get; set; } //metodo que regista y devuelve el ingreso del nombre
 
         [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invalidos")]               //Valida que solo se ingresen números
@@ -38,7 +38,7 @@ namespace Proyecto.Models
 
 
         [Required(ErrorMessage = "El campo es requerido")]//Error si dejan este campo vacío
-        //[RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres invalidos")]
+        [RegularExpression("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\x020]+$", ErrorMessage = "Caracteres invalidos")]//error si no son letras establecidas
         public string objetivo { get; set; } //metodo que registra y devuelve objetivo
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

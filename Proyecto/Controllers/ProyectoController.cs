@@ -356,6 +356,10 @@ namespace Proyecto.Controllers
             }
         }
 
+
+        /*Método encargado de devolver los empleados desarrolladores disponibles 
+       * @return list: lista de empleados desarrolladores disponibles
+       */
         public List<SelectListItem> getEmpledos() {
             List<SelectListItem> list = empleadoController.getEmpledos();
             return list;

@@ -287,7 +287,9 @@ namespace Proyecto.Controllers
             db.SaveChanges();
         }
 
-
+        /*Método encargado de devolver los empleados desarrolladores disponibles 
+         * @return lista: lista de empleados desarrolladores disponibles
+         */
         public List<SelectListItem> getEmpledos()
         {
 
