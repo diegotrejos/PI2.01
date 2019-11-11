@@ -12,79 +12,85 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="container-fluid text-center">
-    <h2>Eliminar Proyecto</h2>
-    <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
-    <table class="d-flex justify-content-center">
-        <tbody>
-            <tr>
-                <th>
-                    Nombre
-                </th>
-                <td>
+    <div class="container-fluid text-center">
+        <h2>Eliminar Proyecto</h2>
+        <h3 style="color:#FF0000" ;> ¿Está seguro que desea eliminar este Proyecto?</h3>
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <td>
 
-                    @Html.DisplayFor(model => model.nombre)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Complejidad
-                </th>
-                <td>
-                    @Html.DisplayFor(model => model.complejidad)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Duracion Estimada
-                </th>
-                <td>
-                    @Html.DisplayFor(model => model.duracionEstimada)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Duracion Real
-                </th>
-                <td>
-                    @Html.DisplayFor(model => model.duracionReal)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Estado
-                </th>
-                <td>
-                    @Html.DisplayFor(model => model.estado)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Responsable
-                </th>
-                <td>
-                    <H5>@TempData["ResponsableAsociado"]</H5>
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    Modulo
-                </th>
-                <td>
-                    <H5>@TempData["ModuloAsociado"]</H5>
-                </td>
-            </tr>
+                        @Html.DisplayFor(model => model.nombre)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Complejidad
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.complejidad)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Duracion Estimada
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.duracionEstimada)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Duracion Real
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.duracionReal)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Estado
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.estado)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Responsable
+                    </th>
+                    <td>
+                        <H5>@TempData["ResponsableAsociado"]</H5>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Modulo
+                    </th>
+                    <td>
+                        <H5>@TempData["ModuloAsociado"]</H5>
+                    </td>
+                </tr>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <div class="botones text-center">
-        <input type="submit" value="Eliminar" class="btn btn-danger" />
-        <a href="~/Requerimiento/Index" class="btn btn-default">
-            Regresar
-        </a>
+        <div class="botones text-center">
+            <input type="submit" value="Eliminar" class="btn btn-danger" />
+            <a href="~/Requerimiento/Index" class="btn btn-default">
+                Cancelar
+            </a>
+        </div>
+
     </div>
-    
-</div>
+
+    <div class="botones text-right">
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default " })
+    </div>
+
+
 }
 

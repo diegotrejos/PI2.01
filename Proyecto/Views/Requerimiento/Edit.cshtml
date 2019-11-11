@@ -42,7 +42,7 @@
                         <td required="true" readonly>
                             @Html.TextBoxFor(model => model.Modulo.Nombre, new { @readonly = "readonly", @class = "form-control" })
                         </td>
-                        
+
                     </tr>
 
                     <tr style="line-height:50px">
@@ -106,9 +106,9 @@
                         </th>
                         @if (TempData["Miembros"] != null)
                         {
-                        <td>
-                            @Html.DropDownList("miembros", new SelectList(TempData["Miembros"] as List<string>), new { @class = "form-control" })
-                        </td>
+                            <td>
+                                @Html.DropDownList("miembros", new SelectList(TempData["Miembros"] as List<string>), new { @class = "form-control" })
+                            </td>
                         }
                     </tr>
                 </tbody>
@@ -120,11 +120,17 @@
         <div class="botones text-center">
             <input type="submit" onclick="habilitar();" value="Aceptar" class="btn btn-success text-center" />
             <a href="~/Requerimiento/Index" class="btn btn-default text-center">
-                Regresar
+                Cancelar
             </a>
 
         </div>
     }
+
+    <div class="botones text-right">
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-default " })
+    </div>
+
+
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
