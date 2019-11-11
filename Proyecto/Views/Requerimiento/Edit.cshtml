@@ -39,9 +39,10 @@
                         <th>
                             Seleccione Modulo
                         </th>
-                        <td required="true">
-                            @Html.DropDownList("Modulos", null, htmlAttributes: new { @class = "form-control" })
+                        <td required="true" readonly>
+                            @Html.TextBoxFor(model => model.Modulo.Nombre, new { @readonly = "readonly", @class = "form-control" })
                         </td>
+                        
                     </tr>
 
                     <tr style="line-height:50px">
@@ -103,9 +104,12 @@
                         <th>
                             Empleado Responsable
                         </th>
+                        @if (TempData["Miembros"] != null)
+                        {
                         <td>
-                            @Html.DropDownList("miembros", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("miembros", new SelectList(TempData["Miembros"] as List<string>), new { @class = "form-control" })
                         </td>
+                        }
                     </tr>
                 </tbody>
             </table>
