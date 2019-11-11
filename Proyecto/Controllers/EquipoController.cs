@@ -39,6 +39,7 @@ namespace Proyecto.Controllers
             // List<Proyecto.Models.Equipo> proyectosConLider = getEmployees();
 
             //Guardan temporalmente los datos
+            TempData["Lider"] = "";
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
             TempData["proyectos"] = proyectos;
@@ -57,8 +58,14 @@ namespace Proyecto.Controllers
                                      where a.nombreProy_FK == Proyecto 
                                      select a;
 
+            var lider = from a in db.Equipo
+                        where a.nombreProy_FK == Proyecto
+                        && a.rol == true
+                        select a.EmpleadoDesarrollador.nombreED;
+
             //asignacion para mostrarlos en la  vista
             TempData["empleadosAsignados"] = empleadosAsignados as List<Equipo>;
+            TempData["lider"] = lider.FirstOrDefault();
             return View(/*empleadosAsignados.ToList()*/);
            
         }
