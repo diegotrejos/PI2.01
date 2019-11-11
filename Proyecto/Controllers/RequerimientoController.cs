@@ -207,21 +207,32 @@ namespace Proyecto.Controllers
 
                     if (!(queryCheck.Any()))
                     {
-                        var queryMod = from a in db.Modulo
-                                       where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
-                                       select a.Id;
-                        var queryResponsable = from b in db.EmpleadoDesarrollador
-                                               where (b.nombreED.Equals(miembro))
-                                               select b.cedulaED;
-                        string input = requerimiento.nombre;
-                        string output = input.Replace("requerimiento", "");
-                        requerimiento.nombre = output;
-                        requerimiento.nombreProyecto_FK = nombreProyecto;
-                        requerimiento.idModulo_FK = queryMod.FirstOrDefault();
-                        requerimiento.cedulaResponsable_FK = queryResponsable.FirstOrDefault();
-                        db.Requerimiento.Add(requerimiento);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+
+                        if (nombreModulo == "Seleccione un modulo" || nombreModulo == null || nombreProyecto == "Seleccione Proyecto"|| nombreProyecto == null || miembro == "Miembro responsable" || miembro == null)
+                        {
+                            Response.Write("<script>alert('Le falta ingresar informacion importante');</script>");
+
+                        }
+                        else
+                        {
+                            var queryMod = from a in db.Modulo
+                                           where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
+                                           select a.Id;
+                            var queryResponsable = from b in db.EmpleadoDesarrollador
+                                                   where (b.nombreED.Equals(miembro))
+                                                   select b.cedulaED;
+                            string input = requerimiento.nombre;
+                            string output = input.Replace("requerimiento", "");
+                            requerimiento.nombre = output;
+                            requerimiento.nombreProyecto_FK = nombreProyecto;
+                            requerimiento.idModulo_FK = queryMod.FirstOrDefault();
+                            requerimiento.cedulaResponsable_FK = queryResponsable.FirstOrDefault();
+                            db.Requerimiento.Add(requerimiento);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+
+                        }
+
                     }
                     else
                     {
