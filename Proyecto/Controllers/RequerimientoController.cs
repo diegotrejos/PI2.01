@@ -22,6 +22,7 @@ namespace Proyecto.Controllers
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.ModuloeController moduloController = new Proyecto.Controllers.ModuloeController();
         Proyecto.Controllers.EquipoController EqController = new Proyecto.Controllers.EquipoController();
+        private static int modId; //variable golbal que se usa para mantener el modulo que es en el edit
         // GET: Requerimiento
         public async Task<ActionResult> Index()
         {
@@ -230,6 +231,7 @@ namespace Proyecto.Controllers
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
+            modId = ModID; //se asigna esto a la variable global para en el metodo edit tipo post se conozca
             if (nombreReq == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -250,21 +252,22 @@ namespace Proyecto.Controllers
             Proyecto.Models.EmpleadoDesarrollador desarrollador = db.EmpleadoDesarrollador.Find(requerimiento.cedulaResponsable_FK);
 
             //datos que se envian a la vista para desplegar en dropdown de seleccion
-            var newItem = new SelectListItem { Text = modulo.Nombre, Value = modulo.Nombre };
-            modulos.Add(newItem);
-            var newItem2 = new SelectListItem { Text = desarrollador.nombreED, Value = desarrollador.nombreED };
-            equipo.Add(newItem2);
+          
+            //encuentro el usuario respectivo 
+            var miembros = from a in db.Equipo
+                                where a.nombreProy_FK == nombreProyecto
+                                select a.EmpleadoDesarrollador.nombreED;
 
-            ViewBag.Modulos = new SelectList(modulos, "Value", "Text", modulo.Nombre);
-            ViewBag.miembros = new SelectList(equipo, "Value", "Text", desarrollador.nombreED);
-
+           
+            TempData["Miembros"] = miembros.ToList();
+         
             return View(requerimiento);
 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento, string nombreProyecto, string miembros, string complejidad, string estado, string Modulos)
+        public ActionResult Edit([Bind(Include = "nombreProyecto_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento, string nombreProyecto, string miembros)
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
@@ -273,20 +276,14 @@ namespace Proyecto.Controllers
                 if (ModelState.IsValid)
                 {
                     //encuentro el id respectivo para modificarlo en requerimimiento
-                    var mod = from a in db.Modulo
-                              where a.NombreProy == nombreProyecto
-                              where a.Nombre == Modulos
-                              select a.Id;
                     //encuentro el usuario respectivo 
                     var desarrollador = from a in db.Equipo
                                         where a.EmpleadoDesarrollador.nombreED == miembros
                                         && a.nombreProy_FK == requerimiento.nombreProyecto_FK
                                         select a.cedulaEM_FK;
                     //los modifico
-                    requerimiento.idModulo_FK = mod.FirstOrDefault();
+                    requerimiento.idModulo_FK = modId;
                     requerimiento.cedulaResponsable_FK = desarrollador.FirstOrDefault();
-                    requerimiento.complejidad = complejidad;
-                    requerimiento.estado = estado;
                     //guardo el cambio en la base
                     db.Entry(requerimiento).State = EntityState.Modified;
                     db.SaveChanges();
