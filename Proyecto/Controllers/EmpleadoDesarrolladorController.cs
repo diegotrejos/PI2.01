@@ -283,5 +283,17 @@ namespace Proyecto.Controllers
             empleadoDesarrollador.disponibilidad = false;
             db.SaveChanges();
         }
+
+
+        public List<SelectListItem> getEmpledos()
+        {
+
+            var item = from a in db.EmpleadoDesarrollador
+                       where a.disponibilidad == true && a.flg == true
+                       select new SelectListItem { Text = a.nombreED, Value = a.nombreED };
+            List<SelectListItem> list = item.ToList();
+            return list;
+
+        }
     }
 }

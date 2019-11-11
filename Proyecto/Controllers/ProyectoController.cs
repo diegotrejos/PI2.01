@@ -22,7 +22,7 @@ namespace Proyecto.Controllers
 
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
-
+        Proyecto.Controllers.EmpleadoDesarrolladorController empleadoController = new Proyecto.Controllers.EmpleadoDesarrolladorController();
 
         // GET: Proyecto
 
@@ -357,11 +357,7 @@ namespace Proyecto.Controllers
         }
 
         public List<SelectListItem> getEmpledos() {
-
-            var item = from a in db.EmpleadoDesarrollador
-                       where a.disponibilidad == true && a.flg == true
-                       select  new SelectListItem { Text = a.nombreED, Value = a.nombreED };
-            List<SelectListItem> list = item.ToList();
+            List<SelectListItem> list = empleadoController.getEmpledos();
             return list;
 
         }
