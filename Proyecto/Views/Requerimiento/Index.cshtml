@@ -4,7 +4,7 @@
     ViewBag.Title = "Requerimientos";
 }
 
-<h2>Requerimientos</h2>
+<h2>Lista Requerimientos</h2>
 
 
 <head>
@@ -17,7 +17,7 @@
 
     <fieldset>
         <div class="display-label">
-            Filtrar por Proyecto
+            Buscar por Proyecto
         </div>
         <div class="editor-field">
             @**@
@@ -28,19 +28,17 @@
                 }
                 else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
                 {
-                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" , @class= "form-control" })
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" , @class= "form-control"})
                 }
                 else
                 {
                     @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" , @class= "form-control" })
                 }
 
-                <br>
-                </br>
 
 
                 <div class="display-label">
-                    Filtrar por Modulos
+                    Buscar por Modulos
                 </div>
 
                 <div>@*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
@@ -105,7 +103,12 @@
                     
                     @Html.ActionLink(" ", "Edit", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn  Cliente btn-info glyphicon glyphicon-wrench float-right " })
 
-                    @Html.ActionLink(" ", "Delete", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+                    @if (item.estado == "Finalizado" || item.estado == "Suspendido")
+                    {
+                        @Html.ActionLink(" ", "Delete", "Requerimiento", new { nombreProyecto = item.nombreProyecto_FK, modID = item.idModulo_FK, nombreReq = item.nombre }, new { @class = "btn Desarrollador Cliente btn-danger glyphicon glyphicon-trash float-right " })
+
+                    }
+                    
                 </td>
             </tr>
         }

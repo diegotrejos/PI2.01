@@ -14,24 +14,26 @@ namespace Proyecto.Controllers
 {
     public class ClienteController : Controller         //Controlador del Módelo Cliente
     {
-
-        public string usuario = "";
-        public string cedula = "";
-        public string proy = "";
+        /*Variables que se utilizan en el inicio de sección para guardar datos necesarios*/
+        public string usuario = "";     //Guarda el rol del usuario
+        public string cedula = "";       //Guarda la cédula de la persona que entra
+        public string proy = "";        //Guarda el proyecto en el que tiene participación la persona que entra
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
 
         // GET: Cliente
         public ActionResult Index()
         {
+            //Uso de variables temporales que guardan los datos necesarias para el inicio de sección
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
+            //Dependiendo del rol que se tenga se crean las consultas necesarias para devolver los datos del proyecto en el cual participan
             if (usuario != "Jefe")
             {
-                if (usuario == "Cliente")
+                if (usuario == "Cliente") //El cliente ve solo sus datos
                 {
                     var obj = from a in db.Cliente
                               where a.cedula == cedula

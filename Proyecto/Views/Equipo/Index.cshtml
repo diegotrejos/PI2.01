@@ -1,78 +1,151 @@
 ﻿@model IEnumerable<Proyecto.Models.Equipo>
 
 @{
-    ViewBag.Title = "Lista de Equipos";
+    ViewBag.Title = "Asignar Equipo"; @*Titulo que esta en el estandar *@
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css" / >
 
-</head>
+<h2>@ViewBag.Title</h2>
 
-<body onload="Desabilitar();">
-    <h2> @ViewBag.Title </h2>
-    @**@
+@*Permite a la columna de la derecha poderse ordenar y recibir empleados de la columna de la izquierda*@
+<script>
+    $(document).ready(function () {
+        $("#asignacion").sortable();
+    });
+</script>
 
-    @*Genera una dropdown list con todos los proyectos*@
+@*Llamo al codigo de java script que se encuentra es esa ruta*@
+<script src="~/Scripts/SortableConnect.js"></script>
 
-    @*DROPDOWN LIST QUE LLAMA A METODO POST INDEX EN CONTROLLER*@
-    @using (Html.BeginForm())
-    {
+@using (Html.BeginForm())
+{
     <fieldset>
-        <div class="Cliente Desarrollador display-label ">
-            Filtrar por Proyecto
-        </div>
-        <div class="Cliente Desarrollador">
-            @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+
+
+        <td> Seleccionar proyecto </td>
+        <td>
+            @if (TempData["proyectos"] != null)
             {
-                @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
+                @Html.DropDownList("Proyecto", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
             }
-            else
-            {
-                @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto")
-            }
-        </div>
+        </td>
 
         <div>
             <input type="submit" value="Buscar" class="btn btn-default" />
         </div>
+
     </fieldset>
-       
-    }
 
-  <p class="botones text-right ">
-        <button onclick="location.href ='@Url.Action("AsignarLider")'" class="btn  btn-large Lider cafe">Asignar Lider</button>
-        <button onclick="location.href ='@Url.Action("AsignarMiembros")'" class="btn  btn-large cafe">Asignar Miembros</button>
-    </p>
+}
 
-    <br />
-     <button onclick="myFunction();" class="btn btn-danger glyphicon glyphicon-trash float-right"></button>
-    <br />
+<body onload="Desabilitar();">
+    @*Codigo aportado por el grupo #1*@
+    <p class="Desarrollador Cliente" align="center">Para asignar empleados a un proyecto por favor arrastrar de empleados disponibles a empleados asignados</p>
 
-    <Script type="text/javascript">
+
+
+
+
+    @*Codigo de los estilos de la lista y de las etiquetas arriba de estas*@
+    <style>
+        #sortable tr:hover {
+            background-color: #0094ff;
+            color: #fff;
+            margin: 20px;
+        }
+
+        #sortable2 tr:hover {
+            background-color: #0094ff;
+            color: #fff;
+            margin: 20px;
+        }
+
+        tbody {
+            float: left;
+            width: 50px;
+            height: 250px;
+        }
+    </style>
+
+
+
+
+    <div class=" Desarrollador Cliente modal-body row">
+        <div class=".col-6 .col-sm-4">
+            @*Estilo para la letra de arriba de la columna*@
+            <p style="font-size:14px; color:#b3b0d5; font-weight:bold; font-style:italic;"> Desarrolladores disponibles</p>
+            <p></p>
+            @*Tabla que se encuentra arriba de las listas y despliega la etiqueta con cedula y nombre*@
+            <table class="table table-responsive-md">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody id="disponibilidad" style="cursor:pointer;">
+                    @*Id es lo que reconoce el script de mas arriba*@
+                    @*Listado de los desarrolladores disponibles *@
+                    @if (TempData["empleadosDisponibles"] != null)
+                    {
+                        foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+                        {
+                            if (item.disponibilidad == true && item.flg == true)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.cedulaED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
+
+                                    </td>
+                                    <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class=" Desarrollador Cliente col">
+        </div>
+        <div class=".col-6 .col-sm-4">
+            @*Estilo para la letra de arriba de la columna*@
+            <p style="font-size:14px; color:#538b01; font-weight:bold; font-style:italic;"> Empleados Asignados</p>
+            <!-- codigo de segunda colunma-->
+            @*Aqui deberia de anadir el boton que llama al script de asignar miembros*@
+
+
+
+<Script type="text/javascript">
         function myFunction() //este nombre tiene que coincidir con el que se pone en el boton que lo llama
         {
-            var opcion = confirm("Esta seguro que desea eliminar este equipo?");
-            if (opcion)
-            {
-                var p = document.getElementById('filtro'); //Aqui es para conseguir el proyecto del dropdown
-                var project = p.options[p.selectedIndex].value; //para sacar el valor
-                console.log(project); //para ver si todo bien con esa variable
-                $.ajax(
+            var itemIds = "";
+            $("#asignacion").find(".taskSingleInline").each(function () {
+                var itemId = $(this).attr("data-taskid");
+                itemIds = itemIds + itemId + ","; //aqui vamos concatenando las cedulas de los empleados que se arrastraron
+            });
+            var p = document.getElementById('Proyecto'); //Aqui es para conseguir el proyecto del dropdown
+            var project = p.options[p.selectedIndex].value; //para sacar el valor
+            console.log(project); //para ver si todo bien con esa variable
+            console.log(itemIds)
+            $.ajax(
                 {
                     type: "post",
                     dataType: "json", //es el tipo del dato que devuelve el metodo del controlador
-                    url: '@Url.Action("Eliminar","Equipo")', //metodo del controlador que se llama
+                    url: '@Url.Action("Asignar","Equipo")', //metodo del controlador que se llama
                     traditional: true, //para permitir arrays
                     async: false,
-                    //Notese que los nombres Miembros y Proyecto tienen que conincidir con los nombres de los parametros en el metodo del controlador
+                    //
                     data:
                     {
+                        Miembros: itemIds,
                         Proyecto: project
                     },
                     success: function (json) //si todo sale bien el json que se retorna en el controlador viene aqui
                     {
-                        if (json.error)
-                            alert("Seleccione el proyecto al cual desea eliminar el equipo");
+                        if(json.error)
+                          alert("Por favor digite el proyecto al que desea agregar miembros y al menos un miembro")
                         if (json.isRedirect)
                             window.location.href = json.redirectUrl;
                     },
@@ -81,48 +154,49 @@
                         console.log(errorList);
                         console.log("error")
                     }
-                })
-            }
+                }
+            )
         }
-
-    </Script>
-
-
-    <table class="table table-striped">
-        <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.cedulaEM_FK)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.rol)
-            </th>
-        </tr>
+</Script>
 
 
-        @foreach (var item in Model)
-        {
-            if(TempData["muestra"].ToString() != "")
-            {
-                <tr>
+            <table class="table table-responsive-md">
 
-                    <td>
-                        @*  @Html.ActionLink(item.cedulaEM_FK, "Details", new { id = item.Id, nombreProy = item.NombreProy }, null)*@
-                        @Html.DisplayFor(modelItem => item.cedulaEM_FK)
-                    </td>
-                    <td>
-                     @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.rol)
-                    </td>
-                </tr>
-            }
-        }
-    </table>
+                <thead class="thead-light">
+                    <tr>
+                        <th>Cédula</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody id="asignacion" style="cursor:pointer;">
+                    @*Id que identifica en los scripts de arriba*@
+                    @*Lista de la derecha de los empleados que ya estan asignados a un proyecto*@
+                    @if (TempData["empleadosAsignados"] != null)
+                    {
+                        foreach (var item in TempData["empleadosAsignados"] as List<Proyecto.Models.Equipo>)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.cedulaEM_FK</i></a>
+                                </td>
+                                <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.nombreED</i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p class="botones text-center ">
+        <button style="background-color:#4CAF50;font-size: 15px;border-radius: 10px;" onclick="myFunction();">Aceptar</button>
+        <a href="~/Equipo/Index" class="btn btn-default">
+            Cancelar
+        </a>
+    </p>
 
     <script>
         function Desabilitar() {
@@ -132,12 +206,11 @@
                  lista[i].setAttribute('readonly', 'readonly');
                  lista[i].hidden = true;
             }
-            if (rol == "Cliente" || rol == "Desarrollador") {
-                alert("Lo sentimos, no cuenta con los permisos necesarios para ejecutar esta acción");
-            }
         }
     </script>
+
 </body>
+
 
 
 

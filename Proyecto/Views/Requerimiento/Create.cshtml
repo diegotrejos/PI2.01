@@ -20,7 +20,7 @@
             <tbody>
                 <tr>
                     <th>
-                        Seleccione Proyecto*
+                        Proyecto  <a style="color:red"> *</a>
                     </th>
                     <td required="true">
 
@@ -45,7 +45,7 @@
 
                 <tr>
                     <th>
-                        Seleccione Modulo*
+                        Modulo  <a style="color:red"> *</a>
                     </th>
                     <td required="true">
 
@@ -60,7 +60,7 @@
 
                 <tr>
                     <th>
-                        Nombre de Requerimiento*
+                        Nombre de Requerimiento  <a style="color:red"> *</a>
                     </th>
                     <td required="true">
                         @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
@@ -84,7 +84,7 @@
                     <th>
                         Duracion Real
                     </th>
-                    <td required="true">
+                    <td>
                         @Html.EditorFor(model => model.duracionReal, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.duracionReal, "", new { @class = "text-danger" })
                     </td>
@@ -94,9 +94,9 @@
 
                 <tr>
                     <th>
-                        Estado
+                        Estado 
                     </th>
-                    <td required="true">
+                    <td>
                         @if (TempData["Estado"] != null)
                         {
                             @Html.DropDownList("estado", new SelectList(TempData["Estado"] as List<string>))
@@ -112,7 +112,7 @@
                     </th>
                     <td required="true">
                         <select id="miembro" name="miembro">
-                            Seleccione Miembro responsable
+                            Miembro responsable
                             <option>Seleccione un miembro
                         </select>
                     </td>

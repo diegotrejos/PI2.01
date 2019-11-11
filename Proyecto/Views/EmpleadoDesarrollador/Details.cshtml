@@ -1,9 +1,10 @@
 ﻿@model Proyecto.Models.EmpleadoDesarrollador
 
 @{
- ViewBag.Title = "Details";
+    ViewBag.Title = "Details";
 }
 
+@* Para las provincias*@
 <script>
 
         $(document).ready(function () {
@@ -47,7 +48,7 @@
 
 <div class="container-fluid text-center">
 
-  
+
 
     <h2>Detalles de Empleado</h2>
 
@@ -177,7 +178,9 @@
                     Disponibilidad
                 </th>
 
-
+                @*Ve el valor que le pasa el controlador*@
+                @*Si esta en true, entonces está disponible*@
+                @*Si esta en false, entonces NO está disponible*@
                 @if (ViewBag.disp == "true")
                 {
                     <td>
@@ -188,7 +191,7 @@
                 {
                     <td>
                         No
-                    </td >
+                    </td>
                 }
 
 
@@ -198,6 +201,9 @@
                 <th>
                     Rol
                 </th>
+                @*Ve el valor que le pasa el controlador del rol*@
+                @*Si esta en true, entonces es un  desarrollador*@
+                @*Si esta en false, entonces es otro (jefe,soporte, etc), no se atrapan todos porque es una relación ISA*@
                 @if (ViewBag.rol == "true")
                 {
                     <td>
@@ -210,15 +216,15 @@
                         Otro
                     </td>
                 }
-                
+
             </tr>
         </tbody>
     </table>
 </div>
 
-    <p class="botones text-center">
-        <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
-            <span></span> Regresar
-        </a>
-    </p>
+<p class="botones text-center">
+    <a href="~/EmpleadoDesarrollador/Index" class="btn btn-default ">
+        <span></span> Regresar
+    </a>
+</p>
 
