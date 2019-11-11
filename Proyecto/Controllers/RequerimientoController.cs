@@ -190,36 +190,47 @@ namespace Proyecto.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string nombreProyecto,string nombreModulo,  string miembro,string complejidad ,string estado,[Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
+         public ActionResult Create(string nombreProyecto, string nombreModulo, string nombre, string miembro, string complejidad, string estado, [Bind(Include = "nombreProyecto_FK,idModulo_FK,nombre,complejidad,duracionEstimada,duracionReal,cedulaResponsable_FK,estado")] Requerimiento requerimiento)
         {
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 if (ModelState.IsValid)
                 {
-                    //busca el id del nombre de modulo que entra por parametro
-                    var queryMod = from a in db.Modulo
-                                   where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
-                                   select a.Id;
-                    //busca la cedula del nombre de responsable que entra por parametro
-                    var queryResponsable = from b in db.EmpleadoDesarrollador
-                                           where (b.nombreED.Equals(miembro))
-                                           select b.cedulaED;
-                    //uso del replace(evita tipos de inyecciones SQL)
-                    string input = requerimiento.nombre;
-                    string output = input.Replace("requerimiento", "");
-                    requerimiento.nombre = output;
 
-                    //asignacion
-                    requerimiento.nombreProyecto_FK = nombreProyecto;
-                    requerimiento.idModulo_FK = queryMod.FirstOrDefault();
-                    requerimiento.cedulaResponsable_FK = queryResponsable.FirstOrDefault();
 
-                    //agregado a la base de datos
-                    db.Requerimiento.Add(requerimiento);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    var queryCheck =
+                        from a in db.Requerimiento
+                        where (a.nombre == nombre && a.nombreProyecto_FK == nombreProyecto)
+                        select a.nombre;
+
+
+
+                    if (!(queryCheck.Any()))
+                    {
+                        var queryMod = from a in db.Modulo
+                                       where a.NombreProy.Equals(nombreProyecto) && (a.Nombre.Equals(nombreModulo))
+                                       select a.Id;
+                        var queryResponsable = from b in db.EmpleadoDesarrollador
+                                               where (b.nombreED.Equals(miembro))
+                                               select b.cedulaED;
+                        string input = requerimiento.nombre;
+                        string output = input.Replace("requerimiento", "");
+                        requerimiento.nombre = output;
+                        requerimiento.nombreProyecto_FK = nombreProyecto;
+                        requerimiento.idModulo_FK = queryMod.FirstOrDefault();
+                        requerimiento.cedulaResponsable_FK = queryResponsable.FirstOrDefault();
+                        db.Requerimiento.Add(requerimiento);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+
+                        Response.Write("<script>alert('El nombre de este Requerimiento ya existe en este proyecto. Intente con uno nuevo');</script>");
+
+                    }
                 }
-                //actualizacion de datos de la vista para que no se pierdan 
+
                 ViewBag.cedulaResponsable_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED", requerimiento.cedulaResponsable_FK);
                 ViewBag.nombreProyecto_FK = new SelectList(db.Modulo, "NombreProy", "Nombre", requerimiento.nombreProyecto_FK);
                 return View(requerimiento);
