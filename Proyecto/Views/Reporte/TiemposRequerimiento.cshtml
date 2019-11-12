@@ -1,4 +1,5 @@
-﻿
+﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
 @using (Html.BeginForm())
 {
     <fieldset>
@@ -36,23 +37,23 @@
     {
         string datos = item.ToString();
 
-        string[] lista = datos.Split(' '); 
-    <tr>
-        <td>
-            @lista[0]
-           
-        </td>
-        <td>
-            @lista[1]
+        string[] lista = datos.Split(' ');
+        <tr>
+            <td>
+                @lista[0]
 
-        </td>
+            </td>
+            <td>
+                @lista[1]
 
-        <td>
-            @lista[2]
-        </td>
-    </tr>
+            </td>
+
+            <td>
+                @lista[2]
+            </td>
+        </tr>
     }
-    
+
 
 
 

@@ -37,15 +37,15 @@ namespace Proyecto.Controllers
 
         public ActionResult TiemposRequerimiento() {
 
-            var item = (from a in db.Requerimiento
+            /*var item = (from a in db.Requerimiento
                         from b in db.EmpleadoDesarrollador
                         where a.cedulaResponsable_FK == b.cedulaED
-                        select new { nombre = b.nombreED, req = a.nombre, suma = a.duracionEstimada - a.duracionReal });
+                        select new { nombre = b.nombreED, req = a.nombre, suma = a.duracionEstimada - a.duracionReal });*/
             List<string> lista = new List<string>();
-            foreach (var dato in item)
+           /* foreach (var dato in item)
             {
                 lista.Add(dato.nombre + " " + dato.req + " " + dato.suma);
-            }
+            }*/
 
             return View(lista);
         }
@@ -59,12 +59,56 @@ namespace Proyecto.Controllers
              var item = (from a in db.Requerimiento
                          where a.cedulaResponsable_FK == cedula.FirstOrDefault().cedulaED
                          select new { nombre = cedula.FirstOrDefault().nombreED, req = a.nombre ,suma = a.duracionEstimada - a.duracionReal});
-            List<string> lista = new List<string>();
+           List<string> lista = new List<string>();
             foreach (var dato in item) {
-                lista.Add(dato.nombre+" "+dato.req+" "+dato.suma);
+                lista.Add(dato .nombre+" "+dato.req+" "+dato.suma);
             }
             
             return View(lista);
+        }
+
+        public ActionResult HorasProyecto() {
+            /*var item = 
+                       from b in  db.Requerimiento
+                       from a in db.Proyecto
+                       where a.nombre == b.nombreProyecto_FK
+                       group b by b.nombreProyecto_FK into c
+                       select new { sumaEst = c.Sum(a => a.duracionEstimada), sumaReal = c.Sum(d=> d.duracionReal)};*/
+            List<string> lista = new List<string>();
+            /*foreach (var dato in item)
+            {
+                lista.Add( dato.sumaEst + " " + dato.sumaReal);
+            }*/
+
+            return View(lista);
+        }
+
+        [HttpPost]
+        public ActionResult HorasProyecto(string nombreProyecto)
+        {
+            var item =
+                      from b in db.Requerimiento
+                      where b.nombreProyecto_FK == nombreProyecto
+                      group b by b.nombreProyecto_FK into c
+                      select new { sumaEst = c.Sum(a => a.duracionEstimada), sumaReal = c.Sum(d => d.duracionReal) };
+            List<string> lista = new List<string>();
+            foreach (var dato in item)
+            {
+                lista.Add(dato.sumaEst + " " + dato.sumaReal);
+            }
+
+            return View(lista);
+        }
+
+        public ActionResult Historal()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Hstorial(string nombre)
+        {
+            return View();
         }
 
         public List<SelectListItem> getEmpleadosTrabajando()
@@ -72,5 +116,10 @@ namespace Proyecto.Controllers
             return emplController.getEmpleadosTrabajando();
         }
 
+        public SelectList getProyectos()
+        {
+            return proyController.getProyectos();
         }
+
+    }
 }
