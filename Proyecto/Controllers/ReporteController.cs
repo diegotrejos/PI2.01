@@ -31,7 +31,7 @@ namespace Proyecto.Controllers
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
-            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;//coment
             return View();
         }
 
