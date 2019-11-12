@@ -300,5 +300,18 @@ namespace Proyecto.Controllers
             return list;
 
         }
+
+        /*devuelve empleados trabajando en algun proyecto
+         */
+        public List<SelectListItem> getEmpleadosTrabajando()
+        {
+
+            var item = from a in db.EmpleadoDesarrollador
+                       where a.disponibilidad == false && a.flg == true
+                       select new SelectListItem { Text = a.nombreED, Value = a.nombreED };
+            List<SelectListItem> list = item.ToList();
+            return list;
+
+        }
     }
 }
