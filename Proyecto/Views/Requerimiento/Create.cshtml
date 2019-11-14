@@ -27,15 +27,15 @@
 
                         @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                         {
-                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto",@class = "form-control"  })
                         }
                         else if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
                         {
-                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto",@class = "form-control"  })
                         }
                         else
                         {
-                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+                            @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos("Empleado", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { name = "nombreProyecto",@class = "form-control"  })
                         }
                         @Html.ValidationMessageFor(model => model.nombreProyecto_FK, "", new { @class = "text-danger" })
                     </td>
@@ -49,7 +49,7 @@
                     </th>
                     <td required="true">
 
-                        <select id="nombreModulo" name="nombreModulo" required="required">
+                        <select id="nombreModulo" name="nombreModulo" required="required" class = "form-control" >
                             Seleccione modulo
                             <option>Seleccione un modulo
                         </select>
