@@ -1,0 +1,70 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <div class="display-label">
+            Buscar Empleado
+        </div>
+        <div class="editor-field">
+
+            <form action="/Reporte/TiemposRequerimiento" method="post">
+                @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
+                <noscript><input type="submit" value="Submit"></noscript>
+            </form>
+        </div>
+
+    </fieldset>
+}
+
+<p class=" boton float-right">
+    <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn  float-right " style="background: #5B3924; color:white">Regresar</button>
+</p>
+
+<table class="table table-striped" style="text-align:center">
+    <tr>
+        <th>
+            Nombre del Proyecto
+        </th>
+        <th>
+            Nombre del desarrollador
+        </th>
+        <th>
+            Rol en el Proyecto
+        </th>
+        <th>
+            Total de horas dedicadas
+        </th>
+        <th></th>
+    </tr>
+    </br>
+    </br>
+
+    @foreach (var item in Model)
+    {
+        string datos = item.ToString();
+
+        string[] lista = datos.Split(' ');
+    <tr>
+        <td>
+            @lista[0]
+
+        </td>
+        <td>
+            @lista[1]
+
+        </td>
+
+        <td>
+            @lista[2]
+        </td>
+        <td>
+            @lista[3]
+        </td>
+    </tr>
+    }
+
+
+
+
+</table>
