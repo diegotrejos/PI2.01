@@ -98,15 +98,6 @@ namespace Proyecto.Controllers
                            group new { a,b, e, l } by a.nombre into c
                            select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
 
-            if (usuario == "Lider") {
-                item =
-                          from b in db.Requerimiento
-                          from f in db.Equipo
-                          from l in db.EmpleadoDesarrollador
-                          where f.cedulaEM_FK == cedula && f.rol == true && b.nombreProyecto_FK == f.nombreProy_FK && f.cedulaEM_FK == l.cedulaED
-                          group new { b,f,l } by b.nombreProyecto_FK into c
-                          select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
-            }
             if (item != null)
                 item.Distinct();
             List<string> lista = new List<string>();
@@ -145,17 +136,6 @@ namespace Proyecto.Controllers
                            where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED
                            group new { a, b, e, l } by a.nombre into c
                            select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
-
-                if (usuario == "Lider")
-                {
-                    item =
-                              from b in db.Requerimiento
-                              from f in db.Equipo
-                              from l in db.EmpleadoDesarrollador
-                              where f.cedulaEM_FK == cedula && f.rol == true && b.nombreProyecto_FK == f.nombreProy_FK && f.cedulaEM_FK == l.cedulaED
-                              group new { b, f, l } by b.nombreProyecto_FK into c
-                              select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
-                }
                 if (item != null)
                     item.Distinct();
             }
