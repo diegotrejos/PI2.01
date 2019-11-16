@@ -7,9 +7,15 @@
             Buscar Empleado
         </div>
         <div class="editor-field">
-
             <form action="/Reporte/TiemposRequerimiento" method="post">
-                @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
+                @if (ViewBag.User == "Lider")
+                {
+                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
+                }
+                else
+                {
+                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Todos los empleados", new { @class = "form-control", @onchange = "this.form.submit()" })
+                }
                 <noscript><input type="submit" value="Submit"></noscript>
             </form>
         </div>
@@ -30,7 +36,7 @@
             Nombre del desarrollador
         </th>
         <th>
-            Rol en el Proyecto
+            Rol
         </th>
         <th>
             Total de horas dedicadas
@@ -44,7 +50,7 @@
     {
         string datos = item.ToString();
 
-        string[] lista = datos.Split(' ');
+        string[] lista = datos.Split(',');
     <tr>
         <td>
             @lista[0]

@@ -1,21 +1,35 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
 
-@using (Html.BeginForm())
-{
     <fieldset>
         <div class="display-label">
-            Buscar Empleado
+            Buscar por empleado
         </div>
         <div class="editor-field">
+            <form action="/Reporteria/TiemposRequerimiento" method="post">
+                @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un empleado", new { name = "nombre", @class = "form-control" })
 
-            <form action="/Reporte/TiemposRequerimiento" method="post">
-                @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
+
+
+
+                <div class="display-label">
+                    Buscar por proyecto
+                </div>
+
+                <div>
+                    @*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
+                    <select id="nombreProyecto" name="nombreProyecto" class="form-control" onchange="this.form.submit()">
+                        <option>@ViewBag.nombreP</option>
+                    </select>
+                </div>
+
                 <noscript><input type="submit" value="Submit"></noscript>
-            </form>
-        </div>
 
-    </fieldset>
-}
+
+            </form>
+    </div>
+
+</fieldset>
+
 
 <p class=" boton float-right">
     <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn float-right " style="background: #5B3924; color:white">Regresar</button>
@@ -23,14 +37,23 @@
 
 <table class="table table-striped" style="text-align:center">
     <tr>
+        @if (ViewBag.todos == "si")
+        {
+            <th>
+                Nombre del proyecto
+            </th>
+        }
         <th>
-            Nombre de desarrollador
+            Nombre del requerimiento
         </th>
         <th>
-            Nombre de requerimiento
+            Duración estimada
         </th>
         <th>
-            Diferencia entre duración estimada y real
+            Duración real
+        </th>
+        <th>
+            Diferencia
         </th>
         <th></th>
     </tr>
@@ -41,24 +64,74 @@
     {
         string datos = item.ToString();
 
-        string[] lista = datos.Split(' ');
+        string[] lista = datos.Split(',');
         <tr>
-            <td>
-                @lista[0]
+            @if (ViewBag.todos == "si")
+            {
+                <td>
+                    @lista[0]
 
-            </td>
+
+                </td>
+            }
             <td>
                 @lista[1]
 
             </td>
-
             <td>
                 @lista[2]
+            </td>
+            <td>
+                @lista[3]
+            </td>
+            <td>
+                @lista[4]
             </td>
         </tr>
     }
 
+   </table>
 
+@*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#nombreProyecto").prop("disabled", true);//se desactiva el primer drowpdown mientras se trabaja esto
 
+        $("#nombre").change(function () {
+         
+            if ($("#nombre").val() != "Seleccione un empleado") {//si esta el valor default del primer dropdown no se hace nada
+            
+                var ModulosProyecto = {};
 
-</table>
+                ModulosProyecto.url = "/Reporteria/getProyectoDesarrollador";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
+                ModulosProyecto.type = "POST";
+                ModulosProyecto.data = JSON.stringify({
+                    nombre: $("#nombre").val()//parametro q se pasa
+                });
+               
+                ModulosProyecto.datatype = "json";
+                ModulosProyecto.contentType = "application/json";
+                ModulosProyecto.success = function (data) {//datos q retorna getmodulo
+
+                    $("#nombreProyecto").empty();
+                    $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
+                        $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
+                    }
+                    $("#nombreProyecto").prop("disabled", false);
+                };
+
+                ModulosProyecto.error = function () {
+                    alert("Error obteniendo los proyectos");
+                };
+
+                $.ajax(ModulosProyecto);
+            } else {
+                $("#nombreProyecto").empty();
+                $("#nombreProyecto").prop("disabled", true);
+            }
+        });
+    });
+</script>

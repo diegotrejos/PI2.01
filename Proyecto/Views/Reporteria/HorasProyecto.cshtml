@@ -1,65 +1,90 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
 
-@using (Html.BeginForm())
-{
-    <fieldset>
-        <div class="display-label">
-            Buscar Proyecto
-        </div>
-        <div class="editor-field">
-
-            <form action="/Reporte/TiemposRequerimiento" method="post">
-                @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
-                <noscript><input type="submit" value="Submit"></noscript>
-            </form>
-        </div>
-
-    </fieldset>
-}
-<p class=" boton float-right">
-    <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn  float-right " style="background: #5B3924; color:white">Regresar</button>
-</p>
-
-<table class="table table-striped" style="text-align:center">
-    <tr>
-        <th>
-            Nombre del Proyecto
-        </th>
-
-        <th>
-            Duración estimada total
-        </th>
-        <th>
-            Duración Real total
-        </th>
-        <th></th>
-    </tr>
-    </br>
-    </br>
-
-    @foreach (var item in Model)
+<body onload="Desabilitar();">
+    @using (Html.BeginForm())
     {
-        string datos = item.ToString();
+        <fieldset>
+            <div class="display-label">
+                Buscar Proyecto
+            </div>
+            <div class="editor-field">
 
-        string[] lista = datos.Split(' ');
-    <tr>
-        <td>
-            @lista[0]
+                <form action="/Reporte/TiemposRequerimiento" method="post">
+                    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos(), "Todos los proyectos", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+            </div>
 
-        </td>
-
-        <td>
-            @lista[1]
-
-        </td>
-        <td>
-            @lista[2]
-
-        </td>
-    </tr>
+        </fieldset>
     }
+    <p class=" boton float-right">
+        <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn  float-right " style="background: #5B3924; color:white">Regresar</button>
+    </p>
+
+    <table class="table table-striped" style="text-align:center">
+        <tr>
+            <th>
+                Nombre del Proyecto
+            </th>
+            <th class="Lider">
+                Nombre del Líder
+            </th>
+
+            <th>
+                Duración estimada total
+            </th>
+            <th>
+                Duración Real total
+            </th>
+            <th>
+                Diferencia
+            </th>
+            <th></th>
+        </tr>
+        </br>
+        </br>
+
+        @foreach (var item in Model)
+        {
+            string datos = item.ToString();
+
+            string[] lista = datos.Split(',');
+            <tr>
+                <td>
+                    @lista[0]
+
+                </td>
+
+                <td class="Lider">
+                    @lista[1]
+
+                </td>
+                <td>
+                    @lista[2]
+
+                </td>
+                <td>
+                    @lista[3]
+
+                </td>
+                <td>
+                    @lista[4]
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].hidden = true;
+            }
+        }
+    </script>
 
 
-
-
-</table>
+</body>

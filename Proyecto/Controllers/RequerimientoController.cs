@@ -391,7 +391,8 @@ namespace Proyecto.Controllers
         [HttpPost]
         public JsonResult getModulos(string nombreproyecto)
         {
-                       
+            System.Diagnostics.Debug.WriteLine("El proyecto" + nombreproyecto);
+
             using (Gr02Proy3Entities db = new Gr02Proy3Entities())
             {
                 return Json(this.moduloController.getModulos(nombreproyecto));
