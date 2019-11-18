@@ -26,9 +26,26 @@ namespace Proyecto.Controllers
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            //Listas que se usan para el despliegue de los proyectos
+            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos(usuario, cedula);
+
+            //Guardan temporalmente los datos
+            TempData["proyectos"] = proyectos;
+            TempData.Keep();
+
             return View();
+
         }
 
-      
+        public ActionResult DesarrolladoresPorConocimiento()
+        {
+            return View();//retorna la vista
+        }
+
+        public ActionResult EstadoRequerimiento(string Proyecto)
+        {
+            return View();//retorna la vista
+        }
     }
 }

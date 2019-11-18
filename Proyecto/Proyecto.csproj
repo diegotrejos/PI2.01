@@ -143,6 +143,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuloeController.cs" />
     <Compile Include="Controllers\ProyectoController.cs" />
+    <Compile Include="Controllers\ReporteriaController.cs" />
     <Compile Include="Controllers\RequerimientoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -291,6 +292,9 @@
     <Content Include="Views\Equipo\AsignarLider.cshtml" />
     <Content Include="Views\Equipo\AsignarMiembros.cshtml" />
     <Content Include="Views\Requerimiento\consulReq.cshtml" />
+    <Content Include="Views\Reporteria\Index.cshtml" />
+    <Content Include="Views\Reporteria\DesarrolladoresPorConocimiento.cshtml" />
+    <Content Include="Views\Reporteria\EstadoRequerimiento.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
