@@ -4,10 +4,10 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            <div class="display-label">
+            <div class="display-label Lider">
                 Buscar Proyecto
             </div>
-            <div class="editor-field">
+            <div class="editor-field Lider">
 
                 <form action="/Reporte/TiemposRequerimiento" method="post">
                     @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos(), "Todos los proyectos", new { @class = "form-control", @onchange = "this.form.submit()" })
