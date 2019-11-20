@@ -1,5 +1,9 @@
 ﻿@{
-    ViewBag.Title = "EstadoReq";
+                /**/
+
+                /**/
+
+                ViewBag.Title = "EstadoReq";
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
@@ -7,36 +11,41 @@
 </head>
 
 
+@{
+    string nombre = (string)System.Web.HttpContext.Current.Session["nombreUsuario"];
+}
 
 
+<div class=" Container" align-items-center>
 
-    <div class=" Container" align-items-center>
-        <h2>Lista de Empleados</h2>
-
-        <p class=" boton float-right">
-            <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
-                <span></span> Regresar
-            </a>
-        </p>
+    <p class=" boton float-right">
+        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+            <span></span> Regresar
+        </a>
+    </p>
 
 
-        @using (Html.BeginForm())
-        {
-            <fieldset>
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <div class="display-label">
+                Buscar Proyecto
+            </div>
+            <div class="editor-field">
 
-
-                <td> Seleccionar proyecto </td>
-                <td>
-                    @if (TempData["proyectos"] != null)
+                <form action="/Reporteria/EstadoRequerimiento" method="post">
+                    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                     {
-                        @Html.DropDownList("Proyecto", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
+                        @Html.DropDownList("Proyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
                     }
-                </td>
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+            </div>
 
-            </fieldset>
-        }
+        </fieldset>
+    }
 
-      
+
         <table class="table table-striped">
             <tr>
                 <th>
@@ -48,56 +57,96 @@
             </tr>
 
 
+                <tr>
+                    <td>
+                        @nombre
+                    </td>
+
+
+                    <td>
+                        algo
+                    </td>
+
+                </tr>
+            
+
+            </table>
+
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>
+                Nombre Requerimiento
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Responsable
+            </th>
+        </tr>
+
+
+        
+        @foreach (var item in Model)
+        {
+            string datosObtenidos = item.ToString();
+
+            string[] datos = datosObtenidos.Split(' ');
+
+            if (datos.Length == 7)
+            {
             <tr>
                 <td>
-                    Luz
+                    @datos[1]
                 </td>
 
+                <td>
+                    @datos[2]  @datos[3]
+                </td>
 
                 <td>
-                    Inge
+                    @datos[4] @datos[5] @datos[6]
                 </td>
 
             </tr>
 
-
-        </table>
-
-
-        <table class="table table-striped">
-
-            <tr>
-                <th>
-                    Nombre Requerimiento
-                </th>
-                <th>
-                    Estado
-                </th>
-                <th>
-                    Responsable
-                </th>
-            </tr>
-
+            }
+            else
+            {
             <tr>
                 <td>
-                    Tarea
+                    @datos[1]
                 </td>
 
                 <td>
-                    Terminada
+                    @datos[2]
                 </td>
 
                 <td>
-                    José
+                    @datos[3] @datos[4] @datos[5]
                 </td>
-
-
 
             </tr>
 
-        </table>
-      
-    </div>
+            }
+
+        }
+    </table>
+        
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].setAttribute('readonly', 'readonly');
+                lista[i].hidden = true;
+            }
+        }
+    </script>
+
+</div>
 
 
 

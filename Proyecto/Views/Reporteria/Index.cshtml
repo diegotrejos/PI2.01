@@ -100,7 +100,7 @@
                     </th>
                     <th>
                         <div class=" boton float-left">
-                            <button onclick="location.href = '@Url.Action("EstadoRequerimiento")'" class="btn " style="background: #5B3924; color:white">Estado y responsable de cada requerimiento</button>
+                            <button onclick="location.href = '@Url.Action("EstadoRequerimiento")'" class="btn Lider Desarrollador Jefe" style="background: #5B3924; color:white">Estado y responsable de cada requerimiento</button>
                         </div>
                     </th>
                 </tr>
@@ -131,7 +131,7 @@
             var lista = document.getElementsByClassName(rol);
             for (var i = 0; i < lista.length; ++i) {
                 lista[i].setAttribute('readonly', 'readonly');
-                lista[i].hidden = true;
+                lista[i].dissable = true;
             }
         }
     </script>
