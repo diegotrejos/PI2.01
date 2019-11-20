@@ -1,0 +1,58 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "HistorialDesarrollador";
+}
+
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+</head>
+
+<div class=" Container" align-items-center>
+    <h2>Historial de cada desarrollador por proyecto</h2>
+
+    @using (Html.BeginForm())
+    {
+    <fieldset>
+        <div class="display-label">
+            Seleccionar Desarrollador
+        </div>
+        <td>
+            @Html.DropDownList("cedulaEmpleadoPK_FK", null, htmlAttributes: new { @class = "form-control" })
+        </td>
+
+    </fieldset>
+    }
+
+    <p class=" boton float-right">
+        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+            <span></span> Regresar
+        </a>
+    </p>
+
+
+    <br />
+    <br />
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Proyectos
+            </th>
+            <th>
+                Rol
+            </th>
+            <th>
+                Total de horas dedicadas
+            </th>
+            <th></th>
+        </tr>
+
+    </table>
+
+
+</div>
+

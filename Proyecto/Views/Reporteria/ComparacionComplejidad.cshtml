@@ -1,0 +1,84 @@
+﻿@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "ComparacionComplejidad";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+</head>
+
+<div class="container">
+    <h2>Comparación de tiempos estimados y reales con misma complejidad</h2>
+
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <div class="display-label">
+                Seleccionar Complejidad
+            </div>
+            <td>
+                 @if (TempData["Complejidad"] != null)
+                        {
+                            @Html.DropDownList("complejidad", new SelectList(TempData["Complejidad"] as List<string>))
+                        }
+            </td>
+
+        </fieldset>
+    }
+
+    <p class=" boton float-right">
+        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+            <span></span> Regresar
+        </a>
+    </p>
+
+
+    <br />
+    <br />
+
+    <table>
+        <tbody>
+            <tr style="line-height:50px">
+                <th>
+                    Cantidad de Requerimientos
+                </th>
+
+                <td></td>
+            </tr>
+
+            <tr style="line-height:50px">
+                <th>
+                    Diferencia mínima entre el tiempo real y el estimado
+                </th>
+
+                <td></td>
+            </tr>
+
+            <tr style="line-height:50px">
+                <th>
+                    Diferencia máxima entre el tiempo real y el estimado
+                </th>
+
+                <td></td>
+            </tr>
+
+            <tr style="line-height:50px">
+                <th>
+                    Tiempo promedio de la duración real
+                </th>
+
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+
