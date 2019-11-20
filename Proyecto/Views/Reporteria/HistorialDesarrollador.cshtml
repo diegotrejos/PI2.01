@@ -15,15 +15,16 @@
 
     @using (Html.BeginForm())
     {
-    <fieldset>
-        <div class="display-label">
-            Seleccionar Desarrollador
-        </div>
-        <td>
-            @Html.DropDownList("cedulaEmpleadoPK_FK", null, htmlAttributes: new { @class = "form-control" })
-        </td>
+        <fieldset>
+            <div class="editor-field">
 
-    </fieldset>
+                <form action="/Reporteria/HistorialDesarrollador" method="post">
+                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+            </div>
+
+        </fieldset>
     }
 
     <p class=" boton float-right">

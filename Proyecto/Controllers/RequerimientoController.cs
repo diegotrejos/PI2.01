@@ -429,5 +429,13 @@ namespace Proyecto.Controllers
             listaLocal.Add("Suspendido");
             return listaLocal;
         }
+
+        public List<SelectListItem> getDesarrolladores()
+        {
+            var item = from a in db.EmpleadoDesarrollador
+                       select new SelectListItem { Text = a.nombreED, Value = a.nombreED };
+            List<SelectListItem> list = item.ToList();
+            return list;
+        }
     }
 }

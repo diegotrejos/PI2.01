@@ -20,19 +20,15 @@ namespace Proyecto.Controllers
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
+        Proyecto.Controllers.EmpleadoDesarrolladorController emplController = new Proyecto.Controllers.EmpleadoDesarrolladorController();
+
         // GET: Reporteria
         public ActionResult Index()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos(usuario, cedula);
-           
-            ViewBag.cedulaEmpleadoPK_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED");
             ViewBag.user = usuario;
-            TempData["Complejidad"] = crearListaComplejidad();
-           
-            TempData.Keep();
             return View();
         }
 
@@ -49,14 +45,20 @@ namespace Proyecto.Controllers
         }
 
         //Crea la lista predefinida con las complejidades
-        private List<string> crearListaComplejidad()
+        public List<SelectListItem> getListaComplejidad()
         {
-            List<string> listaLocal = new List<string>();
-            listaLocal.Add("Simple");
-            listaLocal.Add("Mediano");
-            listaLocal.Add("Complejo");
-            listaLocal.Add("Muy Complejo");
-            return listaLocal;
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "Simple"});
+            items.Add(new SelectListItem() { Text = "Mediano" });
+            items.Add(new SelectListItem() { Text = "Complejo" });
+            items.Add(new SelectListItem() { Text = "Muy Complejo" });
+             return items;
+
+        }
+
+        public List<SelectListItem> getDesarrolladores()
+        {
+            return emplController.getDesarrolladores();
         }
     }
 }

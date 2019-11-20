@@ -300,5 +300,13 @@ namespace Proyecto.Controllers
             return list;
 
         }
+
+        public List<SelectListItem> getDesarrolladores()
+        {
+            var item = from a in db.EmpleadoDesarrollador
+                       select new SelectListItem { Text = a.nombreED, Value = a.nombreED };
+            List<SelectListItem> list = item.ToList();
+            return list;
+        }
     }
 }

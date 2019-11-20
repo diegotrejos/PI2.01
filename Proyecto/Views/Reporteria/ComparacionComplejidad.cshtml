@@ -19,15 +19,12 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            <div class="display-label">
-                Seleccionar Complejidad
+            <div class="editor-field">
+                <form action="/Reporteria/ComparacionComplejidad" method="post">
+                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Seleccione un nivel de complejidad", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
             </div>
-            <td>
-                 @if (TempData["Complejidad"] != null)
-                        {
-                            @Html.DropDownList("complejidad", new SelectList(TempData["Complejidad"] as List<string>))
-                        }
-            </td>
 
         </fieldset>
     }
