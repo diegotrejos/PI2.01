@@ -29,6 +29,25 @@ namespace Proyecto.Controllers
             return View();
         }
 
+        public ActionResult DesarrolladoresProyDis()
+        {
+            List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
+            List<Equipo> equipos = new EquipoController().getEquipos();
+            TempData["empleadosDisponibles"] = empleados;
+            TempData["teams"] = equipos;
+
+            
+                      
+
+            return View();
+
+
+
+        }
+
+       // private List<Equipo> ordenarAsc()
+
+
       
     }
 }

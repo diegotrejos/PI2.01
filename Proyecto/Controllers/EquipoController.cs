@@ -153,7 +153,13 @@ namespace Proyecto.Controllers
         }
 
 
-
+        public List<Equipo> getEquipos()
+        {
+            var team = from a in db.Equipo
+                       orderby a.Proyecto.fechaFinalizacion ascending
+                       select a;
+            return team.ToList();
+        }
 
     }
 }

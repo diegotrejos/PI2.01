@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Asignar Equipo"; @*Titulo que esta en el estandar *@
+}
+
+<h2>@ViewBag.Title</h2>
+
+@*Permite a la columna de la derecha poderse ordenar y recibir empleados de la columna de la izquierda*@
+
+@*Llamo al codigo de java script que se encuentra es esa ruta*@
+
+
+
+<body onload="Desabilitar();">
+
+
+    @*Codigo de los estilos de la lista y de las etiquetas arriba de estas*@
+    <style>
+        #sortable tr:hover {
+            background-color: #0094ff;
+            color: #fff;
+            margin: 30px;
+        }
+
+        #sortable2 tr:hover {
+            background-color: #0094ff;
+            color: #fff;
+            margin: 30px;
+        }
+
+        tbody {
+            float: left;
+            width: 200px;
+            height: 250px;
+        }
+    </style>
+
+
+
+
+    <div class=" Desarrollador Cliente modal-body row">
+        <div class=".col-6 .col-sm-6">
+            @*Estilo para la letra de arriba de la columna*@
+            <p style="font-size:16px; color:#000000; font-weight:bold; font-style:italic;"> Desarrolladores Asignados</p>
+            <p></p>
+            @*Tabla que se encuentra arriba de las listas y despliega la etiqueta con cedula y nombre*@
+            <table class="table table-responsive-md">
+                <thead style="background-color:#5B3924">
+                    <tr>
+                        <th style="color:aliceblue">Nombre  apellido</th>
+                       @* <th style="color:aliceblue">Apellido</th>*@
+                        <th style="color:aliceblue">Proyecto</th>
+                        <th style="color:aliceblue">    Fecha inicio</th>
+                        <th style="color:aliceblue">dur estimada</th>
+                    </tr>
+                </thead>
+                <tbody id="disponibilidad" style="cursor:pointer;">
+                    @*Id es lo que reconoce el script de mas arriba*@
+                    @*Listado de los desarrolladores disponibles *@
+                    @if (TempData["teams"] != null)
+                    {
+                        foreach (var item in TempData["teams"] as List<Proyecto.Models.Equipo>)
+                        {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.nombreED</i></a>
+                        </td>
+                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.apellido1ED</i></a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.nombre</i></a>
+                        </td>
+                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.fechaInicio</i></a>
+                        </td>
+                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.fechaFinalizacion</i></a>
+                        </td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class=" Desarrollador Cliente col">
+        </div>
+
+        <div class=".col-15 .col-sm-4">
+
+            @*Estilo para la letra de arriba de la columna*@
+            <p style="font-size:16px; color:#000000; font-weight:bold; font-style:italic;"> Empleados Disponibles</p>
+            <!-- codigo de segunda colunma-->
+            @*Aqui deberia de anadir el boton que llama al script de asignar miembros*@
+
+
+
+
+            <table class="table table-responsive-md">
+                <thead style="background-color:#5B3924">
+                    <tr>
+                        <th style="color:aliceblue">Cédula</th>
+                        <th style="color:aliceblue">Nombre</th>
+                    </tr>
+                </thead>
+                <tbody id="asignacion" style="cursor:pointer;">
+                    @*Id que identifica en los scripts de arriba*@
+                    @*Lista de la derecha de los empleados que ya estan asignados a un proyecto*@
+                    @if (TempData["empleadosDisponibles"] != null)
+                    {
+                        foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
+                        {
+                            if (item.disponibilidad == true && item.flg == true)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.cedulaED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
+
+                                    </td>
+                                    <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+    <p class="botones text-center ">  
+        <a href="~/Equipo/Index" class="btn btn-success">
+            Aceptar
+        </a>
+    </p>
+        </div>
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                 lista[i].setAttribute('readonly', 'readonly');
+                 lista[i].hidden = true;
+            }
+        }
+    </script>
+
+</body>
+
+
+
