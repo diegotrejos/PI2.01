@@ -429,5 +429,23 @@ namespace Proyecto.Controllers
             listaLocal.Add("Suspendido");
             return listaLocal;
         }
+
+        public void llenarArray(info_empleados[] info)
+        {
+            var linq = from a in db.Requerimiento
+                       select a;
+
+            foreach (var item in linq.ToList())
+            {
+                int count = 0;
+                if (item.cedulaResponsable_FK == info[count].equipo.EmpleadoDesarrollador.cedulaED)
+                {
+                    info[count].requerimientos.Add(item);
+                    break;
+                }
+                else
+                    ++count;
+            }
+        }
     }
 }

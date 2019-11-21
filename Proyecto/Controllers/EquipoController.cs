@@ -161,5 +161,17 @@ namespace Proyecto.Controllers
             return team.ToList();
         }
 
+        public void llenarArray(info_empleados[] info)
+        {
+            var linq = from a in db.Equipo
+                       select a;
+
+            int count = 0;
+            foreach (var item in linq.ToList())
+            {
+                info[count++].equipo = item;
+            }
+        }
+
     }
 }

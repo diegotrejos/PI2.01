@@ -12,6 +12,18 @@ using System.Windows;
 
 namespace Proyecto.Controllers
 {
+
+    public class info_empleados
+    {
+        public Equipo equipo { get;set;}
+        public List<Requerimiento> requerimientos { get; set; }
+        public DateTime durEstimada { get; set;}
+        public int longitud { get; set; }
+    }
+
+
+
+
     public class ReporteriaController : Controller
     {
         public string usuario = "";
@@ -32,20 +44,47 @@ namespace Proyecto.Controllers
         public ActionResult DesarrolladoresProyDis()
         {
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
-            List<Equipo> equipos = new EquipoController().getEquipos();
-            TempData["empleadosDisponibles"] = empleados;
-            TempData["teams"] = equipos;
-
             
-                      
+            TempData["empleadosDisponibles"] = empleados;
+            List<info_empleados> lista_datos = new List<info_empleados>();
 
+            int longitudArray = new EmpleadoDesarrolladorController().getNoDisponibles();
+
+
+            info_empleados[] arrayInfo = new info_empleados[longitudArray];
+
+            arrayInfo[1].longitud = longitudArray;
+
+            new EquipoController().llenarArray(arrayInfo);
+
+            new RequerimientoController().llenarArray(arrayInfo);
+
+            calculoDurEstimada(arrayInfo,longitudArray);
+
+            ordenamientoElka(arrayInfo,longitudArray);
+
+            ViewBag.info = arrayInfo;
             return View();
-
-
-
         }
 
-       // private List<Equipo> ordenarAsc()
+        private void calculoDurEstimada(info_empleados[] info, int longitud)
+        {
+            for (int i = 0; i < longitud; ++i)
+            {
+                int totalHoras = 0;
+                foreach (var item in info[i].requerimientos)
+                {
+                    totalHoras += item.duracionEstimada;
+                }
+                totalHoras = totalHoras / 8;
+                info[i].durEstimada.AddDays(totalHoras);
+            }
+        }
+
+        private void ordenamientoElka(info_empleados[] info, int longitud) //puede ser que tenga que devolver una array pero por ahora lo dejare void 
+        {
+
+        }
 
 
       

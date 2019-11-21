@@ -300,5 +300,21 @@ namespace Proyecto.Controllers
             return list;
 
         }
+
+        public int getNoDisponibles()
+        {
+            int count = 0;
+            var linq = from a in db.EmpleadoDesarrollador
+                       select a;
+            List<EmpleadoDesarrollador> listaEmpleados = linq.ToList();
+            foreach (var item in listaEmpleados)
+            {
+                if (item.flg == true && item.disponibilidad == false)
+                {
+                    ++count;
+                }
+            }
+            return count;
+        }
     }
 }
