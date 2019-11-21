@@ -158,74 +158,7 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
-        public ActionResult Historial()
-        {
-            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
-            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-            ViewBag.user = usuario;
-
-            var item = from r in db.Requerimiento
-                       from p in db.Proyecto
-                       from e in db.Equipo
-                       from em in db.EmpleadoDesarrollador
-                       where p.nombre == r.nombreProyecto_FK &&  r.cedulaResponsable_FK == em.cedulaED && p.fechaFinalizacion!= null
-                       && e.nombreProy_FK == p.nombre && e.cedulaEM_FK == em.cedulaED
-                       group new { r, p, e, em } by p.nombre into c
-                       select new { nombreP = c.FirstOrDefault().p.nombre, nombre = c.FirstOrDefault().em.nombreED, rol = c.FirstOrDefault().e.rol ? "Lider" : "Desarrollador", sumaReal = c.Sum(a => a.r.duracionReal)/*,count= c.Count(), success= c.Where(a => a.r.estado == "Finalizado" ).Count()*/};
-
-            List<string> lista = new List<string>();
-           
-            foreach (var dato in item)
-            {
-                if (dato.rol != "Lider")
-                    lista.Add(dato.nombreP + "," + dato.nombre + "," + dato.rol + "," + dato.sumaReal);
-                else
-                    lista.Add(dato.nombreP + "," + dato.nombre + "," + dato.rol + "," + " ");
-            }
-            return View(lista);
-        }
-
-        [HttpPost]
-        public ActionResult Historial(string nombre)
-        {
-            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
-            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-            ViewBag.user = usuario;
-
-            var item =
-                    from r in db.Requerimiento
-                    from p in db.Proyecto
-                    from e in db.Equipo
-                    from em in db.EmpleadoDesarrollador
-                    where  p.nombre == r.nombreProyecto_FK  && em.nombreED == nombre && r.cedulaResponsable_FK == em.cedulaED && p.fechaFinalizacion != null
-                    && e.nombreProy_FK == p.nombre && e.cedulaEM_FK == em.cedulaED
-                    group new { r, p ,e, em} by p.nombre into c
-                    select new {nombreP = c.FirstOrDefault().p.nombre , nombre = c.FirstOrDefault().em.nombreED, rol = c.FirstOrDefault().e.rol?"Lider":"Desarrollador", sumaReal = c.Sum(a => a.r.duracionReal)/*,count= c.Count(), success= c.Where(a => a.r.estado == "Finalizado" ).Count()*/};
-            if (nombre == "" && usuario=="Jefe")
-            {
-                item = from r in db.Requerimiento
-                       from p in db.Proyecto
-                       from e in db.Equipo
-                       from em in db.EmpleadoDesarrollador
-                       where p.nombre == r.nombreProyecto_FK && r.cedulaResponsable_FK == em.cedulaED
-                        && e.nombreProy_FK == p.nombre && e.cedulaEM_FK == em.cedulaED
-                       group new { r, p, e, em } by p.nombre into c
-                       select new { nombreP = c.FirstOrDefault().p.nombre, nombre = c.FirstOrDefault().em.nombreED, rol = c.FirstOrDefault().e.rol ? "Lider" : "Desarrollador", sumaReal = c.Sum(a => a.r.duracionReal)/*,count= c.Count(), success= c.Where(a => a.r.estado == "Finalizado" ).Count()*/};
-
-            }
-            List<string> lista = new List<string>();
-            foreach (var dato in item)
-            {
-                if (dato.rol != "Lider")
-                    lista.Add(dato.nombreP + "," + dato.nombre+"," + dato.rol +"," + dato.sumaReal);
-                else
-                    lista.Add(dato.nombreP + "," + dato.nombre + "," + dato.rol + "," + " ");
-            }
-            
-            return View(lista);
-        }
+      
 
         public SelectList getDesarrolladores()
         {
@@ -253,38 +186,8 @@ namespace Proyecto.Controllers
 
         public SelectList getProyectos()
         {
-            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
-            ViewBag.user = usuario;
-            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
-            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
-            if (usuario == "Desarrollador" || usuario == "Lider") //Si es Lider o Desarrollador se devuelve el mismo proyecto dependiendo de su cédula
-            {
-                var obj = from a in db.Proyecto
-                          from b in db.Equipo
-                          where a.nombre == b.nombreProy_FK
-                          where b.cedulaEM_FK == cedula
-                          select a.nombre;
-
-                return new SelectList(obj);
-
-            }
-            else if (usuario == "Cliente") //El cliente ve solo sus proyecto
-            {
-                var obj = from a in db.Proyecto
-                          where a.cedulaCliente == cedula
-                          select a.nombre;
-                return new SelectList(obj);
-            }
-            else if (usuario == "Jefe")
-            { //Como el Jefe puede ver todo, se le muestran todos los proyectos
-                var obj = from a in db.Proyecto
-                          select a.nombre;
-                return new SelectList(obj);
-            }
-            SelectList lista = new SelectList("");
-            return lista;
+            return proyController.getProyectosPorRol();
         }
-
 
     }
 }
