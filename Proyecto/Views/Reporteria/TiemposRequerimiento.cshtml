@@ -122,9 +122,8 @@
                     ModulosProyecto.success = function (data) {//datos q retorna getmodulo
 
                         $("#nombreProyecto").empty();
-                        $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
+                        $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
                         for (var i = 0; i < data.length; i++) {
-                            $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
                             $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
                         }
                         $("#nombreProyecto").prop("disabled", false);
