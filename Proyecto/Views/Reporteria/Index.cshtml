@@ -60,7 +60,7 @@
                 <tr style="line-height:50px">
                     <th>
                         <div class=" boton float-left">
-                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Comparación de estimaciones y valores reales por requerimiento</button>
+                            <button onclick="location.href = '@Url.Action("","Reporteria/TiemposRequerimiento")'" class="btn Desarrollador Cliente Lider " style="background: #5B3924; color:white">Comparación de estimaciones y valores reales por requerimiento</button>
                         </div>
                     </th>
                     <th style="width: 200px">
@@ -76,7 +76,7 @@
                 <tr style="line-height:50px">
                     <th>
                         <div class=" boton float-left">
-                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Historial sobre participación, rol y total de horas de un desarrollador por proyecto</button>
+                            <button onclick="location.href = '@Url.Action("","Reporteria/Historial")'" class="btn Desarrollador Cliente Lider" style="background: #5B3924; color:white">Historial sobre participación, rol y total de horas de un desarrollador por proyecto</button>
                         </div>
                     </th>
                     <th style="width: 200px">
@@ -92,7 +92,7 @@
                 <tr style="line-height:50px">
                     <th>
                         <div class=" boton float-left">
-                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Total de horas estimadas y reales por proyecto</button>
+                            <button onclick="location.href = '@Url.Action("","Reporteria/HorasProyecto")'" class="btn Desarrollador Cliente" style="background: #5B3924; color:white">Total de horas estimadas y reales por proyecto</button>
                         </div>
                     </th>
                     <th style="width: 200px">
@@ -131,7 +131,7 @@
             var lista = document.getElementsByClassName(rol);
             for (var i = 0; i < lista.length; ++i) {
                 lista[i].setAttribute('readonly', 'readonly');
-                lista[i].hidden = true;
+                lista[i].disabled = true;
             }
         }
     </script>

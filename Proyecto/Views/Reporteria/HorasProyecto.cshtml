@@ -1,0 +1,93 @@
+﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+<body onload="Desabilitar();">
+
+ <div class=" Container" align-items-center>
+        <h2>Total de horas estimadas y reales por proyecto</h2>
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <div class="display-label Lider">
+                    Buscar Proyecto
+                </div>
+                <div class="editor-field Lider">
+
+                    <form action="/Reporte/TiemposRequerimiento" method="post">
+                        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos(), "Todos los proyectos", new { @class = "form-control", @onchange = "this.form.submit()" })
+                        <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+                </div>
+
+            </fieldset>
+        }
+        <p class=" boton float-right">
+            <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn  float-right " style="background: #5B3924; color:white">Regresar</button>
+        </p>
+
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>
+                    Nombre del Proyecto
+                </th>
+                <th class="Lider">
+                    Nombre del Líder
+                </th>
+
+                <th>
+                    Duración estimada total
+                </th>
+                <th>
+                    Duración Real total
+                </th>
+                <th>
+                    Diferencia
+                </th>
+            </tr>
+            </br>
+            </br>
+
+            @foreach (var item in Model)
+            {
+                string datos = item.ToString();
+
+                string[] lista = datos.Split(',');
+                <tr>
+                    <td>
+                        @lista[0]
+
+                    </td>
+
+                    <td class="Lider">
+                        @lista[1]
+
+                    </td>
+                    <td>
+                        @lista[2]
+
+                    </td>
+                    <td>
+                        @lista[3]
+
+                    </td>
+                    <td>
+                        @lista[4]
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+</div>
+
+        <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].hidden = true;
+            }
+        }
+        </script>
+
+
+</body>
