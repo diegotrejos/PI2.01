@@ -21,7 +21,7 @@
         <fieldset>
             <div class="editor-field">
                 <form action="/Reporteria/ComparacionComplejidad" method="post">
-                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Seleccione un nivel de complejidad", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    @Html.DropDownList("complejidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Seleccione un nivel de complejidad", new { @class = "form-control", @onchange = "this.form.submit()" })
                     <noscript><input type="submit" value="Submit"></noscript>
                 </form>
             </div>
@@ -39,43 +39,94 @@
     <br />
     <br />
 
-    <table>
-        <tbody>
-            <tr style="line-height:50px">
+    @* <table>
+        <tr>
+            @foreach (var item in Model)
+            {
+                string datosObtenidos = item.ToString();
+
+                string[] datos = datosObtenidos.Split(' ');
+
+            <tr>
                 <th>
                     Cantidad de Requerimientos
                 </th>
-
-                <td></td>
-            </tr>
-
+                <td>
+                    @datos[0]
+                </td>
             <tr style="line-height:50px">
                 <th>
                     Diferencia mínima entre el tiempo real y el estimado
                 </th>
-
-                <td></td>
-            </tr>
-
+                <td>
+                    @datos[1]
+                </td>
             <tr style="line-height:50px">
                 <th>
                     Diferencia máxima entre el tiempo real y el estimado
                 </th>
-
-                <td></td>
-            </tr>
-
+                <td>
+                    @datos[2]
+                </td>
             <tr style="line-height:50px">
                 <th>
                     Tiempo promedio de la duración real
                 </th>
+                <td>
+                    @datos[3]
+                </td>
 
-                <td></td>
             </tr>
+            }
+        </table>*@
 
-        </tbody>
+    <table>
+        <tr>
+            <th>
+                Cantidad de Requerimientos
+            </th>
+        
+            <th>
+                Diferencia mínima entre el tiempo real y el estimado
+            </th>
+        
+            <th>
+                Diferencia máxima entre el tiempo real y el estimado
+            </th>
+        
+            <th>
+                Tiempo promedio de la duración real
+            </th>
+            
+        </tr>
+
+       
+
+        @foreach (var item in Model)
+        {
+            string datosObtenidos = item.ToString();
+
+            string[] datos = datosObtenidos.Split(' ');
+        <tr>
+
+            <td>
+                @datos[0]
+
+            </td>
+            <td>
+                @datos[1]
+            </td>
+            <td>
+                @datos[2]
+            </td>
+            <td>
+                @datos[3]
+            </td>
+
+
+        </tr>
+        }
     </table>
-
 </div>
 
 

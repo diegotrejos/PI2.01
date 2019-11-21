@@ -33,14 +33,25 @@ namespace Proyecto.Controllers
         }
 
 
-        public ActionResult ComparacionComplejidad()
+        public ActionResult ComparacionComplejidad(string complejidad)
         {
-            return View();
+            var item = from req in db.Requerimiento
+                       where req.complejidad == complejidad
+                       group req by req.complejidad into g
+                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal) , promedio = g.Average(c => c.duracionReal)};
+
+            List<string> datos = new List<string>();
+            foreach (var dato in item)
+            {
+                datos.Add(dato.total + " " + dato.minimo + " " + dato.maximo + " " + dato.promedio);
+            }
+            return View(datos);
         }
+       
 
         public ActionResult HistorialDesarrollador()
         {
-            ViewBag.cedulaEmpleadoPK_FK = new SelectList(db.EmpleadoDesarrollador, "cedulaED", "nombreED");
+
             return View();
         }
 
