@@ -64,7 +64,7 @@
 
 
                     <td>
-                        algo
+                        @ViewBag.Proy
                     </td>
 
                 </tr>
@@ -95,19 +95,19 @@
 
             string[] datos = datosObtenidos.Split(' ');
 
-            if (datos.Length == 7)
+            if (datos.Length == 6)
             {
             <tr>
                 <td>
-                    @datos[1]
+                    @datos[0]
                 </td>
 
                 <td>
-                    @datos[2]  @datos[3]
+                    @datos[1]  @datos[2]
                 </td>
 
                 <td>
-                    @datos[4] @datos[5] @datos[6]
+                    @datos[3] @datos[4] @datos[5]
                 </td>
 
             </tr>
@@ -117,15 +117,15 @@
             {
             <tr>
                 <td>
+                    @datos[0]
+                </td>
+
+                <td>
                     @datos[1]
                 </td>
 
                 <td>
-                    @datos[2]
-                </td>
-
-                <td>
-                    @datos[3] @datos[4] @datos[5]
+                    @datos[2] @datos[3] @datos[4]
                 </td>
 
             </tr>

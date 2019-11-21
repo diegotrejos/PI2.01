@@ -43,23 +43,24 @@ namespace Proyecto.Controllers
         /* consulta para obtener el numero de empleador por conocimiento y el promedio de tiempo trabajar en la empresa
          * @return lista 
          */
-        [HttpPost]
         public ActionResult DesarrolladoresPorConocimiento()
         {
-            /*
+
             var item = (from habi in db.Habilidades
-                      from  emp in db.EmpleadoDesarrollador
-                      where habi.cedulaEmpleadoPK_FK == emp.cedulaED
-                      group habi by habi.conocimientos into g
-                      select new  {nombre = habi.conociminetos, cantDesa = g.Count(), promedio = g.Average(System.DateTime.Now.Year - emp.fechaInicio.year) }); 
+                     from  emp in db.EmpleadoDesarrollador
+                     where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                     group  habi by habi.conocimientos into g
+                     orderby g.FirstOrDefault().conocimientos ascending
+                        select new { nombre = g.FirstOrDefault().conocimientos, cantDesa = g.Count(), promedio =  g.AsEnumerable().FirstOrDefault().EmpleadoDesarrollador.fechaInicio });
+            //System.DateTime.Now - g.AsEnumerable().FirstOrDefault().EmpleadoDesarrollador.fechaInicio 
 
             List<string> datos = new List<string>();
             foreach (var dato in item)
             {
                 datos.Add(dato.nombre + " " + dato.cantDesa + " " + dato.promedio);
             }
-            */
-            return View();//retorna la vista
+           
+            return View(datos);//retorna la vista
         }
         
 
@@ -76,6 +77,8 @@ namespace Proyecto.Controllers
                 return View(obj.Distinct().ToList());
             }
 
+            ViewBag.Proy = Proyecto;
+
             var item = (from a in db.Requerimiento
                             from b in db.EmpleadoDesarrollador
                             where a.cedulaResponsable_FK == b.cedulaED
@@ -88,21 +91,6 @@ namespace Proyecto.Controllers
             }
 
             return View(datosObtenidos);//retorna la vista
-        }
-        public ActionResult nombreProyecto(string Proyecto)
-        {
-
-            var proy = from a in db.Proyecto
-                       where a.nombre == Proyecto
-                       select a;
-
-            List<string> datoP = new List<string>();
-            foreach (var dato in proy)
-            {
-                datoP.Add(dato.nombre);
-            }
-
-            return View(datoP);//retorna la vista
         }
         public SelectList getProyectos(String rol, String cedula)
         {

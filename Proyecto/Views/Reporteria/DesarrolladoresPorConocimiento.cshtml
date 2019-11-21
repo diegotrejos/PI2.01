@@ -9,7 +9,7 @@
 <body onload="Desabilitar();">
 
     <div class=" Container" align-items-center>
-        <h2>Lista de Empleados</h2>
+        <h2>Consulta</h2>
 
         <p class=" boton float-right">
             <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
@@ -19,32 +19,36 @@
 
         <table class="table table-striped">
             <tr>
-                <th>
+                <th class=" text-center">
                     Habilidad
                 </th>
-                <th>
+                <th class=" text-center">
                     Cantidad de desarrolladores
                 </th>
-                <th>
+                <th class=" text-center">
                     Promedio de antüedad en empresa
                 </th>
-                <th></th>
             </tr>
+            @foreach (var item in Model)
+            {
+                string datosObtenidos = item.ToString();
 
-                <tr>
-                    <td>
+                string[] datos = datosObtenidos.Split(' ');
+                    <tr>
+                        <td class=" text-center">
+                            @datos[0]
+                        </td>
 
-                    </td>
-                    <td>
+                        <td class=" text-center">
+                            @datos[1]
+                        </td>
 
-                    </td>
-                    <td>
-
-                    </td>
-
-
-                </tr>
-        </table>
+                        <td class=" text-center">
+                            @datos[2]
+                        </td>
+                    </tr>
+                }
+                </table>
     </div>
 
     <script>
