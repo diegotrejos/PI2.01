@@ -51,42 +51,43 @@ namespace Proyecto.Controllers
             int longitudArray = new EmpleadoDesarrolladorController().getNoDisponibles();
 
 
-            info_empleados[] arrayInfo = new info_empleados[longitudArray];
+            //info_empleados[] arrayInfo = new info_empleados[longitudArray];
 
-            arrayInfo[1].longitud = longitudArray;
+            //arrayInfo[1].longitud = longitudArray;
 
-            new EquipoController().llenarArray(arrayInfo);
+            new EquipoController().llenarArray(lista_datos);
 
-            new RequerimientoController().llenarArray(arrayInfo);
+            new RequerimientoController().llenarArray(lista_datos);
 
-            calculoDurEstimada(arrayInfo,longitudArray);
+            calculoDurEstimada(lista_datos,longitudArray);
 
-            ordenamientoElka(arrayInfo,longitudArray);
+            //ordenamientoElka(lista_datos,longitudArray);
 
-            ViewBag.info = arrayInfo;
+            TempData["datos"] = lista_datos;
             return View();
         }
 
-        private void calculoDurEstimada(info_empleados[] info, int longitud)
+        private void calculoDurEstimada(List<info_empleados> info, int longitud)
         {
-            for (int i = 0; i < longitud; ++i)
+            foreach (var item1 in info)
             {
                 int totalHoras = 0;
-                foreach (var item in info[i].requerimientos)
+                foreach (var item in item1.requerimientos)
                 {
                     totalHoras += item.duracionEstimada;
                 }
                 totalHoras = totalHoras / 8;
-                info[i].durEstimada.AddDays(totalHoras);
+                item1.durEstimada.AddDays(totalHoras);
             }
         }
 
+        /*
         private void ordenamientoElka(info_empleados[] info, int longitud) //puede ser que tenga que devolver una array pero por ahora lo dejare void 
         {
 
         }
 
-
+    */
       
     }
 }

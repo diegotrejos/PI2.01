@@ -430,21 +430,22 @@ namespace Proyecto.Controllers
             return listaLocal;
         }
 
-        public void llenarArray(info_empleados[] info)
+        public void llenarArray(List<info_empleados> info)
         {
             var linq = from a in db.Requerimiento
                        select a;
 
             foreach (var item in linq.ToList())
             {
-                int count = 0;
-                if (item.cedulaResponsable_FK == info[count].equipo.EmpleadoDesarrollador.cedulaED)
+                foreach (var item1 in info)
                 {
-                    info[count].requerimientos.Add(item);
-                    break;
+                    //int count = 0;
+                    if (item.cedulaResponsable_FK == item1.equipo.EmpleadoDesarrollador.cedulaED)
+                    {
+                        item1.requerimientos.Add(item);
+                        break;
+                    }
                 }
-                else
-                    ++count;
             }
         }
     }

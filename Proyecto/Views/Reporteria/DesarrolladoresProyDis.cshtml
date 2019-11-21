@@ -57,28 +57,28 @@
                 <tbody id="disponibilidad" style="cursor:pointer;">
                     @*Id es lo que reconoce el script de mas arriba*@
                     @*Listado de los desarrolladores disponibles *@
-                    @if (ViewBag.info != null)
+                    @if (TempData["datos"] != null)
                     {
-                        for(int i = 0; i < ViewBag.info[0].longitud; ++i)
+                        foreach (var item in TempData["datos"] as List<((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller)>)
                         {
                     <tr>
                         <td>
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = ViewBag.info[i].cedulaEM_FK })"><i>@ViewBag.info[i].equipo.EmpleadoDesarrollador.nombreED</i></a>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.nombreED</i></a>
                         </td>
-                        <td class="taskSingleInline" id="task@(ViewBag.info[i].cedulaEM_FK)" data-taskid="@(ViewBag.info[i].cedulaEM_FK)">
+                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
 
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = ViewBag.info[i].cedulaEM_FK})"><i>@ViewBag.info[i].equipo.EmpleadoDesarrollador.apellido1ED</i></a>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.apellido1ED</i></a>
                         </td>
                         <td>
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = ViewBag.info[i].cedulaEM_FK })"><i>@ViewBag.info[i].equipo.Proyecto.nombre</i></a>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.nombre</i></a>
                         </td>
-                        <td class="taskSingleInline" id="task@(ViewBag.info[i].cedulaEM_FK)" data-taskid="@ViewBag.info[i].cedulaEM_FK)">
+                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
 
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = ViewBag.info[i].cedulaEM_FK })"><i>@ViewBag.info[i].equipo.Proyecto.fechaInicio</i></a>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.fechaInicio</i></a>
                         </td>
-                        <td class="taskSingleInline" id="task@(ViewBag.info[i].cedulaEM_FK)" data-taskid="@(ViewBag.info[i].cedulaEM_FK)">
+                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
 
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula =ViewBag.info[i].cedulaEM_FK})"><i>@ViewBag.info[i].durEstimada</i></a>
+                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.fechaFinalizacion</i></a>
                         </td>
                     </tr>
                         }
