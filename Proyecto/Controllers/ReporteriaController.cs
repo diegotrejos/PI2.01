@@ -49,10 +49,26 @@ namespace Proyecto.Controllers
         }
        
 
-        public ActionResult HistorialDesarrollador()
+        public ActionResult HistorialDesarrollador(string nombre)
         {
+            var item = from proy in db.Proyecto
+                       from req in db.Requerimiento
+                       from eq in db.Equipo
+                       from emp in db.EmpleadoDesarrollador
+                       where emp.nombreED == nombre
+                       where emp.cedulaED == req.cedulaResponsable_FK
+                       where req.nombreProyecto_FK == proy.nombre
+                       where proy.nombre == eq.nombreProy_FK
+                       where eq.cedulaEM_FK == emp.cedulaED
+                       group new { proy, req, eq } by new { proy.nombre, eq.rol } into g
+                       select new { nom = g.Key.nombre, r = g.Key.rol, duracion = g.Sum(x => x.req.duracionReal) };
 
-            return View();
+            List<string> datos = new List<string>();
+            foreach (var dato in item)
+            {
+                datos.Add(dato.nom + " " + dato.r + " " + dato.duracion);
+            }
+            return View(datos);
         }
 
         //Crea la lista predefinida con las complejidades

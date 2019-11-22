@@ -49,11 +49,55 @@
             <th>
                 Total de horas dedicadas
             </th>
-            <th></th>
         </tr>
 
-    </table>
 
+        @foreach (var item in Model)
+        {
+            string datosObtenidos = item.ToString();
 
+            string[] datos = datosObtenidos.Split(' ');
+            string nombreproy = datos[0];
+            int contador = 1;
+            bool salir = true;
+            while(salir== true)
+            {
+                if (String.Compare(datos[contador], "True") != 0 && String.Compare(datos[contador], "False") !=0)
+                {
+                    nombreproy += ' ' + datos[contador];
+                    ++contador;
+                }
+                else
+                {
+                    salir = false;
+
+                }
+            }
+
+            <tr>
+                <td>
+                    @nombreproy
+                </td>
+
+                    @if (@datos[contador] == "True")
+                    {
+                        <td>
+                            Líder
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Desarrollador
+                        </td>
+                    }
+
+                    <td>
+                        @datos[contador +1]
+                    </td>
+
+            </tr>
+        } 
+        </table>
 </div>
 
