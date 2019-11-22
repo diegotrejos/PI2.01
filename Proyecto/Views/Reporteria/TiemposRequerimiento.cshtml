@@ -103,7 +103,7 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script>
         $(document).ready(function () {
-            $("#nombreProyecto").prop("disabled", true);//se desactiva el primer drowpdown mientras se trabaja esto
+           $("#nombreProyecto").prop("disabled", true);
 
             $("#nombre").change(function () {
 
@@ -122,10 +122,12 @@
                     ModulosProyecto.success = function (data) {//datos q retorna getmodulo
 
                         $("#nombreProyecto").empty();
-                        $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
+                        $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
                         for (var i = 0; i < data.length; i++) {
                             $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
                         }
+                        if(data.length != 0)
+                            $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
                         $("#nombreProyecto").prop("disabled", false);
                     };
 
@@ -135,8 +137,8 @@
 
                     $.ajax(ModulosProyecto);
                 } else {
-                    $("#nombreProyecto").empty();
-                    $("#nombreProyecto").prop("disabled", true);
+                   $("#nombreProyecto").empty();
+                   $("#nombreProyecto").prop("disabled", true);
                 }
             });
         });

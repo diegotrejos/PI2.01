@@ -139,13 +139,13 @@ namespace Proyecto.Controllers
                 item.Distinct();
             if (nombreProyecto =="") {
                  item =
-                           from b in db.Requerimiento
-                           from a in db.Proyecto
-                           from e in db.Equipo
-                           from l in db.EmpleadoDesarrollador
-                           where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED
-                           group new { a, b, e, l } by a.nombre into c
-                           select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
+                         from b in db.Requerimiento
+                         from a in db.Proyecto
+                         from e in db.Equipo
+                         from l in db.EmpleadoDesarrollador
+                         where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED
+                         group new { a, b, e, l } by a.nombre into c
+                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
                 if (item != null)
                     item.Distinct();
             }
