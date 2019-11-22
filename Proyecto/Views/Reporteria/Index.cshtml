@@ -1,0 +1,142 @@
+﻿@{
+                ViewBag.Title = "Index";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+    <style>
+        .btn {
+            width: 700px;
+            height: 30px;
+        }
+        .bt {
+            width: 100px;
+            height: 30px;
+            background: white;
+            border:0px;
+        }
+    </style>
+
+</head>
+
+<body onload="Desabilitar();">
+
+    <div class=" Container" align-items-center>
+        <h2 style="text-align:center">Consultas</h2>
+
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr style="line-height:50px">
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn  " style="background: #5B3924; color:white">Desarrolladores en proyectos y disponibles</button>
+                        </div>
+                    </th>
+                    <th style="width: 200px">
+                        <button class="bt"></button>
+                    </th>
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Estado del desarrollo de los requerimientos</button>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr style="line-height:50px">
+                    <th >
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Total de requerimientos asignados a un desarrollador</button>
+                        </div>
+                    </th>
+                    <th style="width: 200px">
+                        <button class="bt"></button>
+                    </th>
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Períodos de desocupación</button>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr style="line-height:50px">
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("","Reporteria/TiemposRequerimiento")'" class="btn Desarrollador Cliente Lider " style="background: #5B3924; color:white">Comparación de estimaciones y valores reales por requerimiento</button>
+                        </div>
+                    </th>
+                    <th style="width: 200px">
+                        <button class="bt"></button>
+                    </th>
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Total de requerimientos terminado y en ejecución</button>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr style="line-height:50px">
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("","Reporteria/Historial")'" class="btn Desarrollador Cliente Lider" style="background: #5B3924; color:white">Historial sobre participación, rol y total de horas de un desarrollador por proyecto</button>
+                        </div>
+                    </th>
+                    <th style="width: 200px">
+                        <button class="bt"></button>
+                    </th>
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Conocimientos más frecuentes en un rango de tiempo</button>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr style="line-height:50px">
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("","Reporteria/HorasProyecto")'" class="btn Desarrollador Cliente" style="background: #5B3924; color:white">Total de horas estimadas y reales por proyecto</button>
+                        </div>
+                    </th>
+                    <th style="width: 200px">
+                        <button class="bt"></button>
+                    </th>
+                    <th>
+                        <div class=" boton float-left">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Estado y responsable de cada requerimiento</button>
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="d-flex justify-content-center">
+            <tbody>
+                <tr style="line-height:50px">
+                    <th>
+                        <div class=" boton float-center">
+                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Comparación de estimaciones y valores reales por requerimiento con igual nivel de complejidad</button>
+                        </div>
+                    </th>
+                 </tr>
+
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].setAttribute('readonly', 'readonly');
+                lista[i].disabled = true;
+            }
+        }
+    </script>
+
+</body>
+
+
+

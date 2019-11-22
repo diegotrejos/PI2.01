@@ -356,6 +356,41 @@ namespace Proyecto.Controllers
             }
         }
 
+        public SelectList getProyectosPorRol() {
+
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            ViewBag.user = usuario;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            if (usuario == "Desarrollador" || usuario == "Lider") //Si es Lider o Desarrollador se devuelve el mismo proyecto dependiendo de su cédula
+            {
+                var obj = from a in db.Proyecto
+                          from b in db.Equipo
+                          where a.nombre == b.nombreProy_FK
+                          where b.cedulaEM_FK == cedula
+                          select a.nombre;
+
+                return new SelectList(obj);
+
+            }
+            else if (usuario == "Cliente") //El cliente ve solo sus proyecto
+            {
+                var obj = from a in db.Proyecto
+                          where a.cedulaCliente == cedula
+                          select a.nombre;
+                return new SelectList(obj);
+            }
+            else if (usuario == "Jefe")
+            { //Como el Jefe puede ver todo, se le muestran todos los proyectos
+                var obj = from a in db.Proyecto
+                          select a.nombre;
+                return new SelectList(obj);
+            }
+            SelectList lista = new SelectList("");
+            return lista;
+
+        }
+
 
         /*Método encargado de devolver los empleados desarrolladores disponibles 
        * @return list: lista de empleados desarrolladores disponibles

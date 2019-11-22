@@ -64,7 +64,7 @@ namespace Proyecto.Controllers
                         select a.EmpleadoDesarrollador.nombreED;
 
             //asignacion para mostrarlos en la  vista
-            TempData["empleadosAsignados"] = empleadosAsignados as List<Equipo>;
+            TempData["empleadosAsignados"] =  empleadosAsignados.ToList();
             TempData["lider"] = lider.FirstOrDefault();
             return View(/*empleadosAsignados.ToList()*/);
            
