@@ -38,15 +38,15 @@
     <br />
 
 
-    <table class="table table-striped">
-        <tr>
-            <th>
+    <table class="table table-striped" >
+        <tr >
+            <th style="text-align:center">
                 Proyectos
             </th>
-            <th>
+            <th style="text-align:center">
                 Rol
             </th>
-            <th>
+            <th style="text-align:center">
                 Total de horas dedicadas
             </th>
         </tr>
@@ -74,7 +74,7 @@
                 }
             }
 
-            <tr>
+            <tr style="text-align:center">
                 <td>
                     @nombreproy
                 </td>
@@ -92,9 +92,18 @@
                         </td>
                     }
 
-                    <td>
-                        @datos[contador +1]
-                    </td>
+                    @if (@datos[contador] != "True")
+                    {
+                        <td style="text-align:center">
+                            @datos[contador + 1]
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            -
+                        </td>
+                    }
 
             </tr>
         } 

@@ -33,12 +33,28 @@ namespace Proyecto.Controllers
         }
 
 
+        public ActionResult ComparacionComplejidad()
+        {
+            var item = from req in db.Requerimiento
+                       group req by 1 into g
+                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal) , promedio = g.Average(c => c.duracionReal)};
+
+           
+            List<string> datos = new List<string>();
+            foreach (var dato in item)
+            {
+                datos.Add(dato.total + " " + dato.minimo + " " + dato.maximo + " " + dato.promedio);
+            }
+            return View(datos);
+        }
+
+        [HttpPost]
         public ActionResult ComparacionComplejidad(string complejidad)
         {
             var item = from req in db.Requerimiento
                        where req.complejidad == complejidad
                        group req by req.complejidad into g
-                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal) , promedio = g.Average(c => c.duracionReal)};
+                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
 
             List<string> datos = new List<string>();
             foreach (var dato in item)
@@ -47,7 +63,7 @@ namespace Proyecto.Controllers
             }
             return View(datos);
         }
-       
+
 
         public ActionResult HistorialDesarrollador(string nombre)
         {
@@ -60,6 +76,7 @@ namespace Proyecto.Controllers
                        where req.nombreProyecto_FK == proy.nombre
                        where proy.nombre == eq.nombreProy_FK
                        where eq.cedulaEM_FK == emp.cedulaED
+                       //where proy.fechaFinalizacion != null
                        group new { proy, req, eq } by new { proy.nombre, eq.rol } into g
                        select new { nom = g.Key.nombre, r = g.Key.rol, duracion = g.Sum(x => x.req.duracionReal) };
 
