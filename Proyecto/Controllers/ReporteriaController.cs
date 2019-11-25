@@ -46,13 +46,20 @@ namespace Proyecto.Controllers
         public ActionResult DesarrolladoresPorConocimiento()
         {
 
-            var item = (from habi in db.Habilidades
+            /*var item = (from habi in db.Habilidades
                      from  emp in db.EmpleadoDesarrollador
                      where habi.cedulaEmpleadoPK_FK == emp.cedulaED
                      group  habi by habi.conocimientos into g
                      orderby g.FirstOrDefault().conocimientos ascending
-                        select new { nombre = g.FirstOrDefault().conocimientos, cantDesa = g.Count(), promedio =  g.AsEnumerable().FirstOrDefault().EmpleadoDesarrollador.fechaInicio });
-            //System.DateTime.Now - g.AsEnumerable().FirstOrDefault().EmpleadoDesarrollador.fechaInicio 
+                        select new { nombre = g.FirstOrDefault().conocimientos, cantDesa = g.Count(), promedio =  g.AsEnumerable().FirstOrDefault().EmpleadoDesarrollador.fechaInicio });*/
+            //System.DateTime.Now - g.AsEnumerable().FirstOrDefault().EmpleadoDesarrollador.fechaInicio //  g.Average(x => DateTime.Today.Subtract(x.emp.fechaInicio))
+            var item = (from habi in db.Habilidades
+                        from emp in db.EmpleadoDesarrollador
+                        where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                        group new { emp, habi } by new { conocimientos = habi.conocimientos } into g
+                        orderby g.Key.conocimientos ascending
+                        select new { nombre = g.Key.conocimientos, cantDesa = g.Count(), promedio =  g.FirstOrDefault().emp.fechaInicio });
+
 
             List<string> datos = new List<string>();
             foreach (var dato in item)
