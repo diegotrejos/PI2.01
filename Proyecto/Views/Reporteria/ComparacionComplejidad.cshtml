@@ -40,53 +40,6 @@
     <br />
     <br />
 
-    @*<table class="table table-striped">
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    string datosObtenidos = item.ToString();
-
-                    string[] datos = datosObtenidos.Split(' ');
-
-                    <tr>
-                        <th>
-                            Cantidad de Requerimientos
-                        </th>
-                        <td>
-                            @datos[0]
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            Diferencia mínima entre el tiempo real y el estimado
-                        </th>
-                        <td>
-                            @datos[1]
-                        </td>
-                    </tr>
-
-                    <tr">
-                <th>
-                    Diferencia máxima entre el tiempo real y el estimado
-                </th>
-                <td>
-                    @datos[2]
-                </td>
-                </tr>
-
-                <tr">
-                    <th>
-                        Tiempo promedio de la duración real
-                    </th>
-                    <td>
-                        @datos[3]
-                    </td>
-                    </tr>
-                }
-                <tbody>
-        </table>*@
-
     <table class="table table-striped" >
             <tr>
                 <th style="text-align:center">
@@ -106,8 +59,6 @@
                 </th>
 
             </tr>
-
-
 
             @foreach (var item in Model)
             {

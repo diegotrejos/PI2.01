@@ -76,7 +76,7 @@ namespace Proyecto.Controllers
                        where req.nombreProyecto_FK == proy.nombre
                        where proy.nombre == eq.nombreProy_FK
                        where eq.cedulaEM_FK == emp.cedulaED
-                       //where proy.fechaFinalizacion != null
+                       where proy.fechaFinalizacion != null
                        group new { proy, req, eq } by new { proy.nombre, eq.rol } into g
                        select new { nom = g.Key.nombre, r = g.Key.rol, duracion = g.Sum(x => x.req.duracionReal) };
 
