@@ -17,6 +17,27 @@
             </a>
         </p>
 
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <div class="display-label">
+                    Habilidades
+                </div>
+                <div class="editor-field">
+
+                    <form action="/Reporteria/DesarrolladorPorConocimiento" method="post">
+                        @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                        {
+                                @Html.DropDownList("Habilidad", new SelectList(TempData["Hab"] as List<string>), "----------")
+                            
+                        }
+                        <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+                </div>
+
+            </fieldset>
+        }
+
         <table class="table table-striped">
             <tr>
                 <th class=" text-center">
@@ -34,21 +55,21 @@
                 string datosObtenidos = item.ToString();
 
                 string[] datos = datosObtenidos.Split(' ');
-                    <tr>
-                        <td class=" text-center">
-                            @datos[0]
-                        </td>
+                <tr>
+                    <td class=" text-center">
+                        @datos[0]
+                    </td>
 
-                        <td class=" text-center">
-                            @datos[1]
-                        </td>
+                    <td class=" text-center">
+                        @datos[1]
+                    </td>
 
-                        <td class=" text-center">
-                            @datos[2]
-                        </td>
-                    </tr>
-                }
-                </table>
+                    <td class=" text-center">
+                        @datos[2]
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 
     <script>

@@ -156,6 +156,7 @@ namespace Proyecto.Controllers
                         Response.Write("<script>alert('La cédula de este empleado ya existe. Intente con una nueva');</script>");//Si la cédula ya existe, muestra mensaje de error)
                 }
                 }
+            ViewBag.Emp = empleadoDesarrollador.fechaInicio;
             return View(empleadoDesarrollador);
           }
 

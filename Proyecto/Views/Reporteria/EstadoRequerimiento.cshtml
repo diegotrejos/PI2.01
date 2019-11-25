@@ -36,7 +36,7 @@
                 <form action="/Reporteria/EstadoRequerimiento" method="post">
                     @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
                     {
-                        @Html.DropDownList("Proyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
+                        @Html.DropDownList("Proyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Todos los Proyectos", new { @class = "form-control", @onchange = "this.form.submit()" })
                     }
                     <noscript><input type="submit" value="Submit"></noscript>
                 </form>
