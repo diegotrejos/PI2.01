@@ -44,7 +44,7 @@
                 <tr style="line-height:50px">
                     <th >
                         <div class=" boton float-left">
-                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Total de requerimientos asignados a un desarrollador</button>
+                            <button onclick="location.href = '@Url.Action("","Reporteria/ComparacionComplejidad")'" class="btn Cliente Desarrollador Lider" style="background: #5B3924; color:white">Comparación de estimaciones y valores reales por requerimiento con igual nivel de complejidad</button>
                         </div>
                     </th>
                     <th style="width: 200px">
@@ -76,7 +76,7 @@
                 <tr style="line-height:50px">
                     <th>
                         <div class=" boton float-left">
-                            <button onclick="location.href = '@Url.Action("","Reporteria/Historial")'" class="btn Desarrollador Cliente Lider" style="background: #5B3924; color:white">Historial sobre participación, rol y total de horas de un desarrollador por proyecto</button>
+                            <button onclick="location.href = '@Url.Action("","Reporteria/HistorialDesarrollador")'" class="btn Cliente Desarrollador Lider " style="background: #5B3924; color:white">Historial sobre participación, rol y total de horas de un desarrollador por proyecto</button>
                         </div>
                     </th>
                     <th style="width: 200px">
@@ -107,22 +107,7 @@
             </tbody>
         </table>
 
-        <table class="d-flex justify-content-center">
-            <tbody>
-                <tr style="line-height:50px">
-                    <th>
-                        <div class=" boton float-center">
-                            <button onclick="location.href = '@Url.Action("Direccion")'" class="btn " style="background: #5B3924; color:white">Comparación de estimaciones y valores reales por requerimiento con igual nivel de complejidad</button>
-                        </div>
-                    </th>
-                 </tr>
-
-            </tbody>
-        </table>
-
-
-
-
+      
     </div>
 
     <script>
