@@ -47,12 +47,16 @@ namespace Proyecto.Controllers
                        from proy in db.Proyecto
                        where proy.nombre == req.nombreProyecto_FK
                        where req.complejidad == complejidad
+                       where proy.fechaFinalizacion != null
                        group req by req.complejidad into g
                        select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
 
             if (complejidad == "" || complejidad == "Todos los niveles") {
                      item = from req in db.Requerimiento
-                           group req by 1 into g
+                            from proy in db.Proyecto
+                            where proy.nombre == req.nombreProyecto_FK
+                            where proy.fechaFinalizacion != null
+                            group req by 1 into g
                            select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
             }
 
