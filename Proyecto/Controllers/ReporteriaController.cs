@@ -49,9 +49,10 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
-        [HttpPost]
-        public ActionResult TiemposRequerimiento(string nombre, string nombreProyecto)
+        //[HttpPost]
+        public ActionResult tablaRequerimientos(string nombre, string nombreProyecto)
         {
+            System.Diagnostics.Debug.WriteLine("el nombre" + nombreProyecto);
             ViewBag.todos = "";
             ViewBag.nombreP = "Seleccione un proyecto";
             var cedula = from a in db.EmpleadoDesarrollador
@@ -61,7 +62,7 @@ namespace Proyecto.Controllers
                         where a.cedulaResponsable_FK == cedula.FirstOrDefault().cedulaED && a.nombreProyecto_FK == nombreProyecto
                         select new { nombre = a.nombreProyecto_FK, complejidad = a.complejidad,req = a.nombre, duracionEst = a.duracionEstimada, duracionReal = a.duracionReal, diferencia = a.duracionEstimada - a.duracionReal });
 
-            if (nombreProyecto == "" || nombreProyecto == "Todos los proyectos") {
+            if (nombreProyecto == "" || nombreProyecto == "Todos") {
                 ViewBag.todos = "si";
                 ViewBag.nombreP = "Todos los proyectos";
                item = (from a in db.Requerimiento
@@ -73,7 +74,7 @@ namespace Proyecto.Controllers
             List<string> lista = new List<string>();
             foreach (var dato in item)
             {
-                if (nombreProyecto != "Todos los proyectos")
+                if (nombreProyecto != "")
                     ViewBag.nombreP = dato.nombre;
                 lista.Add(dato.nombre + "," + dato.req + "," +dato.complejidad + "," + dato.duracionEst + "," + dato.duracionReal + "," +dato.diferencia );
             }

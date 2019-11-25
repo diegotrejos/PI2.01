@@ -293,6 +293,11 @@ namespace Proyecto.Controllers
             return list;
 
         }
+
+
+        /*devuelve empleados trabajando en algun proyecto
+         */
+
         public SelectList getDesarrolladores()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
@@ -343,6 +348,7 @@ namespace Proyecto.Controllers
 
         /*devuelve empleados trabajando en algun proyecto
       */
+
         public List<SelectListItem> getEmpleadosTrabajando()
         {
 

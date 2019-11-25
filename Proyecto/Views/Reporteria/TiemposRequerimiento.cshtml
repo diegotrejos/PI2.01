@@ -1,5 +1,15 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
-
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#nombreProyecto").change(function () {
+                var categoryId = $("#nombreProyecto").val();
+                var de = $("#nombre").val();
+                if (categoryId == "Todos los proyectos")
+                    categoryId = "";
+                $("#table").load('@(Url.Action("tablaRequerimientos","Reporteria",null, Request.Url.Scheme))?nombre='+ de +'&nombreProyecto='+ categoryId);
+            });
+        });
+</script>
 <div class=" Container" align-items-center>
     <h2>Comparación de estimaciones y valores reales por requerimiento</h2>
     <fieldset>
@@ -7,27 +17,27 @@
             Buscar por empleado
         </div>
         <div class="editor-field">
-            <form action="/Reporteria/TiemposRequerimiento" method="post">
-                @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un empleado", new { name = "nombre", @class = "form-control" })
+            @* <form action="/Reporteria/TiemposRequerimiento" method="post">*@
+            @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un empleado", new { name = "nombre", @class = "form-control" })
 
 
 
 
-                <div class="display-label">
-                    Buscar por proyecto
-                </div>
+            <div class="display-label">
+                Buscar por proyecto
+            </div>
 
-                <div>
-                    @*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
-                    <select id="nombreProyecto" name="nombreProyecto" class="form-control" onchange="this.form.submit()">
-                        <option>@ViewBag.nombreP</option>
-                    </select>
-                </div>
+            <div>
+                @*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
+                <select id="nombreProyecto" name="nombreProyecto" class="form-control">
+                    <option>@ViewBag.nombreP</option>
+                </select>
+            </div>
 
-                <noscript><input type="submit" value="Submit"></noscript>
+            @*<noscript><input type="submit" value="Submit"></noscript>*@
 
 
-            </form>
+            @*</form>*@
         </div>
 
     </fieldset>
@@ -37,109 +47,51 @@
         <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn float-right " style="background: #5B3924; color:white">Regresar</button>
     </p>
 
-    <table class="table table-striped table-bordered">
-        <tr>
-            @if (ViewBag.todos == "si")
-            {
-                <th>
-                    Nombre del proyecto
-                </th>
-            }
-            <th>
-                Nombre del requerimiento
-            </th>
-            <th>
-                Complejidad
-            </th>
-            <th>
-                Duración estimada
-            </th>
-            <th>
-                Duración real
-            </th>
-            <th>
-                Diferencia
-            </th>
-        </tr>
-        </br>
-        </br>
+    <div id="table">
 
-        @foreach (var item in Model)
-        {
-            string datos = item.ToString();
-
-            string[] lista = datos.Split(',');
-            <tr>
-                @if (ViewBag.todos == "si")
-                {
-                    <td>
-                        @lista[0]
-
-
-                    </td>
-                }
-                <td>
-                    @lista[1]
-
-                </td>
-                <td>
-                    @lista[2]
-                </td>
-                <td>
-                    @lista[3]
-                </td>
-                <td>
-                    @lista[4]
-                </td>
-                <td>
-                    @lista[5]
-                </td>
-            </tr>
-        }
-
-    </table>
     </div>
-    @*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script>
-        $(document).ready(function () {
-           $("#nombreProyecto").prop("disabled", true);
+</div>
+@*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#nombreProyecto").prop("disabled", true);
 
-            $("#nombre").change(function () {
+        $("#nombre").change(function () {
 
-                if ($("#nombre").val() != "Seleccione un empleado") {//si esta el valor default del primer dropdown no se hace nada
+            if ($("#nombre").val() != "Seleccione un empleado") {//si esta el valor default del primer dropdown no se hace nada
 
-                    var ModulosProyecto = {};
+                var ModulosProyecto = {};
 
-                    ModulosProyecto.url = "/Reporteria/getProyectoDesarrollador";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
-                    ModulosProyecto.type = "POST";
-                    ModulosProyecto.data = JSON.stringify({
-                        nombre: $("#nombre").val()//parametro q se pasa
-                    });
+                ModulosProyecto.url = "/Reporteria/getProyectoDesarrollador";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
+                ModulosProyecto.type = "POST";
+                ModulosProyecto.data = JSON.stringify({
+                    nombre: $("#nombre").val()//parametro q se pasa
+                });
 
-                    ModulosProyecto.datatype = "json";
-                    ModulosProyecto.contentType = "application/json";
-                    ModulosProyecto.success = function (data) {//datos q retorna getmodulo
+                ModulosProyecto.datatype = "json";
+                ModulosProyecto.contentType = "application/json";
+                ModulosProyecto.success = function (data) {//datos q retorna getmodulo
 
-                        $("#nombreProyecto").empty();
-                        $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
-                        for (var i = 0; i < data.length; i++) {
-                            $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
-                        }
-                        if(data.length != 0)
-                            $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
-                        $("#nombreProyecto").prop("disabled", false);
-                    };
+                    $("#nombreProyecto").empty();
+                    $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
+                    }
+                    if (data.length != 0)
+                        $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
+                    $("#nombreProyecto").prop("disabled", false);
+                };
 
-                    ModulosProyecto.error = function () {
-                        alert("Error obteniendo los proyectos");
-                    };
+                ModulosProyecto.error = function () {
+                    alert("Error obteniendo los proyectos");
+                };
 
-                    $.ajax(ModulosProyecto);
-                } else {
-                   $("#nombreProyecto").empty();
-                   $("#nombreProyecto").prop("disabled", true);
-                }
-            });
+                $.ajax(ModulosProyecto);
+            } else {
+                $("#nombreProyecto").empty();
+                $("#nombreProyecto").prop("disabled", true);
+            }
         });
-    </script>
+    });
+</script>
