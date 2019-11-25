@@ -1,0 +1,116 @@
+﻿@model List<Proyecto.Controllers.ReporteriaController.Desocupacion>
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="  container-fluid text-center">
+        <h2>Agregar Proyecto</h2>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="d-flex justify-content-center">
+            <tbody>
+
+
+                <tr style="line-height:50px">
+                    <th>
+                        Fecha de inicio<a style="color:red"> *</a>
+                    </th>
+                    <td required="true">
+
+
+                        <input type="date" id="Finicio" name="Finicio"/>
+                    </td>
+                </tr>
+
+
+
+                <tr style="line-height:50px">
+                    <th>
+                        Fecha de Finalización<a>  </a>
+                    </th>
+
+                    <td>
+
+
+                        <input type="date" id="Ffinal" name="Ffinal" />
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+      
+            <div>
+                <input type="submit" value="Submit" id="btnSubmit"class="btn btn-success" />
+               
+            </div>
+   
+
+    </div>
+
+
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre De Empleado
+        </th>
+        <th>
+            Periodos desocupados
+        </th>
+
+        <th>
+            Total de dias desocupados
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombreED)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.periodosyDias)
+
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.total)
+            </td>
+
+        </tr>
+    }
+   
+</table>
+
+
+<script>
+
+$(document).ready(function(){
+
+$("#btnSubmit").click(function(){
+debugger;
+var f1 = $("#Finicio").val();
+var f2 = $("#Ffinal").val();
+var d1 = new Date(f1);
+var d2 = new Date(f2);
+if(d1 >= d2)
+{
+    alert("Fechas invalidas");
+    event.preventDefault();
+}
+});
+
+});
+</script>

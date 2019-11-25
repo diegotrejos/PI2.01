@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Proyecto.Models.Requerimiento>
+<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+<h2>Estado de desarollo de los requerimientos</h2>
+
+
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.complejidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracionReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpleadoDesarrollador.nombreED)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modulo.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.complejidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpleadoDesarrollador.nombreED)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modulo.Nombre)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<p class=" boton float-right">
+    <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn  float-right " style="background: #5B3924; color:white">Regresar</button>
+</p>
