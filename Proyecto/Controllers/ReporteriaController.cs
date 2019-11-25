@@ -22,6 +22,7 @@ namespace Proyecto.Controllers
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         Proyecto.Controllers.EmpleadoDesarrolladorController emplController = new Proyecto.Controllers.EmpleadoDesarrolladorController();
+        Proyecto.Controllers.HabilidadesController habController = new Proyecto.Controllers.HabilidadesController();
         // GET: Reporteria
         public ActionResult Index()
         {
@@ -374,6 +375,113 @@ namespace Proyecto.Controllers
         public List<SelectListItem> getDesarrolladoresHistorial()
         {
             return emplController.getDesarrolladoresHistorial();
+        }
+
+
+        public ActionResult DesarrolladoresPorConocimiento()
+        {
+            List<string> datosObtenidos = new List<string>();
+
+            return View(datosObtenidos);//retorna la vista
+        }
+
+        // DESARROLLADOR POR CONOCIMIENTO
+        /* consulta para obtener el numero de empleador por conocimiento y el promedio de tiempo trabajar en la empresa
+         * @return lista 
+         */
+        [HttpPost]
+        public ActionResult DesarrolladoresPorConocimiento(string Habilidad)
+        {
+            var item = (from habi in db.Habilidades
+                        from emp in db.EmpleadoDesarrollador
+                        where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                        where habi.conocimientos == Habilidad
+                        group new { emp, habi } by new { conocimientos = habi.conocimientos } into g
+                        orderby g.Key.conocimientos ascending
+                        // select new { nombre = g.Key.conocimientos, cantDesa = g.Count(),  promedio = g.Average(x=> DateTime.Today.Subtract(x.emp.fechaInicio.HasValue? x.emp.fechaInicio.Value : new DateTime(0000,0,00,00,00,0))) });
+                        //g.Average(x => DateTime.Today.Subtract(x.emp.fechaInicio ?? DateTime.Now).Ticks)
+                        // promedio = g.Average( System.DateTime.Now - g.FirstOrDefault().emp.fechaInicio)
+                        select new { nombre = g.Key.conocimientos, cantDesa = g.Count(), promedio = g.FirstOrDefault().emp.fechaInicio });
+
+            if (Habilidad == "" || Habilidad == "Todos los conocimientos")
+            {
+                item = (from habi in db.Habilidades
+                        from emp in db.EmpleadoDesarrollador
+                        where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                        group new { emp, habi } by new { conocimientos = habi.conocimientos } into g
+                        orderby g.Key.conocimientos ascending
+                        select new { nombre = g.Key.conocimientos, cantDesa = g.Count(), promedio = g.FirstOrDefault().emp.fechaInicio });
+
+            }
+
+
+
+
+            List<string> datos = new List<string>();
+            foreach (var dato in item)
+            {
+                datos.Add(dato.nombre + " " + dato.cantDesa + " " + dato.promedio);
+            }
+
+            return View(datos);//retorna la vista
+        }
+
+        public ActionResult EstadoRequerimiento()
+        {
+
+            List<string> datosObtenidos = new List<string>();
+
+            return View(datosObtenidos);//retorna la vista
+        }
+
+        [HttpPost]
+        public ActionResult EstadoRequerimiento(string Proyecto)
+        {
+            if (usuario == "Cliente")
+            { //si soy cliente puedo solamente ver  mis proyectos
+                var obj = from a in db.Proyecto
+                          where a.cedulaCliente == cedula
+                          select a;
+
+                return View(obj.Distinct().ToList());
+            }
+
+            ViewBag.Proy = Proyecto;
+
+            var item = (from a in db.Requerimiento
+                        from b in db.EmpleadoDesarrollador
+                        where a.cedulaResponsable_FK == b.cedulaED
+                        where a.nombreProyecto_FK == Proyecto
+                        select new { nombreReq = a.nombre, estadoReq = a.estado, nombreDes = b.nombreED, apellido1Des = b.apellido1ED, apellido2Des = b.apellido2ED });
+
+            if (Proyecto == "" || Proyecto == "Todos los Proyectos")
+            {
+                ViewBag.Proy = "Todos los Proyectos";
+                item = (from a in db.Requerimiento
+                        from b in db.EmpleadoDesarrollador
+                        where a.cedulaResponsable_FK == b.cedulaED
+                        select new { nombreReq = a.nombre, estadoReq = a.estado, nombreDes = b.nombreED, apellido1Des = b.apellido1ED, apellido2Des = b.apellido2ED });
+
+            }
+
+            List<string> datosObtenidos = new List<string>();
+            foreach (var dato in item)
+            {
+                datosObtenidos.Add(dato.nombreReq + " " + dato.estadoReq + " " + dato.nombreDes + " " + dato.apellido1Des + " " + dato.apellido2Des);
+            }
+
+            return View(datosObtenidos);//retorna la vista
+        }
+
+        public SelectList getProyectos(String rol, String cedula)
+        {
+            return proyController.getProyectos(rol, cedula);
+
+        }
+
+        public SelectList getHabilidades()
+        {
+            return habController.getHabilidades();
         }
     }
 

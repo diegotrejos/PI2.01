@@ -298,6 +298,8 @@
     <Content Include="Views\Reporteria\TiemposRequerimiento.cshtml" />
     <Content Include="Views\Reporteria\HistorialDesarrollador.cshtml" />
     <Content Include="Views\Reporteria\ComparacionComplejidad.cshtml" />
+    <Content Include="Views\Reporteria\DesarrolladoresPorConocimiento.cshtml" />
+    <Content Include="Views\Reporteria\EstadoRequerimiento.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

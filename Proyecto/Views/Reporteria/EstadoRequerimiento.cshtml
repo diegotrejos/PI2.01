@@ -1,0 +1,152 @@
+﻿@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "EstadoReq";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+</head>
+
+
+@{
+    string nombre = (string)System.Web.HttpContext.Current.Session["nombreUsuario"];
+}
+
+
+<div class=" Container" align-items-center>
+
+    <p class=" boton float-right">
+        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+            <span></span> Regresar
+        </a>
+    </p>
+
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <div class="display-label">
+                Buscar Proyecto
+            </div>
+            <div class="editor-field">
+
+                <form action="/Reporteria/EstadoRequerimiento" method="post">
+                    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
+                    {
+                        @Html.DropDownList("Proyecto", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Todos los Proyectos", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    }
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+            </div>
+
+        </fieldset>
+    }
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Nombre de Cliente
+                </th>
+                <th>
+                    Nombre de Proyecto
+                </th>
+            </tr>
+
+
+                <tr>
+                    <td>
+                        @nombre
+                    </td>
+
+
+                    <td>
+                        @ViewBag.Proy
+                    </td>
+
+                </tr>
+            
+
+            </table>
+
+
+    <table class="table table-striped">
+
+        <tr>
+            <th>
+                Nombre Requerimiento
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Responsable
+            </th>
+        </tr>
+
+
+        
+        @foreach (var item in Model)
+        {
+            string datosObtenidos = item.ToString();
+
+            string[] datos = datosObtenidos.Split(' ');
+
+            if (datos.Length == 6)
+            {
+            <tr>
+                <td>
+                    @datos[0]
+                </td>
+
+                <td>
+                    @datos[1]  @datos[2]
+                </td>
+
+                <td>
+                    @datos[3] @datos[4] @datos[5]
+                </td>
+
+            </tr>
+
+            }
+            else
+            {
+            <tr>
+                <td>
+                    @datos[0]
+                </td>
+
+                <td>
+                    @datos[1]
+                </td>
+
+                <td>
+                    @datos[2] @datos[3] @datos[4]
+                </td>
+
+            </tr>
+
+            }
+
+        }
+    </table>
+        
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].setAttribute('readonly', 'readonly');
+                lista[i].hidden = true;
+            }
+        }
+    </script>
+
+</div>
+
+
+
