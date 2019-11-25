@@ -158,7 +158,7 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
-      
+     
 
         public SelectList getDesarrolladores()
         {
@@ -188,6 +188,115 @@ namespace Proyecto.Controllers
         {
             return proyController.getProyectosPorRol();
         }
+
+
+        //ya terminado
+        public ActionResult Estadodesarrollorequerimientos()
+        {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            string nombreProyecto = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            ViewBag.user = usuario;
+
+            if (usuario == "Desarrollador")
+            { var query = from a in db.Requerimiento
+                              //solo requerimientos en ejecucion o sin iniciar
+                          where (a.nombreProyecto_FK == nombreProyecto)
+                          where (a.estado == "En ejecucion" || a.estado == "Sin iniciar")
+                          where (a.cedulaResponsable_FK == cedula)
+                          select a;
+                return View(query.ToList());
+            }
+
+
+
+            else if (usuario == "Lider")
+            {
+                var query = from a in db.Requerimiento
+                                //solo requerimientos en ejecucion o sin iniciar
+                            where (a.nombreProyecto_FK == nombreProyecto)
+                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar")
+                            select a;
+                return View(query.ToList());
+            }
+
+            else
+            {
+                var query = from a in db.Requerimiento
+                                //solo requerimientos en ejecucion o sin iniciar
+                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar")
+                            select a;
+                return View(query.ToList());
+            }
+        }
+
+
+    //objeto para imprimir resultados bonitos
+        public class Desocupacion
+            {
+            public
+            string nombreED;
+            public
+           string periodosyDias;
+            public
+           int total;
+
+        }
+
+
+        //en progreso
+        public ActionResult PeriodosDisponibles()
+        {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            ViewBag.user = usuario;
+            List<Desocupacion> Empleados = new List<Desocupacion>();
+
+            Desocupacion p = new Desocupacion();
+            p.nombreED = "Diego";
+            p.periodosyDias = "1/02/2006-2/03/2006 = 32";
+            p.total = 32;
+            //los agrego a la lista 
+            Empleados.Add(p);
+            return View(Empleados);
+           
+        }
+
+        [HttpPost]
+        public ActionResult PeriodosDisponibles(string Finicio, string Ffinal)
+        {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+            ViewBag.user = usuario;
+
+            List<Desocupacion> Empleados = new List<Desocupacion>();
+            Finicio = "10/04/2005";
+            Ffinal = "2/12/2006";
+
+
+
+            //Genero lista de todos los empleados
+
+
+            //Hago consulta aqui de sus datos
+            for (int i = 0; i < 2; i++)
+            {
+                Desocupacion p = new Desocupacion();
+                p.nombreED = "Diego";
+                p.periodosyDias = "1/02/2006-2/03/2006 = 32";
+                p.total = 32;
+                //los agrego a la lista 
+                Empleados.Add(p);
+            }
+
+
+            return View(Empleados);
+        }
+
 
     }
 }
