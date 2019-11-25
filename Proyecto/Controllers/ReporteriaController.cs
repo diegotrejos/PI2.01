@@ -35,16 +35,8 @@ namespace Proyecto.Controllers
 
         public ActionResult ComparacionComplejidad()
         {
-            var item = from req in db.Requerimiento
-                       group req by 1 into g
-                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal) , promedio = g.Average(c => c.duracionReal)};
-
-           
             List<string> datos = new List<string>();
-            foreach (var dato in item)
-            {
-                datos.Add(dato.total + " " + dato.minimo + " " + dato.maximo + " " + dato.promedio);
-            }
+           
             return View(datos);
         }
 
@@ -52,9 +44,17 @@ namespace Proyecto.Controllers
         public ActionResult ComparacionComplejidad(string complejidad)
         {
             var item = from req in db.Requerimiento
+                       from proy in db.Proyecto
+                       where proy.nombre == req.nombreProyecto_FK
                        where req.complejidad == complejidad
                        group req by req.complejidad into g
                        select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+
+            if (complejidad == "" || complejidad == "Todos los niveles") {
+                     item = from req in db.Requerimiento
+                           group req by 1 into g
+                           select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+            }
 
             List<string> datos = new List<string>();
             foreach (var dato in item)
