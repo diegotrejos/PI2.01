@@ -40,22 +40,42 @@ namespace Proyecto.Controllers
 
         }
 
-
-        // DESARROLLADOR POR CONOCIMIENTO
-        /* consulta para obtener el numero de empleador por conocimiento y el promedio de tiempo trabajar en la empresa
-         * @return lista 
-         */
         public ActionResult DesarrolladoresPorConocimiento()
         {
-                var item = (from habi in db.Habilidades
+
+            List<string> datosObtenidos = new List<string>();
+
+            return View(datosObtenidos);//retorna la vista
+        }
+
+            // DESARROLLADOR POR CONOCIMIENTO
+            /* consulta para obtener el numero de empleador por conocimiento y el promedio de tiempo trabajar en la empresa
+             * @return lista 
+             */
+            public ActionResult DesarrolladoresPorConocimiento(string Habilidad)
+            {
+            TempData["Hab"] = habController.getHabilidades();
+            var item = (from habi in db.Habilidades
                             from emp in db.EmpleadoDesarrollador
                             where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                            where habi.conocimientos == Habilidad
                             group new { emp, habi } by new { conocimientos = habi.conocimientos } into g
                             orderby g.Key.conocimientos ascending
                             select new { nombre = g.Key.conocimientos, cantDesa = g.Count(),  promedio = g.FirstOrDefault().emp.fechaInicio });
-            TempData["Hab"] = habController.getHabilidades();
+            
 
-                List<string> datos = new List<string>();
+            if (Habilidad == "" || Habilidad == "Todos los conocimientos")
+            {
+                item = (from habi in db.Habilidades
+                        from emp in db.EmpleadoDesarrollador
+                        where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                        group new { emp, habi } by new { conocimientos = habi.conocimientos } into g
+                        orderby g.Key.conocimientos ascending
+                        select new { nombre = g.Key.conocimientos, cantDesa = g.Count(), promedio = g.FirstOrDefault().emp.fechaInicio });
+
+            }
+
+            List<string> datos = new List<string>();
                 foreach (var dato in item)
                 {
                     datos.Add(dato.nombre + " " + dato.cantDesa + " " + dato.promedio);
