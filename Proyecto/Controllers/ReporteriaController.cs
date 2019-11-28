@@ -302,6 +302,9 @@ namespace Proyecto.Controllers
         }
 
 
+        /*
+         Lista de compleijidad
+             */
         public ActionResult ComparacionComplejidad()
         {
             List<string> datos = new List<string>();
