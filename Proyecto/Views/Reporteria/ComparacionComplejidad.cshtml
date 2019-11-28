@@ -20,6 +20,7 @@
     {
         <fieldset>
             <div class="editor-field">
+                <p style="color:red"> Buscar por complejidad</p>
                 <form action="/Reporteria/ComparacionComplejidad" method="post">
                     @Html.DropDownList("complejidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Todos los niveles", new { @class = "form-control", @onchange = "this.form.submit()" })
                     <noscript><input type="submit" value="Submit"></noscript>
