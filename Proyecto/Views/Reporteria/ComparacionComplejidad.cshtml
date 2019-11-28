@@ -1,0 +1,88 @@
+﻿@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "ComparacionComplejidad";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+</head>
+
+<div class="container">
+    <h2>Comparación de tiempos estimados y reales con misma complejidad</h2>
+
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <div class="editor-field">
+                <form action="/Reporteria/ComparacionComplejidad" method="post">
+                    @Html.DropDownList("complejidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Todos los niveles", new { @class = "form-control", @onchange = "this.form.submit()" })
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+            </div>
+
+        </fieldset>
+    }
+
+    <p class=" boton float-right">
+        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+            <span></span> Regresar
+        </a>
+    </p>
+
+
+    <br />
+    <br />
+    <br />
+
+    <table class="table table-striped" >
+            <tr>
+                <th style="text-align:center">
+                    Cantidad de Requerimientos
+                </th>
+
+                <th style="text-align:center">
+                    Diferencia mínima entre el tiempo real y el estimado
+                </th>
+
+                <th style="text-align:center">
+                    Diferencia máxima entre el tiempo real y el estimado
+                </th>
+
+                <th style="text-align:center">
+                    Tiempo promedio de la duración real
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                        string datosObtenidos = item.ToString();
+
+                        string[] datos = datosObtenidos.Split(' ');
+                <tr style="text-align:center">
+
+                    <td>
+                        @datos[0]
+
+                    </td>
+                    <td>
+                        @datos[1]
+                    </td>
+                    <td>
+                        @datos[2]
+                    </td>
+                    <td>
+                        @datos[3]
+                    </td>
+                </tr>
+            }
+        </table>
+</div>
+
+

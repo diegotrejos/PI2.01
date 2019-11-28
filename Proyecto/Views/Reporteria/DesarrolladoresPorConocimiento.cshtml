@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Conocimientos";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+</head>
+
+<body onload="Desabilitar();">
+
+    <div class=" Container" align-items-center>
+        <h2>Consulta</h2>
+
+        <p class=" boton float-right">
+            <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+                <span></span> Regresar
+            </a>
+        </p>
+
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <div class="display-label">
+                    Habilidades
+                </div>
+                <div class="editor-field">
+
+                    <form action="/Reporteria/DesarrolladorPorConocimiento" method="post">
+                        @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                        {
+                            //@Html.DropDownList("Habilidad", new SelectList(TempData["Hab"] as List<string>), "Todos los conocimientos")
+                            @Html.DropDownList("Habilidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getHabilidades(), "Todos los Conocimientos", new { @class = "form-control", @onchange = "this.form.submit()" })
+
+                        }
+                        <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+                </div>
+
+            </fieldset>
+        }
+
+        <table class="table table-striped">
+            <tr>
+                <th class=" text-center">
+                    Habilidad
+                </th>
+                <th class=" text-center">
+                    Cantidad de desarrolladores
+                </th>
+                <th class=" text-center">
+                    Promedio de antüedad en empresa
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                string datosObtenidos = item.ToString();
+
+                string[] datos = datosObtenidos.Split(' ');
+                <tr>
+                    <td class=" text-center">
+                        @datos[0]
+                    </td>
+
+                    <td class=" text-center">
+                        @datos[1]
+                    </td>
+
+                    <td class=" text-center">
+                        @datos[2]
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <script>
+        function Desabilitar() {
+            var rol = '@ViewBag.user';
+            var lista = document.getElementsByClassName(rol);
+            for (var i = 0; i < lista.length; ++i) {
+                lista[i].setAttribute('readonly', 'readonly');
+                lista[i].hidden = true;
+            }
+        }
+    </script>
+
+</body>
+
