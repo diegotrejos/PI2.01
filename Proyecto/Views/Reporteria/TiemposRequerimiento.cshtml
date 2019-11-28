@@ -1,20 +1,30 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/style.css" />
-<script type="text/javascript">
-        $(document).ready(function () {
-            $("#nombreProyecto").change(function () {
-                var categoryId = $("#nombreProyecto").val();
-                var de = $("#nombre").val();
-                if (categoryId == "Todos los proyectos")
-                    categoryId = "";
-                $("#table").load('@(Url.Action("tablaRequerimientos","Reporteria",null, Request.Url.Scheme))?nombre='+ de +'&nombreProyecto='+ categoryId);
+<script>
+    $(document).ready(function () {
+        $('#nombreProyecto').on('change', function () {
+            var categoryId = $("#nombreProyecto").val();
+            var de = $("#nombre").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Reporteria/tablaRequerimientos",
+                data: { nombre: de, nombreProyecto: categoryId },
+                success: function (data) {
+                    $("#table").html(data);
+                }
+
             });
         });
+        
+    });
+
+
 </script>
 <div class=" Container" align-items-center>
     <h2>Comparación de estimaciones y valores reales por requerimiento</h2>
     <fieldset>
         <div class="display-label">
-            Buscar por empleado
+           <p style="color:red"> Buscar por empleado</p>
         </div>
         <div class="editor-field">
             @* <form action="/Reporteria/TiemposRequerimiento" method="post">*@
@@ -22,9 +32,10 @@
 
 
 
-
+            </br>
+            </br>
             <div class="display-label">
-                Buscar por proyecto
+                <p style="color:red"> Buscar por proyecto</p>
             </div>
 
             <div>
