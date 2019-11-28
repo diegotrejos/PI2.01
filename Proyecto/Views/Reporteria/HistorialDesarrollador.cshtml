@@ -17,7 +17,7 @@
     {
         <fieldset>
             <div class="editor-field">
-
+                <p style="color:red"> Buscar por empleado</p>
                 <form action="/Reporteria/HistorialDesarrollador" method="post">
                     @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladoresHistorial(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
                     <noscript><input type="submit" value="Submit"></noscript>
