@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Conocimientos";
 }
 <head>
@@ -7,72 +8,73 @@
 </head>
 
 <body onload="Desabilitar();">
+    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+    {
+        <div class=" Container" align-items-center>
+            <h2>Número desarrolladores por conocimiento y promedio de antgüedad en la empresa</h2>
 
-    <div class=" Container" align-items-center>
-        <h2>Número desarrolladores por conocimiento y promedio de antgüedad en la empresa</h2>
+            <p class=" boton float-right">
+                <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+                    <span></span> Regresar
+                </a>
+            </p>
 
-        <p class=" boton float-right">
-            <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
-                <span></span> Regresar
-            </a>
-        </p>
-
-        @using (Html.BeginForm())
-        {
-        <fieldset>
-            <div class="display-label">
-                <p style="color:red"> Buscar por Habilidades</p>
-            </div>
-            <div class="editor-field">
-
-                <form action="/Reporteria/DesarrolladorPorConocimiento" method="post">
-                    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
-                    {
-                        @Html.DropDownList("Habilidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getHabilidades(), "Todos los Conocimientos", new { @class = "form-control", @onchange = "this.form.submit()" })
-
-                    }
-                    <noscript><input type="submit" value="Submit"></noscript>
-                </form>
-            </div>
-
-        </fieldset>
-        }
-
-        <table class="table table-striped">
-            <tr>
-                <th class=" text-center">
-                    Habilidad
-                </th>
-                <th class=" text-center">
-                    Cantidad de desarrolladores
-                </th>
-                <th class=" text-center">
-                    Promedio de antüedad en empresa (años)
-                </th>
-            </tr>
-            @foreach (var item in Model)
+            @using (Html.BeginForm())
             {
-                string datosObtenidos = item.ToString();
+                <fieldset>
+                    <div class="display-label">
+                        <p style="color:red"> Buscar por Habilidades</p>
+                    </div>
+                    <div class="editor-field">
 
-                string[] datos = datosObtenidos.Split(' ');
-                <tr>
-                    <td class=" text-center">
-                        @datos[0]
-                    </td>
+                        <form action="/Reporteria/DesarrolladorPorConocimiento" method="post">
+                            @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+                            {
+                                @Html.DropDownList("Habilidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getHabilidades(), "Todos los Conocimientos", new { @class = "form-control", @onchange = "this.form.submit()" })
 
-                    <td class=" text-center">
-                        @datos[1]
-                    </td>
+                            }
+                            <noscript><input type="submit" value="Submit"></noscript>
+                        </form>
+                    </div>
 
-                    <td class=" text-center">
-                        @datos[2]
-                    </td>
-                </tr>
+                </fieldset>
             }
-        </table>
-    </div>
 
-    <script>
+            <table class="table table-striped">
+                <tr>
+                    <th class=" text-center">
+                        Habilidad
+                    </th>
+                    <th class=" text-center">
+                        Cantidad de desarrolladores
+                    </th>
+                    <th class=" text-center">
+                        Promedio de antüedad en empresa (años)
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    string datosObtenidos = item.ToString();
+
+                    string[] datos = datosObtenidos.Split(' ');
+                    <tr>
+                        <td class=" text-center">
+                            @datos[0]
+                        </td>
+
+                        <td class=" text-center">
+                            @datos[1]
+                        </td>
+
+                        <td class=" text-center">
+                            @datos[2]
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <script>
         function Desabilitar() {
             var rol = '@ViewBag.user';
             var lista = document.getElementsByClassName(rol);
@@ -81,7 +83,11 @@
                 lista[i].hidden = true;
             }
         }
-    </script>
+        </script>
 
+    }
+    else
+    {
+        <h1> Lo sentimos, no puede ver este contenido.</h1>
+    }
 </body>
-

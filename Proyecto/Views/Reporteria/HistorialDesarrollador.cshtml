@@ -10,74 +10,77 @@
 
 </head>
 
-<div class=" Container" align-items-center>
-    <h2>Historial de cada desarrollador por proyecto</h2>
+@if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+{
 
-    @using (Html.BeginForm())
-    {
-        <fieldset>
-            <div class="editor-field">
-                <p style="color:red"> Buscar por empleado</p>
-                <form action="/Reporteria/HistorialDesarrollador" method="post">
-                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladoresHistorial(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
-                    <noscript><input type="submit" value="Submit"></noscript>
-                </form>
-            </div>
+    <div class=" Container" align-items-center>
+        <h2>Historial de cada desarrollador por proyecto</h2>
 
-        </fieldset>
-    }
-
-    <p class=" boton float-right">
-        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
-            <span></span> Regresar
-        </a>
-    </p>
-
-
-    <br />
-    <br />
-
-
-    <table class="table table-striped" >
-        <tr >
-            <th style="text-align:center">
-                Proyectos
-            </th>
-            <th style="text-align:center">
-                Rol
-            </th>
-            <th style="text-align:center">
-                Total de horas dedicadas
-            </th>
-        </tr>
-
-
-        @foreach (var item in Model)
+        @using (Html.BeginForm())
         {
-            string datosObtenidos = item.ToString();
+            <fieldset>
+                <div class="editor-field">
+                    <p style="color:red"> Buscar por empleado</p>
+                    <form action="/Reporteria/HistorialDesarrollador" method="post">
+                        @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladoresHistorial(), "Seleccione un Empleado", new { @class = "form-control", @onchange = "this.form.submit()" })
+                        <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+                </div>
 
-            string[] datos = datosObtenidos.Split(' ');
-            string nombreproy = datos[0];
-            int contador = 1;
-            bool salir = true;
-            while(salir== true)
+            </fieldset>
+        }
+
+        <p class=" boton float-right">
+            <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+                <span></span> Regresar
+            </a>
+        </p>
+
+
+        <br />
+        <br />
+
+
+        <table class="table table-striped">
+            <tr>
+                <th style="text-align:center">
+                    Proyectos
+                </th>
+                <th style="text-align:center">
+                    Rol
+                </th>
+                <th style="text-align:center">
+                    Total de horas dedicadas
+                </th>
+            </tr>
+
+
+            @foreach (var item in Model)
             {
-                if (String.Compare(datos[contador], "True") != 0 && String.Compare(datos[contador], "False") !=0)
-                {
-                    nombreproy += ' ' + datos[contador];
-                    ++contador;
-                }
-                else
-                {
-                    salir = false;
+                string datosObtenidos = item.ToString();
 
-                }
-            }
+                string[] datos = datosObtenidos.Split(' ');
+                string nombreproy = datos[0];
+                int contador = 1;
+                bool salir = true;
+                while (salir == true)
+                {
+                    if (String.Compare(datos[contador], "True") != 0 && String.Compare(datos[contador], "False") != 0)
+                    {
+                        nombreproy += ' ' + datos[contador];
+                        ++contador;
+                    }
+                    else
+                    {
+                        salir = false;
 
-            <tr style="text-align:center">
-                <td>
-                    @nombreproy
-                </td>
+                    }
+                }
+
+                <tr style="text-align:center">
+                    <td>
+                        @nombreproy
+                    </td>
 
                     @if (@datos[contador] == "True")
                     {
@@ -105,8 +108,13 @@
                         </td>
                     }
 
-            </tr>
-        } 
+                </tr>
+            }
         </table>
-</div>
+    </div>
+}
+else
+{
+    <h1> Lo sentimos, no puede ver este contenido.</h1>
+}
 

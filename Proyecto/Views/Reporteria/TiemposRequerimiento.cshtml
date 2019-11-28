@@ -15,94 +15,104 @@
 
             });
         });
-        
+
     });
 
 
 </script>
-<div class=" Container" align-items-center>
-    <h2>Comparación de estimaciones y valores reales por requerimiento</h2>
-    <fieldset>
-        <div class="display-label">
-           <p style="color:red"> Buscar por empleado</p>
-        </div>
-        <div class="editor-field">
-            @* <form action="/Reporteria/TiemposRequerimiento" method="post">*@
-            @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un empleado", new { name = "nombre", @class = "form-control" })
+
+<body>
+    @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+    {
+        <div class=" Container" align-items-center>
+            <h2>Comparación de estimaciones y valores reales por requerimiento</h2>
+            <fieldset>
+                <div class="display-label">
+                    <p style="color:red"> Buscar por empleado</p>
+                </div>
+                <div class="editor-field">
+                    @* <form action="/Reporteria/TiemposRequerimiento" method="post">*@
+                    @Html.DropDownList("nombre", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getDesarrolladores(), "Seleccione un empleado", new { name = "nombre", @class = "form-control" })
+
+                    <div class="display-label">
+                        <p style="color:red"> Buscar por proyecto</p>
+                    </div>
+                    <br>
+                    </br>
+                    <br>
+                    </br>
+                    <div>
+                        @*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
+                        <select id="nombreProyecto" name="nombreProyecto" class="form-control">
+                            <option>@ViewBag.nombreP</option>
+                        </select>
+                    </div>
+
+                    @*<noscript><input type="submit" value="Submit"></noscript>*@
 
 
+                    @*</form>*@
+                </div>
 
-            </br>
-            </br>
-            <div class="display-label">
-                <p style="color:red"> Buscar por proyecto</p>
+            </fieldset>
+
+
+            <p class=" boton float-right">
+                <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn float-right " style="background: #5B3924; color:white">Regresar</button>
+            </p>
+
+            <div id="table">
+
             </div>
-
-            <div>
-                @*Activa el script que actualiza la info del segundo dropdown  y luego de esta eleccion se actualiza la tabla sin necesidad de un boton*@
-                <select id="nombreProyecto" name="nombreProyecto" class="form-control">
-                    <option>@ViewBag.nombreP</option>
-                </select>
-            </div>
-
-            @*<noscript><input type="submit" value="Submit"></noscript>*@
-
-
-            @*</form>*@
         </div>
+    }
+    else
+    {
+        <h1> Lo sentimos, no puede ver este contenido.</h1>
+    }
+    </body>
 
-    </fieldset>
-
-
-    <p class=" boton float-right">
-        <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn float-right " style="background: #5B3924; color:white">Regresar</button>
-    </p>
-
-    <div id="table">
-
-    </div>
-</div>
-@*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
-<script src="~/Scripts/jquery-1.10.2.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#nombreProyecto").prop("disabled", true);
-
-        $("#nombre").change(function () {
-
-            if ($("#nombre").val() != "Seleccione un empleado") {//si esta el valor default del primer dropdown no se hace nada
-
-                var ModulosProyecto = {};
-
-                ModulosProyecto.url = "/Reporteria/getProyectoDesarrollador";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
-                ModulosProyecto.type = "POST";
-                ModulosProyecto.data = JSON.stringify({
-                    nombre: $("#nombre").val()//parametro q se pasa
-                });
-
-                ModulosProyecto.datatype = "json";
-                ModulosProyecto.contentType = "application/json";
-                ModulosProyecto.success = function (data) {//datos q retorna getmodulo
-
-                    $("#nombreProyecto").empty();
-                    $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
-                    for (var i = 0; i < data.length; i++) {
-                        $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
-                    }
-                    if (data.length != 0)
-                        $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
-                    $("#nombreProyecto").prop("disabled", false);
-                };
-
-                ModulosProyecto.error = function () {
-                    alert("Error obteniendo los proyectos");
-                };
-
-                $.ajax(ModulosProyecto);
-            } else {
-                $("#nombreProyecto").empty();
+        @*Script para pasarle por parametro el resultado del primer dropdown al segundo*@
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        <script>
+            $(document).ready(function () {
                 $("#nombreProyecto").prop("disabled", true);
-            }
-        });
-    });
-</script>
+
+                $("#nombre").change(function () {
+
+                    if ($("#nombre").val() != "Seleccione un empleado") {//si esta el valor default del primer dropdown no se hace nada
+
+                        var ModulosProyecto = {};
+
+                        ModulosProyecto.url = "/Reporteria/getProyectoDesarrollador";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
+                        ModulosProyecto.type = "POST";
+                        ModulosProyecto.data = JSON.stringify({
+                            nombre: $("#nombre").val()//parametro q se pasa
+                        });
+
+                        ModulosProyecto.datatype = "json";
+                        ModulosProyecto.contentType = "application/json";
+                        ModulosProyecto.success = function (data) {//datos q retorna getmodulo
+
+                            $("#nombreProyecto").empty();
+                            $("#nombreProyecto").append("<option>" + "Seleccione un proyecto" + "</option>");
+                            for (var i = 0; i < data.length; i++) {
+                                $("#nombreProyecto").append("<option>" + data[i].Text + "</option>");//retorna objetos JSON que hay q abrir con .text
+                            }
+                            if (data.length != 0)
+                                $("#nombreProyecto").append("<option>" + "Todos los proyectos" + "</option>");
+                            $("#nombreProyecto").prop("disabled", false);
+                        };
+
+                        ModulosProyecto.error = function () {
+                            alert("Error obteniendo los proyectos");
+                        };
+
+                        $.ajax(ModulosProyecto);
+                    } else {
+                        $("#nombreProyecto").empty();
+                        $("#nombreProyecto").prop("disabled", true);
+                    }
+                });
+            });
+        </script>

@@ -1,9 +1,9 @@
 ﻿@{
-                /**/
+    /**/
 
-                /**/
+    /**/
 
-                ViewBag.Title = "ComparacionComplejidad";
+    ViewBag.Title = "ComparacionComplejidad";
 }
 
 <head>
@@ -11,37 +11,40 @@
 
 </head>
 
-<div class="container">
-    <h2>Comparación de tiempos estimados y reales con misma complejidad</h2>
+@if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
+{
 
-    <br />
+    <div class="container">
+        <h2>Comparación de tiempos estimados y reales con misma complejidad</h2>
 
-    @using (Html.BeginForm())
-    {
-        <fieldset>
-            <div class="editor-field">
-                <p style="color:red"> Buscar por complejidad</p>
-                <form action="/Reporteria/ComparacionComplejidad" method="post">
-                    @Html.DropDownList("complejidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Todos los niveles", new { @class = "form-control", @onchange = "this.form.submit()" })
-                    <noscript><input type="submit" value="Submit"></noscript>
-                </form>
-            </div>
+        <br />
 
-        </fieldset>
-    }
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <div class="editor-field">
+                    <p style="color:red"> Buscar por complejidad</p>
+                    <form action="/Reporteria/ComparacionComplejidad" method="post">
+                        @Html.DropDownList("complejidad", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getListaComplejidad(), "Todos los niveles", new { @class = "form-control", @onchange = "this.form.submit()" })
+                        <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
+                </div>
 
-    <p class=" boton float-right">
-        <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
-            <span></span> Regresar
-        </a>
-    </p>
+            </fieldset>
+        }
+
+        <p class=" boton float-right">
+            <a href="~/Reporteria/Index" class="btn btn-default " style="background: #5B3924; color:white">
+                <span></span> Regresar
+            </a>
+        </p>
 
 
-    <br />
-    <br />
-    <br />
+        <br />
+        <br />
+        <br />
 
-    <table class="table table-striped" >
+        <table class="table table-striped">
             <tr>
                 <th style="text-align:center">
                     Cantidad de Requerimientos
@@ -63,9 +66,9 @@
 
             @foreach (var item in Model)
             {
-                        string datosObtenidos = item.ToString();
+                string datosObtenidos = item.ToString();
 
-                        string[] datos = datosObtenidos.Split(' ');
+                string[] datos = datosObtenidos.Split(' ');
                 <tr style="text-align:center">
 
                     <td>
@@ -84,6 +87,10 @@
                 </tr>
             }
         </table>
-</div>
-
+    </div>
+}
+else
+{
+    <h1> Lo sentimos, no puede ver este contenido.</h1>
+}
 
