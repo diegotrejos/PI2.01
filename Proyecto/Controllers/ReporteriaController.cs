@@ -307,8 +307,17 @@ namespace Proyecto.Controllers
              */
         public ActionResult ComparacionComplejidad()
         {
+           var item = from req in db.Requerimiento
+                   from proy in db.Proyecto
+                   where proy.nombre == req.nombreProyecto_FK
+                   where proy.fechaFinalizacion != null
+                   group req by 1 into g
+                   select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
             List<string> datos = new List<string>();
-
+            foreach (var dato in item)
+            {
+                datos.Add(dato.total + " " + dato.minimo + " " + dato.maximo + " " + dato.promedio);
+            }
             return View(datos);
         }
 
@@ -389,9 +398,30 @@ namespace Proyecto.Controllers
          */
         public ActionResult DesarrolladoresPorConocimiento()
         {
-            List<string> datosObtenidos = new List<string>();//lista de objetos
+            var now = DateTime.Now;//Para sacar el average de estadía de empresa 
+            //consulta para conocimiento específico
+           
+            var    item = (from habi in db.Habilidades
+                        from emp in db.EmpleadoDesarrollador
+                        where habi.cedulaEmpleadoPK_FK == emp.cedulaED
+                        group new { emp, habi } by new { conocimientos = habi.conocimientos } into g
+                        orderby g.Key.conocimientos ascending
+                        select new
+                        {
+                            nombre = g.Key.conocimientos,
+                            cantDesa = g.Count(),
+                            promedio = (int)g.Average(x => DbFunctions.DiffYears(x.emp.fechaInicio, now))
+                        });
 
-            return View(datosObtenidos);//retorna la vista
+            
+            //Lista con datos recibidos de la consulta
+            List<string> datos = new List<string>();
+            foreach (var dato in item)
+            {
+                datos.Add(dato.nombre + " " + dato.cantDesa + " " + dato.promedio);
+            }
+
+            return View(datos);//retorna la vista
         }
 
         // DESARROLLADOR POR CONOCIMIENTO
@@ -449,9 +479,20 @@ namespace Proyecto.Controllers
         public ActionResult EstadoRequerimiento()
         {
 
+            ViewBag.Proy = "Todos los Proyectos";
+            var item = (from a in db.Requerimiento
+                    from b in db.EmpleadoDesarrollador
+                    where a.cedulaResponsable_FK == b.cedulaED
+                    select new { nombreReq = a.nombre, estadoReq = a.estado, nombreDes = b.nombreED, apellido1Des = b.apellido1ED, apellido2Des = b.apellido2ED });
+            //Lista con datos recibidos de la consulta
             List<string> datosObtenidos = new List<string>();
+            foreach (var dato in item)
+            {
+                datosObtenidos.Add(dato.nombreReq + " " + dato.estadoReq + " " + dato.nombreDes + " " + dato.apellido1Des + " " + dato.apellido2Des);
+            }
 
             return View(datosObtenidos);//retorna la vista
+
         }
 
         [HttpPost]
