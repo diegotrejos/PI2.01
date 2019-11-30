@@ -15,6 +15,7 @@ namespace Proyecto.Controllers
 {
     public class ReporteriaController : Controller
     {
+        //variables de sesión para obtener vista de acuerdo al rol
         public string usuario = "";
         public string cedula = "";
         public string proy = "";
@@ -302,17 +303,20 @@ namespace Proyecto.Controllers
         }
 
 
-        /*
-         Lista de compleijidad
-             */
+        //Comparación de tiempos con mismo nivel de complejidad, no recibe parámetros para mostrar información de todos los niveles
+        /* consulta para obtener la cantidad total de requerimientos, el mínimo y máximo de la diferencia entre la duración estimada y la real y el tiempo promedio en horas de la real
+         * @return lista 
+         */
         public ActionResult ComparacionComplejidad()
         {
            var item = from req in db.Requerimiento
-                   from proy in db.Proyecto
-                   where proy.nombre == req.nombreProyecto_FK
-                   where proy.fechaFinalizacion != null
-                   group req by 1 into g
-                   select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+                      from proy in db.Proyecto
+                      where proy.nombre == req.nombreProyecto_FK
+                      where proy.fechaFinalizacion != null
+                      group req by 1 into g
+                      select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+
+            //Lista que guarda las tuplas obtenidas
             List<string> datos = new List<string>();
             foreach (var dato in item)
             {
@@ -321,6 +325,11 @@ namespace Proyecto.Controllers
             return View(datos);
         }
 
+        //Comparación de tiempos con mismo nivel de complejidad que recibe como parámetro el nivel
+        /* consulta para obtener la cantidad total de requerimientos, el mínimo y máximo de la diferencia entre la duración estimada y la real y el tiempo promedio en horas de la real
+         * @param complejidad: el nivel de complejidad del requerimiento
+         * @return lista 
+         */
         [HttpPost]
         public ActionResult ComparacionComplejidad(string complejidad)
         {
@@ -332,6 +341,7 @@ namespace Proyecto.Controllers
                        group req by req.complejidad into g
                        select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
 
+            //Devuelve la información de todos los niveles
             if (complejidad == "" || complejidad == "Todos los niveles")
             {
                 item = from req in db.Requerimiento
@@ -342,6 +352,7 @@ namespace Proyecto.Controllers
                        select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
             }
 
+            //Lista que guarda las tuplas obtenidas
             List<string> datos = new List<string>();
             foreach (var dato in item)
             {
@@ -350,7 +361,11 @@ namespace Proyecto.Controllers
             return View(datos);
         }
 
-
+        //Historial de desarrollador en proyectos, recibe como parámetro el nombre del empleado
+        /* consulta para obtener el nombre de los proyectos en los que ha trabajado, su rol y total de horas dedicadas
+         * @param nombre: el nombre del desarrollador
+         * @return lista 
+         */
         public ActionResult HistorialDesarrollador(string nombre)
         {
             var item = from proy in db.Proyecto
@@ -365,7 +380,8 @@ namespace Proyecto.Controllers
                        where proy.fechaFinalizacion != null
                        group new { proy, req, eq } by new { proy.nombre, eq.rol } into g
                        select new { nom = g.Key.nombre, r = g.Key.rol, duracion = g.Sum(x => x.req.duracionReal) };
-
+            
+            //Lista que guarda las tuplas obtenidas
             List<string> datos = new List<string>();
             foreach (var dato in item)
             {
@@ -374,7 +390,9 @@ namespace Proyecto.Controllers
             return View(datos);
         }
 
-        //Crea la lista predefinida con las complejidades
+        /*Crea la lista con los niveles de complejidad
+         * @return lista
+         */
         public List<SelectListItem> getListaComplejidad()
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -383,9 +401,11 @@ namespace Proyecto.Controllers
             items.Add(new SelectListItem() { Text = "Complejo" });
             items.Add(new SelectListItem() { Text = "Muy Complejo" });
             return items;
-
         }
 
+        /*Retorna los nombres de los desarrolladores para mostrar su historial
+         * @return lista
+         */
         public List<SelectListItem> getDesarrolladoresHistorial()
         {
             return emplController.getDesarrolladoresHistorial();
