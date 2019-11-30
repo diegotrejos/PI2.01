@@ -314,7 +314,7 @@ namespace Proyecto.Controllers
                       where proy.nombre == req.nombreProyecto_FK
                       where proy.fechaFinalizacion != null
                       group req by 1 into g
-                      select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+                      select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = Math.Round(g.Average(c => c.duracionReal),2) };
 
             //Lista que guarda las tuplas obtenidas
             List<string> datos = new List<string>();
@@ -339,7 +339,7 @@ namespace Proyecto.Controllers
                        where req.complejidad == complejidad
                        where proy.fechaFinalizacion != null
                        group req by req.complejidad into g
-                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = Math.Round(g.Average(c =>c.duracionReal),2) };
 
             //Devuelve la información de todos los niveles
             if (complejidad == "" || complejidad == "Todos los niveles")
@@ -349,7 +349,7 @@ namespace Proyecto.Controllers
                        where proy.nombre == req.nombreProyecto_FK
                        where proy.fechaFinalizacion != null
                        group req by 1 into g
-                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = g.Average(c => c.duracionReal) };
+                       select new { total = g.Count(), minimo = g.Min(a => a.duracionEstimada - a.duracionReal), maximo = g.Max(b => b.duracionEstimada - b.duracionReal), promedio = Math.Round(g.Average(c => c.duracionReal),2) };
             }
 
             //Lista que guarda las tuplas obtenidas

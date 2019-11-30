@@ -5,12 +5,12 @@
 }
 
 <script>
-        $(document).ready(function () {
-            getProvincia();
-        })
+        $(document).ready(function () {   
+            getProvincia(@Html.DisplayFor(model => model.provincia));
+            getCanton(@Html.DisplayFor(model => model.provincia), @Html.DisplayFor(model => model.canton));
+            getDistrict(@Html.DisplayFor(model => model.provincia), @Html.DisplayFor(model => model.canton), @Html.DisplayFor(model => model.distrito));
+        });
 </script>
-
-
 
 
 @using (Html.BeginForm())
@@ -74,7 +74,7 @@
                     Provincia
                 </th>
                 <td>
-                    @Html.DropDownListFor(model => model.provincia, Enumerable.Empty<SelectListItem>(), "Seleccione Provincia", new { @class = "form-control", onchange = "getCanton()" })
+                    @Html.DropDownListFor(model => model.provincia, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton(null, null)" })
                     @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
                 </td>
             </tr>
@@ -84,7 +84,7 @@
                     Cantón
                 </th>
                 <td>
-                    @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "Seleccione Canton", new { @class = "form-control", onchange = "getDistrict()" })
+                    @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrict(null, null, null)" })
                     @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
                 </td>
             </tr>
@@ -93,7 +93,7 @@
                     Distrito
                 </th>
                 <td>
-                    @Html.DropDownListFor(model => model.distrito, Enumerable.Empty<SelectListItem>(), "Seleccione Distrito", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.distrito, Enumerable.Empty<SelectListItem>(), "--Distrito--", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
                 </td>
             </tr>
