@@ -37,7 +37,8 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        /*Método inicial para
+        /*Método inicial para la vista de la consulta sobre la comparacion real y estimada de los requerimientos
+         * @return view(lista): retorna a la vista una lista vacía (Katherine)
          */
         public ActionResult TiemposRequerimiento()
         {
@@ -55,6 +56,14 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
+
+        /*Método para vista parcial que retorna la informacion necesaria para la consulta de comparacion entre la duración estimada 
+         * y real de los requerimientos para un desarrollador y proyecto específico
+         * @param nombre: nombre de desarrollador
+         * @param nombreProyecto: nombre del proyecto del desarrollador
+         * @return view(lista): lista con información de la consulta
+         * (Katherine)
+         */
         [HttpPost]
         public ActionResult tablaRequerimientos(string nombre, string nombreProyecto)
         {
@@ -62,8 +71,9 @@ namespace Proyecto.Controllers
             System.Diagnostics.Debug.WriteLine("el nombre " + nombreProyecto);
             ViewBag.todos = "";
             ViewBag.nombreP = "Seleccione un proyecto";
+            string[] nombre1 = nombre.Split(' ');
             var cedula = from a in db.EmpleadoDesarrollador
-                         where a.nombreED == nombre
+                         where a.nombreED == nombre1[0]
                          select a;
             var item = (from a in db.Requerimiento
                         where a.cedulaResponsable_FK == cedula.FirstOrDefault().cedulaED && a.nombreProyecto_FK == nombreProyecto
@@ -90,6 +100,11 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
+        /*Método inicial que responde a la consulta de horas estimadas y reales necesarias para terminar un proyecto
+         * se muestran inicialmente todos los proyectos en esta primera vista
+         * @return view(lista): lista con la información de todos los proyectos
+         * (Katherine)
+         */
         public ActionResult HorasProyecto()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
@@ -114,7 +129,7 @@ namespace Proyecto.Controllers
                          from l in db.EmpleadoDesarrollador
                          where b.nombreProyecto_FK == a.nombre  && e.cedulaEM_FK == cedula && e.rol == true && e.nombreProy_FK == a.nombre  &&  a.fechaFinalizacion != null
                          group new { a, b, e, l } by a.nombre into c
-                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
+                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +' '+ c.FirstOrDefault().l.apellido1ED+' '+ c.FirstOrDefault().l.apellido2ED };
 
             }
             if (item != null)
@@ -128,6 +143,11 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
+        /*Método post que responde a la consulta de horas estimadas y reales para concluir con un proyecto específico
+         * @Param nombreProyecto
+         * @return view(lista): lista con la información del proyecto específico
+         * (Katherine)
+         */
         [HttpPost]
         public ActionResult HorasProyecto(string nombreProyecto)
         {
@@ -168,19 +188,29 @@ namespace Proyecto.Controllers
         }
 
      
-
+        /*Método que retorna el nommbre de los desarrolladores
+         * @return desarrolladores (katherine)
+         */
         public SelectList getDesarrolladores()
         {
    
             return emplController.getDesarrolladores();
         }
 
+        /*Método que retorna los proyectos del desarrollador en formato Json
+         * esto para llenar el segundo dropdown por medio de Jquery
+         * al seleccionar el primer dropdown de la vista TiemposRequerimientos
+         * @param nombre: nombre del desarrollador
+         * (Katherine)
+         */
         [HttpPost]
         public JsonResult getProyectoDesarrollador(string nombre)
         {
+
+            string[] nombre1 = nombre.Split(' ');
             //System.Diagnostics.Debug.WriteLine("el nombre" + nombre);
             var empleado = from a in db.EmpleadoDesarrollador
-                           where a.nombreED == nombre
+                           where a.nombreED == nombre1[0]
                            select a.cedulaED;
        
             var item = from a in db.Proyecto
@@ -193,6 +223,9 @@ namespace Proyecto.Controllers
             return  Json(new SelectList(item));
         }
 
+        /*Metodo que retorna los proyectos según el rol loggeado
+         *  @return proyectos
+         */
         public SelectList getProyectos()
         {
             return proyController.getProyectosPorRol();

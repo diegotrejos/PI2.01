@@ -296,6 +296,7 @@ namespace Proyecto.Controllers
 
 
         /*devuelve empleados trabajando en algun proyecto
+         * @ return lista empleados
          */
 
         public SelectList getDesarrolladores()
@@ -312,7 +313,7 @@ namespace Proyecto.Controllers
                           from b in db.Equipo
                           where b.nombreProy_FK == proy
                           where b.cedulaEM_FK == a.cedulaED
-                          select a.nombreED;
+                          select a.nombreED + ' ' + a.apellido1ED + ' ' + a.apellido2ED;
 
                 return new SelectList(obj);
             }
@@ -324,7 +325,7 @@ namespace Proyecto.Controllers
                           where a.cedulaED == b.cedulaEM_FK
                           where c.nombre == b.nombreProy_FK
                           where c.cedulaCliente == cedula
-                          select a.nombreED;
+                          select a.nombreED + ' ' + a.apellido1ED + ' ' + a.apellido2ED;
 
                 return new SelectList(obj);
             }
@@ -332,14 +333,14 @@ namespace Proyecto.Controllers
             {//solo puede ver su propia información y no la de otros desarrolladores
                 var obj = from a in db.EmpleadoDesarrollador
                           where a.cedulaED == cedula
-                          select a.nombreED;
+                          select a.nombreED + ' ' + a.apellido1ED + ' ' + a.apellido2ED;
 
                 return new SelectList(obj);
             }
             else if (usuario == "Jefe")//Si el usuarion en sesion es jefe
             {//Tiene acceso a todo el sistema
                 var obj = from a in db.EmpleadoDesarrollador
-                          select a.nombreED;
+                          select a.nombreED +' '+a.apellido1ED+' '+a.apellido2ED;
                 return new SelectList(obj);
             }
             SelectList lista = new SelectList("");
