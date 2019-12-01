@@ -192,5 +192,20 @@ namespace Proyecto.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public List<string> getHabilidades()
+        {
+            var Linq = from a in db.Habilidades
+                       select a.conocimientos;
+
+            return Linq.Distinct().ToList();
+        }
+
+        public List<Habilidades> gettHabilidades()
+        {
+            List<Habilidades> habs = new Proyecto.Models.Habilidades().listaHabilidades;
+            return habs;
+        }
     }
 }

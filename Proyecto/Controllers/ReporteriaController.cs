@@ -12,18 +12,6 @@ using System.Windows;
 
 namespace Proyecto.Controllers
 {
-
-    public class info_empleados
-    {
-        public Equipo equipo { get;set;}
-        public List<Requerimiento> requerimientos { get; set; }
-        public DateTime durEstimada { get; set;}
-        public int longitud { get; set; }
-    }
-
-
-
-
     public class ReporteriaController : Controller
     {
         public string usuario = "";
@@ -46,7 +34,7 @@ namespace Proyecto.Controllers
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             
             TempData["empleadosDisponibles"] = empleados;
-            List<info_empleados> lista_datos = new List<info_empleados>();
+            List<Proyecto.Models.ViewModels.infoEmpleados> lista_datos = new List<Proyecto.Models.ViewModels.infoEmpleados>();
 
             int longitudArray = new EmpleadoDesarrolladorController().getNoDisponibles();
 
@@ -57,9 +45,11 @@ namespace Proyecto.Controllers
 
             new EquipoController().llenarArray(lista_datos);
 
-            new RequerimientoController().llenarArray(lista_datos);
+            new RequerimientoController().llenarArray(lista_datos); //importante aqui la orden, primero se tiene que que llenar la array en equipo controller
 
-            calculoDurEstimada(lista_datos,longitudArray);
+            calculoDurEstimada(lista_datos);
+
+            ordenarListaEmpleados(lista_datos);
 
             //ordenamientoElka(lista_datos,longitudArray);
 
@@ -67,27 +57,80 @@ namespace Proyecto.Controllers
             return View();
         }
 
-        private void calculoDurEstimada(List<info_empleados> info, int longitud)
+        public ActionResult TotalReqTerminadosEnEjecucion()
+        {
+            List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_datos = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+
+            string cliente = "304970049";
+
+            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().GetProyectosDeCliente(cliente);
+
+            int index = 0;
+
+            foreach (var item in proyectos)
+            {
+                lista_datos.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
+                lista_datos.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
+                //para los requerimientos en ejecucion
+                lista_datos[index].nombreProy = item.nombre;
+                lista_datos[index].durEstimada = (DateTime)item.fechaInicio;
+                lista_datos[index].nombreCliente = item.Cliente.nombre;
+                lista_datos[index].apellidoCliente = item.Cliente.apellido1;
+                //para los requerimientos finalizados
+                lista_datos[index + 1].nombreProy = item.nombre;
+                lista_datos[index + 1].durEstimada = (DateTime)item.fechaInicio;
+                lista_datos[index + 1].nombreCliente = item.Cliente.nombre;
+                lista_datos[index + 1].apellidoCliente = item.Cliente.apellido1;
+                new RequerimientoController().llenarListaReq(lista_datos,item.nombre,index);
+                index += 2;
+            }
+
+            TempData["Lista"] = lista_datos;
+
+            return View();
+        }
+
+            private void calculoDurEstimada(List<Proyecto.Models.ViewModels.infoEmpleados> info)
         {
             foreach (var item1 in info)
             {
-                int totalHoras = 0;
+                double totalHoras = 0;
                 foreach (var item in item1.requerimientos)
                 {
                     totalHoras += item.duracionEstimada;
                 }
                 totalHoras = totalHoras / 8;
-                item1.durEstimada.AddDays(totalHoras);
+                item1.durEstimada = (DateTime)item1.equipo.Proyecto.fechaInicio;
+                item1.durEstimada = item1.durEstimada.AddDays(totalHoras);
+              
             }
         }
 
-        /*
-        private void ordenamientoElka(info_empleados[] info, int longitud) //puede ser que tenga que devolver una array pero por ahora lo dejare void 
+        private void ordenarListaEmpleados(List<Proyecto.Models.ViewModels.infoEmpleados> info)
         {
-
+            int elementos = 0; 
+            foreach (var item in info)
+            {
+                ++elementos;
+            }
+            int marca = 0;
+            int comparador = 0;
+            Proyecto.Models.ViewModels.infoEmpleados aux;
+            int k; 
+            for (int i = 0; i < elementos; ++i)
+            {
+                for (k = elementos - 1; k > marca; --k)
+                {
+                    comparador = DateTime.Compare(info[k - 1].durEstimada, info[k].durEstimada);
+                    if (comparador > 0)
+                    {
+                        aux = info[k - 1];
+                        info[k - 1] = info[k];
+                        info[k] = aux;
+                    }
+                }
+                ++marca;
+            }
         }
-
-    */
-      
     }
 }

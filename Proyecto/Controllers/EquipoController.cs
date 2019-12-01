@@ -27,6 +27,7 @@ namespace Proyecto.Controllers
             //Listas que se utilizan para el manejo de los empleados
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             List<Equipo> empleadosA = new List<Equipo>();
+            //List<string> habilidades = new HabilidadesController().getHabilidades();
 
             /*Variables que se utilizan en el inicio de sección para guardar datos necesarios*/
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;   //Guarda el rol del usuario
@@ -38,13 +39,51 @@ namespace Proyecto.Controllers
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().gettProyectos(usuario, cedula);
             // List<Proyecto.Models.Equipo> proyectosConLider = getEmployees();
 
+            //List<string> listita = filtrarLista(habilidades);
+
+
+
             //Guardan temporalmente los datos
             TempData["Lider"] = "";
+            TempData["habilidades"] = new HabilidadesController().getHabilidades(); //listita;
             TempData["empleadosDisponibles"] = empleados;
             TempData["empleadosAsignados"] = empleadosA;
             TempData["proyectos"] = proyectos;
+
             TempData.Keep();
             return View(db.Equipo.ToList());
+        }
+
+        private List<string> filtrarLista(List<Habilidades> habilidades)
+        {
+            int count = 0;
+            List<string> nuevaLista = new List<string>();
+            string aux = "";
+            foreach (var item in habilidades)
+            {
+                if (count == 0)
+                {
+                    nuevaLista.Add(item.conocimientos);
+                    count = 1;
+                }
+                else
+                {
+                    foreach (var item1 in nuevaLista)
+                    {
+                        if (item.conocimientos != item1 && count != 2)
+                        {
+                            aux = item.conocimientos;
+                            count = 2;
+                        }
+                    }
+                    if (count == 2)
+                    {
+                        nuevaLista.Add(aux);
+                        count = 1;
+                    }
+                }
+            }
+            return nuevaLista;
         }
 
         [HttpPost]
@@ -55,7 +94,7 @@ namespace Proyecto.Controllers
 
             //codigo para buscar los empleados que se deberian de mostrar dependiendo del proyecto
             var empleadosAsignados = from a in db.Equipo
-                                     where a.nombreProy_FK == Proyecto 
+                                     where a.nombreProy_FK == Proyecto
                                      select a;
 
             var lider = from a in db.Equipo
@@ -64,14 +103,14 @@ namespace Proyecto.Controllers
                         select a.EmpleadoDesarrollador.nombreED;
 
             //asignacion para mostrarlos en la  vista
-            TempData["empleadosAsignados"] =  empleadosAsignados.ToList();
+            TempData["empleadosAsignados"] = empleadosAsignados.ToList();
             TempData["lider"] = lider.FirstOrDefault();
             return View(/*empleadosAsignados.ToList()*/);
-           
+
         }
 
 
-      
+
         //Codigo que traia por default visual y como se referencia 5 veces mejor no lo borro xD
         protected override void Dispose(bool disposing)
         {
@@ -85,7 +124,7 @@ namespace Proyecto.Controllers
         //Codigo que se comunica con la controladora de proyectos para recibir los proyectos actuales creados
         public SelectList getProyectos(String rol, String cedula)
         {
-            
+
             return this.proyController.getProyectos(rol, cedula);
         }
 
@@ -100,7 +139,7 @@ namespace Proyecto.Controllers
                 string[] eachMember = Miembros.Split(',');
                 foreach (var itemId in eachMember)
                 {
-                   
+
                     var empleado = from a in db.EmpleadoDesarrollador
                                    where a.cedulaED == itemId
                                    select a.disponibilidad;
@@ -133,7 +172,8 @@ namespace Proyecto.Controllers
                     error = false //no paso ningun error
                 });
             }
-            else {
+            else
+            {
                 return Json(new
                 {
                     redirectUrl = Url.Action("Index", "Equipo"),
@@ -143,12 +183,13 @@ namespace Proyecto.Controllers
             }
         }
 
+
         public SelectList getEmpleadosProyecto(string nombreProy)
         {
             var query = from eq in db.Equipo
                         where eq.nombreProy_FK == nombreProy
                         select eq.EmpleadoDesarrollador.nombreED;
-            
+
             return new SelectList(query);
         }
 
@@ -161,27 +202,20 @@ namespace Proyecto.Controllers
             return team.ToList();
         }
 
-        public void llenarArray(List<info_empleados> info)
+        public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info)
         {
             var linq = from a in db.Equipo
+                       where a.rol == false
                        select a;
 
+
             int count = 0;
-            int countlimit = 1;
-            foreach (var item1 in info)
+            foreach (var item in linq.ToList())
             {
-                ++count;
-                foreach (var item in linq.ToList())
-                {
-                    if (count == countlimit)
-                    {
-                        item1.equipo = item;
-                        ++countlimit;
-                    }   
-                }
-                //countlimit;
+                info.Add(new Proyecto.Models.ViewModels.infoEmpleados());
+                info[count].requerimientos = new List<Requerimiento>();
+                info[count++].equipo = item;
             }
         }
-
     }
 }

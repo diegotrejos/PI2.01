@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Total de requerimientos finalizados y en ejecucion"; @*Titulo que esta en el estandar *@
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+
+<div class=" Container" align-items-center>
+    <table class="table table-striped table-bordered">
+        <tr style="line-height:50px">
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Proyecto
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Duracion Estimada
+            </th>
+
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in TempData["Lista"] as List<Proyecto.Models.ViewModels.TotalReqPorCliente>)
+        {
+            <tr style="line-height:50px">
+                <td>
+                    @item.nombreCliente
+                </td>
+                <td>
+                    @item.apellidoCliente
+                </td>
+                <td>
+                    @item.nombreProy
+                </td>
+                <td>
+                   @item.total
+                </td>
+                <td>
+                    @item.estado
+                </td>
+                <td>
+                    @item.durEstimada
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

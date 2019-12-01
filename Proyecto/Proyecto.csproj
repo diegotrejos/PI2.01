@@ -188,6 +188,8 @@
     <Compile Include="Models\Requerimiento.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\infoEmpleados.cs" />
+    <Compile Include="Models\ViewModels\TotalReqPorCliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +296,7 @@
     <Content Include="Views\Requerimiento\consulReq.cshtml" />
     <Content Include="Views\Reporteria\Index.cshtml" />
     <Content Include="Views\Reporteria\DesarrolladoresProyDis.cshtml" />
+    <Content Include="Views\Reporteria\TotalReqTerminadosEnEjecucion.cshtml" />
     <None Include="Views\Shared\Layout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

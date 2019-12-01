@@ -1,9 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Asignar Equipo"; @*Titulo que esta en el estandar *@
+    ViewBag.Title = "desarrolladores en proyectos y disponibles"; @*Titulo que esta en el estandar *@
 }
 
 <h2>@ViewBag.Title</h2>
+
 
 @*Permite a la columna de la derecha poderse ordenar y recibir empleados de la columna de la izquierda*@
 
@@ -48,7 +49,7 @@
                 <thead style="background-color:#5B3924">
                     <tr>
                         <th style="color:aliceblue">Nombre y apellido</th>
-                       @* <th style="color:aliceblue">Apellido</th>*@
+                        @* <th style="color:aliceblue">Apellido</th>*@
                         <th style="color:aliceblue">Proyecto</th>
                         <th style="color:aliceblue">    Fecha inicio</th>
                         <th style="color:aliceblue">dur estimada</th>
@@ -59,28 +60,28 @@
                     @*Listado de los desarrolladores disponibles *@
                     @if (TempData["datos"] != null)
                     {
-                        foreach (var item in TempData["datos"] as List<((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller)>)
-                        {
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.nombreED</i></a>
-                        </td>
-                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+                        foreach (var item in TempData["datos"] as List<Proyecto.Models.ViewModels.infoEmpleados>)
+                                {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.equipo.cedulaEM_FK })"><i>@item.equipo.EmpleadoDesarrollador.nombreED</i></a>
+                                </td>
+                                <td class="taskSingleInline" id="task@(item.equipo.cedulaEM_FK)" data-taskid="@(item.equipo.cedulaEM_FK)">
 
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.apellido1ED</i></a>
-                        </td>
-                        <td>
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.nombre</i></a>
-                        </td>
-                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.equipo.cedulaEM_FK })"><i>@item.equipo.EmpleadoDesarrollador.apellido1ED</i></a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.equipo.cedulaEM_FK })"><i>@item.equipo.nombreProy_FK</i></a>
+                                </td>
+                                <td class="taskSingleInline" id="task@(item.equipo.cedulaEM_FK)" data-taskid="@(item.equipo.cedulaEM_FK)">
 
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.fechaInicio</i></a>
-                        </td>
-                        <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.equipo.cedulaEM_FK })"><i>@item.equipo.Proyecto.fechaInicio</i></a>
+                                </td>
+                                <td class="taskSingleInline" id="task@(item.equipo.cedulaEM_FK)" data-taskid="@(item.equipo.cedulaEM_FK)">
 
-                            <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.Proyecto.fechaFinalizacion</i></a>
-                        </td>
-                    </tr>
+                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.equipo.cedulaEM_FK })"><i>@item.durEstimada</i></a>
+                                </td>
+                            </tr>
                         }
                     }
                 </tbody>
@@ -103,8 +104,7 @@
             <table class="table table-responsive-md">
                 <thead style="background-color:#5B3924">
                     <tr>
-                        <th style="color:aliceblue">Cédula</th>
-                        <th style="color:aliceblue">Nombre</th>
+                        <th style="color:aliceblue">Nombre y apellido</th>               
                     </tr>
                 </thead>
                 <tbody id="asignacion" style="cursor:pointer;">
@@ -118,11 +118,11 @@
                             {
                                 <tr>
                                     <td>
-                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.cedulaED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
 
                                     </td>
                                     <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
-                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
+                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.apellido1ED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
                                     </td>
                                 </tr>
                             }
@@ -133,12 +133,12 @@
         </div>
     </div>
     <div>
-    <p class="botones text-center ">  
-        <a href="~/Equipo/Index" class="btn btn-success">
-            Aceptar
-        </a>
-    </p>
-        </div>
+        <p class="botones text-center ">
+            <a href="~/Equipo/Index" class="btn btn-success">
+                Aceptar
+            </a>
+        </p>
+    </div>
 
     <script>
         function Desabilitar() {

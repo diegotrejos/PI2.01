@@ -79,6 +79,16 @@
 
     <div class=" Desarrollador Cliente modal-body row">
         <div class=".col-6 .col-sm-6">
+
+            @*Aqui deberia ir el filtro por conocimiento*@
+            <td> Busqueda por habilidad </td>
+            <td>
+                @if (TempData["habilidades"] != null)
+                {
+                    @Html.DropDownList("Habilidades", new SelectList(TempData["habilidades"] as List<string>), "----------")
+                }
+            </td>
+
             @*Estilo para la letra de arriba de la columna*@
             <p style="font-size:14px; color:#000000; font-weight:bold; font-style:italic;"> Desarrolladores disponibles</p>
             <p></p>
