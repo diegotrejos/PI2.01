@@ -2,115 +2,143 @@
 
 
 
-
-
-@using (Html.BeginForm())
+@if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
 {
-    @Html.AntiForgeryToken()
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="  container-fluid text-center">
+            <h2>Periodos Disponibles</h2>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <table class="d-flex justify-content-center">
+                <tbody>
+
+
+                    <tr style="line-height:50px">
+                        <th>
+                            Fecha de inicio
+                        </th>
+                        <td required="true">
+
+
+                            <input type="date" id="Finicio" name="Finicio" />
+                        </td>
+                    </tr>
+
+
+
+                    <tr style="line-height:50px">
+                        <th>
+                            Fecha de Finalización
+                        </th>
+
+                        <td>
+
+
+                            <input type="date" id="Ffinal" name="Ffinal" />
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            <div>
+                <input type="submit" value="Buscar" id="btnSubmit" class="btn btn-default" />
+
+            </div>
+
+
+        </div>
+
+
+    }
+
+    <p class=" boton float-right">
+        <button onclick="location.href = '@Url.Action("", "Reporteria")'" class="btn  float-right " style="background: #5B3924; color:white">Regresar</button>
+    </p>
 
     <div class="  container-fluid text-center">
-        <h2>Agregar Proyecto</h2>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <table class="d-flex justify-content-center">
-            <tbody>
+        @if (ViewBag.lleno == true)
+        {
 
 
-                <tr style="line-height:50px">
+            <table class="table">
+                <tr>
                     <th>
-                        Fecha de inicio<a style="color:red"> *</a>
+                        Nombre De Empleado
                     </th>
-                    <td required="true">
-
-
-                        <input type="date" id="Finicio" name="Finicio"/>
-                    </td>
-                </tr>
-
-
-
-                <tr style="line-height:50px">
                     <th>
-                        Fecha de Finalización<a>  </a>
+                        Periodos desocupados
                     </th>
 
-                    <td>
+                    <th>
+                        Total de dias desocupados
+                    </th>
 
-
-                        <input type="date" id="Ffinal" name="Ffinal" />
-                    </td>
                 </tr>
 
-            </tbody>
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombreED)
+                        </td>
+                        <td>
+                            @Html.Raw("<pre>" + Html.Encode(item.periodosyDias) + "</pre>")
 
-      
-            <div>
-                <input type="submit" value="Submit" id="btnSubmit"class="btn btn-success" />
-               
-            </div>
-   
+                        </td>
 
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.total)
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+        }
+        else
+        {
+            <h3>No existen empleados con dias disponibles en este periodo</h3>
+        }
     </div>
 
+    <script>
+
+        $(document).ready(function () {
+
+            $("#btnSubmit").click(function () {
+                debugger;
+                var f1 = $("#Finicio").val();
+                var f2 = $("#Ffinal").val();
+                var d1 = new Date(f1);
+                var d2 = new Date(f2);
+                if (d1.getTime() >= d2.getTime()) {
+                    alert("Fechas de inicio no es menor que fecha final");
+                    event.preventDefault();
+                }
+                else if (d1.getTime() < new Date(1980 - 01 - 01))
+                {
+                    alert("Fechas invalidas");
+                    event.preventDefault();
+                }
+                else if (!Date.parse(d1) || !Date.parse(d2))
+                {
+                    alert("Fechas invalidas");
+                    event.preventDefault();
+                }
+
+            });
+
+        });
+    </script>
 
 }
-
-
-
-
-<table class="table">
-    <tr>
-        <th>
-            Nombre De Empleado
-        </th>
-        <th>
-            Periodos desocupados
-        </th>
-
-        <th>
-            Total de dias desocupados
-        </th>
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombreED)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.periodosyDias)
-
-            </td>
-
-
-            <td>
-                @Html.DisplayFor(modelItem => item.total)
-            </td>
-
-        </tr>
-    }
-   
-</table>
-
-
-<script>
-
-$(document).ready(function(){
-
-$("#btnSubmit").click(function(){
-debugger;
-var f1 = $("#Finicio").val();
-var f2 = $("#Ffinal").val();
-var d1 = new Date(f1);
-var d2 = new Date(f2);
-if(d1 >= d2)
+else
 {
-    alert("Fechas invalidas");
-    event.preventDefault();
+    <h1> Lo sentimos, no puede ver este contenido.</h1>
 }
-});
-
-});
-</script>
