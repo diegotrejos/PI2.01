@@ -71,9 +71,8 @@ namespace Proyecto.Controllers
             System.Diagnostics.Debug.WriteLine("el nombre " + nombreProyecto);
             ViewBag.todos = "";
             ViewBag.nombreP = "Seleccione un proyecto";
-            string[] nombre1 = nombre.Split(' ');
             var cedula = from a in db.EmpleadoDesarrollador
-                         where a.nombreED == nombre1[0]
+                         where a.nombreED == nombre
                          select a;
             var item = (from a in db.Requerimiento
                         where a.cedulaResponsable_FK == cedula.FirstOrDefault().cedulaED && a.nombreProyecto_FK == nombreProyecto
@@ -187,11 +186,11 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
-     
+
         /*Método que retorna el nommbre de los desarrolladores
          * @return desarrolladores (katherine)
          */
-        public SelectList getDesarrolladores()
+        public List<SelectListItem> getDesarrolladores()
         {
    
             return emplController.getDesarrolladores();
@@ -207,10 +206,10 @@ namespace Proyecto.Controllers
         public JsonResult getProyectoDesarrollador(string nombre)
         {
 
-            string[] nombre1 = nombre.Split(' ');
-            //System.Diagnostics.Debug.WriteLine("el nombre" + nombre);
+           
+            System.Diagnostics.Debug.WriteLine("el nombre para json: " + nombre);
             var empleado = from a in db.EmpleadoDesarrollador
-                           where a.nombreED == nombre1[0]
+                           where a.nombreED == nombre
                            select a.cedulaED;
        
             var item = from a in db.Proyecto

@@ -82,13 +82,13 @@
                     if ($("#nombre").val() != "Seleccione un empleado") {//si esta el valor default del primer dropdown no se hace nada
 
                         var ModulosProyecto = {};
-
                         ModulosProyecto.url = "/Reporteria/getProyectoDesarrollador";//se llenara segunda dropdownlist con lo q devuelva el metodo getmodulos
                         ModulosProyecto.type = "POST";
                         ModulosProyecto.data = JSON.stringify({
                             nombre: $("#nombre").val()//parametro q se pasa
+                            
                         });
-
+                       
                         ModulosProyecto.datatype = "json";
                         ModulosProyecto.contentType = "application/json";
                         ModulosProyecto.success = function (data) {//datos q retorna getmodulo
