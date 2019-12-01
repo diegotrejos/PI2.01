@@ -25,6 +25,9 @@ namespace Proyecto.Controllers
         Proyecto.Controllers.EmpleadoDesarrolladorController emplController = new Proyecto.Controllers.EmpleadoDesarrolladorController();
         Proyecto.Controllers.HabilidadesController habController = new Proyecto.Controllers.HabilidadesController();
         // GET: Reporteria
+        /*Vista inicial para reportería
+         * @return view()
+         */
         public ActionResult Index()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;//Saber rol del que está en el sistema
@@ -34,7 +37,8 @@ namespace Proyecto.Controllers
             return View();
         }
 
-
+        /*Método inicial para
+         */
         public ActionResult TiemposRequerimiento()
         {
             ViewBag.nombreP = "Seleccione un proyecto";
