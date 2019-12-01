@@ -17,6 +17,7 @@ namespace Proyecto.Controllers
         public string usuario = "";
         public string cedula = "";
         public string proy = "";
+        public List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
@@ -31,6 +32,10 @@ namespace Proyecto.Controllers
 
         public ActionResult DesarrolladoresProyDis()
         {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             
             TempData["empleadosDisponibles"] = empleados;
@@ -59,34 +64,56 @@ namespace Proyecto.Controllers
 
         public ActionResult TotalReqTerminadosEnEjecucion()
         {
-            List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_datos = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
-            string cliente = "304970049";
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().GetProyectosDeCliente(cliente);
+            //List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+
+
+            List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().GetProyectosDeCliente(cedula);
 
             int index = 0;
 
             foreach (var item in proyectos)
             {
-                lista_datos.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
-                lista_datos.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
+                lista_totalReq.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
+                lista_totalReq.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
                 //para los requerimientos en ejecucion
-                lista_datos[index].nombreProy = item.nombre;
-                lista_datos[index].durEstimada = (DateTime)item.fechaInicio;
-                lista_datos[index].nombreCliente = item.Cliente.nombre;
-                lista_datos[index].apellidoCliente = item.Cliente.apellido1;
+                lista_totalReq[index].nombreProy = item.nombre;
+                lista_totalReq[index].durEstimada = (DateTime)item.fechaInicio;
+                lista_totalReq[index].nombreCliente = item.Cliente.nombre;
+                lista_totalReq[index].apellidoCliente = item.Cliente.apellido1;
                 //para los requerimientos finalizados
-                lista_datos[index + 1].nombreProy = item.nombre;
-                lista_datos[index + 1].durEstimada = (DateTime)item.fechaInicio;
-                lista_datos[index + 1].nombreCliente = item.Cliente.nombre;
-                lista_datos[index + 1].apellidoCliente = item.Cliente.apellido1;
-                new RequerimientoController().llenarListaReq(lista_datos,item.nombre,index);
+                lista_totalReq[index + 1].nombreProy = item.nombre;
+                lista_totalReq[index + 1].durEstimada = (DateTime)item.fechaInicio;
+                lista_totalReq[index + 1].nombreCliente = item.Cliente.nombre;
+                lista_totalReq[index + 1].apellidoCliente = item.Cliente.apellido1;
+                new RequerimientoController().llenarListaReq(lista_totalReq, item.nombre,index);
                 index += 2;
             }
 
-            TempData["Lista"] = lista_datos;
+            TempData["Lista"] = lista_totalReq;
 
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TotalReqTerminadosEnEjecucion(string filtro)
+        {
+            int index = 0;
+            List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReqFiltrada = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+            foreach (var item in lista_totalReq)
+            {
+                if (item.nombreProy == filtro)
+                {
+                    lista_totalReqFiltrada.Add(new Models.ViewModels.TotalReqPorCliente());
+                    lista_totalReqFiltrada[index++] = item;
+                }
+            }
+            TempData["Lista"] = lista_totalReqFiltrada;
             return View();
         }
 
@@ -131,6 +158,10 @@ namespace Proyecto.Controllers
                 }
                 ++marca;
             }
+        }
+        public SelectList getProyectos(String rol, String cedula)
+        {
+            return this.proyController.getProyectos(rol, cedula);
         }
     }
 }

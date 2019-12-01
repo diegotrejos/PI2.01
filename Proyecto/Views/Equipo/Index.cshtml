@@ -22,18 +22,18 @@
 
 @using (Html.BeginForm())
 {
-    <fieldset>
+<fieldset>
 
 
-        <td> Seleccionar proyecto </td>
-        <td>
-            @if (TempData["proyectos"] != null)
-            {
-                @Html.DropDownList("Proyecto", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
-            }
-        </td>
-
-    </fieldset>
+    <td> Seleccionar proyecto </td>
+    <td>
+        @if (TempData["proyectos"] != null)
+        {
+            @Html.DropDownList("Proyecto", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
+        }
+    </td>
+    <noscript><input type="submit" value="Submit"></noscript>
+</fieldset>
     //Aqui es donde apareceria el lider cuando el filtro funcione 
     if (TempData["Lider"] != null && TempData["Lider"].ToString() != "")
     {
