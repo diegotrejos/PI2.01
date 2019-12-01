@@ -278,6 +278,7 @@ namespace Proyecto.Controllers
             //encuentro el usuario respectivo 
             var miembros = from a in db.Equipo
                                 where a.nombreProy_FK == nombreProyecto
+                                where a.rol == false
                                 select a.EmpleadoDesarrollador.nombreED;
 
            
