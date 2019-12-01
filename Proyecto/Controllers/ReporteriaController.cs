@@ -239,18 +239,18 @@ namespace Proyecto.Controllers
 
     //objeto para imprimir resultados bonitos
         public class Desocupacion
-            {
+        {
             public
             string nombreED;
             public
            string periodosyDias;
             public
-           int total;
+           string total;
 
         }
 
 
-        //en progreso
+        //listo
         public ActionResult PeriodosDisponibles()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
@@ -261,47 +261,156 @@ namespace Proyecto.Controllers
             List<Desocupacion> Empleados = new List<Desocupacion>();
 
             Desocupacion p = new Desocupacion();
-            p.nombreED = "Diego";
-            p.periodosyDias = "1/02/2006-2/03/2006 = 32";
-            p.total = 32;
+            p.nombreED = "------------";
+            p.periodosyDias = "--";
+            p.total = "---";
             //los agrego a la lista 
             Empleados.Add(p);
+            ViewBag.fInicio = "ninguna";
+            ViewBag.ffinal = "ninguna";
             return View(Empleados);
-           
+
         }
 
         [HttpPost]
-        public ActionResult PeriodosDisponibles(string Finicio, string Ffinal)
+        public ActionResult PeriodosDisponibles(DateTime Finicio, DateTime Ffinal)
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
             ViewBag.user = usuario;
-
+            ViewBag.fInicio = Finicio;
+            ViewBag.ffinal = Ffinal;
+            ViewBag.lleno = true;
+            //genere lista de objetos para mostrar luego en vista
             List<Desocupacion> Empleados = new List<Desocupacion>();
-            Finicio = "10/04/2005";
-            Ffinal = "2/12/2006";
+
+            //codigo sql ultilizando cursores
+            string sql = @"
+					  DECLARE
+		
+                        @inicio date,--limite inferior iterador
+                        @final date,--limite superior iterador
+                        @Viejoinicio date,--limite inferior iterador
+                        @Viejofinal date,--limite superior iterador
+                        @diasLib int, --dias libres de iteradores
+                        @Mensaje varchar(100)--variable temporal para formar mensajes a imprimir
+			
+		            Declare	@cursorResult table (mensaje varchar(100))
+
+                        DECLARE DispCur CURSOR FOR
+                        SELECT  DISTINCT P.fechaInicio,P.fechaFinalizacion
+                        FROM Equipo Eq
+                        JOIN Proyecto P
+                        ON P.nombre =Eq.nombreProy_FK
+                        JOIN EmpleadoDesarrollador E
+                        ON E.cedulaED = Eq.cedulaEM_FK
+                        WHERE Eq.cedulaEM_FK = @empleado
+                        AND (0 <= DATEDIFF(Day,@fechainicio,P.fechaInicio)AND 0 >= DATEDIFF(Day,@fechafin,P.fechaFinalizacion)) --CASO QUE esta entre limites
+                        OR (0 >= DATEDIFF(Day,@fechainicio,P.fechaInicio)AND 0 >= DATEDIFF(Day,@fechafin,P.fechaFinalizacion)AND 0 < DATEDIFF(Day,@fechainicio,P.fechaFinalizacion))--limite inferior en medio de proyecto
+                        OR  (0 <= DATEDIFF(Day,@fechainicio,P.fechaInicio)AND 0 <= DATEDIFF(Day,@fechafin,P.fechaFinalizacion)AND 0 >= DATEDIFF(Day,@fechafin,P.fechaInicio))--limite superior en medio de proyecto
+                        ORDER BY P.fechaInicio
+
+
+                        OPEN DispCur
+                        SET @diasLib = 0
+						SET @Viejoinicio =(SELECT E.fechaInicio FROM EmpleadoDesarrollador E WHERE E.cedulaED = @empleado)
+	                        FETCH NEXT FROM DispCur INTO @inicio,@final
+	                         IF @inicio > @fechainicio--en caso de que proyecto aun no haya iniciado en limite inferior
+		                        BEGIN
+								IF @fechainicio < @Viejoinicio --en caso de	q empleado aun no haya empezado a trabajar
+									BEGIN
+									SET @Mensaje = CAST(@Viejoinicio AS nvarchar(10)) +' -- '+CAST(@inicio AS nvarchar(10)) +':  '+ CAST(DATEDIFF(Day, @Viejoinicio,@inicio) AS nvarchar (100))
+									SET @diasLib = @diasLib+(DATEDIFF(Day, @Viejoinicio,@inicio))
+                                    insert into @cursorResult(mensaje) values(@Mensaje)
+									END
+								ELSE
+									BEGIN
+									SET @Mensaje = '  INICIO ' +' -- '+CAST(@inicio AS nvarchar(10)) +':  '+ CAST(DATEDIFF(Day, @fechainicio,@inicio) AS nvarchar (100))
+									SET @diasLib = @diasLib+(DATEDIFF(Day, @fechainicio,@inicio))
+									insert into @cursorResult(mensaje) values(@Mensaje)
+									END
+								END
+	                        WHILE @@fetch_status = 0
+	                        BEGIN
+		                        SET @Viejoinicio = @inicio
+		                        SET @Viejofinal = @final
+		                        FETCH NEXT FROM DispCur INTO @inicio,@final
+		                        IF @Viejoinicio = @inicio AND @final < @fechafin--si proyecto termina antes de limite superior
+			                        BEGIN
+			                        SET @Mensaje = CAST(@Viejofinal AS nvarchar(10)) +' -- '+' FINAL:  '+'  '+ CAST(DATEDIFF(Day,@Viejofinal, @fechafin) AS nvarchar (10))
+			                        SET @diasLib = @diasLib+(DATEDIFF(Day,@Viejofinal, @fechafin))
+			                            insert into @cursorResult(mensaje) values(@Mensaje)
+			                        END
+		                        ELSE IF @final < @fechafin--ciclo normal 
+			                        BEGIN
+			                        SET @Mensaje = CAST(@Viejofinal AS nvarchar(10)) +' -- '+CAST(@inicio AS nvarchar(10))+':  '+ CAST(DATEDIFF(Day,@Viejofinal, @inicio) AS nvarchar (10))
+			                        SET @diasLib = @diasLib+(DATEDIFF(Day,@Viejofinal, @inicio)) 
+			                        insert into @cursorResult(mensaje) values(@Mensaje)
+			                        END	
+		                        ELSE IF @Viejoinicio != @inicio AND @final > @fechafin--si proyecto termina despues de limite superior
+			                        BEGIN
+			                        SET @Mensaje = CAST(@Viejofinal AS nvarchar(10)) +' -- '+CAST(@fechafin AS nvarchar(10))+':  '+ CAST(DATEDIFF(Day,@Viejofinal, @fechafin) AS nvarchar (10))
+			                        SET @diasLib = @diasLib + (DATEDIFF(Day,@Viejofinal, @fechafin))
+			                        insert into @cursorResult(mensaje) values(@Mensaje)
+			                        END
+	                        END
+                                SET @Mensaje = CAST(@diaslib AS nvarchar(10))
+		                        insert into @cursorResult(mensaje) values(@Mensaje)
+                        CLOSE DispCur
+                        DEALLOCATE DispCur;
+			            select * from @cursorResult
+            ";
+
+            //genero listas de personas
+            var personas = from emp in db.EmpleadoDesarrollador
+                           select emp;
 
 
 
-            //Genero lista de todos los empleados
 
-
-            //Hago consulta aqui de sus datos
-            for (int i = 0; i < 2; i++)
+            foreach (var item in personas.ToList())
             {
+                //genero parametros para sql dinamico
+                var fechainicio = new SqlParameter("@fechainicio", Finicio.Date);
+                var fechafin = new SqlParameter("@fechafin", Ffinal.Date);
+                var emp_actual = new SqlParameter("@empleado", item.cedulaED);
+                var results = db.Database.SqlQuery<string>(sql, fechainicio, fechafin, emp_actual).ToList();
+                string per = item.nombreED;
+                //objeto que metere en lista
                 Desocupacion p = new Desocupacion();
-                p.nombreED = "Diego";
-                p.periodosyDias = "1/02/2006-2/03/2006 = 32";
-                p.total = 32;
-                //los agrego a la lista 
-                Empleados.Add(p);
-            }
 
+                p.nombreED = item.nombreED;
+
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+
+                foreach (var linea in results)
+                {
+
+                    if (linea != results.LastOrDefault())
+                    {
+                        p.periodosyDias += linea.ToString();
+                        p.periodosyDias += System.Environment.NewLine;
+                    }
+                }
+                p.total = results.LastOrDefault();
+
+
+                //los agrego a la lista SI tienen datos
+                if (Convert.ToInt32(p.total) > 0)
+                {
+                    Empleados.Add(p);
+                }
+            }
+            //caso de que no existan empleados en el intervalo
+            if (Empleados.Count() == 0)
+            {
+                ViewBag.lleno = false;
+            }
 
             return View(Empleados);
         }
-
 
         //Comparación de tiempos con mismo nivel de complejidad, no recibe parámetros para mostrar información de todos los niveles
         /* consulta para obtener la cantidad total de requerimientos, el mínimo y máximo de la diferencia entre la duración estimada y la real y el tiempo promedio en horas de la real
