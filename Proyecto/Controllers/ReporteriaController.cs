@@ -19,6 +19,7 @@ namespace Proyecto.Controllers
         public string usuario = "";
         public string cedula = "";
         public string proy = "";
+        public List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
@@ -780,22 +781,13 @@ namespace Proyecto.Controllers
             TempData["empleadosDisponibles"] = empleados;
             List<Proyecto.Models.ViewModels.infoEmpleados> lista_datos = new List<Proyecto.Models.ViewModels.infoEmpleados>();
 
-           
-
-
-            //info_empleados[] arrayInfo = new info_empleados[longitudArray];
-
-            //arrayInfo[1].longitud = longitudArray;
-
-            new EquipoController().llenarArray(lista_datos);
+            new EquipoController().llenarArray(lista_datos,usuario,cedula);
 
             new RequerimientoController().llenarArray(lista_datos); //importante aqui la orden, primero se tiene que que llenar la array en equipo controller
 
             calculoDurEstimada(lista_datos);
 
             ordenarListaEmpleados(lista_datos);
-
-            //ordenamientoElka(lista_datos,longitudArray);
 
             TempData["datos"] = lista_datos;
             return View();
@@ -808,7 +800,7 @@ namespace Proyecto.Controllers
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+            //List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
 
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().GetProyectosDeCliente(cedula);
@@ -842,9 +834,9 @@ namespace Proyecto.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult TotalReqTerminadosEnEjecucion(string filtro)
         {
-            int index = 0;
-            List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReqFiltrada = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
-           /* foreach (var item in lista_totalReq)
+           int index = 0;
+           List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReqFiltrada = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+           foreach (var item in lista_totalReq)
             {
                 if (item.nombreProy == filtro)
                 {
@@ -852,7 +844,7 @@ namespace Proyecto.Controllers
                     lista_totalReqFiltrada[index++] = item;
                 }
             }
-            TempData["Lista"] = lista_totalReqFiltrada;*/
+            TempData["Lista"] = lista_totalReqFiltrada;
             return View();
         }
 

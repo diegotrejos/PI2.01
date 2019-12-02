@@ -10,17 +10,11 @@
 
     <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
     <div class="  container-fluid text-center">
-        <form action="/Moduloe/Index" method="post">
+        <form action="/Reporteria/TotalReqTerminadosEnEjecucion" method="post">
             @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
             {
                 @Html.DropDownList("filtro", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
             }
-            @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Jefe")
-            {
-                //algo aqui
-                @Html.DropDownList("filtro", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
-            }
-            @*<input type="submit" value="Buscar" class="btn btn-default" />*@
             <noscript><input type="submit" value="Submit"></noscript>
         </form>
     </div>
