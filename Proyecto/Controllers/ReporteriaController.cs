@@ -232,8 +232,8 @@ namespace Proyecto.Controllers
         }
 
 
-        //ya terminado
-        public ActionResult Estadodesarrollorequerimientos()
+        //Consulta de estado desarollo de requerimientos
+                public ActionResult Estadodesarrollorequerimientos()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string nombreProyecto = System.Web.HttpContext.Current.Session["proyecto"] as string;
@@ -245,20 +245,29 @@ namespace Proyecto.Controllers
             { var query = from a in db.Requerimiento
                               //solo requerimientos en ejecucion o sin iniciar
                           where (a.nombreProyecto_FK == nombreProyecto)
-                          where (a.estado == "En ejecucion" || a.estado == "Sin iniciar")
+                          where (a.estado == "En ejecucion" || a.estado == "Sin iniciar"|| a.estado == "Finalizado")
                           where (a.cedulaResponsable_FK == cedula)
                           select a;
                 return View(query.ToList());
             }
 
-
-
             else if (usuario == "Lider")
             {
+	    //dropdown de miembros 
+                var miembros = from a in db.Equipo
+                               where a.nombreProy_FK == nombreProyecto
+                               where a.rol == false
+                               select a.EmpleadoDesarrollador.nombreED;
+
+
+                TempData["Miembros"] = miembros.ToList();
+
+
+
                 var query = from a in db.Requerimiento
                                 //solo requerimientos en ejecucion o sin iniciar
                             where (a.nombreProyecto_FK == nombreProyecto)
-                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar")
+                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar" || a.estado == "Finalizado")
                             select a;
                 return View(query.ToList());
             }
@@ -267,11 +276,72 @@ namespace Proyecto.Controllers
             {
                 var query = from a in db.Requerimiento
                                 //solo requerimientos en ejecucion o sin iniciar
-                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar")
+             
+                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar" || a.estado == "Finalizado")
                             select a;
+
                 return View(query.ToList());
             }
         }
+
+	//param proyecto: nombre del proyecto, miembro: nombre del empelado del equipo
+        [HttpPost]
+        public ActionResult Estadodesarrollorequerimientos(string proyecto, string miembro)
+        {
+            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+            string nombreProyecto = System.Web.HttpContext.Current.Session["proyecto"] as string;
+            string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
+
+            ViewBag.user = usuario;
+
+             if (usuario == "Lider")
+            {
+
+	//dropdown de miembros
+                var miembros = from a in db.Equipo
+                               where a.nombreProy_FK == nombreProyecto
+                               where a.rol == false
+                               select a.EmpleadoDesarrollador.nombreED;
+
+	
+                TempData["Miembros"] = miembros.ToList();
+
+
+                var query = from a in db.Requerimiento
+                                //solo requerimientos en ejecucion o sin iniciar
+                            from e in db.EmpleadoDesarrollador
+                            where (a.nombreProyecto_FK == nombreProyecto)
+                            where e.cedulaED == a.cedulaResponsable_FK
+                            where e.nombreED == miembro
+                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar" || a.estado == "Finalizado")
+                            select a;
+                return View(query.ToList());
+            }
+
+            else
+            {
+                var query = from a in db.Requerimiento
+                                //solo requerimientos en ejecucion o sin iniciar
+
+                            where (a.estado == "En ejecucion" || a.estado == "Sin iniciar" || a.estado == "Finalizado")
+                            where a.nombreProyecto_FK == proyecto
+                            select a;
+
+		//obtiene el lider del proyecto
+                var lider = from a in db.Equipo
+                            from b in db.EmpleadoDesarrollador
+                            where b.cedulaED == a.cedulaEM_FK
+                            where a.nombreProy_FK == proyecto
+                            where a.rol == true
+                            select b.nombreED;
+                ViewBag.lider = lider.FirstOrDefault();
+
+                return View(query.ToList());
+            }
+
+        }
+
+
 
 
     //objeto para imprimir resultados bonitos
@@ -287,7 +357,7 @@ namespace Proyecto.Controllers
         }
 
 
-        //listo
+        //filtra todos los proyectos en un intervalo de fechas y busca fechas de disponibilidad de los empleados
         public ActionResult PeriodosDisponibles()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
@@ -308,7 +378,7 @@ namespace Proyecto.Controllers
             return View(Empleados);
 
         }
-
+	//param finicio:limite inferioir, ffinal: limite superior
         [HttpPost]
         public ActionResult PeriodosDisponibles(DateTime Finicio, DateTime Ffinal)
         {
