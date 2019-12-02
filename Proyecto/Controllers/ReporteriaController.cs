@@ -118,7 +118,7 @@ namespace Proyecto.Controllers
                            from a in db.Proyecto
                            from e in db.Equipo
                            from l in db.EmpleadoDesarrollador
-                           where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED 
+                           where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED && a.fechaFinalizacion != null
                            group new { a,b, e, l } by a.nombre into c
                            select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +" "+ c.FirstOrDefault().l.apellido1ED +" "+ c.FirstOrDefault().l.apellido2ED};
             if (usuario == "Lider") {
@@ -127,7 +127,7 @@ namespace Proyecto.Controllers
                          from a in db.Proyecto
                          from e in db.Equipo
                          from l in db.EmpleadoDesarrollador
-                         where b.nombreProyecto_FK == a.nombre  && e.cedulaEM_FK == cedula && e.rol == true && e.nombreProy_FK == a.nombre  &&  a.fechaFinalizacion != null
+                         where b.nombreProyecto_FK == a.nombre && e.rol == true && l.cedulaED == cedula && a.nombre == e.nombreProy_FK && e.cedulaEM_FK == cedula &&  a.fechaFinalizacion == null
                          group new { a, b, e, l } by a.nombre into c
                          select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +" "+ c.FirstOrDefault().l.apellido1ED+" "+ c.FirstOrDefault().l.apellido2ED };
 
@@ -161,7 +161,7 @@ namespace Proyecto.Controllers
                            from a in db.Proyecto
                            from e in db.Equipo
                            from l in db.EmpleadoDesarrollador
-                           where a.nombre == nombreProyecto && b.nombreProyecto_FK == nombreProyecto && e.nombreProy_FK == nombreProyecto && e.rol == true && e.cedulaEM_FK == l.cedulaED
+                           where a.nombre == nombreProyecto && b.nombreProyecto_FK == nombreProyecto && e.nombreProy_FK == nombreProyecto && e.rol == true && e.cedulaEM_FK == l.cedulaED && a.fechaFinalizacion != null
                            group new { a, b, e, l } by a.nombre into c
                            select new { nombre = c.FirstOrDefault().a.nombre, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +" "+ c.FirstOrDefault().l.apellido1ED+" "+ c.FirstOrDefault().l.apellido2ED};
             if (item != null)
@@ -172,7 +172,7 @@ namespace Proyecto.Controllers
                          from a in db.Proyecto
                          from e in db.Equipo
                          from l in db.EmpleadoDesarrollador
-                         where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED
+                         where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED && a.fechaFinalizacion != null
                          group new { a, b, e, l } by a.nombre into c
                          select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED + " " + c.FirstOrDefault().l.apellido1ED + " " + c.FirstOrDefault().l.apellido2ED };
                 if (item != null)
