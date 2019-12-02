@@ -296,54 +296,22 @@ namespace Proyecto.Controllers
 
 
         /*devuelve empleados trabajando en algun proyecto
+         * @ return lista empleados
          */
 
-        public SelectList getDesarrolladores()
+        public List<SelectListItem> getDesarrolladores()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             ViewBag.user = usuario;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            if (usuario == "Lider")//Si el usuarion en sesion es lider
-            {//Puede ver los empleados que pertenecen a su equipo
+            var item = from a in db.EmpleadoDesarrollador
+                       where a.flg == true
+                       select new SelectListItem { Text = a.nombreED+" "+a.apellido1ED+" "+a.apellido2ED, Value = a.nombreED};
+            List<SelectListItem> list = item.ToList();
+            return list;
 
-                var obj = from a in db.EmpleadoDesarrollador
-                          from b in db.Equipo
-                          where b.nombreProy_FK == proy
-                          where b.cedulaEM_FK == a.cedulaED
-                          select a.nombreED;
-
-                return new SelectList(obj);
-            }
-            else if (usuario == "Cliente")//Si el usuarion en sesion es cliente
-            {//Solo puede ver los empleados que estan en su proyecto
-                var obj = from a in db.EmpleadoDesarrollador
-                          from b in db.Equipo
-                          from c in db.Proyecto
-                          where a.cedulaED == b.cedulaEM_FK
-                          where c.nombre == b.nombreProy_FK
-                          where c.cedulaCliente == cedula
-                          select a.nombreED;
-
-                return new SelectList(obj);
-            }
-            else if (usuario == "Desarrollador")//Si el usuarion en sesion es desarrollador
-            {//solo puede ver su propia información y no la de otros desarrolladores
-                var obj = from a in db.EmpleadoDesarrollador
-                          where a.cedulaED == cedula
-                          select a.nombreED;
-
-                return new SelectList(obj);
-            }
-            else if (usuario == "Jefe")//Si el usuarion en sesion es jefe
-            {//Tiene acceso a todo el sistema
-                var obj = from a in db.EmpleadoDesarrollador
-                          select a.nombreED;
-                return new SelectList(obj);
-            }
-            SelectList lista = new SelectList("");
-            return lista;
         }
 
         /*devuelve empleados trabajando en algun proyecto

@@ -25,6 +25,9 @@ namespace Proyecto.Controllers
         Proyecto.Controllers.EmpleadoDesarrolladorController emplController = new Proyecto.Controllers.EmpleadoDesarrolladorController();
         Proyecto.Controllers.HabilidadesController habController = new Proyecto.Controllers.HabilidadesController();
         // GET: Reporteria
+        /*Vista inicial para reportería
+         * @return view()
+         */
         public ActionResult Index()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;//Saber rol del que está en el sistema
@@ -34,7 +37,9 @@ namespace Proyecto.Controllers
             return View();
         }
 
-
+        /*Método inicial para la vista de la consulta sobre la comparacion real y estimada de los requerimientos
+         * @return view(lista): retorna a la vista una lista vacía (Katherine)
+         */
         public ActionResult TiemposRequerimiento()
         {
             ViewBag.nombreP = "Seleccione un proyecto";
@@ -51,6 +56,14 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
+
+        /*Método para vista parcial que retorna la informacion necesaria para la consulta de comparacion entre la duración estimada 
+         * y real de los requerimientos para un desarrollador y proyecto específico
+         * @param nombre: nombre de desarrollador
+         * @param nombreProyecto: nombre del proyecto del desarrollador
+         * @return view(lista): lista con información de la consulta
+         * (Katherine)
+         */
         [HttpPost]
         public ActionResult tablaRequerimientos(string nombre, string nombreProyecto)
         {
@@ -86,6 +99,11 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
+        /*Método inicial que responde a la consulta de horas estimadas y reales necesarias para terminar un proyecto
+         * se muestran inicialmente todos los proyectos en esta primera vista
+         * @return view(lista): lista con la información de todos los proyectos
+         * (Katherine)
+         */
         public ActionResult HorasProyecto()
         {
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
@@ -101,7 +119,7 @@ namespace Proyecto.Controllers
                            from l in db.EmpleadoDesarrollador
                            where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED 
                            group new { a,b, e, l } by a.nombre into c
-                           select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
+                           select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +" "+ c.FirstOrDefault().l.apellido1ED +" "+ c.FirstOrDefault().l.apellido2ED};
             if (usuario == "Lider") {
                 item =
                          from b in db.Requerimiento
@@ -110,7 +128,7 @@ namespace Proyecto.Controllers
                          from l in db.EmpleadoDesarrollador
                          where b.nombreProyecto_FK == a.nombre  && e.cedulaEM_FK == cedula && e.rol == true && e.nombreProy_FK == a.nombre  &&  a.fechaFinalizacion != null
                          group new { a, b, e, l } by a.nombre into c
-                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
+                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +" "+ c.FirstOrDefault().l.apellido1ED+" "+ c.FirstOrDefault().l.apellido2ED };
 
             }
             if (item != null)
@@ -124,6 +142,11 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
+        /*Método post que responde a la consulta de horas estimadas y reales para concluir con un proyecto específico
+         * @Param nombreProyecto
+         * @return view(lista): lista con la información del proyecto específico
+         * (Katherine)
+         */
         [HttpPost]
         public ActionResult HorasProyecto(string nombreProyecto)
         {
@@ -139,7 +162,7 @@ namespace Proyecto.Controllers
                            from l in db.EmpleadoDesarrollador
                            where a.nombre == nombreProyecto && b.nombreProyecto_FK == nombreProyecto && e.nombreProy_FK == nombreProyecto && e.rol == true && e.cedulaEM_FK == l.cedulaED
                            group new { a, b, e, l } by a.nombre into c
-                           select new { nombre = c.FirstOrDefault().a.nombre, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
+                           select new { nombre = c.FirstOrDefault().a.nombre, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED +" "+ c.FirstOrDefault().l.apellido1ED+" "+ c.FirstOrDefault().l.apellido2ED};
             if (item != null)
                 item.Distinct();
             if (nombreProyecto =="") {
@@ -150,7 +173,7 @@ namespace Proyecto.Controllers
                          from l in db.EmpleadoDesarrollador
                          where b.nombreProyecto_FK == a.nombre && e.nombreProy_FK == a.nombre && e.rol == true && e.cedulaEM_FK == l.cedulaED
                          group new { a, b, e, l } by a.nombre into c
-                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED };
+                         select new { nombre = c.FirstOrDefault().b.nombreProyecto_FK, sumaEst = c.Sum(a => a.b.duracionEstimada), sumaReal = c.Sum(d => d.b.duracionReal), dif = c.Sum(a => a.b.duracionEstimada) - c.Sum(d => d.b.duracionReal), lider = c.FirstOrDefault().l.nombreED + " " + c.FirstOrDefault().l.apellido1ED + " " + c.FirstOrDefault().l.apellido2ED };
                 if (item != null)
                     item.Distinct();
             }
@@ -163,18 +186,28 @@ namespace Proyecto.Controllers
             return View(lista);
         }
 
-     
 
-        public SelectList getDesarrolladores()
+        /*Método que retorna el nommbre de los desarrolladores
+         * @return desarrolladores (katherine)
+         */
+        public List<SelectListItem> getDesarrolladores()
         {
    
             return emplController.getDesarrolladores();
         }
 
+        /*Método que retorna los proyectos del desarrollador en formato Json
+         * esto para llenar el segundo dropdown por medio de Jquery
+         * al seleccionar el primer dropdown de la vista TiemposRequerimientos
+         * @param nombre: nombre del desarrollador
+         * (Katherine)
+         */
         [HttpPost]
         public JsonResult getProyectoDesarrollador(string nombre)
         {
-            //System.Diagnostics.Debug.WriteLine("el nombre" + nombre);
+
+           
+            System.Diagnostics.Debug.WriteLine("el nombre para json: " + nombre);
             var empleado = from a in db.EmpleadoDesarrollador
                            where a.nombreED == nombre
                            select a.cedulaED;
@@ -189,6 +222,9 @@ namespace Proyecto.Controllers
             return  Json(new SelectList(item));
         }
 
+        /*Metodo que retorna los proyectos según el rol loggeado
+         *  @return proyectos
+         */
         public SelectList getProyectos()
         {
             return proyController.getProyectosPorRol();
