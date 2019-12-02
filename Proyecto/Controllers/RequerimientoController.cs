@@ -431,5 +431,64 @@ namespace Proyecto.Controllers
             listaLocal.Add("Suspendido");
             return listaLocal;
         }
+        
+        
+        public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info)
+        {
+            var linq = from a in db.Requerimiento
+                       select a;
+            
+            foreach (var req in linq.ToList())
+            {
+                foreach (var lista in info)
+                {
+                    if (lista.equipo.EmpleadoDesarrollador.cedulaED == req.cedulaResponsable_FK)
+                    {
+                        lista.requerimientos.Add(new Proyecto.Models.Requerimiento());
+                        lista.requerimientos[lista.cantidadReq++] = req;
+                    }
+                }
+            }
+        }
+
+        public void llenarListaReq(List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_datos, string nombreProy,int indice)
+        {
+            var reqEnEjecucion = from requerimiento in db.Requerimiento
+                       from modulo in db.Modulo
+                       where requerimiento.estado == "En ejecucion"
+                       && nombreProy == modulo.NombreProy
+                       && modulo.Id == requerimiento.idModulo_FK
+                       select requerimiento;
+            var reqFinalizados = from requerimiento in db.Requerimiento
+                                 from modulo in db.Modulo
+                                 where requerimiento.estado == "Finalizado"
+                                 && nombreProy == modulo.NombreProy
+                                 && modulo.Id == requerimiento.idModulo_FK
+                                 select requerimiento;
+            //llenado la lista con los en ejecucion
+            int totalReq = 0;
+            double totalHoras = 0;
+            foreach (var item in reqEnEjecucion.ToList().Distinct())
+            {
+                ++totalReq;
+                totalHoras += item.duracionEstimada;
+            }
+            lista_datos[indice].total = totalReq;
+            lista_datos[indice].durEstimada = lista_datos[indice].durEstimada.AddDays(totalHoras);
+            lista_datos[indice].estado = "En ejecucion";
+            ++indice;
+            //llenando la lista con los finalizados
+            totalReq = 0;
+            totalHoras = 0;
+            foreach (var item in reqFinalizados.ToList().Distinct())
+            {
+                ++totalReq;
+                totalHoras += item.duracionEstimada;
+            }
+            lista_datos[indice].total = totalReq;
+            lista_datos[indice].durEstimada = lista_datos[indice].durEstimada.AddDays(totalHoras);
+            lista_datos[indice].estado = "Finalizados";
+        }
+        
     }
 }
