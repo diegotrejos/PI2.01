@@ -780,7 +780,7 @@ namespace Proyecto.Controllers
             TempData["empleadosDisponibles"] = empleados;
             List<Proyecto.Models.ViewModels.infoEmpleados> lista_datos = new List<Proyecto.Models.ViewModels.infoEmpleados>();
 
-            int longitudArray = new EmpleadoDesarrolladorController().getNoDisponibles();
+           
 
 
             //info_empleados[] arrayInfo = new info_empleados[longitudArray];
@@ -808,7 +808,7 @@ namespace Proyecto.Controllers
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            //List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+            List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
 
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().GetProyectosDeCliente(cedula);
@@ -844,7 +844,7 @@ namespace Proyecto.Controllers
         {
             int index = 0;
             List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReqFiltrada = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
-            foreach (var item in lista_totalReq)
+           /* foreach (var item in lista_totalReq)
             {
                 if (item.nombreProy == filtro)
                 {
@@ -852,7 +852,7 @@ namespace Proyecto.Controllers
                     lista_totalReqFiltrada[index++] = item;
                 }
             }
-            TempData["Lista"] = lista_totalReqFiltrada;
+            TempData["Lista"] = lista_totalReqFiltrada;*/
             return View();
         }
 
