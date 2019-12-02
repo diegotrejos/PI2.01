@@ -72,8 +72,26 @@ namespace Proyecto.Controllers
            
         }
 
+        [HttpPost]
+        public ActionResult FiltrarConocimiento(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
+        {
+            List<EmpleadoDesarrollador> empleadosTotal = new EmpleadoDesarrolladorController().getEmpleados();
+            List<EmpleadoDesarrollador> empleadosConocedores = new List<EmpleadoDesarrollador>();
+            int index = 0;
+            foreach (var item in empleadosTotal)
+            {
+                foreach (var hab in item.Habilidades)
+                {
+                    empleadosConocedores.Add(new EmpleadoDesarrollador());
+                    empleadosConocedores[index++] = item;
+                }
+            }
+            TempData["empleadosDisponibles"] = empleadosConocedores;
+            return View();
+        }
 
-      
+
+
         //Codigo que traia por default visual y como se referencia 5 veces mejor no lo borro xD
         protected override void Dispose(bool disposing)
         {

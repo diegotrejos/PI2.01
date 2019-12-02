@@ -291,7 +291,7 @@
     <Content Include="Views\Requerimiento\Edit.cshtml" />
     <Content Include="Views\Requerimiento\Index.cshtml" />
     <Content Include="Views\Autenticar\Index.cshtml" />
-    <Content Include="Views\Equipo\AsignarLider.cshtml" />
+    <Content Include="Views\Equipo\FiltrarConocimiento.cshtml" />
     <Content Include="Views\Equipo\AsignarMiembros.cshtml" />
     <Content Include="Views\Requerimiento\consulReq.cshtml" />
     <Content Include="Views\Reporteria\Index.cshtml" />

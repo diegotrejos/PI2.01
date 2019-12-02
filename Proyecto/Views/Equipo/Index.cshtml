@@ -76,123 +76,127 @@
             @*Estilo para la letra de arriba de la columna*@
             <p style="font-size:14px; color:#000000; font-weight:bold; font-style:italic;"> Desarrolladores disponibles</p>
             <p></p>
-            @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getHabilidades(), "Seleccione un conocimiento", new { @class = "form-control", @onchange = "this.form.submit()" })
-
+            @using (Html.BeginForm("FiltrarConocimiento", "Equipo",
+                      "", FormMethod.Post, null))
+            {
+                @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getHabilidades(), "Seleccione un conocimiento", new { @class = "form-control", @onchange = "this.form.submit()" })
+            }
 
             @*Tabla que se encuentra arriba de las listas y despliega la etiqueta con cedula y nombre*@
             <table class="table table-responsive-md">
-                <thead style="background-color:#5B3924">
+                <thead style = "background-color:#5B3924" >
                     <tr>
                         <th style="color:aliceblue">Cédula</th>
-                        <th style="color:aliceblue">Nombre</th>
+                        <th style = "color:aliceblue" > Nombre </th>
                     </tr>
                 </thead>
                 <tbody id="disponibilidad" style="cursor:pointer;">
-                    @*Id es lo que reconoce el script de mas arriba*@
-                    @*Listado de los desarrolladores disponibles *@
-                    @if (TempData["empleadosDisponibles"] != null)
-                    {
-                        foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
-                        {
-                            if (item.disponibilidad == true && item.flg == true)
-                            {
-                                <tr>
-                                    <td>
-                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.cedulaED</i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
-
-                                    </td>
-                                    <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
-                                        <a href="@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a>  @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <div class=" Desarrollador Cliente col">
-        </div>
-
-        <div class=".col-15 .col-sm-4">
-
-            @*Estilo para la letra de arriba de la columna*@
-            <p style="font-size:14px; color:#000000; font-weight:bold; font-style:italic;"> Empleados Asignados</p>
-            <!-- codigo de segunda colunma-->
-            @*Aqui deberia de anadir el boton que llama al script de asignar miembros*@
-
-
-
-            <Script type="text/javascript">
-        function myFunction() //este nombre tiene que coincidir con el que se pone en el boton que lo llama
-        {
-            var itemIds = "";
-            $("#asignacion").find(".taskSingleInline").each(function () {
-                var itemId = $(this).attr("data-taskid");
-                itemIds = itemIds + itemId + ","; //aqui vamos concatenando las cedulas de los empleados que se arrastraron
-            });
-            var p = document.getElementById('Proyecto'); //Aqui es para conseguir el proyecto del dropdown
-            var project = p.options[p.selectedIndex].value; //para sacar el valor
-            console.log(project); //para ver si todo bien con esa variable
-            console.log(itemIds)
-            $.ajax(
+        @*Id es lo que reconoce el script de mas arriba*@
+        @*Listado de los desarrolladores disponibles *@
+                            @if(TempData["empleadosDisponibles"] != null)
                 {
-                    type: "post",
-                    dataType: "json", //es el tipo del dato que devuelve el metodo del controlador
-                    url: '@Url.Action("Asignar","Equipo")', //metodo del controlador que se llama
-                    traditional: true, //para permitir arrays
-                    async: false,
-                    //
-                    data:
+                    foreach (var item in TempData["empleadosDisponibles"] as List<Proyecto.Models.EmpleadoDesarrollador>)
                     {
-                        Miembros: itemIds,
-                        Proyecto: project
-                    },
-                    success: function (json) //si todo sale bien el json que se retorna en el controlador viene aqui
-                    {
-                        if(json.error)
-                          alert("Por favor digite el proyecto al que desea agregar miembros y al menos un miembro")
-                        if (json.isRedirect)
-                            window.location.href = json.redirectUrl;
-                    },
-                    error: function (errorList) //si pasa algun error
-                    {
-                        console.log(errorList);
-                        console.log("error")
-                    }
-                }
-            )
-        }
-            </Script>
-
-
-            <table class="table table-responsive-md">
-                <thead style="background-color:#5B3924">
-                    <tr>
-                        <th style="color:aliceblue">Cédula</th>
-                        <th style="color:aliceblue">Nombre</th>
-                    </tr>
-                </thead>
-                <tbody id="asignacion" style="cursor:pointer;">
-                    @*Id que identifica en los scripts de arriba*@
-                    @*Lista de la derecha de los empleados que ya estan asignados a un proyecto*@
-                    @if (TempData["empleadosAsignados"] != null)
-                    {
-                        foreach (var item in TempData["empleadosAsignados"] as List<Proyecto.Models.Equipo>)
+                        if (item.disponibilidad == true && item.flg == true)
                         {
-                            <tr>
-                                <td>
-                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.cedulaEM_FK</i></a>
-                                </td>
-                                <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+                                        <tr>
+                                            <td>
+                                                <a href = "@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })" ><i> @item.cedulaED </i></a> @*Hace que a la cedula se le pueda hacer click para llevar a la consulta del empleado*@
 
-                                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.nombreED</i></a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
+                                                </td>
+
+                                                <td class=" taskSingleInline" id="task@(item.cedulaED)" data-taskid="@(item.cedulaED)">
+                                                 <a href = "@Url.Action("Details", "EmpleadoDesarrollador", new { id = item.cedulaED })"><i>@item.nombreED</i></a> @*Hace que al nombre se le pueda hacer click para llevar a la consulta del empleado*@
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+}
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                        <div class=" Desarrollador Cliente col">
+                                                        </div>
+
+                                                        <div class=".col-15 .col-sm-4">
+
+                                                @*Estilo para la letra de arriba de la columna*@
+                                                            <p style = "font-size:14px; color:#000000; font-weight:bold; font-style:italic;" > Empleados Asignados</p>
+                                                            <!-- codigo de segunda colunma-->
+                                                @*Aqui deberia de anadir el boton que llama al script de asignar miembros*@
+
+
+
+                                                            <Script type = "text/javascript" >
+                                                        function myFunction() //este nombre tiene que coincidir con el que se pone en el boton que lo llama
+{
+                                                    var itemIds = "";
+                                                            $("#asignacion").find(".taskSingleInline").each(function() {
+                                                        var itemId = $(this).attr("data-taskid");
+                                                        itemIds = itemIds + itemId + ","; //aqui vamos concatenando las cedulas de los empleados que se arrastraron
+                                                    });
+                                                    var p = document.getElementById('Proyecto'); //Aqui es para conseguir el proyecto del dropdown
+                                                    var project = p.options[p.selectedIndex].value; //para sacar el valor
+                                                    console.log(project); //para ver si todo bien con esa variable
+                                                    console.log(itemIds)
+                                                            $.ajax(
+                                                                {
+                                                    type: "post",
+                                                                    dataType: "json", //es el tipo del dato que devuelve el metodo del controlador
+                                                                    url: '@Url.Action("Asignar","Equipo")', //metodo del controlador que se llama
+                                                                    traditional: true, //para permitir arrays
+                                                                    async: false,
+                                                                    //
+                                                                    data:
+                                                        {
+                                                        Miembros: itemIds,
+                                                                        Proyecto: project
+                                                                    },
+                                                                    success: function(json) //si todo sale bien el json que se retorna en el controlador viene aqui
+                                                                    {
+                                                            if (json.error)
+                                                                alert("Por favor digite el proyecto al que desea agregar miembros y al menos un miembro")
+                                                                        if (json.isRedirect)
+                                                                window.location.href = json.redirectUrl;
+                                                        },
+                                                                    error: function(errorList) //si pasa algun error
+                                                                    {
+                                                            console.log(errorList);
+                                                            console.log("error")
+                                                                    }
+                                                    }
+                                                            )
+                                                        }
+                                                            </Script>
+
+
+                                                            <table class="table table-responsive-md">
+                                                                <thead style = "background-color:#5B3924" >
+                                                                    <tr>
+                                                                        <th style="color:aliceblue">Cédula</th>
+                                                                        <th style = "color:aliceblue" > Nombre </ th >
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="asignacion" style="cursor:pointer;">
+                                                @*Id que identifica en los scripts de arriba*@
+                                                @*Lista de la derecha de los empleados que ya estan asignados a un proyecto*@
+            @if (TempData["empleadosAsignados"] != null)
+                                {
+                                    foreach (var item in TempData["empleadosAsignados"] as List<Proyecto.Models.Equipo>)
+                                    {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.cedulaEM_FK</i></a>
+                </td>
+                <td class="taskSingleInline" id="task@(item.cedulaEM_FK)" data-taskid="@(item.cedulaEM_FK)">
+
+                    <a href="@Url.Action("Details","EmpleadoDesarrollador", new { cedula = item.cedulaEM_FK })"><i>@item.EmpleadoDesarrollador.nombreED</i></a>
+                </td>
+            </tr>
+                                    }
+                                }
+            </tbody>
             </table>
         </div>
     </div>
