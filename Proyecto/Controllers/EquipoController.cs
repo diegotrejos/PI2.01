@@ -19,7 +19,7 @@ namespace Proyecto.Controllers
         public string proy = "";        //Guarda el proyecto en el que tiene participación la persona que entra
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
-
+        public static List<EmpleadoDesarrollador> empleadosConocedores = new List<EmpleadoDesarrollador>();
 
         // GET: Equipo
         public ActionResult Index()
@@ -66,6 +66,7 @@ namespace Proyecto.Controllers
                         select a.EmpleadoDesarrollador.nombreED;
 
             //asignacion para mostrarlos en la  vista
+            TempData["empleadosDisponibles"] = empleadosConocedores;
             TempData["empleadosAsignados"] =  empleadosAsignados.ToList();
             TempData["lider"] = lider.FirstOrDefault();
             return View(/*empleadosAsignados.ToList()*/);
@@ -76,14 +77,17 @@ namespace Proyecto.Controllers
         public ActionResult FiltrarConocimiento(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
             List<EmpleadoDesarrollador> empleadosTotal = new EmpleadoDesarrolladorController().getEmpleados();
-            List<EmpleadoDesarrollador> empleadosConocedores = new List<EmpleadoDesarrollador>();
+            
             int index = 0;
             foreach (var item in empleadosTotal)
             {
                 foreach (var hab in item.Habilidades)
                 {
-                    empleadosConocedores.Add(new EmpleadoDesarrollador());
-                    empleadosConocedores[index++] = item;
+                    if (hab.conocimientos == filtro && item.disponibilidad == true && item.flg == true)
+                    {
+                        empleadosConocedores.Add(new EmpleadoDesarrollador());
+                        empleadosConocedores[index++] = item;
+                    }
                 }
             }
             TempData["empleadosDisponibles"] = empleadosConocedores;
