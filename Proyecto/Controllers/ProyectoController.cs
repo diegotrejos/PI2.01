@@ -402,6 +402,7 @@ namespace Proyecto.Controllers
 
         }
         
+        //metodo que me devuelve una lista de proyectos de un cliente respectivo
         public List<Proyecto.Models.Proyecto> GetProyectosDeCliente(string cedulaCliente)
         {
             var linq = from a in db.Proyecto

@@ -769,6 +769,7 @@ namespace Proyecto.Controllers
         {
             return habController.getHabilidades();
         }
+        //metodo que despliega la vista de desarrolladores disponibles o asignados
 	
 	 public ActionResult DesarrolladoresProyDis()
         {
@@ -776,13 +777,18 @@ namespace Proyecto.Controllers
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
+            //lista de todos los empleados importada del controlador de empleado desarrolador
             List<EmpleadoDesarrollador> empleados = new EmpleadoDesarrolladorController().getEmpleados();
             
+            //envio la lista de empleados disponibles a la vista
             TempData["empleadosDisponibles"] = empleados;
+            //crea la lista de objetos que voy a desplegar en la vista
             List<Proyecto.Models.ViewModels.infoEmpleados> lista_datos = new List<Proyecto.Models.ViewModels.infoEmpleados>();
 
+            //llamo al controlador de equipo para que llene esta lista con los datos necesarios que estan en su controlador
             new EquipoController().llenarArray(lista_datos,usuario,cedula);
 
+            //llamo al controlador de requerimiento para que llene la lista de los datos necesarios que estan en su controlador
             new RequerimientoController().llenarArray(lista_datos); //importante aqui la orden, primero se tiene que que llenar la array en equipo controller
 
             calculoDurEstimada(lista_datos);
@@ -795,20 +801,21 @@ namespace Proyecto.Controllers
 
         public ActionResult TotalReqTerminadosEnEjecucion()
         {
-
+            //roles
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string proy = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
-            //List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
-
+            //lleno una lista con los proyectos de un cliente respectivo
             List<Proyecto.Models.Proyecto> proyectos = new ProyectoController().GetProyectosDeCliente(cedula);
 
             int index = 0;
 
+            //Por cada proyecto de ese cliente en especifico..
             foreach (var item in proyectos)
             {
+                //creo 2 espacios nuevos en la lista, uno para el total de finalizados y otro para el total de los en ejecucion
                 lista_totalReq.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
                 lista_totalReq.Add(new Proyecto.Models.ViewModels.TotalReqPorCliente());
                 //para los requerimientos en ejecucion
@@ -825,29 +832,32 @@ namespace Proyecto.Controllers
                 index += 2;
             }
 
-            TempData["Lista"] = lista_totalReq;
+            TempData["Lista"] = lista_totalReq; //envio la informacion a la vista
 
             return View();
         }
 
+        //metodo post del total de requerimientos que permite filtrar los datos por proyecto
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult TotalReqTerminadosEnEjecucion(string filtro)
         {
-           int index = 0;
-           List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReqFiltrada = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+           int index = 0; //contador necesario para poder iterar por el foreach como lo necesito
+           List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReqFiltrada = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>(); //nueva lista que se llenara unicamente con los datos que cumplen con la condicion del filtro
            foreach (var item in lista_totalReq)
             {
                 if (item.nombreProy == filtro)
                 {
+                    //agregaqdo a la lista
                     lista_totalReqFiltrada.Add(new Models.ViewModels.TotalReqPorCliente());
                     lista_totalReqFiltrada[index++] = item;
                 }
             }
-            TempData["Lista"] = lista_totalReqFiltrada;
+            TempData["Lista"] = lista_totalReqFiltrada; //envio de datos a la vista
             return View();
         }
 
+        //metodo que permite realizar un calculo de la fecha estimada en la que termino o terminara ese empleado
             private void calculoDurEstimada(List<Proyecto.Models.ViewModels.infoEmpleados> info)
         {
             foreach (var item1 in info)
@@ -857,13 +867,15 @@ namespace Proyecto.Controllers
                 {
                     totalHoras += item.duracionEstimada;
                 }
-                totalHoras = totalHoras / 8;
+                totalHoras = totalHoras / 8; // lo divio entre 8 porque es el aprox de dia
+                //agregado de datos
                 item1.durEstimada = (DateTime)item1.equipo.Proyecto.fechaInicio;
                 item1.durEstimada = item1.durEstimada.AddDays(totalHoras);
               
             }
         }
 
+        //metodo de ordenamiento insercion para desplegar los datos en el orden que lo pode el cliente
         private void ordenarListaEmpleados(List<Proyecto.Models.ViewModels.infoEmpleados> info)
         {
             int elementos = 0; 
@@ -873,21 +885,21 @@ namespace Proyecto.Controllers
             }
             int marca = 0;
             int comparador = 0;
-            Proyecto.Models.ViewModels.infoEmpleados aux;
+            Proyecto.Models.ViewModels.infoEmpleados aux; //auxiliar utilizado para no perder un dato durante el intercambio
             int k; 
             for (int i = 0; i < elementos; ++i)
             {
-                for (k = elementos - 1; k > marca; --k)
+                for (k = elementos - 1; k > marca; --k) //for de cuenta regresiva
                 {
-                    comparador = DateTime.Compare(info[k - 1].durEstimada, info[k].durEstimada);
-                    if (comparador > 0)
+                    comparador = DateTime.Compare(info[k - 1].durEstimada, info[k].durEstimada); // metodo que si devuleve mas de 0 es que la primera fecha es mayor que la segunda
+                    if (comparador > 0) // si es mayor se realiza el intercambio de datos
                     {
                         aux = info[k - 1];
                         info[k - 1] = info[k];
                         info[k] = aux;
                     }
                 }
-                ++marca;
+                ++marca; //marca que me informa hasta donde llegar en el algoritmo
             }
         }
         

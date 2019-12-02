@@ -432,18 +432,21 @@ namespace Proyecto.Controllers
             return listaLocal;
         }
         
-        
+        //Metodo utilizado para llenar una lista que es enviada desde el controlador de reporteria
         public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info)
         {
+            //aqui realizo una LINQ que me duvuelve todos los requerimientos
             var linq = from a in db.Requerimiento
                        select a;
             
+            //por estos 2 foreach itero por todos los requerimientos  y por cada requerimiento pregunto si algun empleado en info es responsable de el 
             foreach (var req in linq.ToList())
             {
                 foreach (var lista in info)
                 {
                     if (lista.equipo.EmpleadoDesarrollador.cedulaED == req.cedulaResponsable_FK)
                     {
+                        // si un empleado es responsable de ese requerimiento, agrego al requerimiento a la lista de requerimientos de ese empleado dentro de la lista
                         lista.requerimientos.Add(new Proyecto.Models.Requerimiento());
                         lista.requerimientos[lista.cantidadReq++] = req;
                     }
@@ -451,8 +454,12 @@ namespace Proyecto.Controllers
             }
         }
 
+        //este metodo llena una lista que es enviada desde el controlador de reporteria
+        //los parametros de este metodo permiten saber a que poryecto de cliente especifico estoy trabajando
+        //el indice es para trabajar en el numero respectivo n y n + 1, ya que el metodo se llama en un for 
         public void llenarListaReq(List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_datos, string nombreProy,int indice)
         {
+            //Las siguientes LINQ me devuelven los requerimientos en ejecucion y finalizados que cumplen con las condiciones buscadas
             var reqEnEjecucion = from requerimiento in db.Requerimiento
                        from modulo in db.Modulo
                        where requerimiento.estado == "En ejecucion"
@@ -468,11 +475,12 @@ namespace Proyecto.Controllers
             //llenado la lista con los en ejecucion
             int totalReq = 0;
             double totalHoras = 0;
-            foreach (var item in reqEnEjecucion.ToList().Distinct())
+            foreach (var item in reqEnEjecucion.ToList().Distinct()) // por medio de este foreach cuento el total y las horas 
             {
                 ++totalReq;
                 totalHoras += item.duracionEstimada;
             }
+            //agrego los datos a la lista
             lista_datos[indice].total = totalReq;
             lista_datos[indice].durEstimada = lista_datos[indice].durEstimada.AddDays(totalHoras);
             lista_datos[indice].estado = "En ejecucion";
@@ -480,11 +488,12 @@ namespace Proyecto.Controllers
             //llenando la lista con los finalizados
             totalReq = 0;
             totalHoras = 0;
-            foreach (var item in reqFinalizados.ToList().Distinct())
+            foreach (var item in reqFinalizados.ToList().Distinct()) // por medio de este foreach cuento el total y las horas 
             {
                 ++totalReq;
                 totalHoras += item.duracionEstimada;
             }
+            //agrego los datos a la lista
             lista_datos[indice].total = totalReq;
             lista_datos[indice].durEstimada = lista_datos[indice].durEstimada.AddDays(totalHoras);
             lista_datos[indice].estado = "Finalizados";

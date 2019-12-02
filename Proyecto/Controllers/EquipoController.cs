@@ -21,7 +21,7 @@ namespace Proyecto.Controllers
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
         public static List<EmpleadoDesarrollador> empleadosConocedores = new List<EmpleadoDesarrollador>();
 
-        // GET: Equipo
+        // Metodo que devuelve la vista inicial del controlador, no recibe nada como parametro
         public ActionResult Index()
         {
             //Listas que se utilizan para el manejo de los empleados
@@ -48,7 +48,7 @@ namespace Proyecto.Controllers
         }
         
         
-
+        //Es el primer metodo post que se encarga del filtro de proyecto para mostrar los desarrolladores asignados
         [HttpPost]
         public ActionResult Index(string Proyecto)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
@@ -59,7 +59,7 @@ namespace Proyecto.Controllers
             var empleadosAsignados = from a in db.Equipo
                                      where a.nombreProy_FK == Proyecto 
                                      select a;
-
+            //Este LINQ se utiliza para encontrar el lider y mostrarselo al usuario 
             var lider = from a in db.Equipo
                         where a.nombreProy_FK == Proyecto
                         && a.rol == true
@@ -69,20 +69,23 @@ namespace Proyecto.Controllers
             TempData["empleadosDisponibles"] = empleadosConocedores;
             TempData["empleadosAsignados"] =  empleadosAsignados.ToList();
             TempData["lider"] = lider.FirstOrDefault();
-            return View(/*empleadosAsignados.ToList()*/);
-           
+            return View(/*empleadosAsignados.ToList()*/);        
         }
 
+        //Este es el segundo metodo post de equipo que se encarga de filtrar por conocimiento a los empleados disponibles
         [HttpPost]
         public ActionResult FiltrarConocimiento(string filtro)//filtro es el nombre del dropdown que me da el nombre de proyecto
         {
+            //llamo al controlador de proyecto para que me duvuelva todos los empleados de nuevo
             List<EmpleadoDesarrollador> empleadosTotal = new EmpleadoDesarrolladorController().getEmpleados();
             
             int index = 0;
             foreach (var item in empleadosTotal)
             {
+                // por medio de este foreach busco cada conocimiento de ese empleado en especifico
                 foreach (var hab in item.Habilidades)
                 {
+                    //Con este if manejo que solo se le muestre al usuario uno que este disponibles, que sea desarrollador y que tenga ese conocimiento
                     if (hab.conocimientos == filtro && item.disponibilidad == true && item.flg == true)
                     {
                         empleadosConocedores.Add(new EmpleadoDesarrollador());
@@ -90,7 +93,7 @@ namespace Proyecto.Controllers
                     }
                 }
             }
-            TempData["empleadosDisponibles"] = empleadosConocedores;
+            TempData["empleadosDisponibles"] = empleadosConocedores; // envio la nueva informacion a la vista
             return View();
         }
 
@@ -176,28 +179,34 @@ namespace Proyecto.Controllers
             return new SelectList(query);
         }
 
+        //Este metodo sirve para llenar una lista que paso por parametro desde el controlador de reporteria 
          public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info, string rol,string cedula)
         {
+            //LINQ para obtener todos los empleados que esten en un equipo y no sean lider
             var linq = from a in db.Equipo
                        where a.rol == false
                        select a;
 
+            //Si el que esta realizando la consulta en reporteria es el Jefe puede ver todos los empleados asignados
             if (rol == "Jefe")
             {
                 int count = 0;
                 foreach (var item in linq.ToList())
                 {
-                    info.Add(new Proyecto.Models.ViewModels.infoEmpleados());
-                    info[count].requerimientos = new List<Requerimiento>();
-                    info[count++].equipo = item;
+                    info.Add(new Proyecto.Models.ViewModels.infoEmpleados()); // necesito agregar primero un elemento vacio
+                    info[count].requerimientos = new List<Requerimiento>(); //le agrego una nueva lista de requerimientos vacia a la lista de requerimiento 
+                                                                            //(realizo esto aqui porque es el unico controlador donde itero por todo=a la lista porque la instancia de equipo es el corazon de la clase que manejo en la lista)
+                    info[count++].equipo = item; //aqui agrego el equipo
                 }
             }
             else
             {
+                //LINQ que me da los equipos donde el lider respectivo lo fue
                 var dondeFueLider = from a in db.Equipo
                            where a.cedulaEM_FK == cedula
                            select a;
 
+                //este codigo es muy similar al de arriba solo que tiene un if que filtra
                 int count = 0;
                 foreach (var item in linq.ToList())
                 {
@@ -214,6 +223,7 @@ namespace Proyecto.Controllers
             }
         }
 
+        //metodo que me duvuelve las habilidades para filtrar
         public SelectList getHabilidades()
         {
             return new HabilidadesController().getHabilidades();
