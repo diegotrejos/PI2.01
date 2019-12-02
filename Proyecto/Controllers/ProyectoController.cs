@@ -366,7 +366,7 @@ namespace Proyecto.Controllers
             {
                 var obj = from a in db.Proyecto
                           from b in db.Equipo
-                          where a.nombre == b.nombreProy_FK
+                          where a.nombre == b.nombreProy_FK 
                           where b.cedulaEM_FK == cedula
                           select a.nombre;
 
