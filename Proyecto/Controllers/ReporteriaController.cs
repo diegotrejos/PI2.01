@@ -231,7 +231,7 @@ namespace Proyecto.Controllers
             return proyController.getProyectosPorRol();
         }
 
-//val: tiempo estimado de requerimiento, nombreproy:nombre del proyecto, uso: bool que me deja ultilizar diferente el metodo
+ //val: tiempo estimado de requerimiento, nombreproy:nombre del proyecto, uso: bool que me deja ultilizar diferente el metodo
        public string geTFechas(int val, string nombreProy, bool uso)
         {
    
@@ -262,10 +262,14 @@ namespace Proyecto.Controllers
 
             
         }
+       
+
         //Consulta de estado desarollo de requerimientos
                 public ActionResult Estadodesarrollorequerimientos()
         {
-            string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
+
+
+        string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string nombreProyecto = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
 
@@ -318,6 +322,8 @@ namespace Proyecto.Controllers
         [HttpPost]
         public ActionResult Estadodesarrollorequerimientos(string proyecto, string miembro)
         {
+        
+
             string usuario = System.Web.HttpContext.Current.Session["rol"] as string;
             string nombreProyecto = System.Web.HttpContext.Current.Session["proyecto"] as string;
             string cedula = System.Web.HttpContext.Current.Session["cedula"] as string;
@@ -370,7 +376,6 @@ namespace Proyecto.Controllers
             }
 
         }
-
 
 
 
