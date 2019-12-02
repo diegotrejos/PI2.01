@@ -1,9 +1,6 @@
 ﻿@model IEnumerable<Proyecto.Models.Equipo>
 
 @{
-                /**/
-
-                /**/
 
                 ViewBag.Title = "Asignar Equipo"; @*Titulo que esta en el estandar *@
 }
@@ -25,12 +22,9 @@
     <fieldset>
 
 
-        <td> Seleccionar proyecto </td>
+        <td> Busqueda por proyecto </td>
         <td>
-            @if (TempData["proyectos"] != null)
-            {
-                @Html.DropDownList("Proyecto", new SelectList(TempData["proyectos"] as List<Proyecto.Models.Proyecto>, "nombre", "nombre"), "----------")
-            }
+            @Html.DropDownList("Proyecto", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getProyectos("Jefe", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })
         </td>
 
     </fieldset>
@@ -82,6 +76,9 @@
             @*Estilo para la letra de arriba de la columna*@
             <p style="font-size:14px; color:#000000; font-weight:bold; font-style:italic;"> Desarrolladores disponibles</p>
             <p></p>
+            @Html.DropDownList("filtro", ((Proyecto.Controllers.EquipoController)this.ViewContext.Controller).getHabilidades(), "Seleccione un conocimiento", new { @class = "form-control", @onchange = "this.form.submit()" })
+
+
             @*Tabla que se encuentra arriba de las listas y despliega la etiqueta con cedula y nombre*@
             <table class="table table-responsive-md">
                 <thead style="background-color:#5B3924">

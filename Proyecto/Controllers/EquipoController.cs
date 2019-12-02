@@ -192,6 +192,11 @@ namespace Proyecto.Controllers
             }
         }
 
+        public SelectList getHabilidades()
+        {
+            return new HabilidadesController().getHabilidades();
+        }
+
 
     }
 }
