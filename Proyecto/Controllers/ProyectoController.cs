@@ -400,5 +400,14 @@ namespace Proyecto.Controllers
             return list;
 
         }
+        
+        public List<Proyecto.Models.Proyecto> GetProyectosDeCliente(string cedulaCliente)
+        {
+            var linq = from a in db.Proyecto
+                       where a.cedulaCliente == cedulaCliente
+                       select a;
+            return linq.ToList();
+        }
+        
     }
 }
