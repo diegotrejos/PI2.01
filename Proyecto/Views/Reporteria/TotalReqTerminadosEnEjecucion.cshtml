@@ -10,7 +10,8 @@
 
     <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
     <div class="  container-fluid text-center">
-        <form action="/Reporteria/TotalReqTerminadosEnEjecucion" method="post">
+        <form action="~/Reporteria/TotalReqTerminadosEnEjecucion" method="post">
+            @Html.AntiForgeryToken()
             @if ((string)System.Web.HttpContext.Current.Session["rol"] == "Cliente")
             {
                 @Html.DropDownList("filtro", ((Proyecto.Controllers.ReporteriaController)this.ViewContext.Controller).getProyectos("Cliente", (string)System.Web.HttpContext.Current.Session["cedula"]), "Seleccione un Proyecto", new { @class = "form-control", @onchange = "this.form.submit()" })

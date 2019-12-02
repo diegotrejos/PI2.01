@@ -19,7 +19,7 @@ namespace Proyecto.Controllers
         public string usuario = "";
         public string cedula = "";
         public string proy = "";
-        public List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
+        public static List<Proyecto.Models.ViewModels.TotalReqPorCliente> lista_totalReq = new List<Proyecto.Models.ViewModels.TotalReqPorCliente>();
 
         private Gr02Proy3Entities db = new Gr02Proy3Entities();
         Proyecto.Controllers.ProyectoController proyController = new Proyecto.Controllers.ProyectoController();
