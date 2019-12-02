@@ -231,7 +231,37 @@ namespace Proyecto.Controllers
             return proyController.getProyectosPorRol();
         }
 
+//val: tiempo estimado de requerimiento, nombreproy:nombre del proyecto, uso: bool que me deja ultilizar diferente el metodo
+       public string geTFechas(int val, string nombreProy, bool uso)
+        {
+   
+            string fecha;
+            if (uso == true)
+            {
+                var proy = from a in db.Proyecto
+                           where a.nombre == nombreProy
+                           select a.fechaInicio;
+                fecha = proy.FirstOrDefault().ToString();
+                DateTime date = Convert.ToDateTime(fecha);
+                return date.ToString();
+            }
+            else
+            {
+                var proy = from a in db.Proyecto
+                           where a.nombre == nombreProy
+                           select a.fechaInicio;
+                fecha = proy.FirstOrDefault().ToString();
+                DateTime date = Convert.ToDateTime(fecha);
+               
+                date=date.AddHours(val);
 
+                return date.ToString();
+
+
+            }
+
+            
+        }
         //Consulta de estado desarollo de requerimientos
                 public ActionResult Estadodesarrollorequerimientos()
         {
