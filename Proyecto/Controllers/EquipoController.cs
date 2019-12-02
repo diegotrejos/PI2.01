@@ -154,19 +154,41 @@ namespace Proyecto.Controllers
             return new SelectList(query);
         }
 
-         public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info)
+         public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info, string rol,string cedula)
         {
             var linq = from a in db.Equipo
                        where a.rol == false
                        select a;
 
-
-            int count = 0;
-            foreach (var item in linq.ToList())
+            if (rol == "Jefe")
             {
-                info.Add(new Proyecto.Models.ViewModels.infoEmpleados());
-                info[count].requerimientos = new List<Requerimiento>();
-                info[count++].equipo = item;
+                int count = 0;
+                foreach (var item in linq.ToList())
+                {
+                    info.Add(new Proyecto.Models.ViewModels.infoEmpleados());
+                    info[count].requerimientos = new List<Requerimiento>();
+                    info[count++].equipo = item;
+                }
+            }
+            else
+            {
+                var dondeFueLider = from a in db.Equipo
+                           where a.cedulaEM_FK == cedula
+                           select a;
+
+                int count = 0;
+                foreach (var item in linq.ToList())
+                {
+                    foreach (var ProyDondeFueLider in dondeFueLider)
+                    {
+                        if (ProyDondeFueLider.nombreProy_FK == item.nombreProy_FK)
+                        {
+                            info.Add(new Proyecto.Models.ViewModels.infoEmpleados());
+                            info[count].requerimientos = new List<Requerimiento>();
+                            info[count++].equipo = item;
+                        }
+                    }
+                }
             }
         }
 
