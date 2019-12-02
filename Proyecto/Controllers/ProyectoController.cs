@@ -366,7 +366,7 @@ namespace Proyecto.Controllers
             {
                 var obj = from a in db.Proyecto
                           from b in db.Equipo
-                          where a.nombre == b.nombreProy_FK 
+                          where a.nombre == b.nombreProy_FK && a.fechaFinalizacion != null
                           where b.cedulaEM_FK == cedula
                           select a.nombre;
 
@@ -376,13 +376,14 @@ namespace Proyecto.Controllers
             else if (usuario == "Cliente") //El cliente ve solo sus proyecto
             {
                 var obj = from a in db.Proyecto
-                          where a.cedulaCliente == cedula
+                          where a.cedulaCliente == cedula && a.fechaFinalizacion != null
                           select a.nombre;
                 return new SelectList(obj);
             }
             else if (usuario == "Jefe")
             { //Como el Jefe puede ver todo, se le muestran todos los proyectos
                 var obj = from a in db.Proyecto
+                          where a.fechaFinalizacion != null
                           select a.nombre;
                 return new SelectList(obj);
             }
