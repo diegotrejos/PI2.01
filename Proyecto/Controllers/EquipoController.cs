@@ -46,6 +46,8 @@ namespace Proyecto.Controllers
             TempData.Keep();
             return View(db.Equipo.ToList());
         }
+        
+        
 
         [HttpPost]
         public ActionResult Index(string Proyecto)//filtro es el nombre del dropdown que me da el nombre de proyecto
@@ -152,7 +154,21 @@ namespace Proyecto.Controllers
             return new SelectList(query);
         }
 
+         public void llenarArray(List<Proyecto.Models.ViewModels.infoEmpleados> info)
+        {
+            var linq = from a in db.Equipo
+                       where a.rol == false
+                       select a;
 
+
+            int count = 0;
+            foreach (var item in linq.ToList())
+            {
+                info.Add(new Proyecto.Models.ViewModels.infoEmpleados());
+                info[count].requerimientos = new List<Requerimiento>();
+                info[count++].equipo = item;
+            }
+        }
 
 
     }
